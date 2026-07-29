@@ -1,4 +1,4 @@
-﻿{
+{
     "FURY":  [
                  {
                      "Slot":  "Head",
@@ -1448,11 +1448,17 @@
                     "Slot":  "Fingers",
                     "Rank":  0,
                     "Id":  30834,
-                    "Name":  "Shapeshifter\u0027s Signet"
+                    "Name":  "Shapeshifter's Signet"
                 },
                 {
                     "Slot":  "Fingers",
                     "Rank":  0,
+                    "Id":  32526,
+                    "Name":  "Band of Devastation"
+                },
+                {
+                    "Slot":  "Fingers",
+                    "Rank":  1,
                     "Id":  29997,
                     "Name":  "Band of the Ranger-General"
                 },
@@ -1460,31 +1466,7 @@
                     "Slot":  "Fingers",
                     "Rank":  2,
                     "Id":  32335,
-                    "Name":  "Unstoppable Aggressor\u0027s Ring"
-                },
-                {
-                    "Slot":  "Fingers",
-                    "Rank":  3,
-                    "Id":  30061,
-                    "Name":  "Ancestral Ring of Conquest"
-                },
-                {
-                    "Slot":  "Fingers",
-                    "Rank":  4,
-                    "Id":  30738,
-                    "Name":  "Ring of Reciprocity"
-                },
-                {
-                    "Slot":  "Fingers",
-                    "Rank":  5,
-                    "Id":  28757,
-                    "Name":  "Ring of a Thousand Marks"
-                },
-                {
-                    "Slot":  "Fingers",
-                    "Rank":  6,
-                    "Id":  28730,
-                    "Name":  "Mithril Band of the Unscarred"
+                    "Name":  "Unstoppable Aggressor's Ring"
                 },
                 {
                     "Slot":  "Trinkets",
