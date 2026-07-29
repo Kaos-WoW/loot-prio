@@ -6275,9 +6275,2516 @@
             "Name": "Idol of Ursoc"
         }
     ],
-    "PROT_PALA": [],
-    "RESTO_SHAM": [],
-    "HOLY_PRIEST": [],
-    "RESTO_DRUID": [],
-    "HOLY_PALA": []
+    "PROT_PALA": [
+        {
+            "Slot": "Head",
+            "Rank": 0,
+            "Id": 32521,
+            "Name": "Faceplate of the Impenetrable"
+        },
+        {
+            "Slot": "Head",
+            "Rank": 0,
+            "Id": 30987,
+            "Name": "Lightbringer Faceguard"
+        },
+        {
+            "Slot": "Head",
+            "Rank": 2,
+            "Id": 30125,
+            "Name": "Crystalforge Faceguard"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 0,
+            "Id": 30998,
+            "Name": "Lightbringer Shoulderguards"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 1,
+            "Id": 29070,
+            "Name": "Justicar Shoulderguards"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 2,
+            "Id": 32250,
+            "Name": "Pauldrons of Abyssal Fury"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 0,
+            "Id": 34010,
+            "Name": "Pepe's Shroud of Pacification"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 1,
+            "Id": 29925,
+            "Name": "Phoenix-Wing Cloak"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 2,
+            "Id": 28766,
+            "Name": "Ruby Drape of the Mysticant"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 3,
+            "Id": 29992,
+            "Name": "Royal Cloak of the Sunstriders"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 4,
+            "Id": 32331,
+            "Name": "Cloak of the Illidari Council"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 0,
+            "Id": 30991,
+            "Name": "Lightbringer Chestguard"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 1,
+            "Id": 30896,
+            "Name": "Glory of the Defender"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 2,
+            "Id": 33695,
+            "Name": "Vengeful Gladiator's Lamellar Chestpiece"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 3,
+            "Id": 29066,
+            "Name": "Justicar Chestguard"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 0,
+            "Id": 32279,
+            "Name": "The Seeker's Wristguards"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 0,
+            "Id": 32232,
+            "Name": "Eternium Shell Bracers"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 2,
+            "Id": 33889,
+            "Name": "Vindicator's Lamellar Bracers"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 3,
+            "Id": 32515,
+            "Name": "Wristguards of Determination"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 0,
+            "Id": 30985,
+            "Name": "Lightbringer Handguards"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 1,
+            "Id": 29998,
+            "Name": "Royal Gauntlets of Silvermoon"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 2,
+            "Id": 30124,
+            "Name": "Crystalforge Handguards"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 0,
+            "Id": 32342,
+            "Name": "Girdle of Mighty Resolve"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 1,
+            "Id": 32333,
+            "Name": "Girdle of Stability"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 2,
+            "Id": 30096,
+            "Name": "Girdle of the Invulnerable"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 3,
+            "Id": 30064,
+            "Name": "Cord of Screaming Terrors"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 0,
+            "Id": 30995,
+            "Name": "Lightbringer Legguards"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 0,
+            "Id": 32263,
+            "Name": "Praetorian's Legguards"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 2,
+            "Id": 33698,
+            "Name": "Vengeful Gladiator's Lamellar Legguards"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 0,
+            "Id": 32245,
+            "Name": "Tide-stomper's Greaves"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 1,
+            "Id": 32267,
+            "Name": "Boots of the Resilient"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 2,
+            "Id": 30894,
+            "Name": "Blue Suede Shoes"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 0,
+            "Id": 32362,
+            "Name": "Pendant of Titans"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 0,
+            "Id": 30007,
+            "Name": "The Darkener's Grasp"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 0,
+            "Id": 33921,
+            "Name": "Vindicator's Pendant of Dominance"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 0,
+            "Id": 30083,
+            "Name": "Ring of Sundered Souls"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 1,
+            "Id": 32261,
+            "Name": "Band of the Abyssal Lord"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 0,
+            "Id": 29172,
+            "Name": "Ashyen's Gift"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 3,
+            "Id": 28793,
+            "Name": "Band of Crimson Fury"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 4,
+            "Id": 29279,
+            "Name": "Violet Signet of the Great Protector"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 5,
+            "Id": 30028,
+            "Name": "Seventh Ring of the Tirisfalen"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 6,
+            "Id": 29297,
+            "Name": "Band of the Eternal Defender"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 7,
+            "Id": 28555,
+            "Name": "Seal of the Exorcist"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 8,
+            "Id": 29305,
+            "Name": "Band of the Eternal Sage"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 9,
+            "Id": 33054,
+            "Name": "The Seal of Danzalar"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 0,
+            "Id": 31858,
+            "Name": "Darkmoon Card: Vengeance"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 1,
+            "Id": 31859,
+            "Name": "Darkmoon Card: Madness"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 2,
+            "Id": 23836,
+            "Name": "Goblin Rocket Launcher"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 3,
+            "Id": 23835,
+            "Name": "Gnomish Poultryizer"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 4,
+            "Id": 32864,
+            "Name": "Commander's Badge"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 0,
+            "Id": 32501,
+            "Name": "Shadowmoon Insignia"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 6,
+            "Id": 28528,
+            "Name": "Moroes' Lucky Pocket Watch"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 7,
+            "Id": 30629,
+            "Name": "Scarab of Displacement"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 8,
+            "Id": 24125,
+            "Name": "Figurine - Dawnstone Crab"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 9,
+            "Id": 29387,
+            "Name": "Gnomeregan Auto-Blocker 600"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 10,
+            "Id": 32534,
+            "Name": "Brooch of the Immortal King"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 11,
+            "Id": 29370,
+            "Name": "Icon of the Silver Crescent"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 12,
+            "Id": 23207,
+            "Name": "Mark of the Champion"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 13,
+            "Id": 34579,
+            "Name": "Battlemaster's Audacity"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 14,
+            "Id": 28789,
+            "Name": "Eye of Magtheridon"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 15,
+            "Id": 30447,
+            "Name": "Tome of Fiery Redemption"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 16,
+            "Id": 32489,
+            "Name": "Ashtongue Talisman of Zeal"
+        },
+        {
+            "Slot": "Off Hand",
+            "Rank": 0,
+            "Id": 32375,
+            "Name": "Bulwark of Azzinoth"
+        },
+        {
+            "Slot": "Off Hand",
+            "Rank": 0,
+            "Id": 30909,
+            "Name": "Antonidas's Aegis of Rapt Concentration"
+        },
+        {
+            "Slot": "Off Hand",
+            "Rank": 2,
+            "Id": 30889,
+            "Name": "Kaz'rogal's Hardened Heart"
+        },
+        {
+            "Slot": "Off Hand",
+            "Rank": 3,
+            "Id": 34011,
+            "Name": "Illidari Runeshield"
+        },
+        {
+            "Slot": "Ranged",
+            "Rank": 0,
+            "Id": 29388,
+            "Name": "Libram of Repentance"
+        },
+        {
+            "Slot": "Ranged",
+            "Rank": 0,
+            "Id": 32368,
+            "Name": "Tome of the Lightbringer"
+        },
+        {
+            "Slot": "Ranged",
+            "Rank": 0,
+            "Id": 27917,
+            "Name": "Libram of the Eternal Rest"
+        }
+    ],
+    "RESTO_SHAM": [
+        {
+            "Slot": "Head",
+            "Rank": 0,
+            "Id": 31012,
+            "Name": "Skyshatter Helmet"
+        },
+        {
+            "Slot": "Head",
+            "Rank": 1,
+            "Id": 32241,
+            "Name": "Helm of Soothing Currents"
+        },
+        {
+            "Slot": "Head",
+            "Rank": 2,
+            "Id": 30166,
+            "Name": "Cataclysm Headguard"
+        },
+        {
+            "Slot": "Head",
+            "Rank": 3,
+            "Id": 32475,
+            "Name": "Living Replicator Specs"
+        },
+        {
+            "Slot": "Head",
+            "Rank": 4,
+            "Id": 29028,
+            "Name": "Cyclone Headdress"
+        },
+        {
+            "Slot": "Head",
+            "Rank": 5,
+            "Id": 30728,
+            "Name": "Fathom-Helm of the Deeps"
+        },
+        {
+            "Slot": "Head",
+            "Rank": 6,
+            "Id": 24264,
+            "Name": "Whitemend Hood"
+        },
+        {
+            "Slot": "Head",
+            "Rank": 7,
+            "Id": 29508,
+            "Name": "Living Dragonscale Helm"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 0,
+            "Id": 31022,
+            "Name": "Skyshatter Shoulderpads"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 1,
+            "Id": 32579,
+            "Name": "Living Earth Shoulders"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 2,
+            "Id": 30168,
+            "Name": "Cataclysm Shoulderguards"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 3,
+            "Id": 30097,
+            "Name": "Coral-Barbed Shoulderpads"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 4,
+            "Id": 32585,
+            "Name": "Swiftheal Mantle"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 5,
+            "Id": 29031,
+            "Name": "Cyclone Shoulderpads"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 6,
+            "Id": 21874,
+            "Name": "Primal Mooncloth Shoulders"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 7,
+            "Id": 28631,
+            "Name": "Dragon-Quake Shoulderguards"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 0,
+            "Id": 32524,
+            "Name": "Shroud of the Highborne"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 1,
+            "Id": 34012,
+            "Name": "Shroud of the Final Stand"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 2,
+            "Id": 29989,
+            "Name": "Sunshower Light Cloak"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 3,
+            "Id": 28765,
+            "Name": "Stainless Cloak of the Pure Hearted"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 4,
+            "Id": 31329,
+            "Name": "Lifegiving Cloak"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 5,
+            "Id": 24254,
+            "Name": "White Remedy Cape"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 0,
+            "Id": 31016,
+            "Name": "Skyshatter Chestguard"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 1,
+            "Id": 30164,
+            "Name": "Cataclysm Chestguard"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 2,
+            "Id": 30887,
+            "Name": "Golden Links of Restoration"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 3,
+            "Id": 29921,
+            "Name": "Fire Crest Breastplate"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 4,
+            "Id": 29522,
+            "Name": "Windhawk Hauberk"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 5,
+            "Id": 21875,
+            "Name": "Primal Mooncloth Robe"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 6,
+            "Id": 29029,
+            "Name": "Cyclone Hauberk"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 0,
+            "Id": 32577,
+            "Name": "Living Earth Bindings"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 0,
+            "Id": 32584,
+            "Name": "Swiftheal Wraps"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 0,
+            "Id": 32582,
+            "Name": "Bracers of Renewed Life"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 3,
+            "Id": 30869,
+            "Name": "Howling Wind Bracers"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 4,
+            "Id": 30047,
+            "Name": "Blackfathom Warbands"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 5,
+            "Id": 32516,
+            "Name": "Wraps of Purification"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 6,
+            "Id": 29523,
+            "Name": "Windhawk Bracers"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 7,
+            "Id": 29183,
+            "Name": "Bindings of the Timewalker"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 8,
+            "Id": 28503,
+            "Name": "Whirlwind Bracers"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 0,
+            "Id": 32328,
+            "Name": "Botanist's Gloves of Growth"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 1,
+            "Id": 32275,
+            "Name": "Spiritwalker Gauntlets"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 2,
+            "Id": 29976,
+            "Name": "Worldstorm Gauntlets"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 3,
+            "Id": 31007,
+            "Name": "Skyshatter Gloves"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 4,
+            "Id": 30165,
+            "Name": "Cataclysm Gloves"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 5,
+            "Id": 28520,
+            "Name": "Gloves of Centering"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 6,
+            "Id": 29032,
+            "Name": "Cyclone Gloves"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 0,
+            "Id": 32258,
+            "Name": "Naturalist's Preserving Cinch"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 0,
+            "Id": 32339,
+            "Name": "Belt of Primal Majesty"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 0,
+            "Id": 30895,
+            "Name": "Angelista's Sash"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 3,
+            "Id": 30030,
+            "Name": "Girdle of Fallen Stars"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 4,
+            "Id": 29524,
+            "Name": "Windhawk Belt"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 5,
+            "Id": 21873,
+            "Name": "Primal Mooncloth Belt"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 6,
+            "Id": 28567,
+            "Name": "Belt of Gale Force"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 0,
+            "Id": 31019,
+            "Name": "Skyshatter Leggings"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 1,
+            "Id": 30912,
+            "Name": "Leggings of Eternity"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 2,
+            "Id": 32271,
+            "Name": "Kilt of Immortal Nature"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 3,
+            "Id": 30893,
+            "Name": "Sun-touched Chain Leggings"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 4,
+            "Id": 29991,
+            "Name": "Sunhawk Leggings"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 5,
+            "Id": 30167,
+            "Name": "Cataclysm Legguards"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 6,
+            "Id": 28751,
+            "Name": "Heart-Flame Leggings"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 7,
+            "Id": 28591,
+            "Name": "Earthsoul Leggings"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 8,
+            "Id": 24261,
+            "Name": "Whitemend Pants"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 0,
+            "Id": 32609,
+            "Name": "Boots of the Divine Light"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 0,
+            "Id": 30737,
+            "Name": "Gold-Leaf Wildboots"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 2,
+            "Id": 30092,
+            "Name": "Orca-Hide Boots"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 3,
+            "Id": 30873,
+            "Name": "Stillwater Boots"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 4,
+            "Id": 32352,
+            "Name": "Naturewarden's Treads"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 5,
+            "Id": 28752,
+            "Name": "Forestlord Striders"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 6,
+            "Id": 30066,
+            "Name": "Tempest-Strider Boots"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 7,
+            "Id": 27525,
+            "Name": "Jeweled Boots of Sanctification"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 0,
+            "Id": 32370,
+            "Name": "Nadina's Pendant of Purity"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 1,
+            "Id": 30018,
+            "Name": "Lord Sanguinar's Claim"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 2,
+            "Id": 33922,
+            "Name": "Vindicator's Pendant of Salvation"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 3,
+            "Id": 28609,
+            "Name": "Emberspur Talisman"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 4,
+            "Id": 30726,
+            "Name": "Archaic Charm of Presence"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 5,
+            "Id": 28822,
+            "Name": "Teeth of Gruul"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 6,
+            "Id": 31691,
+            "Name": "Natasha's Guardian Cord"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 0,
+            "Id": 32528,
+            "Name": "Blessed Band of Karabor"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 1,
+            "Id": 29309,
+            "Name": "Band of the Eternal Restorer"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 2,
+            "Id": 32238,
+            "Name": "Ring of Calming Waves"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 3,
+            "Id": 29920,
+            "Name": "Phoenix-Ring of Rebirth"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 4,
+            "Id": 28790,
+            "Name": "Naaru Lightwarden's Band"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 5,
+            "Id": 28763,
+            "Name": "Jade Ring of the Everliving"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 6,
+            "Id": 30110,
+            "Name": "Coral Band of the Revived"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 7,
+            "Id": 29168,
+            "Name": "Ancestral Band"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 8,
+            "Id": 28259,
+            "Name": "Cosmic Lifeband"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 9,
+            "Id": 29814,
+            "Name": "Celestial Jewel Ring"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 10,
+            "Id": 31923,
+            "Name": "Band of the Crystalline Void"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 0,
+            "Id": 32496,
+            "Name": "Memento of Tyrande"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 0,
+            "Id": 29376,
+            "Name": "Essence of the Martyr"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 2,
+            "Id": 28190,
+            "Name": "Scarab of the Infinite Cycle"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 3,
+            "Id": 28590,
+            "Name": "Ribbon of Sacrifice"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 4,
+            "Id": 30841,
+            "Name": "Lower City Prayerbook"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 5,
+            "Id": 21625,
+            "Name": "Scarab Brooch"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 6,
+            "Id": 23047,
+            "Name": "Eye of the Dead"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 7,
+            "Id": 19395,
+            "Name": "Rejuvenating Gem"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 8,
+            "Id": 24390,
+            "Name": "Auslese's Light Channeler"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 9,
+            "Id": 25634,
+            "Name": "Oshu'gun Relic"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 0,
+            "Id": 30882,
+            "Name": "Bastion of Light"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 0,
+            "Id": 32255,
+            "Name": "Felstone Bulwark"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 2,
+            "Id": 29458,
+            "Name": "Aegis of the Vindicator"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 3,
+            "Id": 33735,
+            "Name": "Vengeful Gladiator's Redoubt"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 4,
+            "Id": 33309,
+            "Name": "Merciless Gladiator's Redoubt"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 5,
+            "Id": 29274,
+            "Name": "Tears of Heaven"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 6,
+            "Id": 29923,
+            "Name": "Talisman of the Sun King"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 7,
+            "Id": 28728,
+            "Name": "Aran's Soothing Sapphire"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 8,
+            "Id": 28754,
+            "Name": "Triptych Shield of the Ancients"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 9,
+            "Id": 22819,
+            "Name": "Shield of Condemnation"
+        },
+        {
+            "Slot": "Ranged",
+            "Rank": 0,
+            "Id": 28523,
+            "Name": "Totem of Healing Rains"
+        },
+        {
+            "Slot": "Ranged",
+            "Rank": 1,
+            "Id": 27544,
+            "Name": "Totem of Spontaneous Regrowth"
+        },
+        {
+            "Slot": "Ranged",
+            "Rank": 2,
+            "Id": 22396,
+            "Name": "Totem of Life"
+        },
+        {
+            "Slot": "Ranged",
+            "Rank": 3,
+            "Id": 25645,
+            "Name": "Totem of the Plains"
+        }
+    ],
+    "HOLY_PALA": [
+        {
+            "Slot": "Head",
+            "Rank": 0,
+            "Id": 30988,
+            "Name": "Lightbringer Greathelm"
+        },
+        {
+            "Slot": "Head",
+            "Rank": 1,
+            "Id": 32354,
+            "Name": "Crown of Empowered Fate"
+        },
+        {
+            "Slot": "Head",
+            "Rank": 2,
+            "Id": 32241,
+            "Name": "Helm of Soothing Currents"
+        },
+        {
+            "Slot": "Head",
+            "Rank": 3,
+            "Id": 30136,
+            "Name": "Crystalforge Greathelm"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 0,
+            "Id": 30996,
+            "Name": "Lightbringer Pauldrons"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 1,
+            "Id": 30878,
+            "Name": "Glimmering Steel Mantle"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 2,
+            "Id": 30138,
+            "Name": "Crystalforge Pauldrons"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 0,
+            "Id": 32524,
+            "Name": "Shroud of the Highborne"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 0,
+            "Id": 34012,
+            "Name": "Shroud of the Final Stand"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 2,
+            "Id": 29989,
+            "Name": "Sunshower Light Cloak"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 3,
+            "Id": 32337,
+            "Name": "Shroud of Forgiveness"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 0,
+            "Id": 30992,
+            "Name": "Lightbringer Chestpiece"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 1,
+            "Id": 30904,
+            "Name": "Savior's Grasp"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 2,
+            "Id": 30134,
+            "Name": "Crystalforge Chestpiece"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 0,
+            "Id": 30862,
+            "Name": "Blessed Adamantite Bracers"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 1,
+            "Id": 30869,
+            "Name": "Howling Wind Bracers"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 2,
+            "Id": 32571,
+            "Name": "Dawnsteel Bracers"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 3,
+            "Id": 30047,
+            "Name": "Blackfathom Warbands"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 0,
+            "Id": 30112,
+            "Name": "Glorious Gauntlets of Crestfall"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 1,
+            "Id": 30983,
+            "Name": "Lightbringer Gloves"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 2,
+            "Id": 29976,
+            "Name": "Worldstorm Gauntlets"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 3,
+            "Id": 32328,
+            "Name": "Botanist's Gloves of Growth"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 0,
+            "Id": 30897,
+            "Name": "Girdle of Hope"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 1,
+            "Id": 30030,
+            "Name": "Girdle of Fallen Stars"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 2,
+            "Id": 29965,
+            "Name": "Girdle of the Righteous Path"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 0,
+            "Id": 30994,
+            "Name": "Lightbringer Leggings"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 1,
+            "Id": 30912,
+            "Name": "Leggings of Eternity"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 2,
+            "Id": 32271,
+            "Name": "Kilt of Immortal Nature"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 3,
+            "Id": 30893,
+            "Name": "Sun-touched Chain Leggings"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 0,
+            "Id": 32243,
+            "Name": "Pearl Inlaid Boots"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 1,
+            "Id": 30027,
+            "Name": "Boots of Courage Unending"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 2,
+            "Id": 32609,
+            "Name": "Boots of the Divine Light"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 3,
+            "Id": 30737,
+            "Name": "Gold-Leaf Wildboots"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 0,
+            "Id": 32370,
+            "Name": "Nadina's Pendant of Purity"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 1,
+            "Id": 30018,
+            "Name": "Lord Sanguinar's Claim"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 2,
+            "Id": 30726,
+            "Name": "Archaic Charm of Presence"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 3,
+            "Id": 28609,
+            "Name": "Emberspur Talisman"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 0,
+            "Id": 32528,
+            "Name": "Blessed Band of Karabor"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 0,
+            "Id": 32238,
+            "Name": "Ring of Calming Waves"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 0,
+            "Id": 29309,
+            "Name": "Band of the Eternal Restorer"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 3,
+            "Id": 30110,
+            "Name": "Coral Band of the Revived"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 4,
+            "Id": 30736,
+            "Name": "Ring of Flowing Light"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 5,
+            "Id": 28790,
+            "Name": "Naaru Lightwarden's Band"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 6,
+            "Id": 28763,
+            "Name": "Jade Ring of the Everliving"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 7,
+            "Id": 29920,
+            "Name": "Phoenix-Ring of Rebirth"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 0,
+            "Id": 32496,
+            "Name": "Memento of Tyrande"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 0,
+            "Id": 29376,
+            "Name": "Essence of the Martyr"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 0,
+            "Id": 38288,
+            "Name": "Direbrew Hops"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 3,
+            "Id": 28590,
+            "Name": "Ribbon of Sacrifice"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 4,
+            "Id": 23047,
+            "Name": "Eye of the Dead"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 5,
+            "Id": 30841,
+            "Name": "Lower City Prayerbook"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 6,
+            "Id": 19395,
+            "Name": "Rejuvenating Gem"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 0,
+            "Id": 32255,
+            "Name": "Felstone Bulwark"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 0,
+            "Id": 30882,
+            "Name": "Bastion of Light"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 0,
+            "Id": 30911,
+            "Name": "Scepter of Purification"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 3,
+            "Id": 33735,
+            "Name": "Vengeful Gladiator's Redoubt"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 4,
+            "Id": 33309,
+            "Name": "Merciless Gladiator's Redoubt"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 5,
+            "Id": 29458,
+            "Name": "Aegis of the Vindicator"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 6,
+            "Id": 29923,
+            "Name": "Talisman of the Sun King"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 7,
+            "Id": 29274,
+            "Name": "Tears of Heaven"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 8,
+            "Id": 29267,
+            "Name": "Light-Bearer's Faith Shield"
+        },
+        {
+            "Slot": "Ranged",
+            "Rank": 0,
+            "Id": 28592,
+            "Name": "Libram of Souls Redeemed"
+        },
+        {
+            "Slot": "Ranged",
+            "Rank": 0,
+            "Id": 23006,
+            "Name": "Libram of Light"
+        },
+        {
+            "Slot": "Ranged",
+            "Rank": 0,
+            "Id": 30063,
+            "Name": "Libram of Absolute Truth"
+        },
+        {
+            "Slot": "Ranged",
+            "Rank": 0,
+            "Id": 28296,
+            "Name": "Libram of the Lightbringer"
+        },
+        {
+            "Slot": "Ranged",
+            "Rank": 4,
+            "Id": 25644,
+            "Name": "Blessed Book of Nagrand"
+        }
+    ],
+    "RESTO_DRUID": [
+        {
+            "Slot": "Head",
+            "Rank": 0,
+            "Id": 31037,
+            "Name": "Thunderheart Helmet"
+        },
+        {
+            "Slot": "Head",
+            "Rank": 0,
+            "Id": 32329,
+            "Name": "Cowl of Benevolence"
+        },
+        {
+            "Slot": "Head",
+            "Rank": 2,
+            "Id": 30219,
+            "Name": "Nordrassil Headguard"
+        },
+        {
+            "Slot": "Head",
+            "Rank": 3,
+            "Id": 32479,
+            "Name": "Wonderheal XT40 Shades"
+        },
+        {
+            "Slot": "Head",
+            "Rank": 4,
+            "Id": 32240,
+            "Name": "Guise of the Tidal Lurker"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 0,
+            "Id": 31047,
+            "Name": "Thunderheart Spaulders"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 1,
+            "Id": 32583,
+            "Name": "Shoulderpads of Renewed Life"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 2,
+            "Id": 32585,
+            "Name": "Swiftheal Mantle"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 3,
+            "Id": 30221,
+            "Name": "Nordrassil Life-Mantle"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 4,
+            "Id": 30111,
+            "Name": "Runetotem's Mantle"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 5,
+            "Id": 29089,
+            "Name": "Shoulderguards of Malorne"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 6,
+            "Id": 21874,
+            "Name": "Primal Mooncloth Shoulders"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 7,
+            "Id": 32518,
+            "Name": "Veil of Turning Leaves"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 8,
+            "Id": 32273,
+            "Name": "Amice of Brilliant Light"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 0,
+            "Id": 32524,
+            "Name": "Shroud of the Highborne"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 1,
+            "Id": 32337,
+            "Name": "Shroud of Forgiveness"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 2,
+            "Id": 29989,
+            "Name": "Sunshower Light Cloak"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 3,
+            "Id": 34012,
+            "Name": "Shroud of the Final Stand"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 4,
+            "Id": 31329,
+            "Name": "Lifegiving Cloak"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 0,
+            "Id": 31041,
+            "Name": "Thunderheart Tunic"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 1,
+            "Id": 30216,
+            "Name": "Nordrassil Chestguard"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 2,
+            "Id": 21875,
+            "Name": "Primal Mooncloth Robe"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 3,
+            "Id": 29087,
+            "Name": "Chestguard of Malorne"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 0,
+            "Id": 32584,
+            "Name": "Swiftheal Wraps"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 0,
+            "Id": 32582,
+            "Name": "Bracers of Renewed Life"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 2,
+            "Id": 30868,
+            "Name": "Rejuvenating Bracers"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 3,
+            "Id": 30062,
+            "Name": "Grove-Bands of Remulos"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 4,
+            "Id": 32513,
+            "Name": "Wristbands of Divine Influence"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 0,
+            "Id": 32328,
+            "Name": "Botanist's Gloves of Growth"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 1,
+            "Id": 32353,
+            "Name": "Gloves of Unfailing Faith"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 2,
+            "Id": 31032,
+            "Name": "Thunderheart Gloves"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 3,
+            "Id": 28521,
+            "Name": "Mitts of the Treemender"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 4,
+            "Id": 30217,
+            "Name": "Nordrassil Gloves"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 5,
+            "Id": 28508,
+            "Name": "Gloves of Saintly Blessings"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 0,
+            "Id": 30895,
+            "Name": "Angelista's Sash"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 0,
+            "Id": 32339,
+            "Name": "Belt of Primal Majesty"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 2,
+            "Id": 21873,
+            "Name": "Primal Mooncloth Belt"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 3,
+            "Id": 32519,
+            "Name": "Belt of Divine Guidance"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 4,
+            "Id": 30036,
+            "Name": "Belt of the Long Road"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 5,
+            "Id": 29984,
+            "Name": "Girdle of Zaetar"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 6,
+            "Id": 29524,
+            "Name": "Windhawk Belt"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 0,
+            "Id": 30912,
+            "Name": "Leggings of Eternity"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 1,
+            "Id": 32271,
+            "Name": "Kilt of Immortal Nature"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 2,
+            "Id": 30727,
+            "Name": "Gilded Trousers of Benediction"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 3,
+            "Id": 31045,
+            "Name": "Thunderheart Legguards"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 4,
+            "Id": 28591,
+            "Name": "Earthsoul Leggings"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 5,
+            "Id": 30220,
+            "Name": "Nordrassil Life-Kilt"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 0,
+            "Id": 30737,
+            "Name": "Gold-Leaf Wildboots"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 0,
+            "Id": 32609,
+            "Name": "Boots of the Divine Light"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 2,
+            "Id": 30092,
+            "Name": "Orca-Hide Boots"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 3,
+            "Id": 30100,
+            "Name": "Soul-Strider Boots"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 4,
+            "Id": 30885,
+            "Name": "Archbishop's Slippers"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 5,
+            "Id": 28752,
+            "Name": "Forestlord Striders"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 0,
+            "Id": 30018,
+            "Name": "Lord Sanguinar's Claim"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 1,
+            "Id": 32370,
+            "Name": "Nadina's Pendant of Purity"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 2,
+            "Id": 30726,
+            "Name": "Archaic Charm of Presence"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 3,
+            "Id": 33922,
+            "Name": "Vindicator's Pendant of Salvation"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 4,
+            "Id": 28609,
+            "Name": "Emberspur Talisman"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 0,
+            "Id": 32528,
+            "Name": "Blessed Band of Karabor"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 1,
+            "Id": 30110,
+            "Name": "Coral Band of the Revived"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 2,
+            "Id": 29309,
+            "Name": "Band of the Eternal Restorer"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 3,
+            "Id": 28763,
+            "Name": "Jade Ring of the Everliving"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 4,
+            "Id": 30736,
+            "Name": "Ring of Flowing Light"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 0,
+            "Id": 29376,
+            "Name": "Essence of the Martyr"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 0,
+            "Id": 32496,
+            "Name": "Memento of Tyrande"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 2,
+            "Id": 23047,
+            "Name": "Eye of the Dead"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 3,
+            "Id": 25634,
+            "Name": "Oshu'gun Relic"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 4,
+            "Id": 19395,
+            "Name": "Rejuvenating Gem"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 5,
+            "Id": 28190,
+            "Name": "Scarab of the Infinite Cycle"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 6,
+            "Id": 30841,
+            "Name": "Lower City Prayerbook"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 7,
+            "Id": 28590,
+            "Name": "Ribbon of Sacrifice"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 8,
+            "Id": 32486,
+            "Name": "Ashtongue Talisman of Equilibrium"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 0,
+            "Id": 32500,
+            "Name": "Crystal Spire of Karabor"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 1,
+            "Id": 33743,
+            "Name": "Vengeful Gladiator's Salvation"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 2,
+            "Id": 30108,
+            "Name": "Lightfathom Scepter"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 3,
+            "Id": 30918,
+            "Name": "Hammer of Atonement"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 4,
+            "Id": 32964,
+            "Name": "Merciless Gladiator's Salvation"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 5,
+            "Id": 28771,
+            "Name": "Light's Justice"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 6,
+            "Id": 32451,
+            "Name": "Gladiator's Salvation"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 7,
+            "Id": 28522,
+            "Name": "Shard of the Virtuous"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 0,
+            "Id": 30908,
+            "Name": "Apostle of Argus"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 1,
+            "Id": 32344,
+            "Name": "Staff of Immaculate Recovery"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 2,
+            "Id": 29981,
+            "Name": "Ethereum Life-Staff"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 3,
+            "Id": 30732,
+            "Name": "Exodar Life-Staff"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 4,
+            "Id": 28782,
+            "Name": "Crystalheart Pulse-Staff"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 5,
+            "Id": 28604,
+            "Name": "Nightstaff of the Everliving"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 6,
+            "Id": 31289,
+            "Name": "Staff of Divine Infusion"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 0,
+            "Id": 30911,
+            "Name": "Scepter of Purification"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 1,
+            "Id": 29274,
+            "Name": "Tears of Heaven"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 2,
+            "Id": 32350,
+            "Name": "Touch of Inspiration"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 3,
+            "Id": 29170,
+            "Name": "Windcaller's Orb"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 4,
+            "Id": 33736,
+            "Name": "Vengeful Gladiator's Reprieve"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 5,
+            "Id": 32961,
+            "Name": "Merciless Gladiator's Reprieve"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 6,
+            "Id": 29923,
+            "Name": "Talisman of the Sun King"
+        },
+        {
+            "Slot": "Ranged",
+            "Rank": 0,
+            "Id": 27886,
+            "Name": "Idol of the Emerald Queen"
+        },
+        {
+            "Slot": "Ranged",
+            "Rank": 1,
+            "Id": 32387,
+            "Name": "Idol of the Raven Goddess"
+        },
+        {
+            "Slot": "Ranged",
+            "Rank": 2,
+            "Id": 25643,
+            "Name": "Harold's Rejuvenating Broach"
+        }
+    ],
+    "HOLY_PRIEST": [
+        {
+            "Slot": "Head",
+            "Rank": 0,
+            "Id": 31063,
+            "Name": "Cowl of Absolution"
+        },
+        {
+            "Slot": "Head",
+            "Rank": 0,
+            "Id": 30152,
+            "Name": "Cowl of the Avatar"
+        },
+        {
+            "Slot": "Head",
+            "Rank": 2,
+            "Id": 32329,
+            "Name": "Cowl of Benevolence"
+        },
+        {
+            "Slot": "Head",
+            "Rank": 3,
+            "Id": 32495,
+            "Name": "Powerheal 4000 Lens"
+        },
+        {
+            "Slot": "Head",
+            "Rank": 4,
+            "Id": 29049,
+            "Name": "Light-Collar of the Incarnate"
+        },
+        {
+            "Slot": "Head",
+            "Rank": 5,
+            "Id": 29990,
+            "Name": "Crown of the Sun"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 0,
+            "Id": 31069,
+            "Name": "Mantle of Absolution"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 0,
+            "Id": 30154,
+            "Name": "Mantle of the Avatar"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 0,
+            "Id": 32585,
+            "Name": "Swiftheal Mantle"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 3,
+            "Id": 21874,
+            "Name": "Primal Mooncloth Shoulders"
+        },
+        {
+            "Slot": "Shoulders",
+            "Rank": 4,
+            "Id": 29054,
+            "Name": "Light-Mantle of the Incarnate"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 0,
+            "Id": 32524,
+            "Name": "Shroud of the Highborne"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 1,
+            "Id": 29989,
+            "Name": "Sunshower Light Cloak"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 2,
+            "Id": 32337,
+            "Name": "Shroud of Forgiveness"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 3,
+            "Id": 34012,
+            "Name": "Shroud of the Final Stand"
+        },
+        {
+            "Slot": "Back",
+            "Rank": 4,
+            "Id": 28765,
+            "Name": "Stainless Cloak of the Pure Hearted"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 0,
+            "Id": 31066,
+            "Name": "Vestments of Absolution"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 0,
+            "Id": 30150,
+            "Name": "Vestments of the Avatar"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 2,
+            "Id": 21875,
+            "Name": "Primal Mooncloth Robe"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 3,
+            "Id": 29050,
+            "Name": "Robes of the Incarnate"
+        },
+        {
+            "Slot": "Chest",
+            "Rank": 4,
+            "Id": 32340,
+            "Name": "Garments of Temperance"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 0,
+            "Id": 32584,
+            "Name": "Swiftheal Wraps"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 0,
+            "Id": 30871,
+            "Name": "Bracers of Martyrdom"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 2,
+            "Id": 32513,
+            "Name": "Wristbands of Divine Influence"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 3,
+            "Id": 33901,
+            "Name": "Vindicator's Mooncloth Cuffs"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 4,
+            "Id": 29183,
+            "Name": "Bindings of the Timewalker"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 5,
+            "Id": 32516,
+            "Name": "Wraps of Purification"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 6,
+            "Id": 28511,
+            "Name": "Bands of Indwelling"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 0,
+            "Id": 31060,
+            "Name": "Gloves of Absolution"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 0,
+            "Id": 30151,
+            "Name": "Gloves of the Avatar"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 2,
+            "Id": 32353,
+            "Name": "Gloves of Unfailing Faith"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 3,
+            "Id": 28508,
+            "Name": "Gloves of Saintly Blessings"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 4,
+            "Id": 29055,
+            "Name": "Handwraps of the Incarnate"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 0,
+            "Id": 30895,
+            "Name": "Angelista's Sash"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 0,
+            "Id": 32519,
+            "Name": "Belt of Divine Guidance"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 2,
+            "Id": 30036,
+            "Name": "Belt of the Long Road"
+        },
+        {
+            "Slot": "Waist",
+            "Rank": 3,
+            "Id": 21873,
+            "Name": "Primal Mooncloth Belt"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 0,
+            "Id": 30912,
+            "Name": "Leggings of Eternity"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 1,
+            "Id": 31068,
+            "Name": "Breeches of Absolution"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 2,
+            "Id": 30153,
+            "Name": "Breeches of the Avatar"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 3,
+            "Id": 30727,
+            "Name": "Gilded Trousers of Benediction"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 4,
+            "Id": 28742,
+            "Name": "Pantaloons of Repentance"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 0,
+            "Id": 32609,
+            "Name": "Boots of the Divine Light"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 1,
+            "Id": 30100,
+            "Name": "Soul-Strider Boots"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 2,
+            "Id": 30885,
+            "Name": "Archbishop's Slippers"
+        },
+        {
+            "Slot": "Feet",
+            "Rank": 3,
+            "Id": 30035,
+            "Name": "Boots of the Long Road"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 0,
+            "Id": 32370,
+            "Name": "Nadina's Pendant of Purity"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 0,
+            "Id": 30018,
+            "Name": "Lord Sanguinar's Claim"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 2,
+            "Id": 33922,
+            "Name": "Vindicator's Pendant of Salvation"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 3,
+            "Id": 30726,
+            "Name": "Archaic Charm of Presence"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 4,
+            "Id": 28609,
+            "Name": "Emberspur Talisman"
+        },
+        {
+            "Slot": "Neck",
+            "Rank": 5,
+            "Id": 28822,
+            "Name": "Teeth of Gruul"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 0,
+            "Id": 32528,
+            "Name": "Blessed Band of Karabor"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 1,
+            "Id": 29309,
+            "Name": "Band of the Eternal Restorer"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 2,
+            "Id": 30110,
+            "Name": "Coral Band of the Revived"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 3,
+            "Id": 29290,
+            "Name": "Violet Signet of the Grand Restorer"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 4,
+            "Id": 32238,
+            "Name": "Ring of Calming Waves"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 5,
+            "Id": 30736,
+            "Name": "Ring of Flowing Light"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 6,
+            "Id": 28763,
+            "Name": "Jade Ring of the Everliving"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 0,
+            "Id": 29376,
+            "Name": "Essence of the Martyr"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 0,
+            "Id": 38288,
+            "Name": "Direbrew Hops"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 0,
+            "Id": 32496,
+            "Name": "Memento of Tyrande"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 0,
+            "Id": 28823,
+            "Name": "Eye of Gruul"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 0,
+            "Id": 19288,
+            "Name": "Darkmoon Card: Blue Dragon"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 5,
+            "Id": 30665,
+            "Name": "Earring of Soulful Meditation"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 6,
+            "Id": 32490,
+            "Name": "Ashtongue Talisman of Acumen"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 7,
+            "Id": 23047,
+            "Name": "Eye of the Dead"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 8,
+            "Id": 28590,
+            "Name": "Ribbon of Sacrifice"
+        },
+        {
+            "Slot": "Trinkets",
+            "Rank": 9,
+            "Id": 28190,
+            "Name": "Scarab of the Infinite Cycle"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 0,
+            "Id": 30911,
+            "Name": "Scepter of Purification"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 1,
+            "Id": 32350,
+            "Name": "Touch of Inspiration"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 2,
+            "Id": 29923,
+            "Name": "Talisman of the Sun King"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 3,
+            "Id": 29170,
+            "Name": "Windcaller's Orb"
+        },
+        {
+            "Slot": "Hands",
+            "Rank": 4,
+            "Id": 29274,
+            "Name": "Tears of Heaven"
+        }
+    ]
 }

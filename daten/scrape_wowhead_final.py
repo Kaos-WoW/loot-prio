@@ -16,7 +16,12 @@ SPECS = {
     "SPRI": "https://www.wowhead.com/tbc/guide/shadow-priest-dps-bt-hyjal-phase-3-best-in-slot-gear-burning-crusade",
     "ELE": "https://www.wowhead.com/tbc/guide/elemental-shaman-dps-bt-hyjal-phase-3-best-in-slot-gear-burning-crusade",
     "BAL": "https://www.wowhead.com/tbc/guide/balance-druid-dps-bt-hyjal-phase-3-best-in-slot-gear-burning-crusade",
-    "FERAL_TANK": "https://www.wowhead.com/tbc/guide/feral-druid-tank-bt-hyjal-phase-3-best-in-slot-gear-burning-crusade"
+    "FERAL_TANK": "https://www.wowhead.com/tbc/guide/feral-druid-tank-bt-hyjal-phase-3-best-in-slot-gear-burning-crusade",
+    "PROT_PALA": "https://www.wowhead.com/tbc/guide/paladin-tank-bt-hyjal-phase-3-best-in-slot-gear-burning-crusade",
+    "RESTO_SHAM": "https://www.wowhead.com/tbc/guide/shaman-healer-bt-hyjal-phase-3-best-in-slot-gear-burning-crusade",
+    "HOLY_PALA": "https://www.wowhead.com/tbc/guide/holy-paladin-healer-bt-hyjal-phase-3-best-in-slot-gear-burning-crusade",
+    "RESTO_DRUID": "https://www.wowhead.com/tbc/guide/druid-healer-bt-hyjal-phase-3-best-in-slot-gear-burning-crusade",
+    "HOLY_PRIEST": "https://www.wowhead.com/tbc/guide/priest-healer-bt-hyjal-phase-3-best-in-slot-gear-burning-crusade"
 }
 
 # Known slots mapping to keep them clean
