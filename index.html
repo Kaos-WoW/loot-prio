@@ -379,10 +379,56 @@ const rows = DATA.rows.filter(r => !r.un && !r.nb);
 const $ = id => document.getElementById(id);
 const uniq = (arr, k) => [...new Set(arr.map(r => r[k]).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'de'));
 
+const BOSS_ORDER = [
+  // Mount Hyjal
+  "Rage Winterchill",
+  "Anetheron",
+  "Kaz'rogal",
+  "Azgalor",
+  "Archimonde",
+  
+  // Black Temple
+  "Hochlord Naj'entus",
+  "Supremus",
+  "Shade of Akama",
+  "Teron Blutschatten",
+  "Reliquiar der Seelen",
+  "Gurtogg Bloodboil",
+  "Mutter Shahraz",
+  "Illidari-Rat",
+  "Illidan Sturmgrimm",
+  
+  // Trash
+  "BT-Trash",
+  "MH-Trash",
+  "Hyjal-Trash"
+];
+
+function sortBosses(bossNames) {
+  return bossNames.slice().sort((a, b) => {
+    let idxA = BOSS_ORDER.indexOf(a);
+    let idxB = BOSS_ORDER.indexOf(b);
+    
+    // Wenn beide in der BOSS_ORDER Liste sind
+    if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+    if (idxA !== -1) return -1;
+    if (idxB !== -1) return 1;
+    
+    // Tier 6 Sets ganz ans Ende
+    const isT6A = a.startsWith("Tier 6");
+    const isT6B = b.startsWith("Tier 6");
+    if (isT6A && !isT6B) return 1;
+    if (!isT6A && isT6B) return -1;
+    
+    // Ansonsten alphabetisch
+    return a.localeCompare(b, 'de');
+  });
+}
+
 function fillSelect(el, vals) {
   vals.forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; el.appendChild(o); });
 }
-fillSelect($('f-boss'), uniq(rows,'b'));
+fillSelect($('f-boss'), sortBosses(uniq(rows,'b')));
 fillSelect($('f-slot'), uniq(rows,'s'));
 fillSelect($('f-spieler'), uniq(rows,'pl'));
 fillSelect($('f-quelle'), uniq(rows,'q'));
