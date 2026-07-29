@@ -59,8 +59,8 @@ foreach ($set in $t6.Keys) {
     }
 }
 
-# ---------- 3. Marken-Items (Phase 3, DPS-relevant) ----------
-$badge = @(34942,34943,34944,33538,33539,33222,33540,33566,33559,33577,33579)
+# ---------- 3. Marken-Items (Keine neuen Marken-Items in Phase 3) ----------
+$badge = @()
 foreach ($id in $badge) {
     if (-not $entries.ContainsKey($id)) {
         $entries[$id] = [pscustomobject]@{
