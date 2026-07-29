@@ -161,11 +161,5 @@ Das Skript nach jeder Modelländerung erneut laufen lassen — es ist der beste 
 
 ## Offene Punkte
 
-1. **Knappheitsspalten fehlen.** Die Daten dafür liegen in `quellen/p3-alternativen-*.md` vollständig
-   vor (Marken-Sortiment, T6-Teile, Handwerk, Trash), ausgewertet ist es noch nicht. Ziel wären zwei
-   Spalten: „wie viele gleichwertige Alternativen hat diese Spec im Slot" und „ab welchem Boss".
-2. **Markenhändler im Spiel gegenprüfen**, sobald Phase 3 live ist. Wowheads Phasenzuordnung ist
-   widersprüchlich (gleiche Item-Reihe teils Phase 3, teils Phase 4). Sind die ilvl-141-Plattenteile
-   kaufbar, entfällt für Brust, Beine und Gürtel der Plattenträger die Knappheitsbegründung.
-3. **Schmuckstücke** ließen sich über gezielte Simulationsläufe nachziehen.
-4. **Tanks und Heiler** sind bewusst nicht enthalten — bisher nur die 13 DPS-Specs.
+1. **Markenhändler im Spiel gegenprüfen**, sobald Phase 3 live ist. Wowheads Phasenzuordnung ist widersprüchlich (gleiche Item-Reihe teils Phase 3, teils Phase 4). Sind die ilvl-141-Plattenteile kaufbar, entfällt für Brust, Beine und Gürtel der Plattenträger die Knappheitsbegründung.
+2. **Schmuckstücke** ließen sich über gezielte Simulationsläufe nachziehen.
