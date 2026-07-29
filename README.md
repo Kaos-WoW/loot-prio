@@ -162,4 +162,3 @@ Das Skript nach jeder Modelländerung erneut laufen lassen — es ist der beste 
 ## Offene Punkte
 
 1. **Markenhändler im Spiel gegenprüfen**, sobald Phase 3 live ist. Wowheads Phasenzuordnung ist widersprüchlich (gleiche Item-Reihe teils Phase 3, teils Phase 4). Sind die ilvl-141-Plattenteile kaufbar, entfällt für Brust, Beine und Gürtel der Plattenträger die Knappheitsbegründung.
-2. **Schmuckstücke** ließen sich über gezielte Simulationsläufe nachziehen.
