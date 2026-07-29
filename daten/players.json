@@ -429,24 +429,24 @@
         "Name":  "Chadíkus",
         "Spec":  "PROT_PALA",
         "Slots":  {
+                      "RANGED":  27484,
                       "SHIRT":  859,
                       "FINGER_1":  30834,
                       "HEAD":  32041,
-                      "NECK":  28745,
                       "TRINKET_2":  29383,
                       "LEGS":  29950,
                       "BACK":  30098,
                       "OFF_HAND":  28825,
                       "TRINKET_1":  28034,
-                      "HANDS":  29947,
                       "CHEST":  30102,
                       "SHOULDER":  30053,
+                      "FEET":  29951,
                       "WRIST":  30091,
                       "WAIST":  30068,
-                      "RANGED":  27484,
+                      "HANDS":  29947,
                       "MAIN_HAND":  28800,
                       "FINGER_2":  30061,
-                      "FEET":  29951
+                      "NECK":  28745
                   }
     },
     {

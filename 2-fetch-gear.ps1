@@ -41,29 +41,7 @@ foreach ($r in $roster) {
     $slots = @{}
     foreach ($e in $resp.equipment) { $slots[$e.slot.type] = [int]$e.item.id }
     
-    # --- Offspec-Plausibilitaetscheck ---
-    if ($r.spec -eq 'PROT_PALA') {
-        $hasShield = $false
-        # Prüfen ob ein Schild in OFF_HAND getragen wird
-        if ($slots.ContainsKey('OFF_HAND')) {
-            $offId = $slots['OFF_HAND']
-            # Bulwark, Antonidas, Kazrogal, Felstone, Bastion, Aegis, Illidari etc.
-            # Schilde haben im Tooltip-Cache meist das Wort "Shield" oder wir checken bekannte Schild-IDs
-            # Einfachste Prüfung: Hat der Spieler überhaupt etwas im OFF_HAND Slot?
-            # Wenn er eine 2H-Waffe trägt, hat er normalerweise kein OFF_HAND.
-            if ($offId -gt 0) { $hasShield = $true }
-        }
-        if (-not $hasShield) {
-            Write-Output "  [WARNUNG] $($r.name) (PROT_PALA) hat kein Schild angelegt! (Offspec/PvP?). Behalte alten Stand."
-            # Alten Stand wiederherstellen
-            if ($alt.ContainsKey($r.name)) {
-                $slots = $alt[$r.name]
-            } else {
-                # Falls gar kein alter Stand da ist, müssen wir es nehmen, aber warnen
-                Write-Output "  [INFO] Kein alter Stand fuer $($r.name) vorhanden. Verwende geladene Daten."
-            }
-        }
-    }
+
     
     $players += [pscustomobject]@{ Name = $r.name; Spec = $r.spec; Slots = $slots }
 }
@@ -90,6 +68,119 @@ foreach ($p in $players) {
 }
 $cache | ConvertTo-Json -Depth 4 -Compress | Out-File $cacheFile -Encoding utf8
 Write-Output ("Neue Item-Tooltips geladen: $neu")
+
+# --- Generischer Plausibilitätscheck für alle Spieler ---
+$SPEC_WEIGHTS = @{
+    'FURY' = @{Str=1.14;Agi=0.80;AP=0.51;Treffer=0.60;Krit=1.07;Tempo=0.99;ArP=0.19;Waffk=1.29;MH=3.12;OH=1.64}
+    'ARMS' = @{Str=0.56;Agi=0.44;AP=0.24;Treffer=0.18;Krit=0.61;Tempo=0.64;ArP=0.12;Waffk=1.00;MH=3.23}
+    'RET'  = @{Str=0.83;Agi=0.63;SP=0.14;AP=0.34;Treffer=0.00;Krit=0.65;Tempo=1.01;ArP=0.08;Waffk=1.69;MH=4.44}
+    'ENH'  = @{Str=0.89;Agi=0.65;Int=0.05;SP=0.24;ZTreffer=0.23;ZKrit=0.05;AP=0.40;Treffer=0.73;Krit=0.68;Tempo=0.65;ArP=0.12;Waffk=1.35;MH=3.28;OH=1.47}
+    'ROGUE' = @{Str=0.42;Agi=0.85;AP=0.38;Treffer=0.00;Krit=0.68;Tempo=0.79;ArP=0.12;Waffk=1.13;MH=3.58;OH=1.33}
+    'HUNT' = @{Str=0.12;Agi=1.14;Int=0.01;AP=0.11;Treffer=0.00;Krit=0.96;Tempo=0.87;ArP=0.16;Waffk=0.42;RANGED=4.09}
+    'WLCK' = @{Int=0.33;SP=1.05;ZTreffer=0.00;ZKrit=0.81;ZTempo=1.33;mp5=0.28}
+    'MAGE' = @{Int=1.14;SP=0.79;Spi=0.78;ZTreffer=0.16;ZKrit=0.64;ZTempo=0.16;mp5=0.42}
+    'SPRI' = @{Int=0.03;SP=0.59;Spi=0.06;ZTreffer=0.00;ZKrit=0.11;ZTempo=0.68}
+    'ELE'  = @{Int=0.18;SP=0.72;ZTreffer=0.06;ZKrit=0.61;ZTempo=1.25;mp5=0.01}
+    'BAL'  = @{Int=0.44;SP=0.78;Spi=0.09;ZTreffer=0.04;ZKrit=0.53;ZTempo=1.01}
+    'PROT_PALA' = @{Sta=1.5;Armor=0.05;Def=1.0;Dodge=0.8;Parry=0.8;Block=0.8;SP=0.5;Int=0.2}
+    'FERAL_TANK' = @{Sta=1.5;Armor=0.10;Agi=1.2;Dodge=0.8;AP=0.4;Krit=0.6;Waffk=1.0}
+    'RESTO_SHAM' = @{Heil=1.0;mp5=2.5;ZTempo=1.2;ZKrit=0.6;Int=0.4}
+    'HOLY_PRIEST' = @{Heil=1.0;mp5=2.0;ZTempo=1.2;ZKrit=0.5;Int=0.4;Spi=0.6}
+    'RESTO_DRUID' = @{Heil=1.0;mp5=2.5;ZTempo=1.0;ZKrit=0.4;Int=0.3;Spi=0.8}
+    'HOLY_PALA' = @{Heil=1.0;mp5=2.5;ZTempo=1.5;ZKrit=0.8;Int=0.5}
+}
+
+function Parse-Tooltip($tt) {
+    $t = $tt -replace '[\r\n]+', ' '
+    $t = $t -replace '<[^>]+>', '|'; $t = $t -replace '\|+', '|'
+    $cut = -1
+    foreach ($mark in @('Chance on hit', 'Use:', '(2) Set', '(4) Set', 'have a chance', 'chance to')) {
+        $i = $t.IndexOf($mark)
+        if ($i -ge 0 -and ($cut -lt 0 -or $i -lt $cut)) { $cut = $i }
+    }
+    if ($cut -ge 0) { $t = $t.Substring(0, $cut) }
+    $st = @{}
+    function Add-Stat($h,$k,$v) { if ($h.ContainsKey($k)) { $h[$k]+=$v } else { $h[$k]=$v } }
+    $map = @{ Agility='Agi'; Strength='Str'; Stamina='Sta'; Intellect='Int'; Spirit='Spi' }
+    foreach ($m in [regex]::Matches($t,'\+(\d+) (Agility|Strength|Stamina|Intellect|Spirit)')) {
+        Add-Stat $st $map[$m.Groups[2].Value] ([int]$m.Groups[1].Value)
+    }
+    foreach ($m in [regex]::Matches($t,'(?:Improves|Increases)(?: your)? ([a-z ]+?) rating by \|?(\d+)')) {
+        $lbl=$m.Groups[1].Value.Trim(); $v=[int]$m.Groups[2].Value
+        switch -Regex ($lbl) {
+            '^spell critical strike$' { Add-Stat $st 'ZKrit' $v }
+            '^spell hit$'             { Add-Stat $st 'ZTreffer' $v }
+            '^spell haste$'           { Add-Stat $st 'ZTempo' $v }
+            '^critical strike$'       { Add-Stat $st 'Krit' $v }
+            '^hit$'                   { Add-Stat $st 'Treffer' $v }
+            '^haste$'                 { Add-Stat $st 'Tempo' $v }
+            '^expertise$'             { Add-Stat $st 'Waffk' $v }
+        }
+    }
+    if ($t -match 'Increases attack power by \|?(\d+)') { Add-Stat $st 'AP' ([int]$Matches[1]) }
+    if ($t -match 'damage and healing done by magical spells and effects by up to \|?(\d+)') { Add-Stat $st 'SP' ([int]$Matches[1]) }
+    foreach ($m in [regex]::Matches($t,'Increases damage done by (?:Shadow|Frost|Fire|Arcane|Nature|Holy) spells and effects by up to \|?(\d+)')) {
+        Add-Stat $st 'SP' ([int]$m.Groups[1].Value)
+    }
+    if ($t -match 'healing done by up to \|?(\d+)') { Add-Stat $st 'Heil' ([int]$Matches[1]) }
+    if ($t -match 'Restores \|?(\d+) mana per 5 sec') { Add-Stat $st 'mp5' ([int]$Matches[1]) }
+    if ($t -match 'ignore \|?(\d+) of your opponent') { Add-Stat $st 'ArP' ([int]$Matches[1]) }
+    if ($t -match '\(([\d\.]+) damage per second\)') { $st['WpnDps']=[double]$Matches[1] }
+    if ($t -match 'Speed \|?([\d\.]+)') { $st['WpnSpeed'] = [double]$Matches[1] }
+    return $st
+}
+
+function Get-GearScore($slots, $specKey) {
+    $specWeights = $SPEC_WEIGHTS[$specKey]
+    if (-not $specWeights) { return 0.0 }
+    $score = 0.0
+    foreach ($slotProp in $slots.PSObject.Properties) {
+        $id = [string]$slotProp.Value
+        if ($id -and $cache.ContainsKey($id)) {
+            $stats = Parse-Tooltip $cache[$id].tooltip
+            $slotKind = $slotProp.Name
+            if ($slotProp.Name -like 'FINGER_*') { $slotKind = 'FINGER' }
+            if ($slotProp.Name -like 'TRINKET_*') { $slotKind = 'TRINKET' }
+            foreach ($k in $stats.Keys) {
+                if ($k -eq 'WpnDps' -or $k -eq 'Sockel' -or $k -eq 'WpnSpeed') { continue }
+                if ($specWeights.ContainsKey($k)) { $score += [double]$stats[$k] * $specWeights[$k] }
+            }
+            if ($stats.ContainsKey('WpnDps')) {
+                $wd = [double]$stats['WpnDps']
+                if ($slotKind -eq 'RANGED') {
+                    if ($specWeights.ContainsKey('RANGED')) { $score += $wd * $specWeights['RANGED'] }
+                } elseif ($slotKind -eq 'OFF_HAND') {
+                    if ($specWeights.ContainsKey('OH')) { $score += $wd * $score }
+                } elseif ($slotKind -eq 'MAIN_HAND' -or $slotKind -eq 'TWOHAND') {
+                    if ($specWeights.ContainsKey('MH')) { $score += $wd * $specWeights['MH'] }
+                }
+            }
+        }
+    }
+    return $score
+}
+
+# Vergleiche neu geladenes Gear mit altem Stand
+foreach ($p in $players) {
+    if (-not $alt.ContainsKey($p.Name)) { continue }
+    
+    # Sonderregel für Prot Paladin: falls kein Schild getragen wird, verwerfen
+    if ($p.Spec -eq 'PROT_PALA' -and -not $p.Slots.ContainsKey('OFF_HAND')) {
+        Write-Output "  [WARNUNG] $($p.Name) (PROT_PALA) hat kein Schild angelegt! Behalte alten Stand."
+        $p.Slots = $alt[$p.Name]
+        continue
+    }
+
+    $newScore = Get-GearScore $p.Slots $p.Spec
+    $oldScore = Get-GearScore $alt[$p.Name] $p.Spec
+
+    # Falls der neue Score signifikant niedriger ist als der alte Stand (z.B. < 80%),
+    # verwerfen wir das neue Gear (sehr wahrscheinlich PvP- oder Offspec-Ausrüstung).
+    if ($oldScore -gt 50 -and $newScore -lt ($oldScore * 0.80)) {
+        Write-Output "  [WARNUNG] $($p.Name) ($($p.Spec)) hat verdächtiges Gear angelegt (PvE-Wertung: $newScore vs. alt: $oldScore)! PvP/Offspec vermutet. Behalte alten Stand."
+        $p.Slots = $alt[$p.Name]
+    }
+}
 
 # Aenderungen gegenueber dem letzten Stand
 Write-Output ""
