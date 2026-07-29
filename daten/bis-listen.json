@@ -375,6 +375,12 @@
         {
             "Slot": "Fingers",
             "Rank": 4,
+            "Id": 32526,
+            "Name": "Band of Devastation"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 5,
             "Id": 33919,
             "Name": "Vindicator's Band of Triumph"
         },
@@ -523,31 +529,31 @@
             "Name": "Merciless Gladiator's Slicer"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 0,
             "Id": 30724,
             "Name": "Barrel-Blade Longrifle"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 0,
             "Id": 32326,
             "Name": "Twisted Blades of Zarak"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 0,
             "Id": 30105,
             "Name": "Serpent Spine Longbow"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 3,
             "Id": 33765,
             "Name": "Vengeful Gladiator's War Edge"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 4,
             "Id": 28772,
             "Name": "Sunfury Bow of the Phoenix"
@@ -927,6 +933,12 @@
             "Name": "Shapeshifter's Signet"
         },
         {
+            "Slot": "Fingers",
+            "Rank": 6,
+            "Id": 32526,
+            "Name": "Band of Devastation"
+        },
+        {
             "Slot": "Trinkets",
             "Rank": 0,
             "Id": 28830,
@@ -1053,31 +1065,31 @@
             "Name": "Vengeful Gladiator's Slicer"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 0,
             "Id": 30724,
             "Name": "Barrel-Blade Longrifle"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 0,
             "Id": 32326,
             "Name": "Twisted Blades of Zarak"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 0,
             "Id": 30105,
             "Name": "Serpent Spine Longbow"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 3,
             "Id": 33765,
             "Name": "Vengeful Gladiator's War Edge"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 4,
             "Id": 28772,
             "Name": "Sunfury Bow of the Phoenix"
@@ -1441,36 +1453,42 @@
         {
             "Slot": "Fingers",
             "Rank": 0,
+            "Id": 32526,
+            "Name": "Band of Devastation"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 0,
             "Id": 29997,
             "Name": "Band of the Ranger-General"
         },
         {
             "Slot": "Fingers",
-            "Rank": 2,
+            "Rank": 3,
             "Id": 32335,
             "Name": "Unstoppable Aggressor's Ring"
         },
         {
             "Slot": "Fingers",
-            "Rank": 3,
+            "Rank": 4,
             "Id": 30061,
             "Name": "Ancestral Ring of Conquest"
         },
         {
             "Slot": "Fingers",
-            "Rank": 4,
+            "Rank": 5,
             "Id": 30738,
             "Name": "Ring of Reciprocity"
         },
         {
             "Slot": "Fingers",
-            "Rank": 5,
+            "Rank": 6,
             "Id": 28757,
             "Name": "Ring of a Thousand Marks"
         },
         {
             "Slot": "Fingers",
-            "Rank": 6,
+            "Rank": 7,
             "Id": 28730,
             "Name": "Mithril Band of the Unscarred"
         },
@@ -1539,6 +1557,60 @@
             "Rank": 10,
             "Id": 19406,
             "Name": "Drake Fang Talisman"
+        },
+        {
+            "Slot": "Two-Hand",
+            "Rank": 0,
+            "Id": 32332,
+            "Name": "Torch of the Damned"
+        },
+        {
+            "Slot": "Two-Hand",
+            "Rank": 1,
+            "Id": 30902,
+            "Name": "Cataclysm's Edge"
+        },
+        {
+            "Slot": "Two-Hand",
+            "Rank": 2,
+            "Id": 33688,
+            "Name": "Vengeful Gladiator's Greatsword"
+        },
+        {
+            "Slot": "Two-Hand",
+            "Rank": 3,
+            "Id": 28430,
+            "Name": "Lionheart Executioner"
+        },
+        {
+            "Slot": "Two-Hand",
+            "Rank": 4,
+            "Id": 29993,
+            "Name": "Twinblade of the Phoenix"
+        },
+        {
+            "Slot": "Two-Hand",
+            "Rank": 5,
+            "Id": 28442,
+            "Name": "Stormherald"
+        },
+        {
+            "Slot": "Two-Hand",
+            "Rank": 6,
+            "Id": 31984,
+            "Name": "Merciless Gladiator's Greatsword"
+        },
+        {
+            "Slot": "Two-Hand",
+            "Rank": 7,
+            "Id": 30090,
+            "Name": "World Breaker"
+        },
+        {
+            "Slot": "Two-Hand",
+            "Rank": 8,
+            "Id": 28773,
+            "Name": "Gorehowl"
         },
         {
             "Slot": "Ranged",
@@ -2079,66 +2151,72 @@
         {
             "Slot": "Fingers",
             "Rank": 3,
+            "Id": 32526,
+            "Name": "Band of Devastation"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 4,
             "Id": 32335,
             "Name": "Unstoppable Aggressor's Ring"
         },
         {
             "Slot": "Fingers",
-            "Rank": 4,
+            "Rank": 5,
             "Id": 32266,
             "Name": "Ring of Deceitful Intent"
         },
         {
             "Slot": "Fingers",
-            "Rank": 5,
+            "Rank": 6,
             "Id": 30052,
             "Name": "Ring of Lethality"
         },
         {
             "Slot": "Fingers",
-            "Rank": 6,
+            "Rank": 7,
             "Id": 28757,
             "Name": "Ring of a Thousand Marks"
         },
         {
             "Slot": "Fingers",
-            "Rank": 7,
+            "Rank": 8,
             "Id": 28649,
             "Name": "Garona's Signet Ring"
         },
         {
             "Slot": "Fingers",
-            "Rank": 8,
+            "Rank": 9,
             "Id": 29298,
             "Name": "Band of Eternity"
         },
         {
             "Slot": "Fingers",
-            "Rank": 9,
+            "Rank": 10,
             "Id": 30834,
             "Name": "Shapeshifter's Signet"
         },
         {
             "Slot": "Fingers",
-            "Rank": 10,
+            "Rank": 11,
             "Id": 30738,
             "Name": "Ring of Reciprocity"
         },
         {
             "Slot": "Fingers",
-            "Rank": 11,
+            "Rank": 12,
             "Id": 29283,
             "Name": "Violet Signet of the Master Assassin"
         },
         {
             "Slot": "Fingers",
-            "Rank": 12,
+            "Rank": 13,
             "Id": 28730,
             "Name": "Mithril Band of the Unscarred"
         },
         {
             "Slot": "Fingers",
-            "Rank": 13,
+            "Rank": 14,
             "Id": 29379,
             "Name": "Ring of Arathi Warlords"
         },
@@ -2207,6 +2285,78 @@
             "Rank": 10,
             "Id": 28034,
             "Name": "Hourglass of the Unraveller"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 0,
+            "Id": 33669,
+            "Name": "Vengeful Gladiator's Cleaver"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 0,
+            "Id": 32262,
+            "Name": "Syphon of the Nathrezim"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 2,
+            "Id": 32946,
+            "Name": "Claw of Molten Fury"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 3,
+            "Id": 32944,
+            "Name": "Talon of the Phoenix"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 4,
+            "Id": 29996,
+            "Name": "Rod of the Sun King"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 5,
+            "Id": 28433,
+            "Name": "Wicked Edge of the Planes"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 6,
+            "Id": 32236,
+            "Name": "Rising Tide"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 7,
+            "Id": 31965,
+            "Name": "Merciless Gladiator's Cleaver"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 8,
+            "Id": 28439,
+            "Name": "Dragonstrike"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 9,
+            "Id": 29924,
+            "Name": "Netherbane"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 10,
+            "Id": 28308,
+            "Name": "Gladiator's Cleaver"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 11,
+            "Id": 28767,
+            "Name": "The Decapitator"
         }
     ],
     "ROGUE": [
@@ -2511,6 +2661,54 @@
             "Name": "Badge of the Swarmguard"
         },
         {
+            "Slot": "Main Hand",
+            "Rank": 0,
+            "Id": 32837,
+            "Name": "Warglaive of Azzinoth"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 1,
+            "Id": 33762,
+            "Name": "Vengeful Gladiator's Slicer"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 2,
+            "Id": 30881,
+            "Name": "Blade of Infamy"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 0,
+            "Id": 32471,
+            "Name": "Shard of Azzinoth"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 4,
+            "Id": 30082,
+            "Name": "Talon of Azshara"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 5,
+            "Id": 28439,
+            "Name": "Dragonstrike"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 6,
+            "Id": 32052,
+            "Name": "Merciless Gladiator's Slicer"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 7,
+            "Id": 33754,
+            "Name": "Vengeful Gladiator's Shanker"
+        },
+        {
             "Slot": "Hands",
             "Rank": 0,
             "Id": 32838,
@@ -2547,25 +2745,25 @@
             "Name": "Tracker's Blade"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 0,
             "Id": 29949,
             "Name": "Arcanite Steam-Pistol"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 1,
             "Id": 32326,
             "Name": "Twisted Blades of Zarak"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 2,
             "Id": 30724,
             "Name": "Barrel-Blade Longrifle"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 3,
             "Id": 28772,
             "Name": "Sunfury Bow of the Phoenix"
@@ -3025,12 +3223,18 @@
         {
             "Slot": "Fingers",
             "Rank": 7,
+            "Id": 32526,
+            "Name": "Band of Devastation"
+        },
+        {
+            "Slot": "Fingers",
+            "Rank": 8,
             "Id": 28791,
             "Name": "Ring of the Recalcitrant"
         },
         {
             "Slot": "Fingers",
-            "Rank": 8,
+            "Rank": 9,
             "Id": 31920,
             "Name": "Shaffar's Band of Brutality"
         },
@@ -3089,73 +3293,199 @@
             "Name": "Bladefist's Breadth"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
+            "Rank": 0,
+            "Id": 30901,
+            "Name": "Boundless Agony"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 0,
+            "Id": 30881,
+            "Name": "Blade of Infamy"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 2,
+            "Id": 33737,
+            "Name": "Vengeful Gladiator's Right Ripper"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 0,
+            "Id": 33705,
+            "Name": "Vengeful Gladiator's Left Ripper"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 4,
+            "Id": 30865,
+            "Name": "Tracker's Blade"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 5,
+            "Id": 32269,
+            "Name": "Messenger of Fate"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 6,
+            "Id": 32944,
+            "Name": "Talon of the Phoenix"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 7,
+            "Id": 29948,
+            "Name": "Claw of the Phoenix"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 8,
+            "Id": 29924,
+            "Name": "Netherbane"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 9,
+            "Id": 32946,
+            "Name": "Claw of Molten Fury"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 10,
+            "Id": 29121,
+            "Name": "Guile of Khoraazi"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 11,
+            "Id": 27846,
+            "Name": "Claw of the Watcher"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 12,
+            "Id": 28524,
+            "Name": "Emerald Ripper"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 13,
+            "Id": 28572,
+            "Name": "Blade of the Unrequited"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 14,
+            "Id": 28584,
+            "Name": "Big Bad Wolf's Paw"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 0,
+            "Id": 29993,
+            "Name": "Twinblade of the Phoenix"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 0,
+            "Id": 32248,
+            "Name": "Halberd of Desolation"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 17,
+            "Id": 28436,
+            "Name": "Bloodmoon"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 18,
+            "Id": 28435,
+            "Name": "Mooncleaver"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 19,
+            "Id": 28587,
+            "Name": "Legacy"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 20,
+            "Id": 27903,
+            "Name": "Sonic Spear"
+        },
+        {
+            "Slot": "Main Hand",
             "Rank": 0,
             "Id": 30906,
             "Name": "Bristleblitz Striker"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 0,
             "Id": 34530,
             "Name": "Vengeful Gladiator's Rifle"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 0,
             "Id": 32336,
             "Name": "Black Bow of the Betrayer"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 3,
             "Id": 30105,
             "Name": "Serpent Spine Longbow"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 4,
             "Id": 31986,
             "Name": "Merciless Gladiator's Crossbow of the Phoenix"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 5,
             "Id": 28772,
             "Name": "Sunfury Bow of the Phoenix"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 6,
             "Id": 30724,
             "Name": "Barrel-Blade Longrifle"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 7,
             "Id": 29949,
             "Name": "Arcanite Steam-Pistol"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 8,
             "Id": 28581,
             "Name": "Wolfslayer Sniper Rifle"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 9,
             "Id": 29351,
             "Name": "Wrathtide Longbow"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 10,
             "Id": 31323,
             "Name": "Don Santos' Famous Hunting Rifle"
         },
         {
-            "Slot": "Ranged",
+            "Slot": "Main Hand",
             "Rank": 11,
             "Id": 29151,
             "Name": "Veteran's Musket"
@@ -3321,18 +3651,24 @@
         {
             "Slot": "Wrists",
             "Rank": 2,
+            "Id": 30870,
+            "Name": "Cuffs of Devastation"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 3,
             "Id": 33913,
             "Name": "Vindicator's Silk Cuffs"
         },
         {
             "Slot": "Wrists",
-            "Rank": 3,
+            "Rank": 4,
             "Id": 29918,
             "Name": "Mindstorm Wristbands"
         },
         {
             "Slot": "Wrists",
-            "Rank": 4,
+            "Rank": 5,
             "Id": 30684,
             "Name": "Ravager's Cuffs"
         },
@@ -3423,24 +3759,30 @@
         {
             "Slot": "Legs",
             "Rank": 0,
+            "Id": 32367,
+            "Name": "Leggings of Devastation"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 0,
             "Id": 31053,
             "Name": "Leggings of the Malefic"
         },
         {
             "Slot": "Legs",
-            "Rank": 2,
+            "Rank": 3,
             "Id": 30734,
             "Name": "Leggings of the Seventh Circle"
         },
         {
             "Slot": "Legs",
-            "Rank": 3,
+            "Rank": 4,
             "Id": 24262,
             "Name": "Spellstrike Pants"
         },
         {
             "Slot": "Legs",
-            "Rank": 4,
+            "Rank": 5,
             "Id": 30213,
             "Name": "Leggings of the Corruptor"
         },
@@ -3821,30 +4163,36 @@
         {
             "Slot": "Wrists",
             "Rank": 0,
+            "Id": 30870,
+            "Name": "Cuffs of Devastation"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 0,
             "Id": 32586,
             "Name": "Bracers of Nimble Thought"
         },
         {
             "Slot": "Wrists",
-            "Rank": 1,
+            "Rank": 2,
             "Id": 33913,
             "Name": "Vindicator's Silk Cuffs"
         },
         {
             "Slot": "Wrists",
-            "Rank": 2,
+            "Rank": 3,
             "Id": 29918,
             "Name": "Mindstorm Wristbands"
         },
         {
             "Slot": "Wrists",
-            "Rank": 3,
+            "Rank": 4,
             "Id": 32655,
             "Name": "Crystalweave Bracers"
         },
         {
             "Slot": "Wrists",
-            "Rank": 4,
+            "Rank": 5,
             "Id": 24250,
             "Name": "Bracers of Havok"
         },
@@ -4059,6 +4407,42 @@
             "Name": "Quagmirran's Eye"
         },
         {
+            "Slot": "Main Hand",
+            "Rank": 0,
+            "Id": 32374,
+            "Name": "Zhar'doom, Greatstaff of the Devourer"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 0,
+            "Id": 30910,
+            "Name": "Tempest of Chaos"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 2,
+            "Id": 34540,
+            "Name": "Vengeful Gladiator's Battle Staff"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 3,
+            "Id": 32237,
+            "Name": "The Maelstrom's Fury"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 4,
+            "Id": 29988,
+            "Name": "The Nexus Key"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 5,
+            "Id": 32055,
+            "Name": "Merciless Gladiator's War Staff"
+        },
+        {
             "Slot": "Hands",
             "Rank": 0,
             "Id": 30872,
@@ -4231,18 +4615,24 @@
         {
             "Slot": "Wrists",
             "Rank": 1,
+            "Id": 30870,
+            "Name": "Cuffs of Devastation"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 2,
             "Id": 32270,
             "Name": "Focused Mana Bindings"
         },
         {
             "Slot": "Wrists",
-            "Rank": 2,
+            "Rank": 3,
             "Id": 30684,
             "Name": "Ravager's Cuffs"
         },
         {
             "Slot": "Wrists",
-            "Rank": 3,
+            "Rank": 4,
             "Id": 31225,
             "Name": "Illidari Bindings"
         },
@@ -4303,18 +4693,24 @@
         {
             "Slot": "Legs",
             "Rank": 1,
+            "Id": 32367,
+            "Name": "Leggings of Devastation"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 2,
             "Id": 31067,
             "Name": "Leggings of Absolution"
         },
         {
             "Slot": "Legs",
-            "Rank": 2,
+            "Rank": 3,
             "Id": 29972,
             "Name": "Trousers of the Astromancer"
         },
         {
             "Slot": "Legs",
-            "Rank": 3,
+            "Rank": 4,
             "Id": 30162,
             "Name": "Leggings of the Avatar"
         },
@@ -4479,6 +4875,48 @@
             "Rank": 7,
             "Id": 23046,
             "Name": "The Restrained Essence of Sapphiron"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 0,
+            "Id": 32374,
+            "Name": "Zhar'doom, Greatstaff of the Devourer"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 1,
+            "Id": 33687,
+            "Name": "Vengeful Gladiator's Gavel"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 2,
+            "Id": 32237,
+            "Name": "The Maelstrom's Fury"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 3,
+            "Id": 34009,
+            "Name": "Hammer of Judgement"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 4,
+            "Id": 32963,
+            "Name": "Merciless Gladiator's Gavel"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 5,
+            "Id": 28770,
+            "Name": "Nathrezim Mindblade"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 6,
+            "Id": 30723,
+            "Name": "Talon of the Tempest"
         },
         {
             "Slot": "Hands",
@@ -4701,30 +5139,36 @@
         {
             "Slot": "Wrists",
             "Rank": 1,
+            "Id": 30870,
+            "Name": "Cuffs of Devastation"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 2,
             "Id": 32259,
             "Name": "Bands of the Coming Storm"
         },
         {
             "Slot": "Wrists",
-            "Rank": 2,
+            "Rank": 3,
             "Id": 29918,
             "Name": "Mindstorm Wristbands"
         },
         {
             "Slot": "Wrists",
-            "Rank": 3,
+            "Rank": 4,
             "Id": 29521,
             "Name": "Netherstrike Bracers"
         },
         {
             "Slot": "Wrists",
-            "Rank": 4,
+            "Rank": 5,
             "Id": 29523,
             "Name": "Windhawk Bracers"
         },
         {
             "Slot": "Wrists",
-            "Rank": 5,
+            "Rank": 6,
             "Id": 24250,
             "Name": "Bracers of Havok"
         },
@@ -5089,6 +5533,66 @@
             "Name": "Neltharion's Tear"
         },
         {
+            "Slot": "Main Hand",
+            "Rank": 0,
+            "Id": 32374,
+            "Name": "Zhar'doom, Greatstaff of the Devourer"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 1,
+            "Id": 32237,
+            "Name": "The Maelstrom's Fury"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 2,
+            "Id": 33687,
+            "Name": "Vengeful Gladiator's Gavel"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 3,
+            "Id": 34009,
+            "Name": "Hammer of Judgement"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 4,
+            "Id": 29988,
+            "Name": "The Nexus Key"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 5,
+            "Id": 32963,
+            "Name": "Merciless Gladiator's Gavel"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 6,
+            "Id": 30723,
+            "Name": "Talon of the Tempest"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 7,
+            "Id": 28770,
+            "Name": "Nathrezim Mindblade"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 8,
+            "Id": 23554,
+            "Name": "Eternium Runed Blade"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 9,
+            "Id": 30832,
+            "Name": "Gavel of Unearthed Secrets"
+        },
+        {
             "Slot": "Hands",
             "Rank": 0,
             "Id": 30909,
@@ -5309,12 +5813,18 @@
         {
             "Slot": "Wrists",
             "Rank": 3,
+            "Id": 30870,
+            "Name": "Cuffs of Devastation"
+        },
+        {
+            "Slot": "Wrists",
+            "Rank": 4,
             "Id": 29918,
             "Name": "Mindstorm Wristbands"
         },
         {
             "Slot": "Wrists",
-            "Rank": 4,
+            "Rank": 5,
             "Id": 29523,
             "Name": "Windhawk Bracers"
         },
@@ -5423,24 +5933,30 @@
         {
             "Slot": "Legs",
             "Rank": 2,
+            "Id": 32367,
+            "Name": "Leggings of Devastation"
+        },
+        {
+            "Slot": "Legs",
+            "Rank": 3,
             "Id": 24262,
             "Name": "Spellstrike Pants"
         },
         {
             "Slot": "Legs",
-            "Rank": 3,
+            "Rank": 4,
             "Id": 30734,
             "Name": "Leggings of the Seventh Circle"
         },
         {
             "Slot": "Legs",
-            "Rank": 4,
+            "Rank": 5,
             "Id": 30234,
             "Name": "Nordrassil Wrath-Kilt"
         },
         {
             "Slot": "Legs",
-            "Rank": 5,
+            "Rank": 6,
             "Id": 29972,
             "Name": "Trousers of the Astromancer"
         },
@@ -6245,6 +6761,48 @@
             "Name": "Mark of the Champion"
         },
         {
+            "Slot": "Main Hand",
+            "Rank": 0,
+            "Id": 30883,
+            "Name": "Pillar of Ferocity"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 1,
+            "Id": 33716,
+            "Name": "Vengeful Gladiator's Staff"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 2,
+            "Id": 30021,
+            "Name": "Wildfury Greatstaff"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 3,
+            "Id": 32014,
+            "Name": "Merciless Gladiator's Maul"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 4,
+            "Id": 28476,
+            "Name": "Gladiator's Maul"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 5,
+            "Id": 28658,
+            "Name": "Terestian's Stranglestaff"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 6,
+            "Id": 29171,
+            "Name": "Earthwarden"
+        },
+        {
             "Slot": "Ranged",
             "Rank": 0,
             "Id": 32387,
@@ -6451,6 +7009,12 @@
             "Name": "Vengeful Gladiator's Lamellar Legguards"
         },
         {
+            "Slot": "Legs",
+            "Rank": 3,
+            "Id": 32367,
+            "Name": "Leggings of Devastation"
+        },
+        {
             "Slot": "Feet",
             "Rank": 0,
             "Id": 32245,
@@ -6647,6 +7211,36 @@
             "Rank": 16,
             "Id": 32489,
             "Name": "Ashtongue Talisman of Zeal"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 0,
+            "Id": 30910,
+            "Name": "Tempest of Chaos"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 0,
+            "Id": 33687,
+            "Name": "Vengeful Gladiator's Gavel"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 2,
+            "Id": 34009,
+            "Name": "Hammer of Judgement"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 3,
+            "Id": 32963,
+            "Name": "Merciless Gladiator's Gavel"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 4,
+            "Id": 30095,
+            "Name": "Fang of the Leviathan"
         },
         {
             "Slot": "Off Hand",
@@ -7275,6 +7869,78 @@
             "Name": "Oshu'gun Relic"
         },
         {
+            "Slot": "Main Hand",
+            "Rank": 0,
+            "Id": 32500,
+            "Name": "Crystal Spire of Karabor"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 1,
+            "Id": 33743,
+            "Name": "Vengeful Gladiator's Salvation"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 2,
+            "Id": 30918,
+            "Name": "Hammer of Atonement"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 3,
+            "Id": 30108,
+            "Name": "Lightfathom Scepter"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 4,
+            "Id": 32964,
+            "Name": "Merciless Gladiator's Salvation"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 5,
+            "Id": 28771,
+            "Name": "Light's Justice"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 6,
+            "Id": 32451,
+            "Name": "Gladiator's Salvation"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 7,
+            "Id": 28522,
+            "Name": "Shard of the Virtuous"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 8,
+            "Id": 23556,
+            "Name": "Hand of Eternity"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 9,
+            "Id": 29353,
+            "Name": "Shockwave Truncheon"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 10,
+            "Id": 31342,
+            "Name": "The Ancient Scepter of Sue-Min"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 11,
+            "Id": 29175,
+            "Name": "Gavel of Pure Light"
+        },
+        {
             "Slot": "Hands",
             "Rank": 0,
             "Id": 30882,
@@ -7671,6 +8337,66 @@
             "Rank": 6,
             "Id": 19395,
             "Name": "Rejuvenating Gem"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 0,
+            "Id": 32500,
+            "Name": "Crystal Spire of Karabor"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 1,
+            "Id": 33743,
+            "Name": "Vengeful Gladiator's Salvation"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 2,
+            "Id": 30918,
+            "Name": "Hammer of Atonement"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 3,
+            "Id": 30108,
+            "Name": "Lightfathom Scepter"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 4,
+            "Id": 32964,
+            "Name": "Merciless Gladiator's Salvation"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 5,
+            "Id": 28771,
+            "Name": "Light's Justice"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 6,
+            "Id": 32451,
+            "Name": "Gladiator's Salvation"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 7,
+            "Id": 28522,
+            "Name": "Shard of the Virtuous"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 8,
+            "Id": 23556,
+            "Name": "Hand of Eternity"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 9,
+            "Id": 29353,
+            "Name": "Shockwave Truncheon"
         },
         {
             "Slot": "Hands",
@@ -8755,6 +9481,60 @@
             "Rank": 9,
             "Id": 28190,
             "Name": "Scarab of the Infinite Cycle"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 0,
+            "Id": 32500,
+            "Name": "Crystal Spire of Karabor"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 1,
+            "Id": 33743,
+            "Name": "Vengeful Gladiator's Salvation"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 2,
+            "Id": 30918,
+            "Name": "Hammer of Atonement"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 3,
+            "Id": 30108,
+            "Name": "Lightfathom Scepter"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 4,
+            "Id": 30908,
+            "Name": "Apostle of Argus"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 5,
+            "Id": 32964,
+            "Name": "Merciless Gladiator's Salvation"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 6,
+            "Id": 32344,
+            "Name": "Staff of Immaculate Recovery"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 7,
+            "Id": 29981,
+            "Name": "Ethereum Life-Staff"
+        },
+        {
+            "Slot": "Main Hand",
+            "Rank": 8,
+            "Id": 28771,
+            "Name": "Light's Justice"
         },
         {
             "Slot": "Hands",

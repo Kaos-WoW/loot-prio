@@ -34,7 +34,7 @@ def clean(s):
     s = re.sub(r'<[^>]+>', '', s)
     return html_module.unescape(s).strip()
 
-def normalize_slot(s):
+def normalize_slot(s, spec=None):
     s = s.lower()
     if 'head' in s or 'helm' in s: return 'Head'
     if 'neck' in s or 'amulet' in s: return 'Neck'
@@ -51,10 +51,14 @@ def normalize_slot(s):
     if 'main hand' in s or 'one-hand' in s: return 'Main Hand'
     if 'off hand' in s or 'shield' in s or 'held' in s: return 'Off Hand'
     if 'two-hand' in s: return 'Two-Hand'
+    if 'weapons' in s or 'weapon' in s:
+        if spec == 'RET':
+            return 'Two-Hand'
+        return 'Main Hand'
     if 'ranged' in s or 'bow' in s or 'gun' in s or 'relic' in s or 'libram' in s or 'idol' in s or 'totem' in s: return 'Ranged'
     return None
 
-def scrape_spec(url):
+def scrape_spec(spec, url):
     print(f"Fetching {url} via curl.exe...")
     try:
         r = subprocess.run(['curl.exe', '-s', '-L', '-A', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)', url], capture_output=True, text=True, encoding='utf-8', errors='ignore')
@@ -74,7 +78,7 @@ def scrape_spec(url):
         m = h_matches[i]
         header_text = clean(m.group(2))
         
-        slot = normalize_slot(header_text)
+        slot = normalize_slot(header_text, spec)
         if not slot:
             continue
             
@@ -88,7 +92,9 @@ def scrape_spec(url):
             
         rank_counter = 0
         for row in rows:
-            if 'item' in row.lower() and ('source' in row.lower() or 'stat' in row.lower()):
+            # Safely check for header row to avoid skipping items containing 'stat' (e.g. Band of Devastation)
+            row_lower = row.lower()
+            if '<b>item</b>' in row_lower or '<th>item</th>' in row_lower or '<td>item</td>' in row_lower:
                 continue
                 
             item_match = re.search(r'href="[^"]*(?:item[=/])(\d+)[^"]*">(.*?)</a>', row, re.IGNORECASE | re.DOTALL)
@@ -133,7 +139,7 @@ def main():
             
     results = {}
     for spec, url in SPECS.items():
-        data = scrape_spec(url)
+        data = scrape_spec(spec, url)
         if data:
             results[spec] = data
             print(f"  => {spec}: Scraped {len(data)} items")
