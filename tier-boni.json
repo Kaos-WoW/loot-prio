@@ -1,0 +1,66 @@
+{
+  "_hinweis": "Set-Boni Tier 5 und Tier 6. Fähigkeitsnamen bewusst auf Englisch wie in der Quelle — eigene Übersetzungen hatten Fehler erzeugt (Arcane Blast ist Arkanschlag, nicht Arkane Explosion; Mutilate ist Verstümmeln, nicht Blutsturz). 'wert' bewertet nur den Nutzen für DPS: hoch / mittel / gering / keiner. Prozentboni auf einzelne Fähigkeiten lassen sich ohne Simulation nicht in DPS umrechnen, deshalb qualitativ.",
+  "Warrior": {
+    "t5": "Destroyer", "t6": "Onslaught",
+    "t5_2": { "text": "Overpower gibt 100 Angriffskraft für 5 s", "wert": "gering" },
+    "t5_4": { "text": "Bloodthirst und Mortal Strike kosten 5 Wut weniger", "wert": "mittel" },
+    "t6_2": { "text": "Execute kostet 3 Wut weniger", "wert": "gering" },
+    "t6_4": { "text": "+5 % Schaden auf Mortal Strike und Bloodthirst", "wert": "hoch" }
+  },
+  "Paladin": {
+    "t5": "Crystalforge", "t6": "Lightbringer",
+    "t5_2": { "text": "Judgements kosten 35 weniger Mana", "wert": "keiner" },
+    "t5_4": { "text": "Judgement heilt gelegentlich die Gruppe", "wert": "keiner" },
+    "t6_2": { "text": "20 % Chance auf 50 Mana bei Nahkampfangriff", "wert": "keiner" },
+    "t6_4": { "text": "+10 % Schaden auf Hammer of Wrath (nur unter 20 % Bossleben nutzbar)", "wert": "gering" }
+  },
+  "Hunter": {
+    "t5": "Rift Stalker", "t6": "Gronnstalker",
+    "t5_2": { "text": "Begleiter wird für 15 % deines Schadens geheilt", "wert": "keiner" },
+    "t5_4": { "text": "Steady Shot hat 5 % mehr kritische Trefferchance", "wert": "mittel" },
+    "t6_2": { "text": "Aspect of the Viper gibt zusätzlich 5 % des Intellekts", "wert": "gering" },
+    "t6_4": { "text": "+10 % Schaden auf Steady Shot", "wert": "hoch" }
+  },
+  "Rogue": {
+    "t5": "Deathmantle", "t6": "Slayer",
+    "t5_2": { "text": "Eviscerate und Envenom verursachen 40 Zusatzschaden je Combopunkt", "wert": "mittel" },
+    "t5_4": { "text": "Chance, dass der nächste Finishing Move keine Energie kostet", "wert": "hoch" },
+    "t6_2": { "text": "+5 % Tempo aus Slice and Dice", "wert": "mittel" },
+    "t6_4": { "text": "+6 % Schaden auf Backstab, Sinister Strike, Mutilate und Hemorrhage", "wert": "hoch" }
+  },
+  "Shaman": {
+    "t5": "Cataclysm", "t6": "Skyshatter",
+    "t5_2": { "text": "Prokk auf Lesser Healing Wave (Nahkampf) bzw. Manaersparnis (Caster)", "wert": "keiner" },
+    "t5_4": { "text": "Nahkampf: +5 % Tempo aus Flurry / Caster: Mana bei Lightning-Bolt-Kritischen", "wert": "mittel" },
+    "t6_2": { "text": "Nahkampf: Shocks kosten 10 % weniger Mana / Caster: mit allen vier Totems +15 mp5, +35 Zauberkrit, +45 Zauberschaden", "wert": "mittel" },
+    "t6_4": { "text": "Nahkampf: Stormstrike gibt 70 AP für 12 s / Caster: +5 % Schaden auf Lightning Bolt", "wert": "hoch" }
+  },
+  "Mage": {
+    "t5": "Tirisfal", "t6": "Tempest",
+    "t5_2": { "text": "+20 % Schaden UND +20 % Manakosten auf Arcane Blast (Arkanschlag, der Hauptzauber)", "wert": "hoch" },
+    "t5_4": { "text": "Zauberkritische Treffer geben bis zu 70 Zauberschaden für 6 s", "wert": "hoch" },
+    "t6_2": { "text": "Evocation dauert 2 s länger", "wert": "gering" },
+    "t6_4": { "text": "+5 % auf Fireball, Frostbolt und Arcane Missiles — NICHT auf Arcane Blast", "wert": "gering" }
+  },
+  "Warlock": {
+    "t5": "Corruptor", "t6": "Malefic",
+    "t5_2": { "text": "Begleiter wird für 15 % deines Schadens geheilt", "wert": "keiner" },
+    "t5_4": { "text": "Shadow Bolt erhöht Corruption um 10 %, Incinerate erhöht Immolate um 10 %", "wert": "hoch" },
+    "t6_2": { "text": "Corruption und Immolate heilen 70 Leben je Tick", "wert": "keiner" },
+    "t6_4": { "text": "+6 % Schaden auf Shadow Bolt und Incinerate", "wert": "hoch" }
+  },
+  "Priest": {
+    "t5": "Avatar", "t6": "Absolution",
+    "t5_2": { "text": "Mana bei vollgeheiltem Ziel durch Greater Heal", "wert": "keiner" },
+    "t5_4": { "text": "Renew hält 3 s länger", "wert": "keiner" },
+    "t6_2": { "text": "Shadow Word: Pain hält 3 s länger", "wert": "mittel" },
+    "t6_4": { "text": "+10 % Schaden auf Mind Blast", "wert": "hoch" }
+  },
+  "Druid": {
+    "t5": "Nordrassil", "t6": "Thunderheart",
+    "t5_2": { "text": "Regrowth billiger nach Formwechsel", "wert": "keiner" },
+    "t5_4": { "text": "+10 % Starfire-Schaden gegen Ziele mit Moonfire oder Insect Swarm", "wert": "hoch" },
+    "t6_2": { "text": "Moonfire hält 3 s länger", "wert": "mittel" },
+    "t6_4": { "text": "+5 % kritische Trefferchance auf Starfire", "wert": "hoch" }
+  }
+}

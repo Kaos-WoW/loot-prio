@@ -1,0 +1,32 @@
+[
+  { "name": "Grotschak",      "spec": "FURY" },
+  { "name": "Valiror",        "spec": "FURY" },
+  { "name": "Moriamus",       "spec": "ARMS" },
+  { "name": "Kaosx",          "spec": "RET" },
+  { "name": "Chilini",        "spec": "ENH" },
+  { "name": "Lanity",         "spec": "ENH" },
+  { "name": "Sandycheekz",    "spec": "ROGUE" },
+  { "name": "Järgerlie",      "spec": "HUNT" },
+  { "name": "Kroenix",        "spec": "HUNT" },
+  { "name": "Deters",         "spec": "WLCK" },
+  { "name": "Xalessa",        "spec": "WLCK" },
+  { "name": "Simondan",       "spec": "WLCK" },
+  { "name": "Sinrakss",       "spec": "MAGE" },
+  { "name": "Lupitus",        "spec": "MAGE" },
+  { "name": "Lariesel",       "spec": "MAGE" },
+  { "name": "Pflasterelfe",   "spec": "SPRI" },
+  { "name": "Exotica",        "spec": "ELE" },
+  { "name": "Exfreya",        "spec": "BAL" },
+  
+  { "name": "Chadíkus",       "spec": "PROT_PALA" },
+  { "name": "Shana",          "spec": "PROT_PALA" },
+  { "name": "Supfreshyo",     "spec": "FERAL_TANK" },
+  
+  { "name": "Shadowdragôn",   "spec": "RESTO_SHAM" },
+  { "name": "Mìlla",          "spec": "HOLY_PRIEST" },
+  { "name": "Discusting",     "spec": "HOLY_PRIEST" },
+  { "name": "Moonspell",      "spec": "RESTO_DRUID" },
+  { "name": "Heinerm",        "spec": "HOLY_PALA" },
+  { "name": "Golschi",        "spec": "HOLY_PALA" },
+  { "name": "Empathic",       "spec": "HOLY_PRIEST" }
+]

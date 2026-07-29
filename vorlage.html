@@ -1,0 +1,703 @@
+<title>Loot-Prioritäten Phase 3 — Hyjal & Black Temple</title>
+
+<style>
+  :root {
+    --ground: #12111a;
+    --surface: #1b1a26;
+    --surface-2: #232130;
+    --line: #302d40;
+    --ink: #e8e6f0;
+    --muted: #8f8aa6;
+    --accent: #a335ee;
+    --accent-soft: rgba(163, 53, 238, 0.16);
+    --gain: #5ad1a8;
+    --gain-soft: rgba(90, 209, 168, 0.16);
+    --warn: #e0a458;
+    --warn-soft: rgba(224, 164, 88, 0.13);
+
+    --f-display: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    --f-ui: system-ui, "Segoe UI", Roboto, sans-serif;
+    --f-data: "Cascadia Mono", Consolas, "SF Mono", ui-monospace, monospace;
+
+    --step-0: 0.875rem;
+    --step-1: 1rem;
+    --step-2: 1.35rem;
+    --step-3: 1.9rem;
+    --step-4: 2.6rem;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --ground: #f6f4f9;
+      --surface: #ffffff;
+      --surface-2: #efecf4;
+      --line: #ddd8e6;
+      --ink: #1a1826;
+      --muted: #635e7a;
+      --accent: #7b25c4;
+      --accent-soft: rgba(123, 37, 196, 0.10);
+      --gain: #1d8a68;
+      --gain-soft: rgba(29, 138, 104, 0.12);
+      --warn: #9a6417;
+      --warn-soft: rgba(154, 100, 23, 0.10);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #12111a; --surface: #1b1a26; --surface-2: #232130; --line: #302d40;
+    --ink: #e8e6f0; --muted: #8f8aa6; --accent: #a335ee;
+    --accent-soft: rgba(163,53,238,0.16); --gain: #5ad1a8; --gain-soft: rgba(90,209,168,0.16);
+    --warn: #e0a458; --warn-soft: rgba(224,164,88,0.13);
+  }
+  :root[data-theme="light"] {
+    --ground: #f6f4f9; --surface: #ffffff; --surface-2: #efecf4; --line: #ddd8e6;
+    --ink: #1a1826; --muted: #635e7a; --accent: #7b25c4;
+    --accent-soft: rgba(123,37,196,0.10); --gain: #1d8a68; --gain-soft: rgba(29,138,104,0.12);
+    --warn: #9a6417; --warn-soft: rgba(154,100,23,0.10);
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--f-ui);
+    font-size: var(--step-1);
+    line-height: 1.55;
+    margin: 0;
+    padding: 0 1.25rem 5rem;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+
+  header.top {
+    display: flex; flex-direction: column; gap: 0.5rem;
+    padding: 3rem 0 1.75rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow {
+    font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600;
+  }
+  h1 {
+    font-family: var(--f-display);
+    font-size: var(--step-4); line-height: 1.1; margin: 0;
+    font-weight: 400; text-wrap: balance; letter-spacing: -0.01em;
+  }
+  .sub { color: var(--muted); max-width: 62ch; margin: 0.35rem 0 0; }
+
+  .provenance {
+    display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem;
+    margin-top: 1rem; font-size: var(--step-0); color: var(--muted);
+    font-family: var(--f-data);
+  }
+  .provenance b { color: var(--ink); font-weight: 600; }
+
+  section { margin-top: 2.5rem; }
+  h2 {
+    font-family: var(--f-display); font-weight: 400;
+    font-size: var(--step-2); margin: 0 0 0.75rem;
+  }
+
+  .caveats {
+    border-left: 2px solid var(--warn);
+    background: var(--warn-soft);
+    padding: 1rem 1.25rem;
+    display: flex; flex-direction: column; gap: 0.6rem;
+    font-size: var(--step-0);
+  }
+  .caveats p { margin: 0; }
+  .caveats strong { color: var(--ink); }
+
+  .controls {
+    position: sticky; top: 0; z-index: 5;
+    background: var(--ground);
+    padding: 0.9rem 0; margin-bottom: 0.25rem;
+    border-bottom: 1px solid var(--line);
+    display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center;
+  }
+  select, input[type="search"] {
+    font-family: var(--f-ui); font-size: var(--step-0);
+    background: var(--surface); color: var(--ink);
+    border: 1px solid var(--line); padding: 0.4rem 0.6rem;
+  }
+  input[type="search"] { min-width: 15rem; flex: 1 1 15rem; }
+  select:focus-visible, input:focus-visible, th button:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 1px;
+  }
+  .count { margin-left: auto; font-family: var(--f-data); font-size: var(--step-0); color: var(--muted); }
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--line); background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: var(--step-0); }
+  thead th {
+    position: sticky; top: 0; background: var(--surface-2);
+    text-align: left; font-weight: 600; white-space: nowrap;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted);
+  }
+  th button {
+    all: unset; cursor: pointer; padding: 0.6rem 0.7rem; display: block; width: 100%;
+    font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit;
+  }
+  th.plain { padding: 0.6rem 0.7rem; }
+  tbody td { padding: 0.5rem 0.7rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tbody tr:hover { background: var(--surface-2); }
+  .num { font-family: var(--f-data); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+
+  .bar { position: relative; min-width: 8.5rem; }
+  .bar span.fill {
+    position: absolute; inset: 0 auto 0 0; background: var(--gain-soft);
+    z-index: 0; pointer-events: none;
+  }
+  .bar b { position: relative; z-index: 1; font-weight: 650; color: var(--gain); }
+
+  .item { font-weight: 600; }
+  .pill {
+    display: inline-block; font-size: 0.68rem; letter-spacing: 0.05em;
+    padding: 0.08rem 0.4rem; border: 1px solid var(--line); color: var(--muted);
+    white-space: nowrap; font-weight: 600;
+  }
+  .pill.q-t6 { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+  .pill.q-marken { border-color: var(--warn); color: var(--warn); background: var(--warn-soft); }
+  .pill.bis-excl1 { border-color: #ffd700; color: #ffd700; background: rgba(255, 215, 0, 0.18); box-shadow: 0 0 6px rgba(255, 215, 0, 0.25); }
+  .pill.bis-excl2 { border-color: var(--gain); color: var(--gain); background: var(--gain-soft); font-weight: 700; }
+  .pill.bis1 { border-color: #3b82f6; color: #60a5fa; background: rgba(59, 130, 246, 0.15); }
+  .pill.upg-only { border-color: var(--line); color: var(--muted); opacity: 0.85; }
+  .note { color: var(--warn); font-size: 0.75rem; display: block; margin-top: 0.15rem; }
+  .muted { color: var(--muted); }
+  .empty { padding: 2rem; text-align: center; color: var(--muted); }
+
+  .pill.equipped { border-color: #4ade80; color: #4ade80; background: rgba(74,222,128,0.12); }
+
+  .sync-bar {
+    display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
+    padding: 0.55rem 0.85rem; margin-bottom: 1rem;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 6px;
+    font-size: 0.82rem;
+  }
+  .sync-bar .sync-status { color: var(--muted); flex: 1; min-width: 0; }
+  .sync-bar .sync-status b { color: var(--ink); }
+  #btnSync {
+    all: unset; cursor: pointer; font-family: var(--f-ui); font-size: 0.82rem;
+    font-weight: 600; background: var(--accent); color: #fff;
+    padding: 0.35rem 0.9rem; border-radius: 4px; white-space: nowrap;
+    transition: opacity 0.15s;
+  }
+  #btnSync:hover { opacity: 0.85; }
+  #btnSync:disabled { opacity: 0.45; cursor: not-allowed; }
+  .sync-progress { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+  .sync-pip {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--line); transition: background 0.2s;
+  }
+  .sync-pip.done { background: var(--gain); }
+  .sync-pip.err  { background: #f87171; }
+  .sync-pip.spin { background: var(--accent); animation: pulse 0.8s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+
+  .login-overlay {
+    position: fixed; inset: 0; background: var(--ground);
+    display: flex; align-items: center; justify-content: center; z-index: 1000;
+  }
+  .login-box {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 8px; padding: 2rem; width: 320px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  }
+  .login-box h2 { font-family: var(--f-display); margin: 0 0 0.5rem; font-size: 1.3rem; }
+  .login-box .sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 1.25rem; }
+  .login-box label { display: block; font-size: 0.75rem; color: var(--muted); margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .login-box input[type="password"] {
+    width: 100%; padding: 0.5rem 0.7rem; box-sizing: border-box; margin-bottom: 1rem;
+    font-family: var(--f-ui); font-size: var(--step-0); background: var(--surface-2); color: var(--ink); border: 1px solid var(--line); border-radius: 4px;
+  }
+  .login-box button {
+    width: 100%; background: var(--accent); color: #fff; border: none; border-radius: 4px;
+    padding: 0.6rem; font-size: 0.9rem; font-weight: 600; cursor: pointer;
+  }
+  .login-box button:hover { opacity: 0.9; }
+  .login-err { color: #f87171; font-size: 0.8rem; margin-top: 0.75rem; min-height: 1.2rem; }
+
+  /* Infotext Tooltips */
+  .tooltip-wrapper {
+    position: relative;
+    cursor: help;
+    border-bottom: 1px dotted var(--muted);
+  }
+  .tooltip-content {
+    visibility: hidden;
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(23, 23, 27, 0.96);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    width: 280px;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    pointer-events: none;
+    text-align: left;
+    font-weight: normal;
+  }
+  .tooltip-wrapper:hover .tooltip-content {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(-4px);
+  }
+
+  @media (max-width: 640px) {
+    h1 { font-size: var(--step-3); }
+    .provenance { flex-direction: column; gap: 0.2rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <h2>🔒 TBC Loot-Prioritäten</h2>
+    <div class="sub">Gemeinsames Passwort der Raidleitung eingeben.</div>
+    <div>
+      <label for="loginPassword">Passwort</label>
+      <input type="password" id="loginPassword" placeholder="Passwort">
+    </div>
+    <button type="button" id="btnLogin">Anmelden</button>
+    <div class="login-err" id="loginError"></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="top">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+      <span class="eyebrow">Gilde Resurrected · Thunderstrike EU</span>
+      <button type="button" id="btnLogout" style="all:unset; cursor:pointer; font-size:0.8rem; color:var(--muted); border:1px solid var(--line); padding:0.25rem 0.6rem; border-radius:4px; font-family:var(--f-ui);">🔓 Abmelden</button>
+    </div>
+    <h1>Loot-Prioritäten Phase&nbsp;3</h1>
+    <p class="sub">Mount Hyjal und Black Temple, gerechnet gegen die tatsächlich getragene Ausrüstung der Raider. Der Wert einer Zeile ist der DPS-Zuwachs für diesen Spieler. BiS-Items werden gegenüber bloßen Upgrades priorisiert.</p>
+    <div class="provenance">
+      <span>Gear-Stand <b id="provStand">—</b></span>
+      <span>Alle <b id="totalRaiders">— Raider</b></span>
+      <span>Gewichte <b>WoWSims 2.5.6</b></span>
+      <span class="tooltip-wrapper">
+        Abgleich <b>88 % in BiS-Top-3</b>
+        <span class="tooltip-content">
+          Dieser Qualitäts-Wert zeigt, wie genau die automatische Berechnung der Prio-Liste ist:
+          <br><br>
+          In <b>88 % aller Fälle</b> liegt das vom System berechnete Top-Upgrade (Platz 1) auch in der offiziellen Wowhead Phase-3-BiS-Liste des jeweiligen Charakters unter den besten 3 Empfehlungen.
+        </span>
+      </span>
+    </div>
+
+    <div class="sync-bar">
+      <button type="button" id="btnSync">⟳ Gear synchronisieren</button>
+      <div class="sync-progress" id="syncProgress"></div>
+      <span class="sync-status" id="syncStatus">Letzter Sync: <b id="syncTime">noch nicht synchronisiert</b></span>
+    </div>
+  </header>
+
+  <section>
+    <h2>Hinweise zur Vergabe</h2>
+    <div class="caveats">
+      <p><strong>BiS-Schutz:</strong> BiS-Spieler haben immer Vorrang vor Spielern, für die das Item nur ein normales Upgrade ist.</p>
+      <p><strong>Keine Schmuckstücke:</strong> Schmuckstücke fehlen in dieser Liste, da ihre Effekte (Proks/Nutzen) nicht verlässlich berechnet werden können.</p>
+      <p><strong>Waffentempo vorsortiert:</strong> Schnelle Waffen (&lt; 2.4s) wurden für Kampf-Schurken und Verstärker-Schamanen bereits aussortiert.</p>
+      <p><strong>Set-Boni extra beachten:</strong> Die DPS-Zahl enthält keine Set-Boni. Ob du durch den Tausch Boni gewinnst oder verlierst, steht direkt als Text unter dem Item.</p>
+      <p><strong>Warglaives (Gleven):</strong> Das Paar ist als Kombi-Zeile berechnet. Nutzt diese Paar-Zeilen für die Vergabe der Gleven.</p>
+      <p><strong>Marken-Items:</strong> Händler-Items für Abzeichen sind gelistet, können aber selbst gefarmt werden. T6-Tokens droppen nur bei Bossen.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Alle Upgrades</h2>
+    <div class="controls">
+      <label style="display:inline-flex; align-items:center; gap:0.45rem; font-size:0.85rem; font-weight:600; cursor:pointer; color:var(--gain); padding:0.3rem 0.6rem; border:1px solid var(--gain-soft); background:var(--gain-soft);">
+        <input type="checkbox" id="f-bis-strict" checked style="accent-color:var(--gain);">
+        BiS-Schutz aktiv (Verhindert Vergabe von BiS-Items an Nicht-BiS-Spieler)
+      </label>
+      <label style="display:inline-flex; align-items:center; gap:0.45rem; font-size:0.85rem; font-weight:600; cursor:pointer; color:#4ade80; padding:0.3rem 0.6rem; border:1px solid rgba(74,222,128,0.25); background:rgba(74,222,128,0.08);">
+        <input type="checkbox" id="f-hide-equipped" style="accent-color:#4ade80;">
+        Bereits ausgerüstete Items ausblenden
+      </label>
+      <select id="f-rolle">
+        <option value="">Alle Rollen</option>
+        <option value="dps">Schadensausteiler (DPS)</option>
+        <option value="tank">Tanks</option>
+        <option value="heiler">Heiler</option>
+      </select>
+      <select id="f-prio">
+        <option value="">Alle Prio-Stufen</option>
+        <option value="bis1">Nur BiS #1 Kandidaten</option>
+        <option value="excl">Exklusives BiS (1–2 Spieler)</option>
+        <option value="upg">Freie Upgrades (kein BiS für niemanden)</option>
+        <option value="blocked">Gesperrt (Nicht-BiS für BiS-Item)</option>
+      </select>
+      <select id="f-boss"><option value="">Alle Bosse</option></select>
+      <select id="f-slot"><option value="">Alle Slots</option></select>
+      <select id="f-spieler"><option value="">Alle Spieler</option></select>
+      <select id="f-quelle"><option value="">Alle Quellen</option></select>
+      <input type="search" id="f-suche" placeholder="Item oder Spieler suchen" aria-label="Suchen">
+      <span class="count" id="count"></span>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="plain">Item</th>
+            <th class="plain">Boss</th>
+            <th class="plain">Slot</th>
+            <th class="plain">Spieler</th>
+            <th class="plain">Spec</th>
+            <th><button type="button" id="btn-sort-prio" data-sort="prio">Prio / BiS Status ▾</button></th>
+            <th><button type="button" id="btn-sort-dps" data-sort="d">Wert-Zuwachs</button></th>
+            <th class="plain">Ersetzt</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <p class="empty" id="empty" hidden>Keine Zeile passt zu diesen Filtern.</p>
+  </section>
+
+  <footer>
+    <p>Statgewichte aus echten Simulationsläufen (WoWSims, 23 Simulationen je Spec). Itemwerte aus der Wowhead-TBC-Datenbank, Namensraum <span style="font-family:var(--f-data)">static-2.5.6</span>. Ausrüstungsstände live über classic-armory.org. Gegengeprüft gegen die veröffentlichten Phase-3-BiS-Listen: 88&nbsp;% der Empfehlungen liegen dort in den Top&nbsp;3, 57&nbsp;% auf Platz&nbsp;1.</p>
+  </footer>
+</div>
+
+<script>
+window.onerror = function(msg, url, line, col, error) {
+  const errDiv = document.createElement('div');
+  errDiv.style = "position:fixed; top:10px; left:10px; right:10px; background:#f87171; color:white; padding:15px; z-index:99999; border-radius:5px; font-family:monospace; box-shadow:0 5px 15px rgba(0,0,0,0.5);";
+  errDiv.innerHTML = "<b>JavaScript Error:</b> " + msg + "<br><small>in " + url + " on line " + line + ":" + col + "</small>";
+  document.body.appendChild(errDiv);
+  return false;
+};
+const DATA = "__DATEN__";
+const rows = DATA.rows.filter(r => !r.un && !r.nb);
+
+const $ = id => document.getElementById(id);
+const uniq = (arr, k) => [...new Set(arr.map(r => r[k]).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'de'));
+
+function fillSelect(el, vals) {
+  vals.forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; el.appendChild(o); });
+}
+fillSelect($('f-boss'), uniq(rows,'b'));
+fillSelect($('f-slot'), uniq(rows,'s'));
+fillSelect($('f-spieler'), uniq(rows,'pl'));
+fillSelect($('f-quelle'), uniq(rows,'q'));
+
+
+let currentSort = 'prio'; // 'prio' or 'd'
+let sortDir = -1; // -1 = descending
+const maxD = Math.max(...rows.map(r => r.d));
+
+// liveGear: { playerName -> Set<itemId> } — befüllt durch Armory-Sync
+let liveGear = {};
+let lastSyncTimeString = '';
+
+// Versuchen, den vorherigen Sync-Zustand aus dem localStorage zu laden
+try {
+  const cachedGear = localStorage.getItem('lootprio_livegear');
+  const cachedTime = localStorage.getItem('lootprio_synctime');
+  if (cachedGear) {
+    const parsed = JSON.parse(cachedGear);
+    for (const [name, ids] of Object.entries(parsed)) {
+      liveGear[name] = new Set(ids.map(Number));
+    }
+    if (cachedTime) {
+      lastSyncTimeString = cachedTime;
+    }
+  }
+} catch (e) {
+  console.warn('Failed to load liveGear from localStorage:', e);
+}
+
+// Falls kein Cache vorhanden, Gear aus Payload vorbelegen (Stand vom letzten Build)
+if (Object.keys(liveGear).length === 0) {
+  if (DATA.gear) {
+    for (const [name, slots] of Object.entries(DATA.gear)) {
+      liveGear[name] = new Set(Object.values(slots).map(Number));
+    }
+  }
+}
+
+if (DATA.stand) $('provStand').textContent = DATA.stand;
+if (lastSyncTimeString) {
+  $('syncTime').textContent = lastSyncTimeString;
+} else if (DATA.stand) {
+  // Fallback-Text wenn noch nie im Browser gesynct wurde
+  $('syncTime').textContent = 'noch nicht synchronisiert (Verwende Build-Stand: ' + DATA.stand + ')';
+}
+if (DATA.roster) $('totalRaiders').textContent = DATA.roster.length + ' Raider';
+
+const ITEM_NAMES = DATA.itemNames || {};
+const GEAR_MAP   = DATA.gear     || {};
+
+function wowLink(id, name) {
+  if (!id) return esc(name);
+  return `<a href="https://www.wowhead.com/tbc/item=${id}" target="_blank" rel="noopener"
+     style="color:inherit; text-decoration:none; border-bottom:1px dashed rgba(255,255,255,0.25);"
+     onmouseover="this.style.borderBottomColor='var(--gain)'"
+     onmouseout="this.style.borderBottomColor='rgba(255,255,255,0.25)'">${esc(name)}</a>`;
+}
+
+function getEquippedCell(spieler, slotKey) {
+  const gear = GEAR_MAP[spieler];
+  if (!gear) return '<span class="muted">—</span>';
+  // Dual-slot (ring / trinket)
+  const keys = slotKey === 'FINGER' ? ['FINGER_1','FINGER_2']
+             : slotKey === 'TRINKET' ? ['TRINKET_1','TRINKET_2']
+             : slotKey === 'MAIN_HAND+OFF_HAND' ? ['MAIN_HAND','OFF_HAND']
+             : [slotKey];
+  const parts = keys.map(k => {
+    const id = gear[k];
+    if (!id) return null;
+    const name = ITEM_NAMES[String(id)] || `#${id}`;
+    return wowLink(id, name);
+  }).filter(Boolean);
+  return parts.length ? parts.join('<br>') : '<span class="muted">—</span>';
+}
+
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+function getSortKey(r) {
+  // Higher value = higher priority
+  if (r.bis === 1) {
+    if (r.bc === 1) return 400000 + r.d;
+    if (r.bc === 2) return 300000 + r.d;
+    return 200000 + r.d;
+  }
+  if (r.bb) return r.d; // Blocked rows at bottom
+  return 100000 + r.d;
+}
+
+function isEquipped(r) {
+  const gear = liveGear[r.pl];
+  return gear ? gear.has(r.id) : false;
+}
+
+function render() {
+  const strict = $('f-bis-strict').checked;
+  const hideEquipped = $('f-hide-equipped').checked;
+  const frolle = $('f-rolle').value;
+  const fprio = $('f-prio').value;
+  const fb = $('f-boss').value, fs = $('f-slot').value, fp = $('f-spieler').value, fq = $('f-quelle').value;
+  const q = $('f-suche').value.trim().toLowerCase();
+
+  let list = rows.filter(r => {
+    if (strict && r.bb) return false;
+    if (hideEquipped && isEquipped(r)) return false;
+    if (fb && r.b !== fb) return false;
+    if (fs && r.s !== fs) return false;
+    if (fp && r.pl !== fp) return false;
+    if (fq && r.q !== fq) return false;
+    if (q && !r.n.toLowerCase().includes(q) && !r.pl.toLowerCase().includes(q)) return false;
+    if (fprio === 'bis1' && r.bis !== 1) return false;
+    if (fprio === 'excl' && (r.bis !== 1 || (r.bc !== 1 && r.bc !== 2))) return false;
+    if (fprio === 'upg' && r.bc > 0) return false;
+    if (fprio === 'blocked' && !r.bb) return false;
+    
+    // Rolle filtern
+    if (frolle === 'dps' && (r.ro === 'Tank' || r.ro === 'Heiler')) return false;
+    if (frolle === 'tank' && r.ro !== 'Tank') return false;
+    if (frolle === 'heiler' && r.ro !== 'Heiler') return false;
+
+    return true;
+  });
+
+  if (currentSort === 'prio') {
+    list.sort((a,b) => (getSortKey(a) - getSortKey(b)) * sortDir);
+    $('btn-sort-prio').textContent = `Prio / BiS Status ${sortDir === -1 ? '▾' : '▴'}`;
+    $('btn-sort-dps').textContent = 'Wert-Zuwachs';
+  } else {
+    list.sort((a,b) => (a.d - b.d) * sortDir);
+    $('btn-sort-dps').textContent = `Wert-Zuwachs ${sortDir === -1 ? '▾' : '▴'}`;
+    $('btn-sort-prio').textContent = 'Prio / BiS Status';
+  }
+
+  $('count').textContent = list.length + ' von ' + rows.length + ' Zeilen';
+  $('empty').hidden = list.length > 0;
+
+  $('tbody').innerHTML = list.map(r => {
+    const isTankOrHeal = (r.ro === 'Tank' || r.ro === 'Heiler');
+    const pct = isTankOrHeal ? Math.min(100, Math.max(2, (r.d / 150) * 100)) : Math.max(2, (r.d / maxD) * 100);
+    const quelle = r.q === 'T6' ? '<span class="pill q-t6">Tier 6</span>'
+                 : r.q === 'Marken' ? '<span class="pill q-marken">Marken</span>' : '';
+    
+    let bisBadge = '';
+    let prioLabel = '';
+
+    if (r.bis === 1) {
+      if (r.bc === 1) {
+        bisBadge = '<span class="pill bis-excl1">★ BiS (Exklusiv 1 Spieler)</span>';
+        prioLabel = '<b style="color:#ffd700">★ Höchste Prio (BiS 1 Sp.)</b>';
+      } else if (r.bc === 2) {
+        bisBadge = '<span class="pill bis-excl2">★ BiS (Exklusiv 2 Spieler)</span>';
+        prioLabel = '<b style="color:var(--gain)">★ Hohe Prio (BiS 2 Sp.)</b>';
+      } else {
+        bisBadge = '<span class="pill bis1">BiS #1</span>';
+        prioLabel = '<b style="color:#60a5fa">BiS #1</b>';
+      }
+    } else if (r.bb) {
+      bisBadge = '<span class="pill q-marken">GESPERRT (BiS für andere)</span>';
+      prioLabel = '<span style="color:var(--warn); font-size:0.75rem;">⚠️ Gesperrt (BiS für andere)</span>';
+    } else {
+      bisBadge = '<span class="pill upg-only">Freies Upgrade</span>';
+      prioLabel = '<span class="muted">Sekundär (Freies Upgrade)</span>';
+    }
+
+    const note = r.h ? `<span class="note">${esc(r.h)}</span>` : '';
+    const speed = r.spd ? ` <span class="muted">${r.spd.toFixed(1)}s · ${r.ps} pro Schlag</span>` : '';
+    const equipped = isEquipped(r);
+    const equippedBadge = equipped ? '<span class="pill equipped">✓ Bereits ausgerüstet</span>' : '';
+    const rowStyle = r.bb
+      ? 'opacity:0.6; background:rgba(224,164,88,0.05);'
+      : equipped ? 'opacity:0.45;' : '';
+    const rowClass = rowStyle ? `style="${rowStyle}"` : '';
+
+    const dpsCellContent = isTankOrHeal
+      ? `+${r.d.toFixed(1)} <span style="font-size:0.75rem; font-weight:normal; opacity:0.8; margin-left:2px;">Pkt (${r.ro === 'Tank' ? 'Tank' : 'Heil'})</span>`
+      : `+${r.d.toFixed(1)} <span style="font-size:0.75rem; font-weight:normal; opacity:0.8; margin-left:2px;">(+${r.p.toFixed(2)}%)</span>`;
+
+    return `<tr ${rowClass}>
+      <td><span class="item">${wowLink(r.id, r.n)}</span> ${quelle} ${bisBadge}${equippedBadge}${note}</td>
+      <td class="muted">${esc(r.b)}</td>
+      <td class="muted">${esc(r.s)}${speed}</td>
+      <td><b>${esc(r.pl)}</b></td>
+      <td class="muted">${esc(r.sp)}</td>
+      <td>${prioLabel}</td>
+      <td class="num bar"><span class="fill" style="width:${pct}%"></span><b>${dpsCellContent}</b></td>
+      <td class="muted" style="font-size:0.8rem; line-height:1.4;">${getEquippedCell(r.pl, r.e)}</td>
+    </tr>`;
+  }).join('');
+}
+
+['f-bis-strict','f-hide-equipped','f-prio','f-boss','f-slot','f-spieler','f-quelle','f-rolle'].forEach(id => $(id).addEventListener('change', render));
+$('f-suche').addEventListener('input', render);
+
+$('btn-sort-prio').addEventListener('click', () => {
+  if (currentSort === 'prio') sortDir *= -1;
+  else { currentSort = 'prio'; sortDir = -1; }
+  render();
+});
+$('btn-sort-dps').addEventListener('click', () => {
+  if (currentSort === 'd') sortDir *= -1;
+  else { currentSort = 'd'; sortDir = -1; }
+  render();
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://uvbubeztfbhhmmxwolxm.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2YnViZXp0ZmJoaG1teHdvbHhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ5OTcxMDUsImV4cCI6MjEwMDU3MzEwNX0.gjB-0vf7ifly0KGxtPnHrdXOjtE5hT6o7MfEnR4Po94";
+const SHARED_EMAIL = "raidleitung@resurrected.local";
+
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let appInitialized = false;
+
+async function initApp() {
+  if (appInitialized) return;
+  appInitialized = true;
+  document.getElementById("loginOverlay").style.display = "none";
+  render();
+}
+
+function showLogin() {
+  appInitialized = false;
+  document.getElementById("loginOverlay").style.display = "flex";
+}
+
+async function doLogin() {
+  const pw = document.getElementById("loginPassword").value;
+  const errEl = document.getElementById("loginError");
+  errEl.textContent = "";
+  if (!pw) { errEl.textContent = "Bitte Passwort eingeben."; return; }
+  const { error } = await sb.auth.signInWithPassword({ email: SHARED_EMAIL, password: pw });
+  if (error) { errEl.textContent = "Falsches Passwort."; }
+}
+
+document.getElementById("btnLogin").addEventListener("click", doLogin);
+document.getElementById("loginPassword").addEventListener("keydown", e => {
+  if (e.key === "Enter") doLogin();
+});
+document.getElementById("btnLogout").addEventListener("click", () => sb.auth.signOut());
+
+sb.auth.onAuthStateChange((event, session) => {
+  if (session) {
+    initApp();
+  } else {
+    showLogin();
+  }
+});
+
+// ---- Armory Sync ----
+const ROSTER = DATA.roster || [];
+const ARMORY_URL = '/api/armory-sync';
+
+async function fetchPlayerGear(name) {
+  const body = JSON.stringify({ region: 'eu', realm: 'thunderstrike', name, flavor: 'tbc-anniversary' });
+  const res = await fetch(ARMORY_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const data = await res.json();
+  if (!data.equipment) throw new Error('no equipment');
+  const ids = new Set(data.equipment.map(e => Number(e.item.id)));
+  return ids;
+}
+
+async function doSync() {
+  const btn = $('btnSync');
+  const prog = $('syncProgress');
+  const timeEl = $('syncTime');
+  btn.disabled = true;
+  btn.textContent = '⟳ Synchronisiere...';
+
+  // Build progress pips
+  prog.innerHTML = ROSTER.map((_, i) =>
+    `<span class="sync-pip" id="pip-${i}"></span>`
+  ).join('');
+
+  const errors = [];
+  for (let i = 0; i < ROSTER.length; i++) {
+    const player = ROSTER[i];
+    const pip = document.getElementById(`pip-${i}`);
+    pip.className = 'sync-pip spin';
+    try {
+      const ids = await fetchPlayerGear(player.name);
+      liveGear[player.name] = ids;
+      pip.className = 'sync-pip done';
+    } catch (e) {
+      errors.push(player.name);
+      pip.className = 'sync-pip err';
+    }
+  }
+
+  const now = new Date();
+  const ts = now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+  const statusString = ts + (errors.length ? ` (${errors.length} Fehler: ${errors.join(', ')})` : ' — alle Spieler OK');
+  timeEl.textContent = statusString;
+
+  // Im localStorage speichern
+  try {
+    const serializable = {};
+    for (const [name, set] of Object.entries(liveGear)) {
+      serializable[name] = Array.from(set);
+    }
+    localStorage.setItem('lootprio_livegear', JSON.stringify(serializable));
+    localStorage.setItem('lootprio_synctime', statusString);
+  } catch (e) {
+    console.error('Failed to save sync state to localStorage:', e);
+  }
+
+  btn.textContent = '⟳ Gear synchronisieren';
+  btn.disabled = false;
+  render();
+}
+
+$('btnSync').addEventListener('click', doSync);
+</script>
