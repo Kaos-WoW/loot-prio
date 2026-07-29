@@ -637,7 +637,7 @@ function render() {
       : `+${r.p.toFixed(2)}% dps <span style="font-size:0.75rem; font-weight:normal; opacity:0.8; margin-left:2px;">(+${r.d.toFixed(1)} dps)</span>`;
 
     return `<tr ${rowClass}>
-      <td><span class="item">${wowLink(r.id, r.n)}</span> ${quelle} ${bisBadge}${equippedBadge}${note}${altsNote}</td>
+      <td><span class="item">${wowLink(r.id, r.n)}</span> ${quelle} ${equippedBadge}${note}${altsNote}</td>
       <td class="muted">${esc(r.b)}</td>
       <td class="muted">${esc(r.s)}${speed}</td>
       <td><b>${esc(r.pl)}</b></td>
