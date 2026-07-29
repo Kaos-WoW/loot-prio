@@ -655,7 +655,7 @@ function getAlternativesNote(r) {
   // Finde alle Upgrades des gleichen Spielers im gleichen Slot, die Marken oder T6 sind
   const alts = rows.filter(o => o.pl === r.pl && o.s === r.s && o.id !== r.id && (o.q === 'Marken' || o.q === 'T6'));
   if (alts.length === 0) {
-    return `<span class="note" style="color:#f87171; font-size:0.72rem; font-weight:500; display:block; margin-top:0.2rem;">⚠️ Keine Alternative (Marken/T6) in diesem Slot</span>`;
+    return '';
   }
   
   const altTexts = alts.map(o => {
