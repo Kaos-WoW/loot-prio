@@ -464,12 +464,12 @@ function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&
 function getSortKey(r) {
   // Higher value = higher priority
   if (r.bis === 1) {
-    if (r.bc === 1) return 400000 + r.d;
-    if (r.bc === 2) return 300000 + r.d;
-    return 200000 + r.d;
+    if (r.bc === 1) return 400000 + r.p;
+    if (r.bc === 2) return 300000 + r.p;
+    return 200000 + r.p;
   }
-  if (r.bb) return r.d; // Blocked rows at bottom
-  return 100000 + r.d;
+  if (r.bb) return r.p; // Blocked rows at bottom
+  return 100000 + r.p;
 }
 
 function isEquipped(r) {
@@ -506,13 +506,15 @@ function render() {
     return true;
   });
 
+  const maxP = Math.max(...rows.map(r => r.p)) || 1;
+
   if (currentSort === 'prio') {
     list.sort((a,b) => (getSortKey(a) - getSortKey(b)) * sortDir);
     $('btn-sort-prio').textContent = `Prio / BiS Status ${sortDir === -1 ? '▾' : '▴'}`;
-    $('btn-sort-dps').textContent = 'Wert-Zuwachs';
+    $('btn-sort-dps').textContent = 'Wert-Zuwachs (%)';
   } else {
-    list.sort((a,b) => (a.d - b.d) * sortDir);
-    $('btn-sort-dps').textContent = `Wert-Zuwachs ${sortDir === -1 ? '▾' : '▴'}`;
+    list.sort((a,b) => (a.p - b.p) * sortDir);
+    $('btn-sort-dps').textContent = `Wert-Zuwachs (%) ${sortDir === -1 ? '▾' : '▴'}`;
     $('btn-sort-prio').textContent = 'Prio / BiS Status';
   }
 
@@ -521,7 +523,7 @@ function render() {
 
   $('tbody').innerHTML = list.map(r => {
     const isTankOrHeal = (r.ro === 'Tank' || r.ro === 'Heiler');
-    const pct = isTankOrHeal ? Math.min(100, Math.max(2, (r.d / 150) * 100)) : Math.max(2, (r.d / maxD) * 100);
+    const pct = Math.max(2, (r.p / maxP) * 100);
     const quelle = r.q === 'T6' ? '<span class="pill q-t6">Tier 6</span>'
                  : r.q === 'Marken' ? '<span class="pill q-marken">Marken</span>' : '';
     
@@ -557,8 +559,8 @@ function render() {
     const rowClass = rowStyle ? `style="${rowStyle}"` : '';
 
     const dpsCellContent = isTankOrHeal
-      ? `+${r.d.toFixed(1)} <span style="font-size:0.75rem; font-weight:normal; opacity:0.8; margin-left:2px;">Pkt (${r.ro === 'Tank' ? 'Tank' : 'Heil'})</span>`
-      : `+${r.d.toFixed(1)} <span style="font-size:0.75rem; font-weight:normal; opacity:0.8; margin-left:2px;">(+${r.p.toFixed(2)}%)</span>`;
+      ? `+${r.p.toFixed(2)}% <span style="font-size:0.75rem; font-weight:normal; opacity:0.8; margin-left:2px;">(+${r.d.toFixed(1)} Pkt)</span>`
+      : `+${r.p.toFixed(2)}% dps <span style="font-size:0.75rem; font-weight:normal; opacity:0.8; margin-left:2px;">(+${r.d.toFixed(1)} dps)</span>`;
 
     return `<tr ${rowClass}>
       <td><span class="item">${wowLink(r.id, r.n)}</span> ${quelle} ${bisBadge}${equippedBadge}${note}</td>
