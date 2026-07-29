@@ -428,9 +428,36 @@ function sortBosses(bossNames) {
 function fillSelect(el, vals) {
   vals.forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; el.appendChild(o); });
 }
+
+const allPlayerNames = uniq(rows, 'pl');
+const playerRoles = {};
+rows.forEach(r => {
+  playerRoles[r.pl] = r.ro;
+});
+
+function updatePlayerFilter() {
+  const frolle = $('f-rolle').value;
+  const currentSelected = $('f-spieler').value;
+  
+  const filteredPlayers = allPlayerNames.filter(name => {
+    const role = playerRoles[name];
+    if (frolle === 'dps') return (role !== 'Tank' && role !== 'Heiler');
+    if (frolle === 'tank') return role === 'Tank';
+    if (frolle === 'heiler') return role === 'Heiler';
+    return true;
+  });
+  
+  $('f-spieler').innerHTML = '<option value="">Alle Spieler</option>';
+  fillSelect($('f-spieler'), filteredPlayers);
+  
+  if (filteredPlayers.includes(currentSelected)) {
+    $('f-spieler').value = currentSelected;
+  }
+}
+
 fillSelect($('f-boss'), sortBosses(uniq(rows,'b')));
 fillSelect($('f-slot'), uniq(rows,'s'));
-fillSelect($('f-spieler'), uniq(rows,'pl'));
+updatePlayerFilter();
 fillSelect($('f-quelle'), uniq(rows,'q'));
 
 
@@ -639,7 +666,11 @@ function getAlternativesNote(r) {
   return `<span class="note" style="color:var(--muted); font-size:0.72rem; display:block; margin-top:0.2rem;">Alternative: ${altTexts.join(', ')}</span>`;
 }
 
-['f-bis-strict','f-hide-equipped','f-prio','f-boss','f-slot','f-spieler','f-quelle','f-rolle'].forEach(id => $(id).addEventListener('change', render));
+$('f-rolle').addEventListener('change', () => {
+  updatePlayerFilter();
+  render();
+});
+['f-bis-strict','f-hide-equipped','f-prio','f-boss','f-slot','f-spieler','f-quelle'].forEach(id => $(id).addEventListener('change', render));
 $('f-suche').addEventListener('input', render);
 
 $('btn-sort-prio').addEventListener('click', () => {
