@@ -1,0 +1,38 @@
+name: Sync Roster and Gear
+
+on:
+  workflow_dispatch: # Ermöglicht manuelles Starten per Mausklick auf GitHub
+  schedule:
+    - cron: '0 3 * * *' # Läuft automatisch jeden Tag um 03:00 Uhr nachts UTC
+
+jobs:
+  sync-and-build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Code auschecken
+        uses: actions/checkout@v4
+
+      - name: Roster aus Google Sheet importieren
+        shell: pwsh
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\0-import-roster.ps1
+
+      - name: Gear aus Armory holen & Plausibilität prüfen
+        shell: pwsh
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\2-fetch-gear.ps1
+
+      - name: Upgrades berechnen & Webseiten bauen
+        shell: pwsh
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\3-compute.ps1
+          powershell -ExecutionPolicy Bypass -File .\4-bis-check.ps1
+          powershell -ExecutionPolicy Bypass -File .\5-build-payload.ps1
+
+      - name: Änderungen committen und pushen
+        run: |
+          git config --global user.name "GitHub Action (Auto-Sync)"
+          git config --global user.email "action@github.com"
+          git add roster.json daten/players.json daten/cache-tooltips.json index.html ausgabe/loot-prio-p3.html temp.csv daten/bis-listen.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-sync roster and gear [skip ci]" && git push)
