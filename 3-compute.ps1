@@ -408,7 +408,21 @@ foreach ($it in $items) {
                 Slot=$it.Slot; Armor=$it.Armor
                 Spec=$spec.Name; SpecKey=$spec.Key; Spieler=$pn
                 Delta=[math]::Round($delta,1); Ersetzt=$curSlot
-                Pct=[math]::Round(($delta / $spec.BaseDps) * 100, 2)
+                Pct = if ($isTankSpec -or $isHealerSpec) {
+                    $statDelta = $newVal - $curVal
+                    if ($statDelta -lt 0) { $statDelta = 0.0 }
+                    $totalWorn = 0.0
+                    foreach ($slotName in $ws.Keys) {
+                        $slotKind = $slotName
+                        if ($slotName -like 'FINGER_*') { $slotKind = 'FINGER' }
+                        if ($slotName -like 'TRINKET_*') { $slotKind = 'TRINKET' }
+                        $totalWorn += Value-Item $ws[$slotName] $spec $slotKind
+                    }
+                    if ($totalWorn -le 0) { $totalWorn = 1000.0 }
+                    [math]::Round(($statDelta / $totalWorn) * 100, 2)
+                } else {
+                    [math]::Round(($delta / $spec.BaseDps) * 100, 2)
+                }
                 Unsicher=($UNSICHER -contains $pn)
                 Speed=$(if ($istats.ContainsKey('WpnSpeed')) { $istats['WpnSpeed'] } else { 0 })
                 ProSchlag=$(if ($istats.ContainsKey('WpnSpeed') -and $istats.ContainsKey('WpnDps')) { [math]::Round([double]$istats['WpnDps'] * [double]$istats['WpnSpeed'],0) } else { 0 })
