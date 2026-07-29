@@ -292,6 +292,7 @@
 
     <div class="sync-bar">
       <button type="button" id="btnSync">⟳ Gear synchronisieren</button>
+      <button type="button" id="btnTriggerWorkflow" style="background:#5b21b6; border-color:#6d28d9; color:#f5f3ff;">⚡ Roster & Gear neu berechnen (Admin)</button>
       <div class="sync-progress" id="syncProgress"></div>
       <span class="sync-status" id="syncStatus">Letzter Sync: <b id="syncTime">noch nicht synchronisiert</b></span>
     </div>
@@ -797,4 +798,23 @@ async function doSync() {
 }
 
 $('btnSync').addEventListener('click', doSync);
+
+async function triggerWorkflowSync() {
+  const btn = $('btnTriggerWorkflow');
+  btn.disabled = true;
+  btn.textContent = '⚡ Starte Server-Update...';
+
+  try {
+    const res = await fetch('/api/trigger-sync', { method: 'POST' });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Server-Fehler');
+    alert('Server-Update erfolgreich gestartet!\n\nDas Google Sheet wird ausgelesen, das Gear aller Spieler synchronisiert, alle Dps-Werte neu berechnet und die Seite neu gebaut.\n\nDas dauert etwa 2-3 Minuten. Aktualisiere danach einfach diese Seite.');
+  } catch (e) {
+    alert('Fehler beim Starten des Updates: ' + e.message + '\n\nHast du das GitHub Token (GITHUB_TOKEN) in den Netlify Environment Variables konfiguriert?');
+  } finally {
+    btn.textContent = '⚡ Roster & Gear neu berechnen (Admin)';
+    btn.disabled = false;
+  }
+}
+$('btnTriggerWorkflow').addEventListener('click', triggerWorkflowSync);
 </script>

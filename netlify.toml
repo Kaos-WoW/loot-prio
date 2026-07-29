@@ -12,3 +12,9 @@
   to = "https://classic-armory.org/api/v1/character/equipment"
   status = 200
   force = true
+
+[[redirects]]
+  from = "/api/trigger-sync"
+  to = "/.netlify/functions/trigger-sync"
+  status = 200
+  force = true
