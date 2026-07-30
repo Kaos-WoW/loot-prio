@@ -204,7 +204,7 @@ foreach ($it in $items) {
         $isDpsSpec = ($spec.Rolle -ne 'Heiler' -and $spec.Rolle -ne 'Tank')
 
         # Heiler-Items nur fuer Heiler zulassen, Heiler wollen auch nur Heilungs-Items
-        $hasHeal = $istats.ContainsKey('Heil') -or $it.Name -like "*of the Seacaller*" -or $it.Name -like "*Pendant of Quiet* " -or $it.Name -like "*Signet of Yin*"
+        $hasHeal = $istats.ContainsKey('Heil') -or $it.Name -like "*Pendant of Quiet* " -or $it.Name -like "*Signet of Yin*"
         if ($hasHeal -and -not $isHealerSpec) { continue }
         if ($isHealerSpec -and -not $hasHeal -and $slotKey -ne 'FINGER' -and $slotKey -ne 'TRINKET' -and $slotKey -ne 'BACK' -and $slotKey -ne 'NECK') {
             # Heiler koennen manche Caster-Umhaenge, Ringe etc. tragen, aber keine reinen DPS-Rüstungsteile/Waffen

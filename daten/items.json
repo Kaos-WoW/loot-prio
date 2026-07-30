@@ -4742,6 +4742,48 @@
                   }
     },
     {
+        "Id":  32586,
+        "Name":  "Bracers of Nimble Thought",
+        "Boss":  "BT-Trash",
+        "Quelle":  "Raid",
+        "Ilvl":  141,
+        "Phase":  "Phase 3",
+        "Slot":  "Wrist",
+        "Armor":  "Cloth",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  9,
+        "Stats":  {
+                      "Sta":  27,
+                      "SP":  34,
+                      "Sockel":  0,
+                      "ZTempo":  28,
+                      "Int":  20
+                  }
+    },
+    {
+        "Id":  32590,
+        "Name":  "Nethervoid Cloak",
+        "Boss":  "BT-Trash",
+        "Quelle":  "Raid",
+        "Ilvl":  141,
+        "Phase":  "Phase 3",
+        "Slot":  "Back",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  16,
+        "Stats":  {
+                      "Sta":  27,
+                      "Sockel":  0,
+                      "SP":  53,
+                      "Int":  18,
+                      "ZTreffer":  18
+                  }
+    },
+    {
         "Id":  32593,
         "Name":  "Treads of the Den Mother",
         "Boss":  "BT-Trash",
