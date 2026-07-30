@@ -17,8 +17,8 @@ Repo: `github.com/Kaos-WoW/loot-prio` · Ausgabe: `ausgabe/loot-prio-p3.html` bz
 ## Für Menschen, die nur die Seite lesen wollen
 
 Nichts zu tun. Die Seite aktualisiert sich nachts automatisch (siehe „Automatisierung“ unten) und zeigt
-den Stand nach dem letzten Raid. Ein lila Blitz-Knopf auf der Seite leitet dich direkt zu GitHub Actions weiter,
-um das Update manuell zu starten, falls es schneller gehen soll.
+den Stand nach dem letzten Raid. Ein lila Blitz-Knopf auf der Seite startet das Update vollautomatisch im Hintergrund,
+indem er eine Supabase Edge Function aufruft, die den GitHub Actions-Workflow triggert.
 
 ## Für alle, die am Code weiterarbeiten
 
@@ -61,8 +61,7 @@ regulären Kette. Für den normalen Betrieb kann man sie ignorieren.
 ## Automatisierung
 
 **GitHub Actions** (`.github/workflows/sync.yml`) läuft täglich um 03:00 UTC und lässt sich zusätzlich
-manuell über das GitHub-Interface per **Workflow Dispatch** auslösen. Der lila Blitz-Knopf auf der
-veröffentlichten Seite leitet Admins direkt dorthin.
+manuell über das GitHub-Interface oder über den lila Blitz-Knopf (triggert eine sichere Supabase Edge Function `trigger-sync` per API) auslösen.
 
 Der Workflow importiert das Roster, holt das Gear, rechnet neu und **committet und pusht das Ergebnis
 automatisch** (`roster.json`, `daten/players.json`, `daten/cache-tooltips.json`, `index.html`,
@@ -71,7 +70,7 @@ system-eigener Push und keine Ausnahme von der Regel, dass ein Assistent nicht u
 Automatisierung wurde als solche eingerichtet und genehmigt.
 
 **GitHub Pages** hostet die Seite direkt aus dem Hauptverzeichnis (`index.html`) des `main`-Branches.
-Clientseitige Abfragen der WoW-Armory greifen direkt auf die API von `classic-armory.org` zu.
+Clientseitige Abfragen der WoW-Armory greifen über den Proxy `corsproxy.io` auf die API von `classic-armory.org` zu, um CORS-Beschränkungen im Browser zu umgehen.
 
 ---
 
