@@ -732,7 +732,7 @@ sb.auth.onAuthStateChange((event, session) => {
 
 // ---- Armory Sync ----
 const ROSTER = DATA.roster || [];
-const ARMORY_URL = '/api/armory-sync';
+const ARMORY_URL = 'https://classic-armory.org/api/v1/character/equipment';
 
 async function fetchPlayerGear(name) {
   const body = JSON.stringify({ region: 'eu', realm: 'thunderstrike', name, flavor: 'tbc-anniversary' });
@@ -799,22 +799,9 @@ async function doSync() {
 
 $('btnSync').addEventListener('click', doSync);
 
-async function triggerWorkflowSync() {
-  const btn = $('btnTriggerWorkflow');
-  btn.disabled = true;
-  btn.textContent = '⚡ Starte Server-Update...';
-
-  try {
-    const res = await fetch('/api/trigger-sync', { method: 'POST' });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Server-Fehler');
-    alert('Server-Update erfolgreich gestartet!\n\nDas Google Sheet wird ausgelesen, das Gear aller Spieler synchronisiert, alle Dps-Werte neu berechnet und die Seite neu gebaut.\n\nDas dauert etwa 2-3 Minuten. Aktualisiere danach einfach diese Seite.');
-  } catch (e) {
-    alert('Fehler beim Starten des Updates: ' + e.message + '\n\nHast du das GitHub Token (GITHUB_TOKEN) in den Netlify Environment Variables konfiguriert?');
-  } finally {
-    btn.textContent = '⚡ Roster & Gear neu berechnen (Admin)';
-    btn.disabled = false;
-  }
+function triggerWorkflowSync() {
+  alert('Da das Tool nun auf GitHub Pages gehostet wird, kannst du das Update direkt in GitHub Actions starten.\n\nEs öffnet sich gleich die entsprechende GitHub-Seite. Klicke dort einfach rechts auf "Run workflow" -> grüner Button "Run workflow".\n\nDas Update dauert etwa 2-3 Minuten, danach aktualisiert sich die Seite von selbst.');
+  window.open('https://github.com/Kaos-WoW/loot-prio/actions/workflows/sync.yml', '_blank');
 }
 $('btnTriggerWorkflow').addEventListener('click', triggerWorkflowSync);
 </script>

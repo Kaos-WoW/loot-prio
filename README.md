@@ -1,164 +1,201 @@
 # TBC Loot-Prioritäten — Phase 3 (Mount Hyjal & Black Temple)
 
 Werkzeug für den Loot-Rat der Gilde **Resurrected** auf **Thunderstrike EU** (WoW TBC Anniversary,
-Serverstand Patch 2.5.6). Rechnet für jedes Phase-3-Item und jeden Raider aus, wie viel DPS-Zuwachs
-es ihm **gegenüber seiner tatsächlich getragenen Ausrüstung** bringt, und baut daraus eine
+Serverstand Patch 2.5.6). Rechnet für jedes Phase-3-Item und jeden Raider aus, wie viel Zuwachs es ihm
+**gegenüber seiner tatsächlich getragenen Ausrüstung** bringt, und veröffentlicht daraus eine
 sortier- und filterbare HTML-Seite.
 
-Ergebnis liegt unter `ausgabe/loot-prio-p3.html` (im Browser öffnen, keine Abhängigkeiten).
+**Deckt inzwischen alle drei Rollen ab** — nicht mehr nur DPS: 11 DPS-Specs (absoluter DPS-Zuwachs),
+2 Tank-Specs und 4 Heiler-Specs (jeweils prozentualer Zuwachs gegenüber dem Gesamtwert der aktuellen
+Ausrüstung, siehe unten). Der komplette Ablauf läuft automatisiert über GitHub Actions und wird auf GitHub Pages veröffentlicht — für den Alltagsgebrauch ist kein manueller Skriptlauf mehr nötig.
+
+Repo: `github.com/Kaos-WoW/loot-prio` · Ausgabe: `ausgabe/loot-prio-p3.html` bzw. `index.html`
+(identischer Inhalt, `index.html` ist die von GitHub Pages ausgelieferte Fassung im Repo-Wurzelverzeichnis).
 
 ---
 
-## Schnellstart
+## Für Menschen, die nur die Seite lesen wollen
 
-Alle Skripte sind PowerShell 5.1 und finden ihre Daten über `$PSScriptRoot` — der Ordner darf also
-verschoben werden. Reihenfolge:
+Nichts zu tun. Die Seite aktualisiert sich nachts automatisch (siehe „Automatisierung“ unten) und zeigt
+den Stand nach dem letzten Raid. Ein lila Blitz-Knopf auf der Seite leitet dich direkt zu GitHub Actions weiter,
+um das Update manuell zu starten, falls es schneller gehen soll.
+
+## Für alle, die am Code weiterarbeiten
+
+**Diese README ist die Übersicht für Menschen.** Die dichte, agentenorientierte Fassung mit jedem
+Stolperstein und dem genauen Konventionenkatalog steht in **[`AGENTS.md`](AGENTS.md)** — die Datei ist
+für den nächsten KI-Agenten geschrieben (aktuell wechseln sich Claude Code und Gemini/Antigravity ab)
+und sollte bei jeder inhaltlichen Änderung mitgepflegt werden, damit beide Dateien nicht auseinanderlaufen.
+
+### Schnellstart (lokal)
+
+Alle Skripte sind PowerShell 5.1 und finden ihre Daten über `$PSScriptRoot` — der Ordner darf verschoben
+werden.
 
 ```powershell
-.\1-fetch-items.ps1     # Item-Pool + Werte von Wowhead      -> daten/items.json
-.\2-fetch-gear.ps1      # getragene Ausrüstung vom Armory    -> daten/players.json
-.\3-compute.ps1         # die eigentliche Rechnung           -> daten/upgrades.json
-.\4-bis-check.ps1       # Gegenprobe gegen BiS-Listen        -> daten/bis-listen.json
-.\5-build-payload.ps1   # Seite bauen                        -> ausgabe/loot-prio-p3.html
+.\0-import-roster.ps1   # Kader aus dem Google Sheet          -> roster.json
+.\1-fetch-items.ps1     # Item-Pool + Werte von Wowhead        -> daten/items.json
+.\2-fetch-gear.ps1      # getragene Ausrüstung, live + Plausibilitätscheck -> daten/players.json
+.\3-compute.ps1         # die eigentliche Rechnung             -> daten/upgrades.json
+.\4-bis-check.ps1       # Gegenprobe der DPS-Empfehlungen      -> daten/bis-listen.json
+.\5-build-payload.ps1   # Seite bauen                          -> ausgabe/loot-prio-p3.html
 ```
 
-**Nur das Gear aktualisieren** (der häufigste Fall, nach jedem Raid):
+**Normaler Durchlauf nach einem Raid** (das macht die Automatisierung nachts von selbst):
 
 ```powershell
-.\2-fetch-gear.ps1; .\3-compute.ps1; .\5-build-payload.ps1
+.\0-import-roster.ps1; .\2-fetch-gear.ps1; .\3-compute.ps1; .\4-bis-check.ps1; .\5-build-payload.ps1
 ```
 
-`2-fetch-gear.ps1` meldet dabei jeden Slotwechsel seit dem letzten Abruf. Alle Skripte nutzen
-`daten/cache-tooltips.json`, Wiederholungsläufe sind daher schnell.
+`2-fetch-gear.ps1` meldet jeden Slotwechsel seit dem letzten Abruf und verwirft verdächtige Stände
+(siehe Plausibilitätscheck unten). Alle Skripte nutzen `daten/cache-tooltips.json`, Wiederholungsläufe
+sind daher schnell.
 
-Es wird **kein Python und kein Node** gebraucht — auf dem Zielrechner ist beides nicht installiert.
+Die Kernkette (Schritte 1–5) braucht **kein Python und kein Node**. Im Ordner `daten/` liegen zusätzlich
+ein paar Python-Hilfsskripte (`scrape_*.py`, `debug_*.py`) — das sind **einmalige Werkzeuge**, mit denen
+einzelne BiS-Listen von Wowhead nachgepflegt wurden (u. a. um Cloudflare zu umgehen), kein Teil der
+regulären Kette. Für den normalen Betrieb kann man sie ignorieren.
 
 ---
 
-## Ordner
+## Automatisierung
 
-| Pfad | Inhalt |
-|---|---|
-| `*.ps1` | die fünf Skripte der Kette |
-| `roster.json` | **von Hand gepflegt**: Spieler und ihre Spec |
-| `tier-boni.json` | **von Hand gepflegt**: Set-Boni T5/T6 mit DPS-Einschätzung |
-| `vorlage.html` | Seitengerüst; `"__DATEN__"` wird beim Bau durch die JSON-Nutzlast ersetzt |
-| `daten/` | Zwischenstände und Tooltip-Cache (alles regenerierbar) |
-| `ausgabe/` | die fertige Seite |
-| `quellen/` | Rechercheunterlagen aus dem Aufbau: Item-Pool, Statgewichte, Alternativen, Gear-Stand |
+**GitHub Actions** (`.github/workflows/sync.yml`) läuft täglich um 03:00 UTC und lässt sich zusätzlich
+manuell über das GitHub-Interface per **Workflow Dispatch** auslösen. Der lila Blitz-Knopf auf der
+veröffentlichten Seite leitet Admins direkt dorthin.
 
-Wer Spieler hinzufügt oder eine Spec ändert, bearbeitet **nur `roster.json`**.
+Der Workflow importiert das Roster, holt das Gear, rechnet neu und **committet und pusht das Ergebnis
+automatisch** (`roster.json`, `daten/players.json`, `daten/cache-tooltips.json`, `index.html`,
+`ausgabe/loot-prio-p3.html`, `daten/bis-listen.json`, `temp.csv`). Das ist ein bewusst eingerichteter,
+system-eigener Push und keine Ausnahme von der Regel, dass ein Assistent nicht ungefragt pusht — die
+Automatisierung wurde als solche eingerichtet und genehmigt.
 
----
-
-## Datenquellen und Abruf-Rezepte
-
-### Ausrüstung — classic-armory.org
-
-```
-POST https://classic-armory.org/api/v1/character/equipment
-{"region":"eu","realm":"thunderstrike","name":"<Name>","flavor":"tbc-anniversary"}
-```
-
-Das Feld heißt **`flavor`**, nicht `version` — mit `version` antwortet die API `{"equipment":null}` bei
-Status 200 statt mit einem Fehler.
-
-⚠️ **Umlaut-Falle:** Die API braucht echte UTF-8-Bytes, sonst findet sie „Järgerlie" nicht — lehnt aber
-ein `charset=utf-8` im Content-Type mit **HTTP 400** ab. `Invoke-RestMethod` mit String-Body scheitert
-daran still. Lösung in `2-fetch-gear.ps1`: `ByteArrayContent` mit von Hand gesetztem, nacktem
-`application/json`-Header.
-
-### Item-Werte — Wowhead
-
-```
-GET https://nether.wowhead.com/tbc/tooltip/item/<ID>?locale=0
-```
-
-Liefert JSON mit `name` und `tooltip` (HTML), inklusive Phasenmarkierung. CORS ist erlaubt.
-
-⚠️ **Die Zonen-Listview von Wowhead ist unvollständig** — bei Black Temple fehlte Teron Blutschatten
-mit 12 Items komplett. Immer pro Boss-NPC über `/tbc/npc=<id>` ziehen, nicht über die Zonenseite.
-Beim Parsen: der Schlüssel heißt `data: [` **mit Leerzeichen**.
-
-### Statgewichte — WoWSims
-
-`wowsims.com/tbc/<klasse>/<spec>/` → Knopf „Stat Weights" → „Calculate".
-⚠️ `wowsims.github.io/tbc/` ist die **veraltete, nicht mehr gepflegte** Fassung.
-
-Die Spalte **„DPS Weight" ist der absolute DPS-Gewinn pro Statpunkt** — genau das, was das Modell
-braucht. „DPS EP" daneben ist nur derselbe Wert geteilt durch einen Referenzstat und damit zwischen
-Specs **nicht** vergleichbar. Die Gewichte sind in `3-compute.ps1` fest hinterlegt (Stand 27.07.2026);
-sie ändern sich nur, wenn sich das Gearniveau des Raids deutlich verschiebt.
+**GitHub Pages** hostet die Seite direkt aus dem Hauptverzeichnis (`index.html`) des `main`-Branches.
+Clientseitige Abfragen der WoW-Armory greifen direkt auf die API von `classic-armory.org` zu.
 
 ---
 
-## ⚠️ Fallen, die schon einmal Ergebnisse verdorben haben
+## Roster — jetzt aus Google Sheets, nicht mehr von Hand
 
-**1. Prokk-Texte werden als feste Werte gelesen.** WoW-Tooltips formulieren Prokks wie Dauereffekte:
-Dragonstrikes *„Chance on hit: Increases your haste rating by 212"* wurde als **dauerhafte**
-Tempowertung gezählt und schenkte der Waffe rund 210 DPS Phantomwert — was die gesamte
-Warglaive-Bewertung verdrehte. Bloodlust Broochs *„Use: +278 Angriffskraft"* genauso.
-Lösung: Tooltip vor der Wertelesung abschneiden bei `Chance on hit`, `Use:`, `(2) Set`, `(4) Set`,
-`have a chance`, `chance to`.
-**Nicht** bei `Equip: Your` schneiden — dauerhafte Effekte wie *„Your attacks ignore 335 armor"*
-beginnen genauso und gehen sonst verloren. (Das war die erste, zu grobe Korrektur.)
+`0-import-roster.ps1` liest den Kader aus einem öffentlichen Google Sheet (Tabellenblatt „Übersicht“)
+und schreibt `roster.json` **komplett neu**. Wer Spieler oder Specs ändern will, trägt das im Sheet ein,
+nicht mehr in der Datei — ein manueller Edit an `roster.json` wird beim nächsten Lauf überschrieben.
 
-**2. Cap-Artefakte bei Treffer und Waffenkunde.** In den Sim-Presets sind die Charaktere meist schon
-am Cap, deshalb kommen diese Stats dort mit **0,00** heraus. Das ist kein Ergebnis, sondern ein
-Artefakt. Übernimmt man es blind, werden treffer-lastige Items massiv unterbewertet.
+Die deutschen Klassen-/Spec-Bezeichnungen aus dem Sheet werden robust auf interne Spec-Keys gemappt
+(Teilstring-Erkennung, z. B. „Furor“ → `FURY`, „Schutz“ → `PROT_PALA`, „Wiederherstellung“ →
+`RESTO_SHAM`/`RESTO_DRUID`). Das Google Sheet muss auf „Jeder mit dem Link kann lesen“ freigegeben sein,
+sonst schlägt der CSV-Export fehl.
 
-**3. Sonderzeichen in `.ps1`-Dateien.** PowerShell 5.1 liest Skripte als ANSI — Umlaute und Zeichen wie
-`·` werden zu Kauderwelsch. Solche Texte gehören in eine UTF-8-JSON-Datei (`roster.json`,
-`tier-boni.json`), die mit `-Encoding UTF8` gelesen wird. Deshalb steht der Spielername „Järgerlie"
-in `roster.json` und nicht im Skript.
+---
 
-**4. Fähigkeitsnamen nicht selbst übersetzen.** Aus *Arcane Blast* wurde fälschlich „Arkane Explosion"
-(richtig: Arkanschlag), aus *Mutilate* „Blutsturz" (richtig: Verstümmeln). In `tier-boni.json` stehen
-die Namen deshalb bewusst **englisch wie in der Quelle**.
+## Rollen und Bewertungsmethodik
 
-**5. Schilde erscheinen als Schildhand-Items.** Im Tooltip steht bei Schilden „Off Hand" als Slot und
-„Shield" als Rüstungsart. Ohne Prüfung der Rüstungsart bekommen Magier und Druiden Schilde vorgeschlagen.
+| Rolle | Specs | Bewertung |
+|---|---|---|
+| **DPS** | Furor/Waffen-Krieger, Vergeltung, Verstärkung, Kampf-Schurke, Jäger, Hexer, Magier, Schattenpriester, Elementar, Gleichgewicht | absoluter DPS-Zuwachs (`ΔDPS`), direkt zwischen Specs vergleichbar |
+| **Tank** | Schutz-Paladin, Feral-Tank | prozentualer Zuwachs relativ zum Gesamtwert der aktuell getragenen Ausrüstung |
+| **Heiler** | Wiederherstellung-Druide/Schamane, Heilig-Paladin, Heilig-Priester | prozentualer Zuwachs relativ zum Gesamtwert der aktuell getragenen Ausrüstung |
+
+Für Tank und Heiler wird **zusätzlich gegen die jeweilige BiS-Liste gegatet**: ein Item taucht für diese
+Rollen nur auf, wenn es in der hinterlegten Phase-3-BiS-Liste der Spec steht. Das verhindert, dass ein
+rein statistisches Modell (das Blockwert, Abhärtung oder Heilungsmenge nicht simuliert) Tanks und Heilern
+unsinnige Empfehlungen gibt.
+
+**BiS-Priorisierung (alle Rollen):** Items, die für eine Spec Best-in-Slot sind, werden vor bloßen
+Upgrades einsortiert und als Exklusivitäts-Badge ausgewiesen — „★ BiS für 1 Spieler“ bzw. „für 2 Spieler“
+markiert die knappsten, eindeutigsten Vergabeentscheidungen. Ist ein Item BiS für eine andere Spec, aber
+nicht für die anfragende, wird die Zeile als „Gesperrt“ markiert statt als Upgrade angeboten.
+
+---
+
+## Neuer Schutzmechanismus: Plausibilitätscheck beim Gear-Abruf
+
+`2-fetch-gear.ps1` vergleicht bei jedem Abruf den neuen PvE-Statwert der Ausrüstung mit dem zuletzt
+gespeicherten. **Fällt der Wert um mehr als 20 %**, wird der neue Stand verworfen und der alte behalten
+— typischerweise, weil der Spieler gerade in Arena-/BG-Ausrüstung oder einem Nebenspec ausgeloggt war.
+Das Skript gibt in diesem Fall eine Warnung mit altem und neuem Wert aus. Das löst das Problem, das
+früher Valiror und Pflasterelfe betraf (Offspec-Stand wurde ungefiltert übernommen).
+
+---
+
+## Wichtigste Datenquellen (Kurzfassung — Details in AGENTS.md)
+
+- **Ausrüstung:** classic-armory.org, `POST /api/v1/character/equipment` mit `flavor` (nicht `version`)
+  im Body. Braucht echte UTF-8-Bytes für Umlaute im Namen, verträgt aber kein `charset=utf-8` im
+  Content-Type-Header (→ `ByteArrayContent` mit rohem Header, siehe `2-fetch-gear.ps1`).
+- **Item-Werte:** `nether.wowhead.com/tbc/tooltip/item/<ID>?locale=0`. Die Zonen-Übersichtsseiten von
+  Wowhead sind unvollständig (Teron Blutschatten fehlte komplett) — immer pro Boss-NPC abrufen.
+- **Statgewichte:** wowsims.com (die gepflegte Fassung, nicht `wowsims.github.io`), Spalte „DPS Weight“
+  ist der absolute DPS-Gewinn pro Statpunkt und in `3-compute.ps1` fest hinterlegt.
+- **DPS-BiS-Gegenprobe:** warcrafttavern.com, automatisiert über `4-bis-check.ps1`.
+- **Tank-/Heiler-BiS-Listen:** offizielle Wowhead-Phase-3-Guides, per Hand bzw. über die
+  Python-Hilfsskripte in `daten/` eingepflegt (kein automatisierter Regressionstest wie bei DPS).
+
+---
+
+## Bekannte Fallen (Kurzfassung — vollständige Liste in AGENTS.md)
+
+1. **Prokk-Texte sehen aus wie feste Werte.** *„Chance on hit: Increases your haste rating by 212“* ist
+   kein Dauereffekt — vor der Wertelesung bei `Chance on hit`, `Use:`, `(2) Set`, `(4) Set` abschneiden,
+   aber **nicht** bei `Equip: Your`, sonst gehen echte Dauereffekte verloren.
+2. **Cap-Artefakte bei Treffer/Waffenkunde.** Sim-Presets liegen oft schon am Cap; ein Gewicht von 0,00
+   heißt „am Cap“, nicht „wertlos“.
+3. **Sonderzeichen nie literal in `.ps1`-Dateien** — PowerShell 5.1 liest sie als ANSI. Umlaute und
+   Sonderzeichen gehören in UTF-8-JSON (`roster.json`, `tier-boni.json`).
+4. **Fähigkeitsnamen nicht selbst übersetzen** — in `tier-boni.json` stehen sie bewusst englisch
+   (*Arcane Blast* ≠ „Arkane Explosion“, das ist Arkanschlag; *Mutilate* ≠ „Blutsturz“, das ist
+   Verstümmeln).
+5. **Schilde tragen „Off Hand“ als Slot** — ohne Prüfung der Rüstungsart (`Shield`) bekommen Caster
+   Schilde vorgeschlagen.
 
 ---
 
 ## Was das Modell kann — und was nicht
 
-Gerechnet wird `ΔDPS = Wert(neues Item) − Wert(getragenes Teil im selben Slot)`, beides mit den
-Statgewichten der jeweiligen Spec. Sockel werden auf beiden Seiten mit einem Standardstein bewertet
-(8 Stärke/Beweglichkeit bzw. 12 Zauberschaden), Verzauberungen auf keiner Seite, weil sie beim
-Wechsel mitgehen.
+Für DPS gilt weiterhin `ΔDPS = Wert(neues Item) − Wert(getragenes Teil im selben Slot)`, mit den
+Statgewichten der jeweiligen Spec. Sockel werden beidseitig mit einem Standardstein bewertet,
+Verzauberungen auf keiner Seite (sie gehen beim Wechsel mit).
 
-Sonderfälle, die abgebildet sind: Ringe und Schmuck gegen das **schlechtere** der beiden getragenen
-Teile · Zweihandwaffen gegen Waffenhand **plus** Schildhand · wer eine Zweihandwaffe führt, bekommt
-keine Schildhand-Items · Waffenkenntnisse je Klasse · Rüstungsklasse und niedrigere · Distanzslot
-zählt Waffenschaden nur bei Jägern · Warglaives zusätzlich als **Paar-Zeile** samt 2er-Bonus · **BiS-Priorisierung**: Items, die für eine Spec Best-in-Slot (#1) sind, werden vor bloßen Upgrades für andere Spieler einsortiert — inklusive Exklusivitäts-Badges (★ BiS für 1 bzw. 2 Spieler).
+Abgebildet: Ringe/Schmuck gegen das schlechtere der beiden getragenen Teile · Zweihandwaffen gegen
+Waffenhand plus Schildhand · Waffenkenntnisse je Klasse · Rüstungsklasse und niedriger · Warglaives
+zusätzlich als Paar-Zeile samt 2er-Bonus · BiS-Priorisierung und -Sperre für alle Rollen · Tank/Heiler
+als prozentualer Zuwachs mit BiS-Gate.
 
 **Nicht abgebildet:**
 
-- **Schmuckstücke.** Ihr Wert steckt fast ganz in Prokks und Nutzeneffekten. Die Zeilen sind als
-  `NichtBewertbar` markiert und werden auf der Seite ausgeblendet.
-- **Tier-Set-Boni als Zahl.** Prozentboni auf einzelne Fähigkeiten (*„+5 % auf Bloodthirst"*) lassen
-  sich ohne Simulation nicht in DPS umrechnen. Stattdessen steht unter jeder Tier-Zeile, was der
-  Wechsel mit den Boni macht: Teilezahl vorher/nachher, welcher Bonus wegfällt, welcher anspringt,
-  welcher erhalten bleibt — je mit Einschätzung `hoch/mittel/gering/keiner` aus `tier-boni.json`.
-- **Waffengeschwindigkeit**, außer als Ausschluss: Waffenhand-Kandidaten unter 2,4 s sind für
-  Verstärkung und Kampf-Schurke aussortiert. Feiner rechnet das Modell nicht — deshalb steht der
-  Schaden pro Schlag als Zusatzangabe in der Tabelle.
-- **Spezifische Spec-Mechaniken** wie Kampfgewandtheit des Schurken (die eine *schnelle* Schildhand
-  belohnt). Deshalb ist der Vorsprung der Krieger bei den Warglaives vermutlich überzeichnet.
+- **Schmuckstücke** bei DPS — ihr Wert steckt fast ganz in Prokks/Nutzeneffekten und ist nicht
+  bewertbar; die Zeilen werden ausgeblendet (`NichtBewertbar`).
+- **Tier-Set-Boni als Zahl.** Prozentboni auf einzelne Fähigkeiten lassen sich ohne Simulation nicht in
+  DPS umrechnen. Stattdessen steht unter jeder Tier-Zeile der Set-Übergang als Text mit Einschätzung
+  (`hoch/mittel/gering/keiner`) aus `tier-boni.json`.
+- **Waffengeschwindigkeit**, außer als harter Ausschluss unter 2,4 s bei Verstärkung/Kampf-Schurke.
+- **Tank-/Heiler-Feinmechaniken** wie Blockwert-Verteilung, Heil-Overhealing oder Aggro — die
+  BiS-Gate-Logik fängt die gröbsten Fehlanreize ab, ersetzt aber keine Simulation.
+- **Spec-Mechaniken wie Kampfgewandtheit** (schnelle Schildhand gibt dem Schurken Energie zurück) —
+  deshalb ist der Warglaive-Vorsprung der Krieger gegenüber dem Schurken vermutlich etwas überzeichnet.
 
 ## Verlässlichkeit
 
-`4-bis-check.ps1` stellt die beste Empfehlung je Slot und Spec gegen die veröffentlichten
-Phase-3-BiS-Listen von warcrafttavern.com. Stand 28.07.2026:
+`4-bis-check.ps1` prüft ausschließlich die **DPS-Empfehlungen** gegen warcrafttavern.com. Letzter Stand:
+**136 Empfehlungen · 57 % auf BiS-Platz 1 · 88 % in den BiS-Top-3 · 9 nicht gelistet** (meist Marken-
+oder Trash-Items, die diese Guides gar nicht führen). Nach jeder Modelländerung erneut laufen lassen —
+es ist der beste vorhandene Regressionstest, hat hier bereits mehrere echte Fehler aufgedeckt (Prokk-
+Falle, Distanzwaffen für Nahkämpfer, zu schnelle Waffen für Verstärkung/Schurke).
 
-**136 Empfehlungen · 57 % auf BiS-Platz 1 · 88 % in den BiS-Top-3 · 9 nicht gelistet.**
-
-Die meisten Nichttreffer sind Marken- und Trash-Items, die die BiS-Listen gar nicht berücksichtigen.
-Das Skript nach jeder Modelländerung erneut laufen lassen — es ist der beste vorhandene Regressionstest.
+Für **Tank und Heiler existiert kein automatisierter Gegentest** — die BiS-Listen dort wurden von Hand
+gegen offizielle Wowhead-Guides abgeglichen und punktuell nachgepflegt.
 
 ---
 
 ## Offene Punkte
 
-1. **Markenhändler im Spiel gegenprüfen**, sobald Phase 3 live ist. Wowheads Phasenzuordnung ist widersprüchlich (gleiche Item-Reihe teils Phase 3, teils Phase 4). Sind die ilvl-141-Plattenteile kaufbar, entfällt für Brust, Beine und Gürtel der Plattenträger die Knappheitsbegründung.
+1. **Knappheitsspalten fehlen weiterhin.** Die Rohdaten liegen in `quellen/p3-alternativen-*.md`
+   vollständig vor (Marken-Sortiment, T6-Teile, Handwerk, Trash); ausgewertet und in die Seite
+   eingebaut ist es noch nicht.
+2. **Markenhändler im Spiel gegenprüfen**, sobald Phase 3 live ist — Wowheads Phasenzuordnung ist
+   teils widersprüchlich (gleiche Item-Reihe mal Phase 3, mal Phase 4 markiert).
+3. **Buff-Annahmen der Statgewichte** sind nicht spec-übergreifend auf identische Raid-Buffs verifiziert.
+4. **Ein automatisierter Regressionstest für Tank/Heiler** wäre sinnvoll, analog zu `4-bis-check.ps1`.
+5. **Aufräumen im `daten/`-Ordner:** die Python-Hilfsskripte und die Wurzeldateien `raw.html`/`temp.csv`
+   sind Arbeitsartefakte einzelner Sitzungen und aktuell mitversioniert — ein `.gitignore` gibt es noch
+   nicht.

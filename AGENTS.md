@@ -30,7 +30,7 @@ Normaler Update-Durchlauf nach einem Raid (automatisiert über GitHub Actions):
 * **Stat-Gewichte (wowsims.com):** Verwende immer die absolute "DPS Weight" (Gewinn pro Statpunkt), niemals die relative "DPS EP", da letztere nicht klassenübergreifend vergleichbar ist.
 * **Keine automatischen Git-Pushes:** Commits lokal erstellen, aber niemals automatisch pushen (`git push`), ohne die explizite Freigabe des Nutzers einzuholen.
 * **Devastation & Waffen-Bug im Scraper:** Im Scraper `scrape_wowhead_final.py` wurde der Header-Filter korrigiert (nutzt nun exaktes HTML-Tag-Matching statt Substring-Filter `stat`), damit Wörter wie `devastation` nicht fälschlicherweise ausgefiltert werden. Zudem werden Ret-Paladin-Waffen standardmäßig auf den Slot `Two-Hand` gemappt.
-* **Sichere Serverless Functions:** Der lila Blitz-Button auf der Webseite triggert den GitHub Actions Sync sicher über eine Netlify Serverless Function (`netlify/functions/trigger-sync.js`), um unbefugtes Auslesen des GitHub-Tokens zu verhindern.
+* **Manuelles Trigger-Update:** Nach dem Umzug auf GitHub Pages (rein statisch) leitet der lila Blitz-Button auf der Webseite nun direkt zur GitHub-Actions-Seite weiter, damit Admins den Workflow dort per "Run workflow" auslösen können. Das hält das GitHub-Token sicher und vermeidet Serverless-Abhängigkeiten.
 
 ---
 
@@ -47,4 +47,4 @@ Normaler Update-Durchlauf nach einem Raid (automatisiert über GitHub Actions):
 * **[x] Roster-Import aus Google Sheets:** `0-import-roster.ps1` liest nun direkt die Übersicht aus dem öffentlichen Google-Sheet ein und übersetzt die deutschen Klassen/Spec-Bezeichnungen robust.
 * **[x] Plausibilitäts-Checks (PvP-Schutz):** Generischer Check für alle Klassen in `2-fetch-gear.ps1` implementiert. Fällt der PvE-Wert der live angelegten Ausrüstung um mehr als 20 % im Vergleich zur DB, wird das Update verworfen.
 * **[x] Korrekte Prozentberechnung für Heiler & Tanks:** Berechnung wurde in `3-compute.ps1` auf eine rein statbasierte Zuwachsrechnung im Vergleich zum Gesamtwert der getragenen PvE-Ausrüstung umgestellt (Zahlenbereich nun realistisch bei +0.5% bis +4.5%).
-* **[x] Web-Interface Trigger-Button:** Admin-Update-Button auf der Webseite via Netlify Serverless Function & GitHub API Dispatch realisiert.
+* **[x] Web-Interface Trigger-Button:** Admin-Update-Button auf der Webseite leitet zur manuellen Auslösung direkt zur GitHub Actions Seite weiter (nach Umzug auf GitHub Pages).
