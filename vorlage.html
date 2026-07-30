@@ -681,6 +681,8 @@ function renderContestedTable() {
   const itemsMap = {};
   rows.forEach(r => {
     if (r.q !== 'Raid') return; 
+    // Tier-Token ausschließen (haben "Forgotten" im Namen)
+    if (r.n.toLowerCase().includes('forgotten')) return;
 
     if (strict && r.bb) return;
     if (hideEquipped && isEquipped(r)) return;
