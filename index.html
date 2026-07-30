@@ -310,6 +310,25 @@
     </div>
   </section>
 
+  <section id="contested-section">
+    <h2>🔥 Heiß umkämpfter Loot (Bedarfs-Übersicht)</h2>
+    <p class="sub" style="margin-bottom:0.75rem;">Die umkämpftesten Raid-Drops der Phase 3 (Kombination aus BiS #1 Status und Gesamtanzahl Upgrades).</p>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="plain">Item</th>
+            <th class="plain">Quelle / Boss</th>
+            <th class="plain" style="text-align: center;">Upgrades gesamt</th>
+            <th class="plain" style="text-align: center;">Kandidaten für BiS #1</th>
+            <th class="plain">Bedarf von (Fett/Gold = BiS #1, durchgestrichen = bereits ausgerüstet)</th>
+          </tr>
+        </thead>
+        <tbody id="contested-tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
   <section>
     <h2>Alle Upgrades</h2>
     <div class="controls">
@@ -646,6 +665,90 @@ function render() {
       <td>${prioLabel}</td>
       <td class="num bar"><span class="fill" style="width:${pct}%"></span><b>${dpsCellContent}</b></td>
       <td class="muted" style="font-size:0.8rem; line-height:1.4;">${getEquippedCell(r.pl, r.e)}</td>
+    </tr>`;
+  }).join('');
+  renderContestedTable();
+}
+
+function renderContestedTable() {
+  const strict = $('f-bis-strict').checked;
+  const hideEquipped = $('f-hide-equipped').checked;
+  const frolle = $('f-rolle').value;
+  const fprio = $('f-prio').value;
+  const fb = $('f-boss').value, fs = $('f-slot').value, fp = $('f-spieler').value, fq = $('f-quelle').value;
+  const q = $('f-suche').value.trim().toLowerCase();
+
+  const itemsMap = {};
+  rows.forEach(r => {
+    if (r.q !== 'Raid') return; 
+
+    if (strict && r.bb) return;
+    if (hideEquipped && isEquipped(r)) return;
+    if (fb && r.b !== fb) return;
+    if (fs && r.s !== fs) return;
+    if (fq && r.q !== fq) return;
+    if (q && !r.n.toLowerCase().includes(q) && !r.pl.toLowerCase().includes(q)) return;
+    if (fp && r.pl !== fp) return;
+    if (fprio === 'bis1' && r.bis !== 1) return;
+    if (fprio === 'excl' && (r.bis !== 1 || (r.bc !== 1 && r.bc !== 2))) return;
+    if (fprio === 'upg' && r.bc > 0) return;
+    if (fprio === 'blocked' && !r.bb) return;
+    
+    if (frolle === 'dps' && (r.ro === 'Tank' || r.ro === 'Heiler')) return;
+    if (frolle === 'tank' && r.ro !== 'Tank') return;
+    if (frolle === 'heiler' && r.ro !== 'Heiler') return;
+
+    if (!itemsMap[r.id]) {
+      itemsMap[r.id] = {
+        id: r.id,
+        name: r.n,
+        boss: r.b,
+        source: r.q,
+        upgrades: [],
+        bisList: []
+      };
+    }
+    itemsMap[r.id].upgrades.push(r);
+    if (r.bis === 1 && !r.bb) {
+      itemsMap[r.id].bisList.push(r);
+    }
+  });
+
+  const itemsList = Object.values(itemsMap);
+
+  itemsList.sort((a, b) => {
+    if (b.bisList.length !== a.bisList.length) {
+      return b.bisList.length - a.bisList.length;
+    }
+    return b.upgrades.length - a.upgrades.length;
+  });
+
+  const filtered = itemsList.filter(item => item.upgrades.length >= 2);
+  const topItems = filtered.slice(0, 12);
+
+  const tbody = $('contested-tbody');
+  if (topItems.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="5" class="empty">Keine umkämpften Items mit den gewählten Filtern.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = topItems.map(item => {
+    const playerLinks = item.upgrades.map(r => {
+      const isBis = r.bis === 1 && !r.bb;
+      const valText = r.ro === 'Tank' || r.ro === 'Heiler' ? `+${r.p.toFixed(1)}%` : `+${r.p.toFixed(1)}%`;
+      const equipped = isEquipped(r);
+      const equippedStyle = equipped ? 'text-decoration: line-through; opacity: 0.5;' : '';
+      const color = isBis ? 'color:#ffd700; font-weight:700;' : 'color:var(--muted);';
+      
+      return `<span style="${color}${equippedStyle}">${esc(r.pl)} (${valText})</span>`;
+    }).join(', ');
+
+    return `<tr>
+      <td><span class="item">${wowLink(item.id, item.name)}</span></td>
+      <td class="muted">${esc(item.boss)}</td>
+      <td class="num" style="text-align: center; font-weight: 600;">${item.upgrades.length}</td>
+      <td class="num" style="text-align: center; font-weight: 700; color: #ffd700;">${item.bisList.length}</td>
+      <td style="font-size: 0.82rem; line-height: 1.4;">${playerLinks}</td>
     </tr>`;
   }).join('');
 }
