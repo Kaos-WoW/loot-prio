@@ -5,6 +5,9 @@ on:
   schedule:
     - cron: '0 3 * * *' # Läuft automatisch jeden Tag um 03:00 Uhr nachts UTC
 
+permissions:
+  contents: write # Ermöglicht der Action, Änderungen zurück ins Repo zu pushen
+
 jobs:
   sync-and-build:
     runs-on: windows-latest
