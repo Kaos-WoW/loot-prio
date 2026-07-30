@@ -394,7 +394,7 @@ window.onerror = function(msg, url, line, col, error) {
   return false;
 };
 const DATA = "__DATEN__";
-const rows = DATA.rows.filter(r => !r.un && !r.nb);
+const rows = DATA.rows.filter(r => !r.un);
 
 const $ = id => document.getElementById(id);
 const uniq = (arr, k) => [...new Set(arr.map(r => r[k]).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'de'));
@@ -579,6 +579,7 @@ function render() {
   const q = $('f-suche').value.trim().toLowerCase();
 
   let list = rows.filter(r => {
+    if (r.nb) return false;
     if (strict && r.bb) return false;
     if (hideEquipped && isEquipped(r)) return false;
     if (fb && r.b !== fb) return false;
@@ -737,7 +738,7 @@ function renderContestedTable() {
   tbody.innerHTML = topItems.map(item => {
     const playerLinks = item.upgrades.map(r => {
       const isBis = r.bis === 1 && !r.bb;
-      const valText = r.ro === 'Tank' || r.ro === 'Heiler' ? `+${r.p.toFixed(1)}%` : `+${r.p.toFixed(1)}%`;
+      const valText = r.nb ? (r.bis === 1 ? 'BiS' : 'Bedarf') : (r.ro === 'Tank' || r.ro === 'Heiler' ? `+${r.p.toFixed(1)}%` : `+${r.p.toFixed(1)}%`);
       const equipped = isEquipped(r);
       const equippedStyle = equipped ? 'text-decoration: line-through; opacity: 0.5;' : '';
       const color = isBis ? 'color:#ffd700; font-weight:700;' : 'color:var(--muted);';
