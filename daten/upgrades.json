@@ -7,28 +7,6 @@
         "Ilvl":  141,
         "Slot":  "Wrist",
         "Armor":  "Plate",
-        "Spec":  "Furor-Krieger",
-        "SpecKey":  "FURY",
-        "Spieler":  "Grotschak",
-        "Delta":  29.9,
-        "Ersetzt":  "WRIST",
-        "Pct":  1.42,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Nah",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  1
-    },
-    {
-        "ItemId":  30861,
-        "Item":  "Furious Shackles",
-        "Boss":  "Rage Winterchill",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Wrist",
-        "Armor":  "Plate",
         "Spec":  "Vergeltungs-Paladin",
         "SpecKey":  "RET",
         "Spieler":  "Kaosx",
@@ -63,7 +41,7 @@
         "Rolle":  "Heiler",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  30862,
@@ -98,16 +76,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  36.4,
+        "Delta":  0.1,
         "Ersetzt":  "WRIST",
-        "Pct":  1.73,
+        "Pct":  0,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  30863,
@@ -173,7 +151,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  30863,
@@ -293,28 +271,6 @@
         "Ilvl":  141,
         "Slot":  "Wrist",
         "Armor":  "Mail",
-        "Spec":  "Furor-Krieger",
-        "SpecKey":  "FURY",
-        "Spieler":  "Grotschak",
-        "Delta":  14.1,
-        "Ersetzt":  "WRIST",
-        "Pct":  0.67,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Nah",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  1
-    },
-    {
-        "ItemId":  30864,
-        "Item":  "Bracers of the Pathfinder",
-        "Boss":  "Rage Winterchill",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Wrist",
-        "Armor":  "Mail",
         "Spec":  "Jaeger",
         "SpecKey":  "HUNT",
         "Spieler":  "Järgerlie",
@@ -371,7 +327,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  30865,
@@ -396,6 +352,28 @@
         "T5Teile":  4
     },
     {
+        "ItemId":  30865,
+        "Item":  "Tracker\u0027s Blade",
+        "Boss":  "Rage Winterchill",
+        "Quelle":  "Raid",
+        "Ilvl":  141,
+        "Slot":  "One-Hand",
+        "Armor":  "",
+        "Spec":  "Jaeger",
+        "SpecKey":  "HUNT",
+        "Spieler":  "Järgerlie",
+        "Delta":  9.4,
+        "Ersetzt":  "MAIN_HAND",
+        "Pct":  0.43,
+        "Unsicher":  false,
+        "Speed":  1.5,
+        "ProSchlag":  150,
+        "Rolle":  "Fern",
+        "Hinweis":  "",
+        "NichtBewertbar":  false,
+        "T5Teile":  5
+    },
+    {
         "ItemId":  30866,
         "Item":  "Blood-stained Pauldrons",
         "Boss":  "Rage Winterchill",
@@ -406,16 +384,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  55.4,
+        "Delta":  6.7,
         "Ersetzt":  "SHOULDER",
-        "Pct":  2.64,
+        "Pct":  0.32,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  30866,
@@ -525,7 +503,7 @@
         "Rolle":  "Heiler",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  30869,
@@ -846,9 +824,9 @@
         "Spec":  "Hexenmeister",
         "SpecKey":  "WLCK",
         "Spieler":  "Xalessa",
-        "Delta":  36.6,
+        "Delta":  66.7,
         "Ersetzt":  "OFF_HAND",
-        "Pct":  1.74,
+        "Pct":  3.18,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
@@ -946,6 +924,28 @@
         "T5Teile":  5
     },
     {
+        "ItemId":  30872,
+        "Item":  "Chronicle of Dark Secrets",
+        "Boss":  "Rage Winterchill",
+        "Quelle":  "Raid",
+        "Ilvl":  141,
+        "Slot":  "Held In Off-hand",
+        "Armor":  "",
+        "Spec":  "Schattenpriester",
+        "SpecKey":  "SPRI",
+        "Spieler":  "Pflasterelfe",
+        "Delta":  27.7,
+        "Ersetzt":  "OFF_HAND",
+        "Pct":  2.31,
+        "Unsicher":  false,
+        "Speed":  0,
+        "ProSchlag":  0,
+        "Rolle":  "Caster",
+        "Hinweis":  "",
+        "NichtBewertbar":  false,
+        "T5Teile":  1
+    },
+    {
         "ItemId":  30873,
         "Item":  "Stillwater Boots",
         "Boss":  "Rage Winterchill",
@@ -987,7 +987,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  30874,
@@ -1031,7 +1031,7 @@
         "Rolle":  "Heiler",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  30878,
@@ -1066,16 +1066,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  62.9,
+        "Delta":  1.5,
         "Ersetzt":  "WAIST",
-        "Pct":  3,
+        "Pct":  0.07,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  30879,
@@ -1141,7 +1141,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  30879,
@@ -1242,16 +1242,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  81.6,
+        "Delta":  6.3,
         "Ersetzt":  "FEET",
-        "Pct":  3.89,
+        "Pct":  0.3,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  30880,
@@ -1295,7 +1295,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  30880,
@@ -1339,7 +1339,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  30881,
@@ -1384,6 +1384,28 @@
         "Hinweis":  "",
         "NichtBewertbar":  false,
         "T5Teile":  2
+    },
+    {
+        "ItemId":  30881,
+        "Item":  "Blade of Infamy",
+        "Boss":  "Anetheron",
+        "Quelle":  "Raid",
+        "Ilvl":  141,
+        "Slot":  "One-Hand",
+        "Armor":  "",
+        "Spec":  "Jaeger",
+        "SpecKey":  "HUNT",
+        "Spieler":  "Järgerlie",
+        "Delta":  20.6,
+        "Ersetzt":  "MAIN_HAND",
+        "Pct":  0.94,
+        "Unsicher":  false,
+        "Speed":  2.6,
+        "ProSchlag":  260,
+        "Rolle":  "Fern",
+        "Hinweis":  "",
+        "NichtBewertbar":  false,
+        "T5Teile":  5
     },
     {
         "ItemId":  30881,
@@ -1440,9 +1462,9 @@
         "Spec":  "Jaeger",
         "SpecKey":  "HUNT",
         "Spieler":  "Järgerlie",
-        "Delta":  75.4,
+        "Delta":  76.3,
         "Ersetzt":  "MAIN_HAND+OFF_HAND",
-        "Pct":  3.43,
+        "Pct":  3.47,
         "Unsicher":  false,
         "Speed":  3,
         "ProSchlag":  214,
@@ -1948,14 +1970,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  60.5,
         "Ersetzt":  "OFF_HAND",
-        "Pct":  0.93,
+        "Pct":  0.92,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  3
+        "T5Teile":  4
     },
     {
         "ItemId":  30889,
@@ -1987,28 +2009,6 @@
         "Ilvl":  141,
         "Slot":  "Feet",
         "Armor":  "Leather",
-        "Spec":  "Furor-Krieger",
-        "SpecKey":  "FURY",
-        "Spieler":  "Grotschak",
-        "Delta":  70.4,
-        "Ersetzt":  "FEET",
-        "Pct":  3.35,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Nah",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  1
-    },
-    {
-        "ItemId":  30891,
-        "Item":  "Black Featherlight Boots",
-        "Boss":  "Kaz\u0027rogal",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Feet",
-        "Armor":  "Leather",
         "Spec":  "Verstaerkungs-Schamane",
         "SpecKey":  "ENH",
         "Spieler":  "Chilini",
@@ -2021,7 +2021,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  30891,
@@ -2044,28 +2044,6 @@
         "Hinweis":  "",
         "NichtBewertbar":  false,
         "T5Teile":  4
-    },
-    {
-        "ItemId":  30892,
-        "Item":  "Beast-tamer\u0027s Shoulders",
-        "Boss":  "Kaz\u0027rogal",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Shoulder",
-        "Armor":  "Mail",
-        "Spec":  "Furor-Krieger",
-        "SpecKey":  "FURY",
-        "Spieler":  "Grotschak",
-        "Delta":  24.8,
-        "Ersetzt":  "SHOULDER",
-        "Pct":  1.18,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Nah",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  1
     },
     {
         "ItemId":  30893,
@@ -2109,7 +2087,7 @@
         "Rolle":  "Heiler",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  30893,
@@ -2190,14 +2168,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  57.4,
         "Ersetzt":  "FEET",
-        "Pct":  0.66,
+        "Pct":  0.65,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  3
+        "T5Teile":  4
     },
     {
         "ItemId":  30894,
@@ -2342,16 +2320,16 @@
         "Spec":  "Schutz-Paladin",
         "SpecKey":  "PROT_PALA",
         "Spieler":  "Chadíkus",
-        "Delta":  71,
+        "Delta":  58.6,
         "Ersetzt":  "CHEST",
-        "Pct":  1.87,
+        "Pct":  0.76,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  3
+        "T5Teile":  4
     },
     {
         "ItemId":  30896,
@@ -2395,7 +2373,7 @@
         "Rolle":  "Heiler",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  30897,
@@ -2430,16 +2408,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  73.2,
+        "Delta":  2.8,
         "Ersetzt":  "LEGS",
-        "Pct":  3.49,
+        "Pct":  0.13,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  30898,
@@ -2505,7 +2483,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  30898,
@@ -2628,16 +2606,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  81.3,
+        "Delta":  10.9,
         "Ersetzt":  "LEGS",
-        "Pct":  3.87,
+        "Pct":  0.52,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  30900,
@@ -2725,7 +2703,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  30900,
@@ -2813,7 +2791,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  30901,
@@ -2848,9 +2826,9 @@
         "Spec":  "Jaeger",
         "SpecKey":  "HUNT",
         "Spieler":  "Järgerlie",
-        "Delta":  9.9,
+        "Delta":  39.2,
         "Ersetzt":  "MAIN_HAND",
-        "Pct":  0.45,
+        "Pct":  1.78,
         "Unsicher":  false,
         "Speed":  1.8,
         "ProSchlag":  181,
@@ -2914,9 +2892,9 @@
         "Spec":  "Vergeltungs-Paladin",
         "SpecKey":  "RET",
         "Spieler":  "Kaosx",
-        "Delta":  67.3,
+        "Delta":  701.8,
         "Ersetzt":  "MAIN_HAND+OFF_HAND",
-        "Pct":  4.2,
+        "Pct":  43.86,
         "Unsicher":  false,
         "Speed":  3.5,
         "ProSchlag":  483,
@@ -2936,9 +2914,9 @@
         "Spec":  "Jaeger",
         "SpecKey":  "HUNT",
         "Spieler":  "Järgerlie",
-        "Delta":  15.9,
+        "Delta":  16.8,
         "Ersetzt":  "MAIN_HAND+OFF_HAND",
-        "Pct":  0.72,
+        "Pct":  0.76,
         "Unsicher":  false,
         "Speed":  3.5,
         "ProSchlag":  483,
@@ -2958,16 +2936,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  88.4,
+        "Delta":  17.9,
         "Ersetzt":  "LEGS",
-        "Pct":  4.21,
+        "Pct":  0.85,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  30903,
@@ -3046,16 +3024,16 @@
         "Spec":  "Heilig-Paladin",
         "SpecKey":  "HOLY_PALA",
         "Spieler":  "Heinerm",
-        "Delta":  80.7,
+        "Delta":  71,
         "Ersetzt":  "CHEST",
-        "Pct":  1.59,
+        "Pct":  1.08,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Heiler",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  30904,
@@ -3090,16 +3068,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  113.8,
+        "Delta":  14.8,
         "Ersetzt":  "CHEST",
-        "Pct":  5.42,
+        "Pct":  0.71,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  30905,
@@ -3178,16 +3156,16 @@
         "Spec":  "Verstaerkungs-Schamane",
         "SpecKey":  "ENH",
         "Spieler":  "Chilini",
-        "Delta":  43.8,
+        "Delta":  22.3,
         "Ersetzt":  "CHEST",
-        "Pct":  2.57,
+        "Pct":  1.31,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  30905,
@@ -3329,28 +3307,6 @@
         "Ilvl":  151,
         "Slot":  "Chest",
         "Armor":  "Mail",
-        "Spec":  "Furor-Krieger",
-        "SpecKey":  "FURY",
-        "Spieler":  "Grotschak",
-        "Delta":  91.1,
-        "Ersetzt":  "CHEST",
-        "Pct":  4.34,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Nah",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  1
-    },
-    {
-        "ItemId":  30907,
-        "Item":  "Mail of Fevered Pursuit",
-        "Boss":  "Archimonde",
-        "Quelle":  "Raid",
-        "Ilvl":  151,
-        "Slot":  "Chest",
-        "Armor":  "Mail",
         "Spec":  "Vergeltungs-Paladin",
         "SpecKey":  "RET",
         "Spieler":  "Kaosx",
@@ -3376,16 +3332,16 @@
         "Spec":  "Verstaerkungs-Schamane",
         "SpecKey":  "ENH",
         "Spieler":  "Chilini",
-        "Delta":  22.3,
+        "Delta":  0.9,
         "Ersetzt":  "CHEST",
-        "Pct":  1.31,
+        "Pct":  0.05,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  30907,
@@ -3466,14 +3422,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  108.5,
         "Ersetzt":  "OFF_HAND",
-        "Pct":  0.76,
+        "Pct":  0.75,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  3
+        "T5Teile":  4
     },
     {
         "ItemId":  30909,
@@ -3530,9 +3486,9 @@
         "Spec":  "Hexenmeister",
         "SpecKey":  "WLCK",
         "Spieler":  "Xalessa",
-        "Delta":  60.9,
+        "Delta":  298.6,
         "Ersetzt":  "MAIN_HAND",
-        "Pct":  2.9,
+        "Pct":  14.22,
         "Unsicher":  false,
         "Speed":  1.8,
         "ProSchlag":  73,
@@ -3596,9 +3552,9 @@
         "Spec":  "Arkan-Magier",
         "SpecKey":  "MAGE",
         "Spieler":  "Lupitus",
-        "Delta":  52.2,
+        "Delta":  247.8,
         "Ersetzt":  "MAIN_HAND",
-        "Pct":  2.9,
+        "Pct":  13.76,
         "Unsicher":  false,
         "Speed":  1.8,
         "ProSchlag":  73,
@@ -3642,14 +3598,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  150.4,
         "Ersetzt":  "MAIN_HAND",
-        "Pct":  4.49,
+        "Pct":  4.44,
         "Unsicher":  false,
         "Speed":  1.8,
         "ProSchlag":  73,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  3
+        "T5Teile":  4
     },
     {
         "ItemId":  30910,
@@ -3759,7 +3715,7 @@
         "Rolle":  "Heiler",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  30911,
@@ -3906,14 +3862,14 @@
         "Spieler":  "Heinerm",
         "Delta":  60.4,
         "Ersetzt":  "LEGS",
-        "Pct":  0.54,
+        "Pct":  0.53,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Heiler",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  30912,
@@ -4046,28 +4002,6 @@
         "Hinweis":  "",
         "NichtBewertbar":  false,
         "T5Teile":  4
-    },
-    {
-        "ItemId":  30915,
-        "Item":  "Belt of Seething Fury",
-        "Boss":  "Kaz\u0027rogal",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Waist",
-        "Armor":  "Plate",
-        "Spec":  "Furor-Krieger",
-        "SpecKey":  "FURY",
-        "Spieler":  "Grotschak",
-        "Delta":  54.7,
-        "Ersetzt":  "WAIST",
-        "Pct":  2.61,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Nah",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  1
     },
     {
         "ItemId":  30915,
@@ -4297,28 +4231,6 @@
         "Ilvl":  141,
         "Slot":  "Shoulder",
         "Armor":  "Leather",
-        "Spec":  "Furor-Krieger",
-        "SpecKey":  "FURY",
-        "Spieler":  "Grotschak",
-        "Delta":  39.6,
-        "Ersetzt":  "SHOULDER",
-        "Pct":  1.88,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Nah",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  1
-    },
-    {
-        "ItemId":  30917,
-        "Item":  "Razorfury Mantle",
-        "Boss":  "Kaz\u0027rogal",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Shoulder",
-        "Armor":  "Leather",
         "Spec":  "Verstaerkungs-Schamane",
         "SpecKey":  "ENH",
         "Spieler":  "Chilini",
@@ -4331,7 +4243,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  30917,
@@ -4544,14 +4456,14 @@
         "Spieler":  "Heinerm",
         "Delta":  129.4,
         "Ersetzt":  "MAIN_HAND",
-        "Pct":  4.1,
+        "Pct":  4.08,
         "Unsicher":  false,
         "Speed":  1.8,
         "ProSchlag":  75,
         "Rolle":  "Heiler",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  30918,
@@ -4574,28 +4486,6 @@
         "Hinweis":  "",
         "NichtBewertbar":  false,
         "T5Teile":  3
-    },
-    {
-        "ItemId":  30919,
-        "Item":  "Valestalker Girdle",
-        "Boss":  "Kaz\u0027rogal",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Waist",
-        "Armor":  "Mail",
-        "Spec":  "Furor-Krieger",
-        "SpecKey":  "FURY",
-        "Spieler":  "Grotschak",
-        "Delta":  58.4,
-        "Ersetzt":  "WAIST",
-        "Pct":  2.78,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Nah",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  1
     },
     {
         "ItemId":  30919,
@@ -4639,7 +4529,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  30919,
@@ -4696,16 +4586,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  61.8,
+        "Delta":  14.9,
         "Ersetzt":  "HANDS",
-        "Pct":  2.94,
+        "Pct":  0.71,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
-        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 1-\u003e1, T6 0-\u003e1",
+        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 4-\u003e3, T6 0-\u003e1 -- VERLIERT T5-4er: Bloodthirst und Mortal Strike kosten 5 Wut weniger [mittel] -- behaelt T5-2er: Overpower gibt 100 Angriffskraft für 5 s [gering]",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  30969,
@@ -4762,16 +4652,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  74.4,
+        "Delta":  9.6,
         "Ersetzt":  "HEAD",
-        "Pct":  3.54,
+        "Pct":  0.46,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
-        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 1-\u003e1, T6 0-\u003e1",
+        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 4-\u003e3, T6 0-\u003e1 -- VERLIERT T5-4er: Bloodthirst und Mortal Strike kosten 5 Wut weniger [mittel] -- behaelt T5-2er: Overpower gibt 100 Angriffskraft für 5 s [gering]",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  30972,
@@ -4828,16 +4718,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  114.3,
+        "Delta":  15.3,
         "Ersetzt":  "CHEST",
-        "Pct":  5.44,
+        "Pct":  0.73,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
-        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 1-\u003e1, T6 0-\u003e1",
+        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 4-\u003e3, T6 0-\u003e1 -- VERLIERT T5-4er: Bloodthirst und Mortal Strike kosten 5 Wut weniger [mittel] -- behaelt T5-2er: Overpower gibt 100 Angriffskraft für 5 s [gering]",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  30975,
@@ -4894,16 +4784,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  91.2,
+        "Delta":  20.7,
         "Ersetzt":  "LEGS",
-        "Pct":  4.34,
+        "Pct":  0.99,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
-        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 1-\u003e0, T6 0-\u003e1",
+        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 4-\u003e4, T6 0-\u003e1 -- behaelt T5-4er: Bloodthirst und Mortal Strike kosten 5 Wut weniger [mittel]",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  30977,
@@ -4960,16 +4850,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  65,
+        "Delta":  16.3,
         "Ersetzt":  "SHOULDER",
-        "Pct":  3.09,
+        "Pct":  0.78,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
-        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 1-\u003e1, T6 0-\u003e1",
+        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 4-\u003e3, T6 0-\u003e1 -- VERLIERT T5-4er: Bloodthirst und Mortal Strike kosten 5 Wut weniger [mittel] -- behaelt T5-2er: Overpower gibt 100 Angriffskraft für 5 s [gering]",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  30979,
@@ -5341,9 +5231,9 @@
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
-        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 4-\u003e3, T6 0-\u003e1 -- VERLIERT T5-4er: Nahkampf: +5 % Tempo aus Flurry / Caster: Mana bei Lightning-Bolt-Kritischen [mittel]",
+        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 5-\u003e4, T6 0-\u003e1 -- behaelt T5-4er: Nahkampf: +5 % Tempo aus Flurry / Caster: Mana bei Lightning-Bolt-Kritischen [mittel]",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  31011,
@@ -5407,9 +5297,9 @@
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
-        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 4-\u003e3, T6 0-\u003e1 -- VERLIERT T5-4er: Nahkampf: +5 % Tempo aus Flurry / Caster: Mana bei Lightning-Bolt-Kritischen [mittel]",
+        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 5-\u003e4, T6 0-\u003e1 -- behaelt T5-4er: Nahkampf: +5 % Tempo aus Flurry / Caster: Mana bei Lightning-Bolt-Kritischen [mittel]",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  31015,
@@ -5466,16 +5356,16 @@
         "Spec":  "Verstaerkungs-Schamane",
         "SpecKey":  "ENH",
         "Spieler":  "Chilini",
-        "Delta":  23.9,
+        "Delta":  2.4,
         "Ersetzt":  "CHEST",
-        "Pct":  1.4,
+        "Pct":  0.14,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
-        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 4-\u003e4, T6 0-\u003e1 -- behaelt T5-4er: Nahkampf: +5 % Tempo aus Flurry / Caster: Mana bei Lightning-Bolt-Kritischen [mittel]",
+        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 5-\u003e4, T6 0-\u003e1 -- behaelt T5-4er: Nahkampf: +5 % Tempo aus Flurry / Caster: Mana bei Lightning-Bolt-Kritischen [mittel]",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  31018,
@@ -5539,9 +5429,9 @@
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
-        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 4-\u003e3, T6 0-\u003e1 -- VERLIERT T5-4er: Nahkampf: +5 % Tempo aus Flurry / Caster: Mana bei Lightning-Bolt-Kritischen [mittel]",
+        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 5-\u003e4, T6 0-\u003e1 -- behaelt T5-4er: Nahkampf: +5 % Tempo aus Flurry / Caster: Mana bei Lightning-Bolt-Kritischen [mittel]",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  31021,
@@ -5605,9 +5495,9 @@
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
-        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 4-\u003e3, T6 0-\u003e1 -- VERLIERT T5-4er: Nahkampf: +5 % Tempo aus Flurry / Caster: Mana bei Lightning-Bolt-Kritischen [mittel]",
+        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 5-\u003e4, T6 0-\u003e1 -- behaelt T5-4er: Nahkampf: +5 % Tempo aus Flurry / Caster: Mana bei Lightning-Bolt-Kritischen [mittel]",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  31024,
@@ -6568,14 +6458,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  122.5,
         "Ersetzt":  "WRIST",
-        "Pct":  2,
+        "Pct":  1.98,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  3
+        "T5Teile":  4
     },
     {
         "ItemId":  32232,
@@ -6610,16 +6500,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  60,
+        "Delta":  13.1,
         "Ersetzt":  "HANDS",
-        "Pct":  2.86,
+        "Pct":  0.63,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32234,
@@ -6707,7 +6597,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32234,
@@ -6786,16 +6676,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  95.1,
+        "Delta":  30.3,
         "Ersetzt":  "HEAD",
-        "Pct":  4.53,
+        "Pct":  1.44,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32235,
@@ -6883,7 +6773,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32235,
@@ -7015,7 +6905,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32236,
@@ -7059,7 +6949,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32236,
@@ -7116,9 +7006,9 @@
         "Spec":  "Hexenmeister",
         "SpecKey":  "WLCK",
         "Spieler":  "Xalessa",
-        "Delta":  34.8,
+        "Delta":  272.6,
         "Ersetzt":  "MAIN_HAND",
-        "Pct":  1.66,
+        "Pct":  12.98,
         "Unsicher":  false,
         "Speed":  1.8,
         "ProSchlag":  75,
@@ -7182,9 +7072,9 @@
         "Spec":  "Arkan-Magier",
         "SpecKey":  "MAGE",
         "Spieler":  "Lupitus",
-        "Delta":  28.8,
+        "Delta":  224.5,
         "Ersetzt":  "MAIN_HAND",
-        "Pct":  1.6,
+        "Pct":  12.47,
         "Unsicher":  false,
         "Speed":  1.8,
         "ProSchlag":  75,
@@ -7226,9 +7116,9 @@
         "Spec":  "Schattenpriester",
         "SpecKey":  "SPRI",
         "Spieler":  "Pflasterelfe",
-        "Delta":  19.4,
+        "Delta":  142.3,
         "Ersetzt":  "MAIN_HAND",
-        "Pct":  1.62,
+        "Pct":  11.86,
         "Unsicher":  false,
         "Speed":  1.8,
         "ProSchlag":  75,
@@ -7236,28 +7126,6 @@
         "Hinweis":  "",
         "NichtBewertbar":  false,
         "T5Teile":  1
-    },
-    {
-        "ItemId":  32237,
-        "Item":  "The Maelstrom\u0027s Fury",
-        "Boss":  "Hochlord Naj\u0027entus",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Main Hand",
-        "Armor":  "",
-        "Spec":  "Gleichgewichts-Druide",
-        "SpecKey":  "BAL",
-        "Spieler":  "Exfreya",
-        "Delta":  37.3,
-        "Ersetzt":  "MAIN_HAND",
-        "Pct":  2.67,
-        "Unsicher":  false,
-        "Speed":  1.8,
-        "ProSchlag":  75,
-        "Rolle":  "Caster",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  4
     },
     {
         "ItemId":  32238,
@@ -7360,14 +7228,14 @@
         "Spieler":  "Heinerm",
         "Delta":  130.2,
         "Ersetzt":  "FINGER_1",
-        "Pct":  1.56,
+        "Pct":  1.55,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Heiler",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32238,
@@ -7455,7 +7323,7 @@
         "Rolle":  "Heiler",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32241,
@@ -7521,7 +7389,7 @@
         "Rolle":  "Heiler",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32243,
@@ -7553,41 +7421,19 @@
         "Ilvl":  141,
         "Slot":  "Feet",
         "Armor":  "Plate",
-        "Spec":  "Furor-Krieger",
-        "SpecKey":  "FURY",
-        "Spieler":  "Grotschak",
-        "Delta":  18.2,
-        "Ersetzt":  "FEET",
-        "Pct":  0.87,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Nah",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  1
-    },
-    {
-        "ItemId":  32245,
-        "Item":  "Tide-stomper\u0027s Greaves",
-        "Boss":  "Hochlord Naj\u0027entus",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Feet",
-        "Armor":  "Plate",
         "Spec":  "Schutz-Paladin",
         "SpecKey":  "PROT_PALA",
         "Spieler":  "Chadíkus",
         "Delta":  122.5,
         "Ersetzt":  "FEET",
-        "Pct":  2,
+        "Pct":  1.98,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  3
+        "T5Teile":  4
     },
     {
         "ItemId":  32245,
@@ -7798,9 +7644,9 @@
         "Spec":  "Jaeger",
         "SpecKey":  "HUNT",
         "Spieler":  "Järgerlie",
-        "Delta":  22.4,
+        "Delta":  23.3,
         "Ersetzt":  "MAIN_HAND+OFF_HAND",
-        "Pct":  1.02,
+        "Pct":  1.06,
         "Unsicher":  false,
         "Speed":  3.5,
         "ProSchlag":  457,
@@ -7844,14 +7690,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  78.8,
         "Ersetzt":  "SHOULDER",
-        "Pct":  2.56,
+        "Pct":  2.54,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  3
+        "T5Teile":  4
     },
     {
         "ItemId":  32250,
@@ -7883,28 +7729,6 @@
         "Ilvl":  141,
         "Slot":  "Wrist",
         "Armor":  "Mail",
-        "Spec":  "Furor-Krieger",
-        "SpecKey":  "FURY",
-        "Spieler":  "Grotschak",
-        "Delta":  24.8,
-        "Ersetzt":  "WRIST",
-        "Pct":  1.18,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Nah",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  1
-    },
-    {
-        "ItemId":  32251,
-        "Item":  "Wraps of Precise Flight",
-        "Boss":  "Supremus",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Wrist",
-        "Armor":  "Mail",
         "Spec":  "Verstaerkungs-Schamane",
         "SpecKey":  "ENH",
         "Spieler":  "Chilini",
@@ -7917,7 +7741,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32251,
@@ -7993,41 +7817,19 @@
         "Ilvl":  141,
         "Slot":  "Chest",
         "Armor":  "Leather",
-        "Spec":  "Furor-Krieger",
-        "SpecKey":  "FURY",
-        "Spieler":  "Grotschak",
-        "Delta":  86.8,
-        "Ersetzt":  "CHEST",
-        "Pct":  4.13,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Nah",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  1
-    },
-    {
-        "ItemId":  32252,
-        "Item":  "Nether Shadow Tunic",
-        "Boss":  "Supremus",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Chest",
-        "Armor":  "Leather",
         "Spec":  "Verstaerkungs-Schamane",
         "SpecKey":  "ENH",
         "Spieler":  "Chilini",
-        "Delta":  32.3,
+        "Delta":  10.8,
         "Ersetzt":  "CHEST",
-        "Pct":  1.9,
+        "Pct":  0.63,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32252,
@@ -8181,7 +7983,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32254,
@@ -8436,16 +8238,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  67.4,
+        "Delta":  32.4,
         "Ersetzt":  "NECK",
-        "Pct":  3.21,
+        "Pct":  1.54,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32260,
@@ -8533,7 +8335,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32260,
@@ -8609,41 +8411,19 @@
         "Ilvl":  141,
         "Slot":  "Finger",
         "Armor":  "",
-        "Spec":  "Furor-Krieger",
-        "SpecKey":  "FURY",
-        "Spieler":  "Grotschak",
-        "Delta":  12.6,
-        "Ersetzt":  "FINGER_1",
-        "Pct":  0.6,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Nah",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  1
-    },
-    {
-        "ItemId":  32261,
-        "Item":  "Band of the Abyssal Lord",
-        "Boss":  "Supremus",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Finger",
-        "Armor":  "",
         "Spec":  "Schutz-Paladin",
         "SpecKey":  "PROT_PALA",
         "Spieler":  "Chadíkus",
         "Delta":  74,
         "Ersetzt":  "FINGER_2",
-        "Pct":  2.14,
+        "Pct":  2.11,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  3
+        "T5Teile":  4
     },
     {
         "ItemId":  32261,
@@ -8687,7 +8467,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32262,
@@ -8731,7 +8511,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32262,
@@ -8768,14 +8548,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  128.3,
         "Ersetzt":  "LEGS",
-        "Pct":  2.52,
+        "Pct":  2.49,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  3
+        "T5Teile":  4
     },
     {
         "ItemId":  32263,
@@ -8810,16 +8590,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  50.8,
+        "Delta":  2.1,
         "Ersetzt":  "SHOULDER",
-        "Pct":  2.42,
+        "Pct":  0.1,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32264,
@@ -8885,7 +8665,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32264,
@@ -8961,28 +8741,6 @@
         "Ilvl":  141,
         "Slot":  "Waist",
         "Armor":  "Leather",
-        "Spec":  "Furor-Krieger",
-        "SpecKey":  "FURY",
-        "Spieler":  "Grotschak",
-        "Delta":  59.4,
-        "Ersetzt":  "WAIST",
-        "Pct":  2.83,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Nah",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  1
-    },
-    {
-        "ItemId":  32265,
-        "Item":  "Shadow-walker\u0027s Cord",
-        "Boss":  "Shade of Akama",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Waist",
-        "Armor":  "Leather",
         "Spec":  "Vergeltungs-Paladin",
         "SpecKey":  "RET",
         "Spieler":  "Kaosx",
@@ -9017,7 +8775,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32265,
@@ -9096,16 +8854,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  57.8,
+        "Delta":  12,
         "Ersetzt":  "FINGER_1",
-        "Pct":  2.75,
+        "Pct":  0.57,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32266,
@@ -9127,7 +8885,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32266,
@@ -9196,28 +8954,6 @@
         "T5Teile":  1
     },
     {
-        "ItemId":  32268,
-        "Item":  "Myrmidon\u0027s Treads",
-        "Boss":  "Shade of Akama",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Feet",
-        "Armor":  "Plate",
-        "Spec":  "Furor-Krieger",
-        "SpecKey":  "FURY",
-        "Spieler":  "Grotschak",
-        "Delta":  28.4,
-        "Ersetzt":  "FEET",
-        "Pct":  1.35,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Nah",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  1
-    },
-    {
         "ItemId":  32269,
         "Item":  "Messenger of Fate",
         "Boss":  "Gurtogg Bloodboil",
@@ -9237,7 +8973,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32269,
@@ -9260,6 +8996,28 @@
         "Hinweis":  "",
         "NichtBewertbar":  false,
         "T5Teile":  4
+    },
+    {
+        "ItemId":  32269,
+        "Item":  "Messenger of Fate",
+        "Boss":  "Gurtogg Bloodboil",
+        "Quelle":  "Raid",
+        "Ilvl":  141,
+        "Slot":  "One-Hand",
+        "Armor":  "",
+        "Spec":  "Jaeger",
+        "SpecKey":  "HUNT",
+        "Spieler":  "Järgerlie",
+        "Delta":  12.4,
+        "Ersetzt":  "MAIN_HAND",
+        "Pct":  0.57,
+        "Unsicher":  false,
+        "Speed":  1.4,
+        "ProSchlag":  141,
+        "Rolle":  "Fern",
+        "Hinweis":  "",
+        "NichtBewertbar":  false,
+        "T5Teile":  5
     },
     {
         "ItemId":  32270,
@@ -9457,7 +9215,7 @@
         "Rolle":  "Heiler",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32271,
@@ -9558,16 +9316,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  70.7,
+        "Delta":  23.8,
         "Ersetzt":  "HANDS",
-        "Pct":  3.37,
+        "Pct":  1.13,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32278,
@@ -9626,14 +9384,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  120,
         "Ersetzt":  "WRIST",
-        "Pct":  1.78,
+        "Pct":  1.76,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  3
+        "T5Teile":  4
     },
     {
         "ItemId":  32279,
@@ -9668,16 +9426,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  72.6,
+        "Delta":  16.6,
         "Ersetzt":  "BACK",
-        "Pct":  3.46,
+        "Pct":  0.79,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32323,
@@ -9743,7 +9501,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32323,
@@ -9819,28 +9577,6 @@
         "Ilvl":  141,
         "Slot":  "Wrist",
         "Armor":  "Leather",
-        "Spec":  "Furor-Krieger",
-        "SpecKey":  "FURY",
-        "Spieler":  "Grotschak",
-        "Delta":  30.4,
-        "Ersetzt":  "WRIST",
-        "Pct":  1.45,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Nah",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  1
-    },
-    {
-        "ItemId":  32324,
-        "Item":  "Insidious Bands",
-        "Boss":  "Teron Blutschatten",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Wrist",
-        "Armor":  "Leather",
         "Spec":  "Vergeltungs-Paladin",
         "SpecKey":  "RET",
         "Spieler":  "Kaosx",
@@ -9875,7 +9611,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32324,
@@ -10139,7 +9875,7 @@
         "Rolle":  "Heiler",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32328,
@@ -10462,14 +10198,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  60.1,
         "Ersetzt":  "BACK",
-        "Pct":  0.9,
+        "Pct":  0.89,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  3
+        "T5Teile":  4
     },
     {
         "ItemId":  32331,
@@ -10526,9 +10262,9 @@
         "Spec":  "Vergeltungs-Paladin",
         "SpecKey":  "RET",
         "Spieler":  "Kaosx",
-        "Delta":  62,
+        "Delta":  696.5,
         "Ersetzt":  "MAIN_HAND+OFF_HAND",
-        "Pct":  3.87,
+        "Pct":  43.53,
         "Unsicher":  false,
         "Speed":  3.8,
         "ProSchlag":  495,
@@ -10557,7 +10293,7 @@
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  3
+        "T5Teile":  4
     },
     {
         "ItemId":  32333,
@@ -10582,50 +10318,6 @@
         "T5Teile":  3
     },
     {
-        "ItemId":  32334,
-        "Item":  "Vest of Mounting Assault",
-        "Boss":  "Gurtogg Bloodboil",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Chest",
-        "Armor":  "Mail",
-        "Spec":  "Furor-Krieger",
-        "SpecKey":  "FURY",
-        "Spieler":  "Grotschak",
-        "Delta":  71.4,
-        "Ersetzt":  "CHEST",
-        "Pct":  3.4,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Nah",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  1
-    },
-    {
-        "ItemId":  32334,
-        "Item":  "Vest of Mounting Assault",
-        "Boss":  "Gurtogg Bloodboil",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Chest",
-        "Armor":  "Mail",
-        "Spec":  "Verstaerkungs-Schamane",
-        "SpecKey":  "ENH",
-        "Spieler":  "Chilini",
-        "Delta":  12.6,
-        "Ersetzt":  "CHEST",
-        "Pct":  0.74,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Nah",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  4
-    },
-    {
         "ItemId":  32335,
         "Item":  "Unstoppable Aggressor\u0027s Ring",
         "Boss":  "Gurtogg Bloodboil",
@@ -10636,16 +10328,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  73.1,
+        "Delta":  27.3,
         "Ersetzt":  "FINGER_1",
-        "Pct":  3.48,
+        "Pct":  1.3,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32335,
@@ -10733,7 +10425,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32335,
@@ -10924,14 +10616,14 @@
         "Spieler":  "Heinerm",
         "Delta":  56.5,
         "Ersetzt":  "BACK",
-        "Pct":  0.34,
+        "Pct":  0.33,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Heiler",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32337,
@@ -11164,16 +10856,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  110,
+        "Delta":  39.6,
         "Ersetzt":  "LEGS",
-        "Pct":  5.24,
+        "Pct":  1.88,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32341,
@@ -11261,7 +10953,7 @@
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  3
+        "T5Teile":  4
     },
     {
         "ItemId":  32342,
@@ -11296,16 +10988,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  107.9,
+        "Delta":  32.6,
         "Ersetzt":  "FEET",
-        "Pct":  5.14,
+        "Pct":  1.55,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32345,
@@ -11384,16 +11076,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  67.4,
+        "Delta":  6,
         "Ersetzt":  "WAIST",
-        "Pct":  3.21,
+        "Pct":  0.28,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32346,
@@ -11459,7 +11151,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32346,
@@ -11516,16 +11208,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  61.6,
+        "Delta":  14.7,
         "Ersetzt":  "HANDS",
-        "Pct":  2.93,
+        "Pct":  0.7,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32347,
@@ -11613,7 +11305,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32347,
@@ -11736,9 +11428,9 @@
         "Spec":  "Vergeltungs-Paladin",
         "SpecKey":  "RET",
         "Spieler":  "Kaosx",
-        "Delta":  23.7,
+        "Delta":  658.2,
         "Ersetzt":  "MAIN_HAND+OFF_HAND",
-        "Pct":  1.48,
+        "Pct":  41.14,
         "Unsicher":  false,
         "Speed":  3.7,
         "ProSchlag":  483,
@@ -11758,9 +11450,9 @@
         "Spec":  "Jaeger",
         "SpecKey":  "HUNT",
         "Spieler":  "Järgerlie",
-        "Delta":  11.5,
+        "Delta":  12.4,
         "Ersetzt":  "MAIN_HAND+OFF_HAND",
-        "Pct":  0.52,
+        "Pct":  0.56,
         "Unsicher":  false,
         "Speed":  3.7,
         "ProSchlag":  483,
@@ -11931,28 +11623,6 @@
         "Ilvl":  141,
         "Slot":  "Feet",
         "Armor":  "Leather",
-        "Spec":  "Furor-Krieger",
-        "SpecKey":  "FURY",
-        "Spieler":  "Grotschak",
-        "Delta":  18.2,
-        "Ersetzt":  "FEET",
-        "Pct":  0.87,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Nah",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  1
-    },
-    {
-        "ItemId":  32352,
-        "Item":  "Naturewarden\u0027s Treads",
-        "Boss":  "Reliquiar der Seelen",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Feet",
-        "Armor":  "Leather",
         "Spec":  "Elementar-Schamane",
         "SpecKey":  "ELE",
         "Spieler":  "Exotica",
@@ -12097,7 +11767,7 @@
         "Rolle":  "Heiler",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32354,
@@ -12132,9 +11802,9 @@
         "Spec":  "Hexenmeister",
         "SpecKey":  "WLCK",
         "Spieler":  "Xalessa",
-        "Delta":  19.3,
+        "Delta":  49.4,
         "Ersetzt":  "OFF_HAND",
-        "Pct":  0.92,
+        "Pct":  2.35,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
@@ -12144,23 +11814,23 @@
         "T5Teile":  5
     },
     {
-        "ItemId":  32362,
-        "Item":  "Pendant of Titans",
-        "Boss":  "Reliquiar der Seelen",
+        "ItemId":  32361,
+        "Item":  "Blind-Seers Icon",
+        "Boss":  "Shade of Akama",
         "Quelle":  "Raid",
         "Ilvl":  141,
-        "Slot":  "Neck",
+        "Slot":  "Held In Off-hand",
         "Armor":  "",
-        "Spec":  "Furor-Krieger",
-        "SpecKey":  "FURY",
-        "Spieler":  "Grotschak",
-        "Delta":  1.2,
-        "Ersetzt":  "NECK",
-        "Pct":  0.06,
+        "Spec":  "Schattenpriester",
+        "SpecKey":  "SPRI",
+        "Spieler":  "Pflasterelfe",
+        "Delta":  25.3,
+        "Ersetzt":  "OFF_HAND",
+        "Pct":  2.1,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
-        "Rolle":  "Nah",
+        "Rolle":  "Caster",
         "Hinweis":  "",
         "NichtBewertbar":  false,
         "T5Teile":  1
@@ -12185,7 +11855,7 @@
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  3
+        "T5Teile":  4
     },
     {
         "ItemId":  32362,
@@ -12242,16 +11912,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  102.7,
+        "Delta":  3.7,
         "Ersetzt":  "CHEST",
-        "Pct":  4.89,
+        "Pct":  0.17,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32365,
@@ -12308,16 +11978,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  99.2,
+        "Delta":  23.9,
         "Ersetzt":  "FEET",
-        "Pct":  4.72,
+        "Pct":  1.14,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32366,
@@ -12405,7 +12075,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32366,
@@ -12669,7 +12339,7 @@
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  3
+        "T5Teile":  4
     },
     {
         "ItemId":  32367,
@@ -12713,7 +12383,7 @@
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  3
+        "T5Teile":  4
     },
     {
         "ItemId":  32368,
@@ -12757,7 +12427,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32369,
@@ -12780,6 +12450,28 @@
         "Hinweis":  "",
         "NichtBewertbar":  false,
         "T5Teile":  4
+    },
+    {
+        "ItemId":  32369,
+        "Item":  "Blade of Savagery",
+        "Boss":  "Mutter Shahraz",
+        "Quelle":  "Raid",
+        "Ilvl":  141,
+        "Slot":  "One-Hand",
+        "Armor":  "",
+        "Spec":  "Jaeger",
+        "SpecKey":  "HUNT",
+        "Spieler":  "Järgerlie",
+        "Delta":  8.5,
+        "Ersetzt":  "MAIN_HAND",
+        "Pct":  0.39,
+        "Unsicher":  false,
+        "Speed":  1.4,
+        "ProSchlag":  141,
+        "Rolle":  "Fern",
+        "Hinweis":  "",
+        "NichtBewertbar":  false,
+        "T5Teile":  5
     },
     {
         "ItemId":  32370,
@@ -12904,14 +12596,14 @@
         "Spieler":  "Heinerm",
         "Delta":  115.2,
         "Ersetzt":  "NECK",
-        "Pct":  0.79,
+        "Pct":  0.78,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Heiler",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32370,
@@ -12946,16 +12638,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  79,
+        "Delta":  14.2,
         "Ersetzt":  "HEAD",
-        "Pct":  3.76,
+        "Pct":  0.68,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32373,
@@ -13036,14 +12728,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  131.5,
         "Ersetzt":  "OFF_HAND",
-        "Pct":  2.8,
+        "Pct":  2.77,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  3
+        "T5Teile":  4
     },
     {
         "ItemId":  32375,
@@ -13066,28 +12758,6 @@
         "Hinweis":  "",
         "NichtBewertbar":  false,
         "T5Teile":  3
-    },
-    {
-        "ItemId":  32376,
-        "Item":  "Forest Prowler\u0027s Helm",
-        "Boss":  "Illidari-Rat",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Head",
-        "Armor":  "Mail",
-        "Spec":  "Furor-Krieger",
-        "SpecKey":  "FURY",
-        "Spieler":  "Grotschak",
-        "Delta":  61.5,
-        "Ersetzt":  "HEAD",
-        "Pct":  2.93,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Nah",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  1
     },
     {
         "ItemId":  32376,
@@ -13153,7 +12823,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32376,
@@ -13232,16 +12902,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  50.2,
+        "Delta":  1.6,
         "Ersetzt":  "SHOULDER",
-        "Pct":  2.39,
+        "Pct":  0.07,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32377,
@@ -13307,7 +12977,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32377,
@@ -13351,7 +13021,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32471,
@@ -13474,9 +13144,9 @@
         "Spec":  "Arkan-Magier",
         "SpecKey":  "MAGE",
         "Spieler":  "Lupitus",
-        "Delta":  47.4,
+        "Delta":  21.8,
         "Ersetzt":  "TRINKET_1",
-        "Pct":  2.64,
+        "Pct":  1.21,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
@@ -13696,14 +13366,14 @@
         "Spieler":  "Heinerm",
         "Delta":  198,
         "Ersetzt":  "TRINKET_2",
-        "Pct":  5.06,
+        "Pct":  5.04,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Heiler",
         "Hinweis":  "Schmuck: Prokk- und Nutzeneffekte sind nicht bewertbar",
         "NichtBewertbar":  true,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32496,
@@ -13738,16 +13408,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  75.6,
+        "Delta":  29.8,
         "Ersetzt":  "FINGER_1",
-        "Pct":  3.6,
+        "Pct":  1.42,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32497,
@@ -13813,7 +13483,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32497,
@@ -14004,14 +13674,14 @@
         "Spieler":  "Heinerm",
         "Delta":  216,
         "Ersetzt":  "MAIN_HAND",
-        "Pct":  5.99,
+        "Pct":  5.96,
         "Unsicher":  false,
         "Speed":  1.8,
         "ProSchlag":  73,
         "Rolle":  "Heiler",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32500,
@@ -14055,7 +13725,7 @@
         "Rolle":  "Tank",
         "Hinweis":  "Schmuck: Prokk- und Nutzeneffekte sind nicht bewertbar",
         "NichtBewertbar":  true,
-        "T5Teile":  3
+        "T5Teile":  4
     },
     {
         "ItemId":  32501,
@@ -14112,16 +13782,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  54.8,
+        "Delta":  34.4,
         "Ersetzt":  "TRINKET_2",
-        "Pct":  2.61,
+        "Pct":  1.64,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "Schmuck: Prokk- und Nutzeneffekte sind nicht bewertbar",
         "NichtBewertbar":  true,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32505,
@@ -14209,7 +13879,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "Schmuck: Prokk- und Nutzeneffekte sind nicht bewertbar",
         "NichtBewertbar":  true,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32505,
@@ -14332,16 +14002,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  98.4,
+        "Delta":  23.1,
         "Ersetzt":  "FEET",
-        "Pct":  4.68,
+        "Pct":  1.1,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32510,
@@ -14429,7 +14099,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32510,
@@ -14686,14 +14356,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  127.4,
         "Ersetzt":  "HEAD",
-        "Pct":  2.44,
+        "Pct":  2.41,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  3
+        "T5Teile":  4
     },
     {
         "ItemId":  32521,
@@ -14840,14 +14510,14 @@
         "Spieler":  "Heinerm",
         "Delta":  145.5,
         "Ersetzt":  "BACK",
-        "Pct":  2.35,
+        "Pct":  2.34,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Heiler",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32524,
@@ -15080,16 +14750,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  64.4,
+        "Delta":  18.6,
         "Ersetzt":  "FINGER_1",
-        "Pct":  3.06,
+        "Pct":  0.88,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32526,
@@ -15522,14 +15192,14 @@
         "Spieler":  "Heinerm",
         "Delta":  176.5,
         "Ersetzt":  "FINGER_1",
-        "Pct":  3.95,
+        "Pct":  3.93,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Heiler",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  32528,
@@ -15552,28 +15222,6 @@
         "Hinweis":  "",
         "NichtBewertbar":  false,
         "T5Teile":  3
-    },
-    {
-        "ItemId":  32593,
-        "Item":  "Treads of the Den Mother",
-        "Boss":  "BT-Trash",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Feet",
-        "Armor":  "Leather",
-        "Spec":  "Furor-Krieger",
-        "SpecKey":  "FURY",
-        "Spieler":  "Grotschak",
-        "Delta":  68.9,
-        "Ersetzt":  "FEET",
-        "Pct":  3.28,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Nah",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  1
     },
     {
         "ItemId":  32593,
@@ -15627,28 +15275,6 @@
         "Ilvl":  141,
         "Slot":  "Waist",
         "Armor":  "Plate",
-        "Spec":  "Furor-Krieger",
-        "SpecKey":  "FURY",
-        "Spieler":  "Grotschak",
-        "Delta":  49.9,
-        "Ersetzt":  "WAIST",
-        "Pct":  2.38,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Nah",
-        "Hinweis":  "",
-        "NichtBewertbar":  false,
-        "T5Teile":  1
-    },
-    {
-        "ItemId":  32606,
-        "Item":  "Girdle of the Lightbearer",
-        "Boss":  "BT-Trash",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Waist",
-        "Armor":  "Plate",
         "Spec":  "Vergeltungs-Paladin",
         "SpecKey":  "RET",
         "Spieler":  "Kaosx",
@@ -15674,16 +15300,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  56.4,
+        "Delta":  9.5,
         "Ersetzt":  "HANDS",
-        "Pct":  2.68,
+        "Pct":  0.45,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32608,
@@ -15749,7 +15375,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32837,
@@ -15806,16 +15432,16 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  225,
+        "Delta":  40.5,
         "Ersetzt":  "OFF_HAND",
-        "Pct":  10.71,
+        "Pct":  1.93,
         "Unsicher":  false,
         "Speed":  1.4,
         "ProSchlag":  153,
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32838,
@@ -15881,7 +15507,7 @@
         "Rolle":  "Nah",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  1
+        "T5Teile":  4
     },
     {
         "ItemId":  32943,
@@ -15918,14 +15544,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  81.4,
         "Ersetzt":  "OFF_HAND",
-        "Pct":  2.8,
+        "Pct":  2.76,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  3
+        "T5Teile":  4
     },
     {
         "ItemId":  34011,
@@ -16072,14 +15698,14 @@
         "Spieler":  "Heinerm",
         "Delta":  120.5,
         "Ersetzt":  "BACK",
-        "Pct":  1.06,
+        "Pct":  1.05,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Heiler",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  5
     },
     {
         "ItemId":  34012,
@@ -16114,9 +15740,9 @@
         "Spec":  "Furor-Krieger",
         "SpecKey":  "FURY",
         "Spieler":  "Grotschak",
-        "Delta":  515.1,
+        "Delta":  330.6,
         "Ersetzt":  "MAIN_HAND+OFF_HAND",
-        "Pct":  24.53,
+        "Pct":  15.74,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,

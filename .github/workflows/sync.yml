@@ -26,6 +26,16 @@ jobs:
         run: |
           powershell -ExecutionPolicy Bypass -File .\2-fetch-gear.ps1
 
+      - name: Prüfen ob genug Spieler abgerufen wurden
+        shell: pwsh
+        run: |
+          $p = Get-Content "daten\players.json" -Raw -Encoding UTF8 | ConvertFrom-Json
+          if ($p.Count -lt 5) {
+            Write-Output "FEHLER: players.json hat nur $($p.Count) Einträge. Abbruch."
+            exit 1
+          }
+          Write-Output "OK: $($p.Count) Spieler in players.json."
+
       - name: Upgrades berechnen & Webseiten bauen
         shell: pwsh
         run: |
@@ -37,5 +47,5 @@ jobs:
         run: |
           git config --global user.name "GitHub Action (Auto-Sync)"
           git config --global user.email "action@github.com"
-          git add roster.json daten/players.json daten/cache-tooltips.json index.html ausgabe/loot-prio-p3.html temp.csv daten/bis-listen.json
+          git add roster.json daten/players.json daten/cache-tooltips.json daten/payload.json index.html ausgabe/loot-prio-p3.html temp.csv daten/bis-listen.json
           git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-sync roster and gear [skip ci]" && git push)

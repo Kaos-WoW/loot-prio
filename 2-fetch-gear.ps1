@@ -48,6 +48,16 @@ foreach ($r in $roster) {
 Write-Output ("Abgerufen: " + $players.Count + " von " + $roster.Count)
 if ($fehler.Count) { Write-Output ("Fehlgeschlagen: " + ($fehler -join ", ")) }
 
+# Sicherheitsnetz: Wenn weniger als 50% der Spieler abgerufen wurden, Armory wahrscheinlich
+# nicht erreichbar oder Roster leer -> Script abbrechen, alte players.json behalten.
+$minErforderlich = [Math]::Ceiling($roster.Count * 0.5)
+if ($players.Count -lt $minErforderlich) {
+    Write-Output ""
+    Write-Output "[ABBRUCH] Nur $($players.Count) von $($roster.Count) Spielern abgerufen (Minimum: $minErforderlich)."
+    Write-Output "          Armory möglicherweise nicht erreichbar. Alte players.json wird NICHT überschrieben."
+    exit 0
+}
+
 # Tooltips fuer alle getragenen Teile nachladen
 $cache = @{}
 if (Test-Path $cacheFile) {
