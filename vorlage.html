@@ -904,9 +904,21 @@ async function doSync() {
 
 $('btnSync').addEventListener('click', doSync);
 
-function triggerWorkflowSync() {
-  alert('Da das Tool nun auf GitHub Pages gehostet wird, kannst du das Update direkt in GitHub Actions starten.\n\nEs öffnet sich gleich die entsprechende GitHub-Seite. Klicke dort einfach rechts auf "Run workflow" -> grüner Button "Run workflow".\n\nDas Update dauert etwa 2-3 Minuten, danach aktualisiert sich die Seite von selbst.');
-  window.open('https://github.com/Kaos-WoW/loot-prio/actions/workflows/sync.yml', '_blank');
+async function triggerWorkflowSync() {
+  const btn = $('btnTriggerWorkflow');
+  btn.disabled = true;
+  btn.textContent = '⚡ Starte Server-Update...';
+
+  try {
+    const { data, error } = await sb.functions.invoke('trigger-sync');
+    if (error || (data && data.error)) throw new Error(error?.message || data?.error || 'Server-Fehler');
+    alert('Server-Update erfolgreich gestartet!\n\nDas Google Sheet wird ausgelesen, das Gear aller Spieler synchronisiert, alle DPS-Werte neu berechnet und die Seite neu gebaut.\n\nDas dauert etwa 2-3 Minuten. Die Seite aktualisiert sich danach von selbst.');
+  } catch (e) {
+    alert('Fehler beim Starten des Updates: ' + e.message + '\n\nHast du das GitHub Token (GITHUB_TOKEN) in den Supabase Secrets konfiguriert?');
+  } finally {
+    btn.textContent = '⚡ Roster & Gear neu berechnen (Admin)';
+    btn.disabled = false;
+  }
 }
 $('btnTriggerWorkflow').addEventListener('click', triggerWorkflowSync);
 </script>
