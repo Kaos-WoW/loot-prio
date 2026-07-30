@@ -119,9 +119,12 @@ function Parse-Tooltip($tt) {
     }
     if ($t -match 'Increases attack power by \|?(\d+)') { Add-Stat $st 'AP' ([int]$Matches[1]) }
     if ($t -match 'damage and healing done by magical spells and effects by up to \|?(\d+)') { Add-Stat $st 'SP' ([int]$Matches[1]) }
+    $schoolMax = 0
     foreach ($m in [regex]::Matches($t,'Increases damage done by (?:Shadow|Frost|Fire|Arcane|Nature|Holy) spells and effects by up to \|?(\d+)')) {
-        Add-Stat $st 'SP' ([int]$m.Groups[1].Value)
+        $val = [int]$m.Groups[1].Value
+        if ($val -gt $schoolMax) { $schoolMax = $val }
     }
+    if ($schoolMax -gt 0) { Add-Stat $st 'SP' $schoolMax }
     if ($t -match 'healing done by up to \|?(\d+)') { Add-Stat $st 'Heil' ([int]$Matches[1]) }
     if ($t -match 'Restores \|?(\d+) mana per 5 sec') { Add-Stat $st 'mp5' ([int]$Matches[1]) }
     if ($t -match 'ignore \|?(\d+) of your opponent') { Add-Stat $st 'ArP' ([int]$Matches[1]) }
