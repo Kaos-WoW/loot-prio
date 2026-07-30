@@ -837,7 +837,7 @@ sb.auth.onAuthStateChange((event, session) => {
 
 // ---- Armory Sync ----
 const ROSTER = DATA.roster || [];
-const ARMORY_URL = 'https://classic-armory.org/api/v1/character/equipment';
+const ARMORY_URL = 'https://corsproxy.io/?https://classic-armory.org/api/v1/character/equipment';
 
 async function fetchPlayerGear(name) {
   const body = JSON.stringify({ region: 'eu', realm: 'thunderstrike', name, flavor: 'tbc-anniversary' });
