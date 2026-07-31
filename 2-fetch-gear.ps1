@@ -31,43 +31,46 @@ function Get-Equipment($name) {
     return ($resp.Content.ReadAsStringAsync().Result | ConvertFrom-Json)
 }
 
-$players = @()
+# Lade vorhandene Tooltips für die Slot-Ermittlung
+$cache = @{}
+if (Test-Path $cacheFile) {
+    $raw = Get-Content $cacheFile -Raw -Encoding UTF8 | ConvertFrom-Json
+    foreach ($p in $raw.PSObject.Properties) { $cache[$p.Name] = $p.Value }
+}
+
+$rawPlayers = @()
 $fehler  = @()
 foreach ($r in $roster) {
     try { $resp = Get-Equipment $r.name }
     catch { $fehler += ($r.name + " (Abruf)"); continue }
     if (-not $resp -or -not $resp.equipment) { $fehler += ($r.name + " (keine Daten)"); continue }
     
-    $slots = @{}
-    foreach ($e in $resp.equipment) { $slots[$e.slot.type] = [int]$e.item.id }
-    
-
-    
-    $players += [pscustomobject]@{ Name = $r.name; Spec = $r.spec; Slots = $slots }
+    # Hole alle angelegten Item-IDs flach ab
+    $itemIds = @()
+    foreach ($e in $resp.equipment) {
+        if ($e.item -and $e.item.id -gt 0) {
+            $itemIds += [int]$e.item.id
+        }
+    }
+    $rawPlayers += [pscustomobject]@{ Name = $r.name; Spec = $r.spec; ItemIds = $itemIds }
 }
-Write-Output ("Abgerufen: " + $players.Count + " von " + $roster.Count)
+Write-Output ("Abgerufen: " + $rawPlayers.Count + " von " + $roster.Count)
 if ($fehler.Count) { Write-Output ("Fehlgeschlagen: " + ($fehler -join ", ")) }
 
-# Sicherheitsnetz: Wenn weniger als 50% der Spieler abgerufen wurden, Armory wahrscheinlich
-# nicht erreichbar oder Roster leer -> Script abbrechen, alte players.json behalten.
+# Sicherheitsnetz
 $minErforderlich = [Math]::Ceiling($roster.Count * 0.5)
-if ($players.Count -lt $minErforderlich) {
+if ($rawPlayers.Count -lt $minErforderlich) {
     Write-Output ""
-    Write-Output "[ABBRUCH] Nur $($players.Count) von $($roster.Count) Spielern abgerufen (Minimum: $minErforderlich)."
+    Write-Output "[ABBRUCH] Nur $($rawPlayers.Count) von $($roster.Count) Spielern abgerufen (Minimum: $minErforderlich)."
     Write-Output "          Armory möglicherweise nicht erreichbar. Alte players.json wird NICHT überschrieben."
     exit 0
 }
 
-# Tooltips fuer alle getragenen Teile nachladen
-$cache = @{}
-if (Test-Path $cacheFile) {
-    $raw = Get-Content $cacheFile -Raw -Encoding UTF8 | ConvertFrom-Json
-    foreach ($p in $raw.PSObject.Properties) { $cache[$p.Name] = $p.Value }
-}
+# Tooltips fuer alle neuen Item-IDs nachladen
 $neu = 0
-foreach ($p in $players) {
-    foreach ($s in $p.Slots.Keys) {
-        $k = [string]$p.Slots[$s]
+foreach ($p in $rawPlayers) {
+    foreach ($id in $p.ItemIds) {
+        $k = [string]$id
         if ($cache.ContainsKey($k)) { continue }
         try {
             $t = Invoke-RestMethod -Uri ("https://nether.wowhead.com/tbc/tooltip/item/$k" + "?locale=0") -TimeoutSec 25
@@ -78,6 +81,72 @@ foreach ($p in $players) {
 }
 $cache | ConvertTo-Json -Depth 4 -Compress | Out-File $cacheFile -Encoding utf8
 Write-Output ("Neue Item-Tooltips geladen: $neu")
+
+# Slot-Mapping-Tabelle anhand des Tooltip-Texts
+$players = @()
+foreach ($p in $rawPlayers) {
+    $slots = @{}
+    $fingerCount = 1
+    $trinketCount = 1
+    
+    foreach ($id in $p.ItemIds) {
+        $k = [string]$id
+        if (-not $cache.ContainsKey($k)) { continue }
+        
+        $tooltipText = $cache[$k].tooltip -replace '[\r\n]+', ' '
+        $tooltipText = $tooltipText -replace '<[^>]+>', '|'
+        
+        # Finde Slot im Tooltip
+        $detectedSlot = $null
+        foreach ($s in @('Head','Neck','Shoulder','Chest','Waist','Legs','Feet','Wrist','Hands','Finger','Trinket','Back','Main Hand','Off Hand','One-Hand','Two-Hand','Ranged','Relic','Held In Off-hand','Shield','Thrown')) {
+            if ($tooltipText -match ("\|" + [regex]::Escape($s) + "\|")) {
+                $detectedSlot = $s
+                break
+            }
+        }
+        
+        if (-not $detectedSlot) { continue }
+        
+        # Sortiere in den richtigen Slot-Key ein
+        $slotKey = switch ($detectedSlot) {
+            'Head' { 'HEAD' }
+            'Neck' { 'NECK' }
+            'Shoulder' { 'SHOULDER' }
+            'Chest' { 'CHEST' }
+            'Waist' { 'WAIST' }
+            'Legs' { 'LEGS' }
+            'Feet' { 'FEET' }
+            'Wrist' { 'WRIST' }
+            'Hands' { 'HANDS' }
+            'Back' { 'BACK' }
+            'Finger' {
+                $sk = "FINGER_$fingerCount"
+                $fingerCount++
+                $sk
+            }
+            'Trinket' {
+                $sk = "TRINKET_$trinketCount"
+                $trinketCount++
+                $sk
+            }
+            'Main Hand' { 'MAIN_HAND' }
+            'One-Hand'  { 'MAIN_HAND' }
+            'Two-Hand'  { 'MAIN_HAND' }
+            'Off Hand'  { 'OFF_HAND' }
+            'Held In Off-hand' { 'OFF_HAND' }
+            'Shield'    { 'OFF_HAND' }
+            'Ranged'    { 'RANGED' }
+            'Relic'     { 'RANGED' }
+            'Thrown'    { 'RANGED' }
+        }
+        
+        if ($slotKey) {
+            $slots[$slotKey] = $id
+        }
+    }
+    
+    $players += [pscustomobject]@{ Name = $p.Name; Spec = $p.Spec; Slots = $slots }
+}
 
 # --- Generischer Plausibilitätscheck für alle Spieler ---
 $SPEC_WEIGHTS = @{

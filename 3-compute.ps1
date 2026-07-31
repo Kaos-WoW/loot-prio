@@ -142,7 +142,23 @@ function Value-Item($stats, $spec, $slotKind, $playerName=$null) {
     $w = $spec.W
     # Falls simulierte Gewichte fuer diesen Spieler existieren, diese bevorzugen
     if ($playerName -and $simWeights.ContainsKey($playerName)) {
-        $w = $simWeights[$playerName]
+        $w = @{}
+        foreach ($k in $spec.W.Keys) {
+            $simVal = 0.0
+            # Beachte: PowerShell ConvertFrom-Json kann Hashtables oder PSObjects liefern.
+            # Wir prüfen beide Zugriffsmöglichkeiten ab.
+            if ($simWeights[$playerName].PSObject.Properties[$k]) {
+                $simVal = [double]$simWeights[$playerName].$k
+            } elseif ($simWeights[$playerName].ContainsKey -and $simWeights[$playerName].ContainsKey($k)) {
+                $simVal = [double]$simWeights[$playerName][$k]
+            }
+            
+            if ($simVal -le 0.0) {
+                $w[$k] = $spec.W[$k] # Fallback auf statisches Gewicht bei 0 oder Fehlen
+            } else {
+                $w[$k] = $simVal
+            }
+        }
     }
     
     $v = 0.0

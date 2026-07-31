@@ -60,26 +60,49 @@ function Run-SingleSim($bonusStats) {
                             "name" = $p.Name
                             "class" = "ClassPaladin"
                             "retributionPaladin" = @{
-                                "talents" = "5-053201-0523005120033125331051"
-                                "options" = @{ "classOptions" = @{} }
+                                "talents" = "50000000000000000000-0532010000000000000000-0523005120033125331051"
+                                "options" = @{
+                                    "classOptions" = @{}
+                                }
                             }
                             "equipment" = @{ "items" = $equippedItems }
                             "bonusStats" = @{ "stats" = $bonusStats }
+                            "consumables" = @{
+                                "flaskId" = 22861
+                                "foodId" = 27655
+                                "scrollStr" = $true
+                                "scrollAgi" = $true
+                            }
                             "buffs" = @{
                                 "blessingOfKings" = $true
                                 "blessingOfMight" = "BlessingOfMightImproved"
                             }
-                            "consumables" = @{
-                                "flask" = "FlaskOfRelentlessAssault"
-                                "food" = "FoodRoastedClefthoof"
-                            }
                         }
                     )
+                    "buffs" = @{
+                        "battleShout" = "TristateEffectImproved"
+                        "leaderOfThePack" = "TristateEffectRegular"
+                        "windfuryTotem" = "TristateEffectImproved"
+                        "strengthOfEarthTotem" = "TristateEffectImproved"
+                        "graceOfAirTotem" = "TristateEffectImproved"
+                    }
                 }
             )
             "buffs" = @{
                 "bloodlust" = $true
-                "battleShout" = "BattleShoutImproved"
+                "giftOfTheWild" = "TristateEffectImproved"
+                "powerWordFortitude" = "TristateEffectImproved"
+            }
+            "debuffs" = @{
+                "sunderArmor" = $true
+                "curseOfRecklessness" = $true
+                "faerieFire" = "TristateEffectImproved"
+                "judgementOfWisdom" = $true
+                "judgementOfLight" = $true
+                "improvedSealOfTheCrusader" = "TristateEffectImproved"
+                "bloodFrenzy" = $true
+                "mangle" = $true
+                "giftOfArthas" = $true
             }
         }
         "encounter" = @{
@@ -97,8 +120,23 @@ function Run-SingleSim($bonusStats) {
     
     $inputJsonPath = "$binDir\sim_input.json"
     $outputJsonPath = "$binDir\sim_output.json"
+    
+    # Schreibe Basis-JSON
     $jsonString = $simRequest | ConvertTo-Json -Depth 10
     [System.IO.File]::WriteAllText($inputJsonPath, $jsonString)
+    
+    # Nutze Python, um die APL-Rotation sauber und fehlerfrei einzufügen
+    $pyCmd = @"
+import json
+with open(r'$inputJsonPath', 'r', encoding='utf-8') as f:
+    d = json.load(f)
+with open(r'$binDir\default.apl.json', 'r', encoding='utf-8') as f:
+    r = json.load(f)
+d['raid']['parties'][0]['players'][0]['rotation'] = r
+with open(r'$inputJsonPath', 'w', encoding='utf-8') as f:
+    json.dump(d, f, indent=2)
+"@
+    python -c $pyCmd
     
     Start-Process -FilePath $exePath -ArgumentList "sim", "--infile", $inputJsonPath, "--outfile", $outputJsonPath -Wait -NoNewWindow
     
@@ -129,6 +167,8 @@ $statsToTest = @{
     "Treffer" = @{ Index=20; Label="Trefferwertung" }
     "Krit"    = @{ Index=21; Label="Krit-Wertung" }
     "Tempo"   = @{ Index=22; Label="Tempowertung" }
+    "ArP"     = @{ Index=23; Label="Ruestungsdurchschlag" }
+    "Waffk"   = @{ Index=24; Label="Waffenkunde" }
 }
 
 $weights = @{}
