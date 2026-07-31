@@ -4,8 +4,16 @@
         "spec":  "FURY"
     },
     {
+        "name":  "Chadíkus",
+        "spec":  "PROT_PALA"
+    },
+    {
         "name":  "Kaosx",
         "spec":  "RET"
+    },
+    {
+        "name":  "Järgerlie",
+        "spec":  "HUNT"
     },
     {
         "name":  "Moriamus",
@@ -16,7 +24,7 @@
         "spec":  "FURY"
     },
     {
-        "name":  "Chadíkus",
+        "name":  "Shana",
         "spec":  "PROT_PALA"
     },
     {
@@ -24,16 +32,8 @@
         "spec":  "WLCK"
     },
     {
-        "name":  "Järgerlie",
-        "spec":  "HUNT"
-    },
-    {
         "name":  "Kroenix",
         "spec":  "HUNT"
-    },
-    {
-        "name":  "Shana",
-        "spec":  "PROT_PALA"
     },
     {
         "name":  "Shadowdragôn",
@@ -60,7 +60,7 @@
         "spec":  "HOLY_PRIEST"
     },
     {
-        "name":  "Sinrakss",
+        "name":  "Lariesel",
         "spec":  "MAGE"
     },
     {
@@ -68,20 +68,16 @@
         "spec":  "MAGE"
     },
     {
+        "name":  "Heinerm",
+        "spec":  "HOLY_PALA"
+    },
+    {
         "name":  "Moonspell",
         "spec":  "RESTO_DRUID"
     },
     {
-        "name":  "Lariesel",
-        "spec":  "MAGE"
-    },
-    {
         "name":  "Xalessa",
         "spec":  "WLCK"
-    },
-    {
-        "name":  "Heinerm",
-        "spec":  "HOLY_PALA"
     },
     {
         "name":  "Golschi",
@@ -100,15 +96,19 @@
         "spec":  "ELE"
     },
     {
-        "name":  "Empathic",
-        "spec":  "HOLY_PRIEST"
-    },
-    {
         "name":  "Exfreya",
         "spec":  "BAL"
     },
     {
+        "name":  "Empathic",
+        "spec":  "HOLY_PRIEST"
+    },
+    {
         "name":  "Pflasterelfe",
         "spec":  "SPRI"
+    },
+    {
+        "name":  "Erikadirk",
+        "spec":  "ROGUE"
     }
 ]
