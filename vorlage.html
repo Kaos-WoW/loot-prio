@@ -235,13 +235,6 @@
   tbody tr:hover { background: var(--surface-2); }
   .num { font-family: var(--f-data); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
 
-  .bar { position: relative; min-width: 8.5rem; }
-  .bar span.fill {
-    position: absolute; inset: 0 auto 0 0; background: var(--gain-soft);
-    z-index: 0; pointer-events: none;
-  }
-  .bar b { position: relative; z-index: 1; font-weight: 650; color: var(--gain); }
-
   .item { font-weight: 600; }
   .pill {
     display: inline-block; font-size: 0.68rem; letter-spacing: 0.05em;
@@ -784,8 +777,6 @@ function render() {
     return true;
   });
 
-  const maxP = Math.max(...rows.map(r => r.p)) || 1;
-
   if (currentSort === 'prio') {
     list.sort((a,b) => (getSortKey(a) - getSortKey(b)) * sortDir);
     $('btn-sort-prio').textContent = `Prio / BiS Status ${sortDir === -1 ? '▾' : '▴'}`;
@@ -801,7 +792,6 @@ function render() {
 
   $('tbody').innerHTML = list.map(r => {
     const isTankOrHeal = (r.ro === 'Tank' || r.ro === 'Heiler');
-    const pct = Math.max(2, (r.p / maxP) * 100);
     const quelle = r.q === 'T6' ? '<span class="pill q-t6">Tier 6</span>'
                  : r.q === 'Marken' ? '<span class="pill q-marken">Marken</span>' : '';
     
@@ -838,8 +828,8 @@ function render() {
     const rowClass = rowStyle ? `style="${rowStyle}"` : '';
 
     const dpsCellContent = isTankOrHeal
-      ? `+${r.p.toFixed(2)}% <span style="font-size:0.75rem; font-weight:normal; opacity:0.8; margin-left:2px;">(+${r.d.toFixed(1)} Pkt)</span>`
-      : `+${r.p.toFixed(2)}% dps <span style="font-size:0.75rem; font-weight:normal; opacity:0.8; margin-left:2px;">(+${r.d.toFixed(1)} dps)</span>`;
+      ? `<span style="color:var(--gain); font-weight:650;">+${r.p.toFixed(2)}%</span> <span style="font-size:0.75rem; font-weight:normal; opacity:0.8; margin-left:2px; color:var(--muted);">(+${r.d.toFixed(1)} Pkt)</span>`
+      : `<span style="color:var(--gain); font-weight:650;">+${r.p.toFixed(2)}% dps</span> <span style="font-size:0.75rem; font-weight:normal; opacity:0.8; margin-left:2px; color:var(--muted);">(+${r.d.toFixed(1)} dps)</span>`;
 
     return `<tr ${rowClass}>
       <td><span class="item">${wowLink(r.id, r.n)}</span> ${quelle} ${equippedBadge}${note}${altsNote}</td>
@@ -848,7 +838,7 @@ function render() {
       <td><b>${esc(r.pl)}</b></td>
       <td class="muted">${esc(r.sp)}</td>
       <td>${prioLabel}</td>
-      <td class="num bar"><span class="fill" style="width:${pct}%"></span><b>${dpsCellContent}</b></td>
+      <td class="num"><b>${dpsCellContent}</b></td>
       <td class="muted" style="font-size:0.8rem; line-height:1.4;">${getEquippedCell(r.pl, r.e)}</td>
     </tr>`;
   }).join('');
