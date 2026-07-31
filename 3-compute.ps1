@@ -89,15 +89,15 @@ $UNSICHER = @()
 $specs = @(
  NewSpec 'FURY' 'Furor-Krieger' 'Plate' 'Nah' @{Str=1.14;Agi=0.80;AP=0.51;Treffer=0.60;Krit=1.07;Tempo=0.99;ArP=0.19;Waffk=1.29;MH=3.12;OH=1.64} @{Stat='Str';Menge=8} @('Grotschak','Valiror') '' 2100
  NewSpec 'ARMS' 'Waffen-Krieger' 'Plate' 'Nah2H' @{Str=0.56;Agi=0.44;AP=0.24;Treffer=0.18;Krit=0.61;Tempo=0.64;ArP=0.12;Waffk=1.00;MH=3.23} @{Stat='Str';Menge=8} @('Moriamus') 'Waffenkunde aus Preset abgeleitet (Sim-Set war am Cap)' 1600
- NewSpec 'RET'  'Vergeltungs-Paladin' 'Plate' 'Nah2H' @{Str=0.83;Agi=0.63;SP=0.14;AP=0.34;Treffer=0.00;Krit=0.65;Tempo=1.01;ArP=0.08;Waffk=1.69;MH=4.44} @{Stat='Str';Menge=8} @('Kaosx') 'Treffer=0 unterstellt Cap' 1600
+ NewSpec 'RET'  'Vergeltungs-Paladin' 'Plate' 'Nah2H' @{Str=0.83;Agi=0.63;SP=0.14;AP=0.34;Treffer=1.20;Krit=0.65;Tempo=1.01;ArP=0.08;Waffk=1.69;MH=4.44} @{Stat='Str';Menge=8} @('Kaosx') '' 1600
  NewSpec 'ENH'  'Verstaerkungs-Schamane' 'Mail' 'Nah' @{Str=0.89;Agi=0.65;Int=0.05;SP=0.24;ZTreffer=0.23;ZKrit=0.05;AP=0.40;Treffer=0.73;Krit=0.68;Tempo=0.65;ArP=0.12;Waffk=1.35;MH=3.28;OH=1.47} @{Stat='Str';Menge=8} @('Chilini','Lanity') '' 1700
- NewSpec 'ROGUE' 'Kampf-Schurke' 'Leather' 'Nah' @{Str=0.42;Agi=0.85;AP=0.38;Treffer=0.00;Krit=0.68;Tempo=0.79;ArP=0.12;Waffk=1.13;MH=3.58;OH=1.33} @{Stat='Agi';Menge=8} @('Sandycheekz') 'Treffer=0 unterstellt Cap' 2000
- NewSpec 'HUNT' 'Jaeger' 'Mail' 'Fern' @{Str=0.12;Agi=1.14;Int=0.01;AP=0.11;Treffer=0.00;Krit=0.96;Tempo=0.87;ArP=0.16;Waffk=0.42;RANGED=4.09} @{Stat='Agi';Menge=8} @('J*rgerlie','Kroenix') 'Treffer=0 unterstellt Cap' 2200
- NewSpec 'WLCK' 'Hexenmeister' 'Cloth' 'Caster' @{Int=0.33;SP=1.05;ZTreffer=0.00;ZKrit=0.81;ZTempo=1.33;mp5=0.28} @{Stat='SP';Menge=12} @('Deters','Xalessa','Simondan') 'Treffer=0 unterstellt Cap' 2100
- NewSpec 'MAGE' 'Arkan-Magier' 'Cloth' 'Caster' @{Int=1.14;SP=0.79;Spi=0.78;ZTreffer=0.16;ZKrit=0.64;ZTempo=0.16;mp5=0.42} @{Stat='SP';Menge=12} @('Sinrakss','Lupitus','Lariesel') '' 1800
- NewSpec 'SPRI' 'Schattenpriester' 'Cloth' 'Caster' @{Int=0.03;SP=0.59;Spi=0.06;ZTreffer=0.00;ZKrit=0.11;ZTempo=0.68} @{Stat='SP';Menge=12} @('Pflasterelfe') 'Treffer=0 unterstellt Cap' 1200
- NewSpec 'ELE'  'Elementar-Schamane' 'Mail' 'Caster' @{Int=0.18;SP=0.72;ZTreffer=0.06;ZKrit=0.61;ZTempo=1.25;mp5=0.01} @{Stat='SP';Menge=12} @('Exotica') '' 1500
- NewSpec 'BAL'  'Gleichgewichts-Druide' 'Leather' 'Caster' @{Int=0.44;SP=0.78;Spi=0.09;ZTreffer=0.04;ZKrit=0.53;ZTempo=1.01} @{Stat='SP';Menge=12} @('Exfreya') '' 1400
+ NewSpec 'ROGUE' 'Kampf-Schurke' 'Leather' 'Nah' @{Str=0.42;Agi=0.85;AP=0.38;Treffer=1.40;Krit=0.68;Tempo=0.79;ArP=0.12;Waffk=1.13;MH=3.58;OH=1.33} @{Stat='Agi';Menge=8} @('Sandycheekz') '' 2000
+ NewSpec 'HUNT' 'Jaeger' 'Mail' 'Fern' @{Str=0.12;Agi=1.14;Int=0.01;AP=0.11;Treffer=1.30;Krit=0.96;Tempo=0.87;ArP=0.16;Waffk=0.42;RANGED=4.09} @{Stat='Agi';Menge=8} @('J*rgerlie','Kroenix') '' 2200
+ NewSpec 'WLCK' 'Hexenmeister' 'Cloth' 'Caster' @{Int=0.33;SP=1.05;ZTreffer=1.80;ZKrit=0.81;ZTempo=1.33;mp5=0.28} @{Stat='SP';Menge=12} @('Deters','Xalessa','Simondan') '' 2100
+ NewSpec 'MAGE' 'Arkan-Magier' 'Cloth' 'Caster' @{Int=1.14;SP=0.79;Spi=0.78;ZTreffer=1.70;ZKrit=0.64;ZTempo=0.16;mp5=0.42} @{Stat='SP';Menge=12} @('Sinrakss','Lupitus','Lariesel') '' 1800
+ NewSpec 'SPRI' 'Schattenpriester' 'Cloth' 'Caster' @{Int=0.03;SP=0.59;Spi=0.06;ZTreffer=1.50;ZKrit=0.11;ZTempo=0.68} @{Stat='SP';Menge=12} @('Pflasterelfe') '' 1200
+ NewSpec 'ELE'  'Elementar-Schamane' 'Mail' 'Caster' @{Int=0.18;SP=0.72;ZTreffer=1.60;ZKrit=0.61;ZTempo=1.25;mp5=0.01} @{Stat='SP';Menge=12} @('Exotica') '' 1500
+ NewSpec 'BAL'  'Gleichgewichts-Druide' 'Leather' 'Caster' @{Int=0.44;SP=0.78;Spi=0.09;ZTreffer=1.60;ZKrit=0.53;ZTempo=1.01} @{Stat='SP';Menge=12} @('Exfreya') '' 1400
  NewSpec 'PROT_PALA' 'Schutz-Paladin' 'Plate' 'Tank' @{Sta=1.5;Armor=0.05;Def=1.0;Dodge=0.8;Parry=0.8;Block=0.8;SP=0.5;Int=0.2} @{} @() '' 100
  NewSpec 'FERAL_TANK' 'Feral-Tank' 'Leather' 'Tank' @{Sta=1.5;Armor=0.10;Agi=1.2;Dodge=0.8;AP=0.4;Krit=0.6;Waffk=1.0} @{} @() '' 100
  NewSpec 'RESTO_SHAM' 'Wiederherstellungs-Schamane' 'Mail' 'Heiler' @{Heil=1.0;mp5=2.5;ZTempo=1.2;ZKrit=0.6;Int=0.4} @{} @() '' 100
@@ -153,10 +153,17 @@ function Value-Item($stats, $spec, $slotKind, $playerName=$null) {
                 $simVal = [double]$simWeights[$playerName][$k]
             }
             
-            if ($simVal -le 0.0) {
-                $w[$k] = $spec.W[$k] # Fallback auf statisches Gewicht bei 0 oder Fehlen
+            # Sicherheitsnetz für Cap-Stats: Um den "De-gearing"-Effekt zu verhindern,
+            # dürfen Waffenkunde, Trefferwertung und Zaubertrefferwertung niemals unter
+            # ihr statisches "Below-Cap"-Gewicht fallen.
+            if ($k -eq 'Treffer' -or $k -eq 'Waffk' -or $k -eq 'ZTreffer') {
+                $w[$k] = [math]::Max($simVal, [double]$spec.W[$k])
             } else {
-                $w[$k] = $simVal
+                if ($simVal -le 0.0) {
+                    $w[$k] = $spec.W[$k] # Fallback auf statisches Gewicht bei 0 oder Fehlen
+                } else {
+                    $w[$k] = $simVal
+                }
             }
         }
     }
