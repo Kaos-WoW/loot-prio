@@ -5,9 +5,8 @@ Serverstand Patch 2.5.6). Rechnet für jedes Phase-3-Item und jeden Raider aus, 
 **gegenüber seiner tatsächlich getragenen Ausrüstung** bringt, und veröffentlicht daraus eine
 sortier- und filterbare HTML-Seite.
 
-**Deckt inzwischen alle drei Rollen ab** — nicht mehr nur DPS: 11 DPS-Specs (absoluter DPS-Zuwachs),
-2 Tank-Specs und 4 Heiler-Specs (jeweils prozentualer Zuwachs gegenüber dem Gesamtwert der aktuellen
-Ausrüstung, siehe unten). Der komplette Ablauf läuft automatisiert über GitHub Actions und wird auf GitHub Pages veröffentlicht — für den Alltagsgebrauch ist kein manueller Skriptlauf mehr nötig.
+**Deckt inzwischen alle drei Rollen ab** (11 DPS-Specs, 2 Tanks, 4 Heiler) und bietet ein interaktives Web-Interface.
+Neben einem vollautomatisierten nächtlichen GitHub Actions-Lauf besitzt die Seite nun einen **Multi-Select-Spieler-Filter** (zum schnellen Vergleich von 2-4 Raidern bei der Vergabe) und ein bereinigtes Tabellendesign. Die Veröffentlichung erfolgt automatisch via GitHub Pages.
 
 Repo: `github.com/Kaos-WoW/loot-prio` · Ausgabe: `ausgabe/loot-prio-p3.html` bzw. `index.html`
 (identischer Inhalt, `index.html` ist die von GitHub Pages ausgelieferte Fassung im Repo-Wurzelverzeichnis).

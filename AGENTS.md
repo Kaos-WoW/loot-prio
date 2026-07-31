@@ -36,6 +36,9 @@ Normaler Update-Durchlauf nach einem Raid (automatisiert über GitHub Actions):
 * **Waffentempo-Normierung:** Physische Nahkämpfer (RET, FURY, ARMS, ENH, ROGUE) müssen ihre Waffenhand, Schildhand und Zweihänder nach Waffentempo normieren (3.6 für 2H, 2.6 für 1H), da sonst 2H-Waffen im `MAIN_HAND`-Slot fälschlicherweise als Einhänder berechnet werden. Hierzu muss `Is2H` aus dem Tooltip ausgewertet werden (nicht nur der Slotname `TWOHAND`).
 * **Cap-Stat-Abwärtstrend (De-gearing spiral):** Wenn Spieler am Hit- oder Expertise-Cap simuliert werden, fällt das simulierte Gewicht fast auf 0 ab, was dazu führt, dass die Formel das Cap-Gear fälschlicherweise ablegen will. Lösung: Gewichte für `Treffer`, `Waffk` und `ZTreffer` in `Value-Item` dürfen niemals unter ihr statisches "Below-Cap"-Gewicht fallen (z.B. Hit = 1.20, Expertise = 1.69).
 * **Armory-Slot-Bug:** Die API von classic-armory.org liefert bei TBC Anniversary die Items manchmal in völlig willkürlichen Slots zurück. `2-fetch-gear.ps1` ignoriert die API-Slots und sortiert die Items anhand des echten Typs aus den wowhead Tooltips robust ein.
+* **Multi-Select Spieler-Filter:** Spieler-Auswahl erfolgt über ein interaktives Dropdown mit Suchfeld und Mehrfachauswahl-Checkboxes, um direkte Vergleiche (2–4 Spieler) im Loot-Rat zu ermöglichen.
+* **Seiten-Sprung bei Dynamic Heights verhindern:** Wenn sich die Tabelle durch Filter schrumpft, zwingt der Browser zum Scrollen. Behebung: Das Tabellen-div `#main-tablewrap` hat eine Mindesthöhe von `65vh` (65% des Viewports).
+* **Dropdown-Einklappen (.hidden):** `.ms-dropdown` verwendet `display: flex;`. Das HTML-Attribut `hidden` wird durch CSS-Klassenspezifität überschrieben. Daher steuert JS das Einklappen über `.classList.toggle('hidden')` (im CSS als `.ms-dropdown.hidden { display: none !important; }` definiert).
 
 ---
 
@@ -56,3 +59,5 @@ Normaler Update-Durchlauf nach einem Raid (automatisiert über GitHub Actions):
 * **[x] Heiß umkämpfter Loot:** Eine neue dynamische Übersichtstabelle wurde oberhalb der Haupttabelle eingefügt. Sie zeigt die begehrtesten Items (sortiert nach BiS-Kandidaten & Upgrades gesamt) und listet die Spieler auf. Tier 6 Token sind davon ausgeschlossen, Schmuckstücke (Trinkets) hingegen als (BiS)/(Bedarf) integriert.
 * **[x] WoWSims CLI-Integration & Dynamische Simulation:** Vollautomatische Simulation für Spieler (derzeit Kaosx) zur Ermittlung dynamischer Stat-Gewichte.
 * **[x] Globale Waffentempo- & Cap-Stat-Sicherungen:** Mechanisch korrekte Berechnung von Zweihandwaffen und Absicherung der Cap-Gegenstände gegen das fälschliche Ablegen (De-gearing).
+* **[x] Interaktiver Multi-Select Spieler-Filter:** Ermöglicht die gleichzeitige Auswahl mehrerer Raider inklusive Suchfeld.
+* **[x] Clean-up Tabellendesign (Balken weg):** Entfernung der störenden grünen Verlaufsbalken hinter den Prozentwerten.d Absicherung der Cap-Gegenstände gegen das fälschliche Ablegen (De-gearing).
