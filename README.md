@@ -124,8 +124,8 @@ früher Valiror und Pflasterelfe betraf (Offspec-Stand wurde ungefiltert überno
   Content-Type-Header (→ `ByteArrayContent` mit rohem Header, siehe `2-fetch-gear.ps1`).
 - **Item-Werte:** `nether.wowhead.com/tbc/tooltip/item/<ID>?locale=0`. Die Zonen-Übersichtsseiten von
   Wowhead sind unvollständig (Teron Blutschatten fehlte komplett) — immer pro Boss-NPC abrufen.
-- **Statgewichte:** wowsims.com (die gepflegte Fassung, nicht `wowsims.github.io`), Spalte „DPS Weight“
-  ist der absolute DPS-Gewinn pro Statpunkt und in `3-compute.ps1` fest hinterlegt.
+- **Statgewichte:** wowsims.com (die gepflegte Fassung, nicht `wowsims.github.io`). Für Kaosx werden
+  die Gewichte vollautomatisch über die lokale `wowsimcli-windows.exe` dynamisch simuliert (25er-Raid-Setup mit APL-Rotation) und in `daten/sim-weights.json` abgelegt. Für alle anderen Spieler dienen die offiziellen WoWSims-Presets als statischer Fallback.
 - **DPS-BiS-Gegenprobe:** warcrafttavern.com, automatisiert über `4-bis-check.ps1`.
 - **Tank-/Heiler-BiS-Listen:** offizielle Wowhead-Phase-3-Guides, per Hand bzw. über die
   Python-Hilfsskripte in `daten/` eingepflegt (kein automatisierter Regressionstest wie bei DPS).
@@ -167,7 +167,7 @@ als prozentualer Zuwachs mit BiS-Gate.
 - **Tier-Set-Boni als Zahl.** Prozentboni auf einzelne Fähigkeiten lassen sich ohne Simulation nicht in
   DPS umrechnen. Stattdessen steht unter jeder Tier-Zeile der Set-Übergang als Text mit Einschätzung
   (`hoch/mittel/gering/keiner`) aus `tier-boni.json`.
-- **Waffengeschwindigkeit**, außer als harter Ausschluss unter 2,4 s bei Verstärkung/Kampf-Schurke.
+- **Waffengeschwindigkeit:** Wir haben eine physische Waffentempo-Normierung eingebaut (3.6 für 2H, 2.6 für 1H), um Swing-Damage-Vorteile (Crusader Strike, Windfury, Seal of Blood) akkurat abzubilden.
 - **Tank-/Heiler-Feinmechaniken** wie Blockwert-Verteilung, Heil-Overhealing oder Aggro — die
   BiS-Gate-Logik fängt die gröbsten Fehlanreize ab, ersetzt aber keine Simulation.
 - **Spec-Mechaniken wie Kampfgewandtheit** (schnelle Schildhand gibt dem Schurken Energie zurück) —
