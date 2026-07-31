@@ -913,7 +913,7 @@ async function triggerWorkflowSync() {
   try {
     const { data, error } = await sb.functions.invoke('trigger-sync');
     if (error || (data && data.error)) throw new Error(error?.message || data?.error || 'Server-Fehler');
-    alert('Server-Update erfolgreich gestartet!\n\nDas Google Sheet wird ausgelesen, das Gear aller Spieler synchronisiert, alle DPS-Werte neu berechnet und die Seite neu gebaut.\n\nDas dauert etwa 2-3 Minuten. Die Seite aktualisiert sich danach von selbst.');
+    alert('Server-Update erfolgreich gestartet!\n\nDas Google Sheet wird ausgelesen, das Gear aller Spieler synchronisiert, alle DPS-Werte neu berechnet und die Seite neu gebaut.\n\nDas dauert etwa 5 Minuten. Die Seite aktualisiert sich danach von selbst.');
   } catch (e) {
     alert('Fehler beim Starten des Updates: ' + e.message + '\n\nHast du das GitHub Token (GITHUB_TOKEN) in den Supabase Secrets konfiguriert?');
   } finally {
