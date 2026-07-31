@@ -125,8 +125,27 @@ $SLOTMAP = @{
 }
 
 # ---------------- Wertfunktion ----------------
-function Value-Item($stats, $spec, $slotKind) {
-    $w = $spec.W; $v = 0.0
+$simWeights = @{}
+$simWeightsFile = "$base\daten\sim-weights.json"
+if (Test-Path $simWeightsFile) {
+    $rawSim = Get-Content $simWeightsFile -Raw -Encoding UTF8 | ConvertFrom-Json
+    foreach ($p in $rawSim.PSObject.Properties) {
+        $pWeights = @{}
+        foreach ($s in $p.Value.PSObject.Properties) {
+            $pWeights[$s.Name] = [double]$s.Value
+        }
+        $simWeights[$p.Name] = $pWeights
+    }
+}
+
+function Value-Item($stats, $spec, $slotKind, $playerName=$null) {
+    $w = $spec.W
+    # Falls simulierte Gewichte fuer diesen Spieler existieren, diese bevorzugen
+    if ($playerName -and $simWeights.ContainsKey($playerName)) {
+        $w = $simWeights[$playerName]
+    }
+    
+    $v = 0.0
     foreach ($k in $stats.Keys) {
         if ($k -eq 'WpnDps' -or $k -eq 'Sockel' -or $k -eq 'WpnSpeed') { continue }
         if ($w.ContainsKey($k)) { $v += [double]$stats[$k] * $w[$k] }
@@ -328,24 +347,24 @@ foreach ($it in $items) {
                 if ($delta -le 0) { $delta = 0.1 } # Immer anzeigen, wenn es in der BiS-Liste ist
             } else {
                 # Normaler DPS-Raider
-                $newVal = Value-Item $istats $spec $slotKey
+                $newVal = Value-Item $istats $spec $slotKey $pn
                 $curVal = 0.0
                 if ($slotKey -eq 'FINGER' -or $slotKey -eq 'TRINKET') {
                     $a = $slotKey + '_1'; $b = $slotKey + '_2'
                     $va = 0.0; $vb = 0.0
-                    if ($ws.ContainsKey($a)) { $va = Value-Item $ws[$a] $spec $slotKey }
-                    if ($ws.ContainsKey($b)) { $vb = Value-Item $ws[$b] $spec $slotKey }
+                    if ($ws.ContainsKey($a)) { $va = Value-Item $ws[$a] $spec $slotKey $pn }
+                    if ($ws.ContainsKey($b)) { $vb = Value-Item $ws[$b] $spec $slotKey $pn }
                     if ($va -le $vb) { $curVal = $va; $curSlot = $a } else { $curVal = $vb; $curSlot = $b }
                 } elseif ($slotKey -eq 'TWOHAND') {
                     $va = 0.0; $vb = 0.0
-                    if ($ws.ContainsKey('MAIN_HAND')) { $va = Value-Item $ws['MAIN_HAND'] $spec 'MAIN_HAND' }
-                    if ($ws.ContainsKey('OFF_HAND'))  { $vb = Value-Item $ws['OFF_HAND']  $spec 'OFF_HAND' }
+                    if ($ws.ContainsKey('MAIN_HAND')) { $va = Value-Item $ws['MAIN_HAND'] $spec 'MAIN_HAND' $pn }
+                    if ($ws.ContainsKey('OFF_HAND'))  { $vb = Value-Item $ws['OFF_HAND']  $spec 'OFF_HAND' $pn }
                     $curVal = $va + $vb; $curSlot = 'MAIN_HAND+OFF_HAND'
                 } elseif ($slotKey -eq 'OFF_HAND') {
                     if ($ws.ContainsKey('MAIN_HAND') -and $ws['MAIN_HAND'].ContainsKey('Is2H')) { continue }
-                    if ($ws.ContainsKey($slotKey)) { $curVal = Value-Item $ws[$slotKey] $spec $slotKey }
+                    if ($ws.ContainsKey($slotKey)) { $curVal = Value-Item $ws[$slotKey] $spec $slotKey $pn }
                 } else {
-                    if ($ws.ContainsKey($slotKey)) { $curVal = Value-Item $ws[$slotKey] $spec $slotKey }
+                    if ($ws.ContainsKey($slotKey)) { $curVal = Value-Item $ws[$slotKey] $spec $slotKey $pn }
                 }
                 $delta = $newVal - $curVal
                 if ($delta -le 0) { continue }

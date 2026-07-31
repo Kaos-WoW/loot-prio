@@ -1,0 +1,144 @@
+{
+    "raid":  {
+                 "parties":  [
+                                 {
+                                     "players":  [
+                                                     {
+                                                         "equipment":  {
+                                                                           "items":  [
+                                                                                         {
+                                                                                             "id":  30131
+                                                                                         },
+                                                                                         {
+                                                                                             "id":  278827
+                                                                                         },
+                                                                                         {
+                                                                                             "id":  30055
+                                                                                         },
+                                                                                         {
+                                                                                             "id":  30098
+                                                                                         },
+                                                                                         {
+                                                                                             "id":  30129
+                                                                                         },
+                                                                                         {
+                                                                                             "id":  30057
+                                                                                         },
+                                                                                         {
+                                                                                             "id":  29947
+                                                                                         },
+                                                                                         {
+                                                                                             "id":  28779
+                                                                                         },
+                                                                                         {
+                                                                                             "id":  30257
+                                                                                         },
+                                                                                         {
+                                                                                             "id":  29951
+                                                                                         },
+                                                                                         {
+                                                                                             "id":  30834
+                                                                                         },
+                                                                                         {
+                                                                                             "id":  30061
+                                                                                         },
+                                                                                         {
+                                                                                             "id":  29383
+                                                                                         },
+                                                                                         {
+                                                                                             "id":  28830
+                                                                                         },
+                                                                                         {
+                                                                                             "id":  28430
+                                                                                         },
+                                                                                         {
+                                                                                             "id":  0
+                                                                                         },
+                                                                                         {
+                                                                                             "id":  27484
+                                                                                         }
+                                                                                     ]
+                                                                       },
+                                                         "name":  "Kaosx",
+                                                         "buffs":  {
+                                                                       "blessingOfKings":  true,
+                                                                       "blessingOfMight":  "BlessingOfMightImproved"
+                                                                   },
+                                                         "class":  "ClassPaladin",
+                                                         "consumables":  {
+                                                                             "food":  "FoodRoastedClefthoof",
+                                                                             "flask":  "FlaskOfRelentlessAssault"
+                                                                         },
+                                                         "bonusStats":  {
+                                                                            "stats":  [
+                                                                                          30,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0,
+                                                                                          0
+                                                                                      ]
+                                                                        },
+                                                         "retributionPaladin":  {
+                                                                                    "options":  {
+                                                                                                    "classOptions":  {
+
+                                                                                                                     }
+                                                                                                },
+                                                                                    "talents":  "5-053201-0523005120033125331051"
+                                                                                }
+                                                     }
+                                                 ]
+                                 }
+                             ],
+                 "buffs":  {
+                               "battleShout":  "BattleShoutImproved",
+                               "bloodlust":  true
+                           }
+             },
+    "encounter":  {
+                      "duration":  180,
+                      "durationVariation":  5,
+                      "targets":  [
+                                      {
+                                          "armor":  6200,
+                                          "level":  73,
+                                          "mobType":  "MobTypeDemon"
+                                      }
+                                  ]
+                  },
+    "simOptions":  {
+                       "randomSeed":  101,
+                       "iterations":  4000
+                   }
+}
