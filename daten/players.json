@@ -25,9 +25,34 @@
                   }
     },
     {
+        "Name":  "Chadíkus",
+        "Spec":  "PROT_PALA",
+        "Slots":  {
+                      "MAIN_HAND":  28802,
+                      "RANGED":  27917,
+                      "SHIRT":  859,
+                      "FINGER_1":  30083,
+                      "HEAD":  30125,
+                      "NECK":  30007,
+                      "LEGS":  29069,
+                      "BACK":  28570,
+                      "OFF_HAND":  28825,
+                      "TRINKET_1":  28789,
+                      "CHEST":  30123,
+                      "SHOULDER":  30127,
+                      "WRIST":  32515,
+                      "WAIST":  30034,
+                      "HANDS":  30124,
+                      "TRINKET_2":  30447,
+                      "FINGER_2":  30028,
+                      "FEET":  32267
+                  }
+    },
+    {
         "Name":  "Kaosx",
         "Spec":  "RET",
         "Slots":  {
+                      "MAIN_HAND":  28430,
                       "RANGED":  27484,
                       "SHIRT":  2575,
                       "TABARD":  31405,
@@ -44,6 +69,29 @@
                       "HANDS":  29947,
                       "TRINKET_2":  28830,
                       "FINGER_2":  30061,
+                      "FEET":  29951
+                  }
+    },
+    {
+        "Name":  "Järgerlie",
+        "Spec":  "HUNT",
+        "Slots":  {
+                      "MAIN_HAND":  28313,
+                      "RANGED":  28772,
+                      "FINGER_1":  29298,
+                      "HEAD":  30141,
+                      "NECK":  30059,
+                      "LEGS":  30142,
+                      "BACK":  28672,
+                      "OFF_HAND":  29948,
+                      "TRINKET_1":  29383,
+                      "CHEST":  30139,
+                      "SHOULDER":  30143,
+                      "WRIST":  30026,
+                      "WAIST":  30040,
+                      "HANDS":  30140,
+                      "TRINKET_2":  30627,
+                      "FINGER_2":  28791,
                       "FEET":  29951
                   }
     },
@@ -96,26 +144,26 @@
                   }
     },
     {
-        "Name":  "Chadíkus",
+        "Name":  "Shana",
         "Spec":  "PROT_PALA",
         "Slots":  {
                       "MAIN_HAND":  28802,
                       "RANGED":  27917,
-                      "SHIRT":  859,
-                      "FINGER_1":  30083,
+                      "TABARD":  23192,
+                      "FINGER_1":  29172,
                       "HEAD":  30125,
                       "NECK":  30007,
-                      "LEGS":  29069,
-                      "BACK":  28570,
+                      "LEGS":  30126,
+                      "BACK":  29992,
                       "OFF_HAND":  28825,
-                      "TRINKET_1":  28789,
-                      "CHEST":  30123,
-                      "SHOULDER":  30127,
+                      "TRINKET_1":  29370,
+                      "CHEST":  29066,
+                      "SHOULDER":  29070,
                       "WRIST":  32515,
                       "WAIST":  30034,
                       "HANDS":  30124,
-                      "TRINKET_2":  30447,
-                      "FINGER_2":  30028,
+                      "TRINKET_2":  28789,
+                      "FINGER_2":  30083,
                       "FEET":  32267
                   }
     },
@@ -143,29 +191,6 @@
                   }
     },
     {
-        "Name":  "Järgerlie",
-        "Spec":  "HUNT",
-        "Slots":  {
-                      "MAIN_HAND":  28313,
-                      "RANGED":  28772,
-                      "FINGER_1":  29298,
-                      "HEAD":  30141,
-                      "NECK":  30059,
-                      "LEGS":  30142,
-                      "BACK":  28672,
-                      "OFF_HAND":  29948,
-                      "TRINKET_1":  29383,
-                      "CHEST":  30139,
-                      "SHOULDER":  30143,
-                      "WRIST":  30026,
-                      "WAIST":  30040,
-                      "HANDS":  30140,
-                      "TRINKET_2":  30627,
-                      "FINGER_2":  28791,
-                      "FEET":  29951
-                  }
-    },
-    {
         "Name":  "Kroenix",
         "Spec":  "HUNT",
         "Slots":  {
@@ -188,30 +213,6 @@
                       "TRINKET_2":  28830,
                       "FINGER_2":  29298,
                       "FEET":  30104
-                  }
-    },
-    {
-        "Name":  "Shana",
-        "Spec":  "PROT_PALA",
-        "Slots":  {
-                      "MAIN_HAND":  28802,
-                      "RANGED":  27917,
-                      "TABARD":  23192,
-                      "FINGER_1":  29172,
-                      "HEAD":  30125,
-                      "NECK":  30007,
-                      "LEGS":  30126,
-                      "BACK":  29992,
-                      "OFF_HAND":  28825,
-                      "TRINKET_1":  29370,
-                      "CHEST":  29066,
-                      "SHOULDER":  29070,
-                      "WRIST":  32515,
-                      "WAIST":  30034,
-                      "HANDS":  30124,
-                      "TRINKET_2":  28789,
-                      "FINGER_2":  30083,
-                      "FEET":  32267
                   }
     },
     {
@@ -361,25 +362,25 @@
                   }
     },
     {
-        "Name":  "Sinrakss",
+        "Name":  "Lariesel",
         "Spec":  "MAGE",
         "Slots":  {
-                      "MAIN_HAND":  28802,
-                      "RANGED":  27540,
-                      "FINGER_1":  29285,
+                      "MAIN_HAND":  30095,
+                      "RANGED":  29350,
+                      "FINGER_1":  29302,
                       "HEAD":  30206,
-                      "NECK":  28134,
+                      "NECK":  30015,
                       "LEGS":  30207,
-                      "BACK":  29992,
+                      "BACK":  28797,
                       "OFF_HAND":  29271,
-                      "TRINKET_1":  29370,
+                      "TRINKET_1":  30720,
                       "CHEST":  30196,
                       "SHOULDER":  30210,
-                      "WRIST":  29002,
-                      "WAIST":  28654,
+                      "WRIST":  24250,
+                      "WAIST":  30038,
                       "HANDS":  30205,
-                      "TRINKET_2":  30720,
-                      "FINGER_2":  29302,
+                      "TRINKET_2":  29370,
+                      "FINGER_2":  29287,
                       "FEET":  28517
                   }
     },
@@ -407,6 +408,29 @@
                   }
     },
     {
+        "Name":  "Heinerm",
+        "Spec":  "HOLY_PALA",
+        "Slots":  {
+                      "MAIN_HAND":  28771,
+                      "RANGED":  28592,
+                      "FINGER_1":  29290,
+                      "HEAD":  30136,
+                      "NECK":  30018,
+                      "LEGS":  30137,
+                      "BACK":  28765,
+                      "OFF_HAND":  29458,
+                      "TRINKET_1":  29376,
+                      "CHEST":  30134,
+                      "SHOULDER":  30138,
+                      "WRIST":  30047,
+                      "WAIST":  30030,
+                      "HANDS":  30135,
+                      "TRINKET_2":  28727,
+                      "FINGER_2":  28790,
+                      "FEET":  30027
+                  }
+    },
+    {
         "Name":  "Moonspell",
         "Spec":  "RESTO_DRUID",
         "Slots":  {
@@ -431,29 +455,6 @@
                   }
     },
     {
-        "Name":  "Lariesel",
-        "Spec":  "MAGE",
-        "Slots":  {
-                      "MAIN_HAND":  30095,
-                      "RANGED":  29350,
-                      "FINGER_1":  29302,
-                      "HEAD":  30206,
-                      "NECK":  30015,
-                      "LEGS":  30207,
-                      "BACK":  28797,
-                      "OFF_HAND":  29271,
-                      "TRINKET_1":  30720,
-                      "CHEST":  30196,
-                      "SHOULDER":  30210,
-                      "WRIST":  24250,
-                      "WAIST":  30038,
-                      "HANDS":  30205,
-                      "TRINKET_2":  29370,
-                      "FINGER_2":  29287,
-                      "FEET":  28517
-                  }
-    },
-    {
         "Name":  "Xalessa",
         "Spec":  "WLCK",
         "Slots":  {
@@ -472,29 +473,6 @@
                       "TRINKET_2":  29370,
                       "FINGER_2":  28793,
                       "FEET":  30037
-                  }
-    },
-    {
-        "Name":  "Heinerm",
-        "Spec":  "HOLY_PALA",
-        "Slots":  {
-                      "MAIN_HAND":  28771,
-                      "RANGED":  28592,
-                      "FINGER_1":  29290,
-                      "HEAD":  30136,
-                      "NECK":  30018,
-                      "LEGS":  30137,
-                      "BACK":  28765,
-                      "OFF_HAND":  29458,
-                      "TRINKET_1":  29376,
-                      "CHEST":  30134,
-                      "SHOULDER":  30138,
-                      "WRIST":  30047,
-                      "WAIST":  30030,
-                      "HANDS":  30135,
-                      "TRINKET_2":  28727,
-                      "FINGER_2":  28790,
-                      "FEET":  30027
                   }
     },
     {
@@ -594,6 +572,28 @@
                   }
     },
     {
+        "Name":  "Exfreya",
+        "Spec":  "BAL",
+        "Slots":  {
+                      "MAIN_HAND":  29988,
+                      "RANGED":  27518,
+                      "FINGER_1":  28793,
+                      "HEAD":  29093,
+                      "NECK":  30015,
+                      "LEGS":  30234,
+                      "BACK":  28766,
+                      "TRINKET_1":  29370,
+                      "CHEST":  30231,
+                      "SHOULDER":  30235,
+                      "WRIST":  28515,
+                      "WAIST":  28799,
+                      "HANDS":  30232,
+                      "TRINKET_2":  27683,
+                      "FINGER_2":  29302,
+                      "FEET":  28517
+                  }
+    },
+    {
         "Name":  "Empathic",
         "Spec":  "HOLY_PRIEST",
         "Slots":  {
@@ -617,28 +617,6 @@
                   }
     },
     {
-        "Name":  "Exfreya",
-        "Spec":  "BAL",
-        "Slots":  {
-                      "MAIN_HAND":  29988,
-                      "RANGED":  27518,
-                      "FINGER_1":  28793,
-                      "HEAD":  29093,
-                      "NECK":  30015,
-                      "LEGS":  30234,
-                      "BACK":  28766,
-                      "TRINKET_1":  29370,
-                      "CHEST":  30231,
-                      "SHOULDER":  30235,
-                      "WRIST":  28515,
-                      "WAIST":  28799,
-                      "HANDS":  30232,
-                      "TRINKET_2":  27683,
-                      "FINGER_2":  29302,
-                      "FEET":  28517
-                  }
-    },
-    {
         "Name":  "Pflasterelfe",
         "Spec":  "SPRI",
         "Slots":  {
@@ -657,6 +635,31 @@
                       "TRINKET_2":  28789,
                       "FINGER_2":  29290,
                       "FEET":  21870
+                  }
+    },
+    {
+        "Name":  "Erikadirk",
+        "Spec":  "ROGUE",
+        "Slots":  {
+                      "MAIN_HAND":  28768,
+                      "RANGED":  27526,
+                      "SHIRT":  2575,
+                      "TABARD":  31405,
+                      "FINGER_1":  28649,
+                      "HEAD":  28224,
+                      "NECK":  29381,
+                      "LEGS":  29046,
+                      "BACK":  28032,
+                      "OFF_HAND":  28189,
+                      "TRINKET_1":  29383,
+                      "CHEST":  29045,
+                      "SHOULDER":  29047,
+                      "WRIST":  29246,
+                      "WAIST":  30040,
+                      "HANDS":  27531,
+                      "TRINKET_2":  28579,
+                      "FINGER_2":  28757,
+                      "FEET":  25686
                   }
     }
 ]
