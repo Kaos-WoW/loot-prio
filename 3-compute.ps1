@@ -186,8 +186,8 @@ function Value-Item($stats, $spec, $slotKind, $playerName=$null) {
         # Langsame Waffen begünstigen Styles (Crusader Strike, Windfury, Seal of Blood)
         $meleeSpecs = @('RET', 'FURY', 'ARMS', 'ENH', 'ROGUE')
         if ($meleeSpecs -contains $spec.Key) {
-            if ($slotKind -eq 'MAIN_HAND' -or $slotKind -eq 'TWOHAND') {
-                # Normierung auf 3.6 Tempo für 2H, 2.6 Tempo für 1H
+            if ($slotKind -eq 'MAIN_HAND' -or $slotKind -eq 'OFF_HAND' -or $slotKind -eq 'TWOHAND') {
+                # Normierung auf 3.6 Tempo für 2H, 2.6 Tempo für 1H/Schildhand
                 $is2H = ($slotKind -eq 'TWOHAND' -or ($stats.ContainsKey('Is2H') -and $stats['Is2H'] -eq 1))
                 $normSpeed = if ($is2H) { 3.6 } else { 2.6 }
                 $wd = $wd * [math]::Pow($speed / $normSpeed, 2)
