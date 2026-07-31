@@ -172,9 +172,22 @@ function Value-Item($stats, $spec, $slotKind, $playerName=$null) {
     }
     if ($stats.ContainsKey('WpnDps')) {
         $wd = [double]$stats['WpnDps']
-        # FIX: Distanzslot zaehlt Waffenschaden NUR bei Jaegern. Fuer Nahkaempfer ist
-        # der Distanzslot ein reiner Statttraeger - vorher fiel er faelschlich auf das
-        # Nahkampfgewicht durch und wertete Boegen massiv auf.
+        $speed = 3.6
+        if ($stats.ContainsKey('WpnSpeed')) { $speed = [double]$stats['WpnSpeed'] }
+        
+        # Waffentempo-Normierung für physische Nahkämpfer (RET, FURY, ARMS, ENH, ROGUE)
+        # Langsame Waffen begünstigen Styles (Crusader Strike, Windfury, Seal of Blood)
+        $meleeSpecs = @('RET', 'FURY', 'ARMS', 'ENH', 'ROGUE')
+        if ($meleeSpecs -contains $spec.Key) {
+            if ($slotKind -eq 'MAIN_HAND' -or $slotKind -eq 'TWOHAND') {
+                # Normierung auf 3.6 Tempo für 2H, 2.6 Tempo für 1H
+                $is2H = ($slotKind -eq 'TWOHAND' -or ($stats.ContainsKey('Is2H') -and $stats['Is2H'] -eq 1))
+                $normSpeed = if ($is2H) { 3.6 } else { 2.6 }
+                $wd = $wd * [math]::Pow($speed / $normSpeed, 2)
+            }
+        }
+
+        # FIX: Distanzslot zaehlt Waffenschaden NUR bei Jaegern.
         if ($slotKind -eq 'RANGED') {
             if ($w.ContainsKey('RANGED')) { $v += $wd * $w['RANGED'] }
         } elseif ($slotKind -eq 'OFF_HAND') {
