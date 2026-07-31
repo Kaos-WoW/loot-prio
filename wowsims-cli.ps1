@@ -149,6 +149,11 @@ foreach ($statKey in $statsToTest.Keys) {
     Write-Output "    DPS: $newDps (Gewicht: $($weights[$statKey]))"
 }
 
+# 4. Berechne Waffenhand-Wert (MH) aus AP (Verhältnis beim Retri: ~13.05)
+if ($weights.ContainsKey("AP")) {
+    $weights["MH"] = [math]::Round($weights["AP"] * 13.05, 3)
+}
+
 # 4. Speichere Gewichte
 $outputWeights = @{}
 if (Test-Path $weightsFile) {
