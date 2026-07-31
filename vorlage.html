@@ -112,16 +112,105 @@
     border-bottom: 1px solid var(--line);
     display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center;
   }
-  select, input[type="search"] {
+  select, input[type="search"], .ms-trigger {
     font-family: var(--f-ui); font-size: var(--step-0);
     background: var(--surface); color: var(--ink);
     border: 1px solid var(--line); padding: 0.4rem 0.6rem;
   }
   input[type="search"] { min-width: 15rem; flex: 1 1 15rem; }
-  select:focus-visible, input:focus-visible, th button:focus-visible {
+  select:focus-visible, input:focus-visible, th button:focus-visible, .ms-trigger:focus-visible {
     outline: 2px solid var(--accent); outline-offset: 1px;
   }
   .count { margin-left: auto; font-family: var(--f-data); font-size: var(--step-0); color: var(--muted); }
+
+  /* Custom Multiselect styles */
+  .multiselect {
+    position: relative;
+    display: inline-block;
+  }
+  .ms-trigger {
+    cursor: pointer;
+    text-align: left;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 11rem;
+    user-select: none;
+  }
+  .ms-trigger:hover {
+    background: var(--surface-2);
+  }
+  .ms-trigger::after {
+    content: "▾";
+    margin-left: 0.5rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+  .ms-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 100;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    width: 14rem;
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    max-height: 18rem;
+    border-radius: 4px;
+  }
+  .ms-search-wrap {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    gap: 0.4rem;
+    background: var(--surface-2);
+  }
+  .ms-search-wrap input {
+    flex: 1;
+    font-family: var(--f-ui); font-size: 0.8rem;
+    background: var(--surface); color: var(--ink);
+    border: 1px solid var(--line); padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+  }
+  .ms-btn-clear {
+    font-family: var(--f-ui); font-size: 0.75rem;
+    background: var(--surface); color: var(--muted);
+    border: 1px solid var(--line); padding: 0.25rem 0.4rem;
+    cursor: pointer;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .ms-btn-clear:hover {
+    color: var(--ink);
+    border-color: var(--muted);
+  }
+  .ms-options {
+    overflow-y: auto;
+    flex: 1;
+    padding: 0.25rem 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .ms-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.6rem;
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.85rem;
+    color: var(--ink);
+  }
+  .ms-option:hover {
+    background: var(--surface-2);
+  }
+  .ms-option input {
+    cursor: pointer;
+    accent-color: var(--accent);
+  }
 
   .tablewrap { overflow-x: auto; border: 1px solid var(--line); background: var(--surface); }
   table { border-collapse: collapse; width: 100%; font-size: var(--step-0); }
@@ -355,7 +444,16 @@
       </select>
       <select id="f-boss"><option value="">Alle Bosse</option></select>
       <select id="f-slot"><option value="">Alle Slots</option></select>
-      <select id="f-spieler"><option value="">Alle Spieler</option></select>
+      <div class="multiselect" id="spieler-multiselect">
+        <button type="button" class="ms-trigger" id="ms-trigger-spieler">Spieler: Alle</button>
+        <div class="ms-dropdown" id="ms-dropdown-spieler" hidden>
+          <div class="ms-search-wrap">
+            <input type="text" id="ms-search-spieler" placeholder="Suche..." autocomplete="off">
+            <button type="button" class="ms-btn-clear" id="ms-btn-clear-spieler">Leeren</button>
+          </div>
+          <div class="ms-options" id="ms-options-spieler"></div>
+        </div>
+      </div>
       <select id="f-quelle"><option value="">Alle Quellen</option></select>
       <input type="search" id="f-suche" placeholder="Item oder Spieler suchen" aria-label="Suchen">
       <span class="count" id="count"></span>
@@ -455,23 +553,103 @@ rows.forEach(r => {
   playerRoles[r.pl] = r.ro;
 });
 
+const selectedPlayers = new Set();
+
 function updatePlayerFilter() {
   const frolle = $('f-rolle').value;
-  const currentSelected = $('f-spieler').value;
+  const container = $('ms-options-spieler');
   
-  const filteredPlayers = allPlayerNames.filter(name => {
+  if (container.children.length === 0) {
+    container.innerHTML = allPlayerNames.map(p => {
+      return `<label class="ms-option" data-player="${p.toLowerCase()}" data-player-original="${p}">
+        <input type="checkbox" value="${p}" class="ms-player-cb">
+        <span>${esc(p)}</span>
+      </label>`;
+    }).join('');
+    
+    $('ms-trigger-spieler').addEventListener('click', (e) => {
+      e.stopPropagation();
+      const drop = $('ms-dropdown-spieler');
+      drop.hidden = !drop.hidden;
+      if (!drop.hidden) {
+        $('ms-search-spieler').focus();
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('#spieler-multiselect')) {
+        $('ms-dropdown-spieler').hidden = true;
+      }
+    });
+
+    $('ms-search-spieler').addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      container.querySelectorAll('.ms-option').forEach(opt => {
+        const p = opt.dataset.player;
+        const roleFiltered = opt.dataset.roleFiltered === "true";
+        if (roleFiltered) {
+          opt.style.display = 'none';
+        } else {
+          opt.style.display = p.includes(q) ? 'flex' : 'none';
+        }
+      });
+    });
+
+    container.addEventListener('change', (e) => {
+      if (e.target.classList.contains('ms-player-cb')) {
+        const p = e.target.value;
+        if (e.target.checked) {
+          selectedPlayers.add(p);
+        } else {
+          selectedPlayers.delete(p);
+        }
+        updatePlayerFilterUI();
+        render();
+      }
+    });
+
+    $('ms-btn-clear-spieler').addEventListener('click', () => {
+      selectedPlayers.clear();
+      container.querySelectorAll('.ms-player-cb').forEach(cb => cb.checked = false);
+      updatePlayerFilterUI();
+      render();
+    });
+  }
+
+  container.querySelectorAll('.ms-option').forEach(opt => {
+    const name = opt.dataset.playerOriginal;
     const role = playerRoles[name];
-    if (frolle === 'dps') return (role !== 'Tank' && role !== 'Heiler');
-    if (frolle === 'tank') return role === 'Tank';
-    if (frolle === 'heiler') return role === 'Heiler';
-    return true;
+    let match = true;
+    if (frolle === 'dps') match = (role !== 'Tank' && role !== 'Heiler');
+    else if (frolle === 'tank') match = (role === 'Tank');
+    else if (frolle === 'heiler') match = (role === 'Heiler');
+    
+    const cb = opt.querySelector('input');
+    if (match) {
+      opt.dataset.roleFiltered = "false";
+      const q = $('ms-search-spieler').value.toLowerCase().trim();
+      opt.style.display = name.toLowerCase().includes(q) ? 'flex' : 'none';
+    } else {
+      opt.dataset.roleFiltered = "true";
+      opt.style.display = 'none';
+      if (cb.checked) {
+        cb.checked = false;
+        selectedPlayers.delete(name);
+      }
+    }
   });
   
-  $('f-spieler').innerHTML = '<option value="">Alle Spieler</option>';
-  fillSelect($('f-spieler'), filteredPlayers);
-  
-  if (filteredPlayers.includes(currentSelected)) {
-    $('f-spieler').value = currentSelected;
+  updatePlayerFilterUI();
+}
+
+function updatePlayerFilterUI() {
+  const btn = $('ms-trigger-spieler');
+  if (selectedPlayers.size === 0) {
+    btn.textContent = 'Spieler: Alle';
+  } else if (selectedPlayers.size === 1) {
+    btn.textContent = `Spieler: ${[...selectedPlayers][0]}`;
+  } else {
+    btn.textContent = `Spieler: ${selectedPlayers.size} ausgewählt`;
   }
 }
 
@@ -575,7 +753,7 @@ function render() {
   const hideEquipped = $('f-hide-equipped').checked;
   const frolle = $('f-rolle').value;
   const fprio = $('f-prio').value;
-  const fb = $('f-boss').value, fs = $('f-slot').value, fp = $('f-spieler').value, fq = $('f-quelle').value;
+  const fb = $('f-boss').value, fs = $('f-slot').value, fq = $('f-quelle').value;
   const q = $('f-suche').value.trim().toLowerCase();
 
   let list = rows.filter(r => {
@@ -584,7 +762,7 @@ function render() {
     if (hideEquipped && isEquipped(r)) return false;
     if (fb && r.b !== fb) return false;
     if (fs && r.s !== fs) return false;
-    if (fp && r.pl !== fp) return false;
+    if (selectedPlayers.size > 0 && !selectedPlayers.has(r.pl)) return false;
     if (fq && r.q !== fq) return false;
     if (q && !r.n.toLowerCase().includes(q) && !r.pl.toLowerCase().includes(q)) return false;
     if (fprio === 'bis1' && r.bis !== 1) return false;
@@ -676,7 +854,7 @@ function renderContestedTable() {
   const hideEquipped = $('f-hide-equipped').checked;
   const frolle = $('f-rolle').value;
   const fprio = $('f-prio').value;
-  const fb = $('f-boss').value, fs = $('f-slot').value, fp = $('f-spieler').value, fq = $('f-quelle').value;
+  const fb = $('f-boss').value, fs = $('f-slot').value, fq = $('f-quelle').value;
   const q = $('f-suche').value.trim().toLowerCase();
 
   const itemsMap = {};
@@ -691,7 +869,7 @@ function renderContestedTable() {
     if (fs && r.s !== fs) return;
     if (fq && r.q !== fq) return;
     if (q && !r.n.toLowerCase().includes(q) && !r.pl.toLowerCase().includes(q)) return;
-    if (fp && r.pl !== fp) return;
+    if (selectedPlayers.size > 0 && !selectedPlayers.has(r.pl)) return;
     if (fprio === 'bis1' && r.bis !== 1) return;
     if (fprio === 'excl' && (r.bis !== 1 || (r.bc !== 1 && r.bc !== 2))) return;
     if (fprio === 'upg' && r.bc > 0) return;
@@ -777,7 +955,7 @@ $('f-rolle').addEventListener('change', () => {
   updatePlayerFilter();
   render();
 });
-['f-bis-strict','f-hide-equipped','f-prio','f-boss','f-slot','f-spieler','f-quelle'].forEach(id => $(id).addEventListener('change', render));
+['f-bis-strict','f-hide-equipped','f-prio','f-boss','f-slot','f-quelle'].forEach(id => $(id).addEventListener('change', render));
 $('f-suche').addEventListener('input', render);
 
 $('btn-sort-prio').addEventListener('click', () => {
