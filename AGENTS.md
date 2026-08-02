@@ -99,6 +99,7 @@ Realer Ablauf laut `.github/workflows/sync.yml` (automatisiert, täglich 03:00 U
 
 ## 3. Offene Punkte & TODOs
 
+* **Trinket DPS-Berechnung (Beta):** Implementierung der statischen Uptime-Approximation (Methode A) für Phase 3 und Legacy-BiS Trinkets auf dem Branch `feat/trinket-beta` mit separater HTML-Ausgabe.
 * **Knappheitsspalten:** Einpflege der Daten aus `quellen/p3-alternativen-*.md` in die Ausgabe
   (Alternativen im Slot, ab welchem Boss).
 * **Phasenzuordnung Markenhändler:** Sobald Phase 3 live ist, die ilvl-141-Plattenteile beim Händler

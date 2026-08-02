@@ -245,15 +245,16 @@ gegen offizielle Wowhead-Guides abgeglichen und punktuell nachgepflegt.
 
 ## Offene Punkte
 
-1. **Knappheitsspalten fehlen weiterhin.** Die Rohdaten liegen in `quellen/p3-alternativen-*.md`
+1. **Trinket DPS-Berechnung (Beta):** Implementierung der statischen Uptime-Approximation (Methode A) für Phase 3 und Legacy-BiS Schmuckstücke auf dem Branch `feat/trinket-beta` mit separater HTML-Ausgabe.
+2. **Knappheitsspalten fehlen weiterhin.** Die Rohdaten liegen in `quellen/p3-alternativen-*.md`
    vollständig vor (Marken-Sortiment, T6-Teile, Handwerk, Trash); ausgewertet und in die Seite
    eingebaut ist es noch nicht.
-2. **Markenhändler im Spiel gegenprüfen**, sobald Phase 3 live ist — Wowheads Phasenzuordnung ist
+3. **Markenhändler im Spiel gegenprüfen**, sobald Phase 3 live ist — Wowheads Phasenzuordnung ist
    teils widersprüchlich (gleiche Item-Reihe mal Phase 3, mal Phase 4 markiert).
-3. **Buff-Annahmen der Statgewichte** sind nicht spec-übergreifend auf identische Raid-Buffs verifiziert.
-4. **Ein automatisierter Regressionstest für Tank/Heiler** wäre sinnvoll, analog zu `4-bis-check.ps1`.
-5. **Individuelle Simulation auf mehr Spieler ausweiten** — aktuell nur Kaosx, alle anderen DPS laufen
+4. **Buff-Annahmen der Statgewichte** sind nicht spec-übergreifend auf identische Raid-Buffs verifiziert.
+5. **Ein automatisierter Regressionstest für Tank/Heiler** wäre sinnvoll, analog zu `4-bis-check.ps1`.
+6. **Individuelle Simulation auf mehr Spieler ausweiten** — aktuell nur Kaosx, alle anderen DPS laufen
    weiterhin auf statischen Presets.
-6. **Aufräumen im Repo:** Python-Hilfsskripte in `daten/`, die Wurzeldateien `raw.html`/`temp.csv`
+7. **Aufräumen im Repo:** Python-Hilfsskripte in `daten/`, die Wurzeldateien `raw.html`/`temp.csv`
    sowie wachsende `bin/`-Zwischendateien sind Arbeitsartefakte und aktuell mitversioniert — ein
    `.gitignore` gibt es noch nicht.
