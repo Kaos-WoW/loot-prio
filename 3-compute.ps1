@@ -216,13 +216,19 @@ $MIN_MH_SPEED = @{ 'ENH'=2.4; 'ROGUE'=2.4 }
 
 # Statistiken der getragenen Teile vorberechnen
 $wornStats = @{}
+$wornIds = @{}
 foreach ($pl in $players) {
     $h = @{}
+    $ids = @{}
     foreach ($p in $pl.Slots.PSObject.Properties) {
         $id = [string]$p.Value
-        if ($cache.ContainsKey($id)) { $h[$p.Name] = Parse-Tooltip $cache[$id].tooltip }
+        if ($id) {
+            $ids[$p.Name] = [int]$id
+            if ($cache.ContainsKey($id)) { $h[$p.Name] = Parse-Tooltip $cache[$id].tooltip }
+        }
     }
     $wornStats[$pl.Name] = $h
+    $wornIds[$pl.Name] = $ids
 }
 
 # Treffer-Diagnose je Spieler
@@ -309,101 +315,108 @@ foreach ($it in $items) {
             $ws = $wornStats[$pn]
             $curSlot = $slotKey
 
-            # Falls Tank oder Heiler: Stat-Zuwachs gerechnet über Tank/Heil-Multiplikatoren + BiS-Listen-Bonus
-            if ($isTankSpec -or $isHealerSpec) {
-                # Pruefen ob Item in der BiS-Liste des Specs ist
-                $bisItem = $null
-                if ($bisListen.$($spec.Key)) {
-                    $bisItem = $bisListen.$($spec.Key) | Where-Object { $_.Id -eq $it.Id } | Select-Object -First 1
-                }
-                if (-not $bisItem) { continue } # Nicht in der BiS-Liste des Tanks/Heilers -> nicht anzeigen
+            # Pruefen ob Item in der BiS-Liste des Specs ist
+            $bisItem = $null
+            if ($bisListen.$($spec.Key)) {
+                $bisItem = $bisListen.$($spec.Key) | Where-Object { $_.Id -eq $it.Id } | Select-Object -First 1
+            }
 
-                # Um es als Upgrade zu werten, darf der Spieler es nicht bereits tragen
-                $alreadyEquipped = $false
-                if ($slotKey -eq 'FINGER' -or $slotKey -eq 'TRINKET') {
-                    $a = $slotKey + '_1'; $b = $slotKey + '_2'
-                    if (($ws.ContainsKey($a) -and $ws[$a].Id -eq $it.Id) -or ($ws.ContainsKey($b) -and $ws[$b].Id -eq $it.Id)) { $alreadyEquipped = $true }
-                } else {
-                    if ($ws.ContainsKey($slotKey) -and $ws[$slotKey].Id -eq $it.Id) { $alreadyEquipped = $true }
-                }
-                if ($alreadyEquipped) { continue }
-
-                # 1. Stat-basierten Score berechnen
-                $newVal = Value-Item $istats $spec $slotKey
-                
-                # 2. Score des aktuell getragenen Items bestimmen
-                $curVal = 0.0; $curItem = $null
-                if ($slotKey -eq 'FINGER' -or $slotKey -eq 'TRINKET') {
-                    $a = $slotKey + '_1'; $b = $slotKey + '_2'
-                    $va = 0.0; $vb = 0.0
-                    if ($ws.ContainsKey($a)) { $va = Value-Item $ws[$a] $spec $slotKey }
-                    if ($ws.ContainsKey($b)) { $vb = Value-Item $ws[$b] $spec $slotKey }
-                    if ($va -le $vb) { 
-                        $curVal = $va; $curSlot = $a 
-                        if ($ws.ContainsKey($a)) { $curItem = $ws[$a] }
-                    } else { 
-                        $curVal = $vb; $curSlot = $b 
-                        if ($ws.ContainsKey($b)) { $curItem = $ws[$b] }
-                    }
-                } elseif ($slotKey -eq 'TWOHAND') {
-                    $va = 0.0; $vb = 0.0
-                    if ($ws.ContainsKey('MAIN_HAND')) { $va = Value-Item $ws['MAIN_HAND'] $spec 'MAIN_HAND' }
-                    if ($ws.ContainsKey('OFF_HAND'))  { $vb = Value-Item $ws['OFF_HAND']  $spec 'OFF_HAND' }
-                    $curVal = $va + $vb; $curSlot = 'MAIN_HAND+OFF_HAND'
-                } elseif ($slotKey -eq 'OFF_HAND') {
-                    if ($ws.ContainsKey('MAIN_HAND') -and $ws['MAIN_HAND'].ContainsKey('Is2H')) { continue }
-                    if ($ws.ContainsKey($slotKey)) { 
-                        $curVal = Value-Item $ws[$slotKey] $spec $slotKey 
-                        $curItem = $ws[$slotKey]
-                    }
-                } else {
-                    if ($ws.ContainsKey($slotKey)) { 
-                        $curVal = Value-Item $ws[$slotKey] $spec $slotKey 
-                        $curItem = $ws[$slotKey]
-                    }
-                }
-
-                # 3. BiS-Bonus-Punkte bestimmen
-                $bisBonus = 0
-                if ($bisItem) {
-                    if ($bisItem.Rank -eq 0) { $bisBonus += 100 } # BiS #1 bekommt 100 Punkte
-                    else { $bisBonus += 50 } # Alternative bekommt 50 Punkte
-                }
-
-                # Getragenes Item in BiS-Liste? Wenn ja, Bonus abziehen
-                if ($curItem -and $bisListen.$($spec.Key)) {
-                    $curBis = $bisListen.$($spec.Key) | Where-Object { $_.Id -eq $curItem.Id } | Select-Object -First 1
-                    if ($curBis) {
-                        if ($curBis.Rank -eq 0) { $bisBonus -= 100 }
-                        else { $bisBonus -= 50 }
-                    }
-                }
-
-                $delta = ($newVal - $curVal) + $bisBonus
-                if ($delta -le 0) { $delta = 0.1 } # Immer anzeigen, wenn es in der BiS-Liste ist
+            # Prüfen ob bereits ausgerüstet
+            $alreadyEquipped = $false
+            $pIds = $wornIds[$pn]
+            if ($slotKey -eq 'FINGER' -or $slotKey -eq 'TRINKET') {
+                $a = $slotKey + '_1'; $b = $slotKey + '_2'
+                if (($pIds.ContainsKey($a) -and $pIds[$a] -eq $it.Id) -or ($pIds.ContainsKey($b) -and $pIds[$b] -eq $it.Id)) { $alreadyEquipped = $true }
             } else {
-                # Normaler DPS-Raider
-                $newVal = Value-Item $istats $spec $slotKey $pn
-                $curVal = 0.0
-                if ($slotKey -eq 'FINGER' -or $slotKey -eq 'TRINKET') {
-                    $a = $slotKey + '_1'; $b = $slotKey + '_2'
-                    $va = 0.0; $vb = 0.0
-                    if ($ws.ContainsKey($a)) { $va = Value-Item $ws[$a] $spec $slotKey $pn }
-                    if ($ws.ContainsKey($b)) { $vb = Value-Item $ws[$b] $spec $slotKey $pn }
-                    if ($va -le $vb) { $curVal = $va; $curSlot = $a } else { $curVal = $vb; $curSlot = $b }
-                } elseif ($slotKey -eq 'TWOHAND') {
-                    $va = 0.0; $vb = 0.0
-                    if ($ws.ContainsKey('MAIN_HAND')) { $va = Value-Item $ws['MAIN_HAND'] $spec 'MAIN_HAND' $pn }
-                    if ($ws.ContainsKey('OFF_HAND'))  { $vb = Value-Item $ws['OFF_HAND']  $spec 'OFF_HAND' $pn }
-                    $curVal = $va + $vb; $curSlot = 'MAIN_HAND+OFF_HAND'
-                } elseif ($slotKey -eq 'OFF_HAND') {
-                    if ($ws.ContainsKey('MAIN_HAND') -and $ws['MAIN_HAND'].ContainsKey('Is2H')) { continue }
-                    if ($ws.ContainsKey($slotKey)) { $curVal = Value-Item $ws[$slotKey] $spec $slotKey $pn }
+                if ($pIds.ContainsKey($slotKey) -and $pIds[$slotKey] -eq $it.Id) { $alreadyEquipped = $true }
+            }
+
+            if ($alreadyEquipped) {
+                # Bereits ausgerüstete Items nur in der Liste führen, wenn sie in der BiS-Liste des Specs sind
+                if (-not $bisItem) { continue }
+                $delta = 0.0
+            } else {
+                # Falls Tank oder Heiler: Stat-Zuwachs gerechnet über Tank/Heil-Multiplikatoren + BiS-Listen-Bonus
+                if ($isTankSpec -or $isHealerSpec) {
+                    if (-not $bisItem) { continue } # Nicht in der BiS-Liste des Tanks/Heilers -> nicht anzeigen
+
+                    # 1. Stat-basierten Score berechnen
+                    $newVal = Value-Item $istats $spec $slotKey
+
+                    # 2. Score des aktuell getragenen Items bestimmen
+                    $curVal = 0.0; $curItem = $null; $curItemId = 0
+                    if ($slotKey -eq 'FINGER' -or $slotKey -eq 'TRINKET') {
+                        $a = $slotKey + '_1'; $b = $slotKey + '_2'
+                        $va = 0.0; $vb = 0.0
+                        if ($ws.ContainsKey($a)) { $va = Value-Item $ws[$a] $spec $slotKey }
+                        if ($ws.ContainsKey($b)) { $vb = Value-Item $ws[$b] $spec $slotKey }
+                        if ($va -le $vb) { 
+                            $curVal = $va; $curSlot = $a 
+                            if ($ws.ContainsKey($a)) { $curItem = $ws[$a]; $curItemId = $pIds[$a] }
+                        } else { 
+                            $curVal = $vb; $curSlot = $b 
+                            if ($ws.ContainsKey($b)) { $curItem = $ws[$b]; $curItemId = $pIds[$b] }
+                        }
+                    } elseif ($slotKey -eq 'TWOHAND') {
+                        $va = 0.0; $vb = 0.0
+                        if ($ws.ContainsKey('MAIN_HAND')) { $va = Value-Item $ws['MAIN_HAND'] $spec 'MAIN_HAND' }
+                        if ($ws.ContainsKey('OFF_HAND'))  { $vb = Value-Item $ws['OFF_HAND']  $spec 'OFF_HAND' }
+                        $curVal = $va + $vb; $curSlot = 'MAIN_HAND+OFF_HAND'
+                    } elseif ($slotKey -eq 'OFF_HAND') {
+                        if ($ws.ContainsKey('MAIN_HAND') -and $ws['MAIN_HAND'].ContainsKey('Is2H')) { continue }
+                        if ($ws.ContainsKey($slotKey)) { 
+                            $curVal = Value-Item $ws[$slotKey] $spec $slotKey 
+                            $curItem = $ws[$slotKey]; $curItemId = $pIds[$slotKey]
+                        }
+                    } else {
+                        if ($ws.ContainsKey($slotKey)) { 
+                            $curVal = Value-Item $ws[$slotKey] $spec $slotKey 
+                            $curItem = $ws[$slotKey]; $curItemId = $pIds[$slotKey]
+                        }
+                    }
+
+                    # 3. BiS-Bonus-Punkte bestimmen
+                    $bisBonus = 0
+                    if ($bisItem) {
+                        if ($bisItem.Rank -eq 0) { $bisBonus += 100 } # BiS #1 bekommt 100 Punkte
+                        else { $bisBonus += 50 } # Alternative bekommt 50 Punkte
+                    }
+
+                    # Getragenes Item in BiS-Liste? Wenn ja, Bonus abziehen
+                    if ($curItemId -and $bisListen.$($spec.Key)) {
+                        $curBis = $bisListen.$($spec.Key) | Where-Object { $_.Id -eq $curItemId } | Select-Object -First 1
+                        if ($curBis) {
+                            if ($curBis.Rank -eq 0) { $bisBonus -= 100 }
+                            else { $bisBonus -= 50 }
+                        }
+                    }
+
+                    $delta = ($newVal - $curVal) + $bisBonus
+                    if ($delta -le 0) { $delta = 0.1 } # Immer anzeigen, wenn es in der BiS-Liste ist
                 } else {
-                    if ($ws.ContainsKey($slotKey)) { $curVal = Value-Item $ws[$slotKey] $spec $slotKey $pn }
+                    # Normaler DPS-Raider
+                    $newVal = Value-Item $istats $spec $slotKey $pn
+                    $curVal = 0.0
+                    if ($slotKey -eq 'FINGER' -or $slotKey -eq 'TRINKET') {
+                        $a = $slotKey + '_1'; $b = $slotKey + '_2'
+                        $va = 0.0; $vb = 0.0
+                        if ($ws.ContainsKey($a)) { $va = Value-Item $ws[$a] $spec $slotKey $pn }
+                        if ($ws.ContainsKey($b)) { $vb = Value-Item $ws[$b] $spec $slotKey $pn }
+                        if ($va -le $vb) { $curVal = $va; $curSlot = $a } else { $curVal = $vb; $curSlot = $b }
+                    } elseif ($slotKey -eq 'TWOHAND') {
+                        $va = 0.0; $vb = 0.0
+                        if ($ws.ContainsKey('MAIN_HAND')) { $va = Value-Item $ws['MAIN_HAND'] $spec 'MAIN_HAND' $pn }
+                        if ($ws.ContainsKey('OFF_HAND'))  { $vb = Value-Item $ws['OFF_HAND']  $spec 'OFF_HAND' $pn }
+                        $curVal = $va + $vb; $curSlot = 'MAIN_HAND+OFF_HAND'
+                    } elseif ($slotKey -eq 'OFF_HAND') {
+                        if ($ws.ContainsKey('MAIN_HAND') -and $ws['MAIN_HAND'].ContainsKey('Is2H')) { continue }
+                        if ($ws.ContainsKey($slotKey)) { $curVal = Value-Item $ws[$slotKey] $spec $slotKey $pn }
+                    } else {
+                        if ($ws.ContainsKey($slotKey)) { $curVal = Value-Item $ws[$slotKey] $spec $slotKey $pn }
+                    }
+                    $delta = $newVal - $curVal
+                    if ($delta -le 0) { continue }
                 }
-                $delta = $newVal - $curVal
-                if ($delta -le 0) { continue }
             }
             # Set-Stand: wie viele T5-Teile traegt der Spieler aktuell?
             $t5 = 0
