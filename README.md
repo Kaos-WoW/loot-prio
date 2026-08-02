@@ -181,9 +181,7 @@ dass ein kaputter API-Abruf die veröffentlichte Seite mit Fehldaten überschrei
    Verstümmeln).
 5. **Schilde tragen „Off Hand“ als Slot** — ohne Prüfung der Rüstungsart (`Shield`) bekommen Caster
    Schilde vorgeschlagen.
-6. **Zweihandwaffen brauchen eine Tempo-Normierung.** Ohne sie rechnet das Modell eine 2H-Waffe im
-   `MAIN_HAND`-Slot fälschlich wie einen schnellen Einhänder — `Is2H` aus dem Tooltip auswerten, nicht
-   nur den Slotnamen.
+6. **Zweihandwaffen-Tempo-Normierung nur für RET.** Da in TBC fast alle physischen Spezialangriffe normiert sind, wird die Tempo-Normierung nur für RET-Paladine angewendet und dort linear statt quadratisch gerechnet, um eine Überbewertung langsamer Waffen (wie *Torch* vs. *Cataclysm's Edge*) zu verhindern.
 
 ---
 

@@ -68,10 +68,10 @@ Realer Ablauf laut `.github/workflows/sync.yml` (automatisiert, täglich 03:00 U
   will dann faelschlich Cap-Gear ablegen. Lösung: Gewichte für `Treffer`, `Waffk` und `ZTreffer` dürfen
   in `Value-Item` (`3-compute.ps1`) nie unter ihr statisches „Below-Cap“-Gewicht fallen (z. B. RET
   Treffer = 1.20, Waffk = 1.69 statt 0).
-* **Waffentempo-Normierung:** Physische Nahkämpfer (RET, FURY, ARMS, ENH, ROGUE) normieren Waffenhand,
-  Schildhand und Zweihänder auf ein festes Referenztempo (3.6 für 2H, 2.6 für 1H/Schildhand), sonst
-  werden 2H-Waffen im `MAIN_HAND`-Slot fälschlich wie Einhänder gerechnet. Dazu wird `Is2H` aus dem
-  Tooltip ausgewertet, nicht nur der Slotname `TWOHAND` (ein 2H-Item kann im Feld `MAIN_HAND` stehen).
+* **Waffentempo-Normierung:** Da in TBC fast alle physischen Spezialangriffe (Mortal Strike, Stormstrike, Sinister Strike) normiert sind, wird die Waffentempo-Normierung in `Value-Item` (`3-compute.ps1`) nur für **RET-Paladine** (wegen Crusader Strike / Seal of Blood) angewendet, und zwar **linear** (`speed / normSpeed`) statt quadratisch, um eine krasse Überbewertung langsamer Waffen (wie *Torch of the Damned* vs. *Cataclysm's Edge* bei Arms) zu verhindern.
+* **Bereits ausgerüstete Items (alreadyEquipped):** Damit Spieler, die ein Item bereits tragen, das in ihrer BiS-Liste steht, auf der Seite als „Bereits ausgerüstet“ gelistet werden, trackt `3-compute.ps1` die getragenen Item-IDs in `$wornIds` (der alte Check lief fälschlich gegen die stats-Hashtable) und schreibt diese Zeilen mit `Delta = 0.0` in `upgrades.json` (sowohl für DPS- als auch für Tank/Heilspezialisierungen).
+* **Plausibilitäts-Check (Hashtables):** Die Funktion `Get-GearScore` in `2-fetch-gear.ps1` prüft live abgerufene Ausrüstung (die als `Hashtables` vorliegt) sowie gespeicherte Ausrüstung aus `players.json` (die als `PSCustomObjects` geladen wird). Sie iteriert universell über die Keys, um Rechenfehler (die den PvP/Offspec-Schutz durch 0-Wertungen umgehen würden) zu verhindern.
+* **Legacy-BiS- und T6-Ergänzungen:** Wichtige Phase 1/2 Raid-Items, die in Phase 3 absolute BiS-Items bleiben (wie *Belt of One-Hundred Deaths* von Lady Vashj oder *Dragonspine Trophy* von Gruul), sowie alle spezialisierungsspezifischen T6-Sets sind in `1-fetch-items.ps1` hinterlegt, damit das Modell für diese Gegenstände Upgrades berechnet.
 * **Fähigkeitsnamen nicht selbst übersetzen:** In `tier-boni.json` stehen sie bewusst englisch wie in
   der Quelle (*Arcane Blast* ≠ „Arkane Explosion“, das ist Arkanschlag; *Mutilate* ≠ „Blutsturz“, das
   ist Verstümmeln).
