@@ -182,15 +182,13 @@ function Value-Item($stats, $spec, $slotKind, $playerName=$null) {
         $speed = 3.6
         if ($stats.ContainsKey('WpnSpeed')) { $speed = [double]$stats['WpnSpeed'] }
         
-        # Waffentempo-Normierung für physische Nahkämpfer (RET, FURY, ARMS, ENH, ROGUE)
-        # Langsame Waffen begünstigen Styles (Crusader Strike, Windfury, Seal of Blood)
-        $meleeSpecs = @('RET', 'FURY', 'ARMS', 'ENH', 'ROGUE')
-        if ($meleeSpecs -contains $spec.Key) {
+        # Waffentempo-Normierung: Nur für RET Paladin wichtig (Crusader Strike / Seal of Blood)
+        if ($spec.Key -eq 'RET') {
             if ($slotKind -eq 'MAIN_HAND' -or $slotKind -eq 'OFF_HAND' -or $slotKind -eq 'TWOHAND') {
                 # Normierung auf 3.6 Tempo für 2H, 2.6 Tempo für 1H/Schildhand
                 $is2H = ($slotKind -eq 'TWOHAND' -or ($stats.ContainsKey('Is2H') -and $stats['Is2H'] -eq 1))
                 $normSpeed = if ($is2H) { 3.6 } else { 2.6 }
-                $wd = $wd * [math]::Pow($speed / $normSpeed, 2)
+                $wd = $wd * ($speed / $normSpeed)
             }
         }
 
