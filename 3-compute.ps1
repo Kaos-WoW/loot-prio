@@ -204,6 +204,26 @@ function Value-Item($stats, $spec, $slotKind, $playerName=$null) {
     return $v
 }
 
+# Custom Trinket-Statistik-Hinterlegung (On-Use & Proc Uptime-Mittelwert)
+$TRINKET_EFFECTS = @{
+    28830 = @{ AP = 40; Tempo = 91 }                  # Dragonspine Trophy
+    32505 = @{ Treffer = 20; AP = 84; ArP = 135 }      # Madness of the Betrayer
+    30627 = @{ Treffer = 10; Krit = 38; AP = 68 }      # Tsunami Talisman
+    29383 = @{ AP = 118 }                             # Bloodlust Brooch
+    32483 = @{ SP = 55; ZKrit = 25; ZTempo = 29 }     # The Skull of Gul'dan
+    33829 = @{ SP = 88 }                              # Hex Shrunken Head
+    29370 = @{ SP = 69 }                              # Icon of the Silver Crescent
+    28785 = @{ SP = 70 }                              # The Lightning Capacitor
+    32492 = @{ Krit = 130 }                           # Ashtongue Talisman of Lethality (Rogue)
+    32487 = @{ AP = 124 }                             # Ashtongue Talisman of Swiftness (Hunter)
+    32488 = @{ SP = 85 }                              # Ashtongue Talisman of Acumen (Warlock/Mage)
+    28121 = @{ Krit = 32; AP = 45 }                   # Hourglass of the Unraveller
+    30626 = @{ ZKrit = 40; SP = 47.5 }                # Sextant of Unstable Currents
+    28528 = @{ Ausw = 63 }                            # Moroes' Lucky Pocket Watch
+    29376 = @{ Heil = 133 }                           # Essence of the Martyr
+    28727 = @{ Int = 40; mp5 = 9 }                    # Pendant of the Violet Eye
+}
+
 # Tier-5-Set-Namen je Klasse, um den aktuellen Set-Stand eines Spielers zu erkennen
 $T5NAME = @{
  'Warrior'='Destroyer'; 'Paladin'='Crystalforge'; 'Hunter'='Rift Stalker'; 'Rogue'='Deathmantle'
@@ -222,7 +242,14 @@ foreach ($pl in $players) {
         $id = [string]$p.Value
         if ($id) {
             $ids[$p.Name] = [int]$id
-            if ($cache.ContainsKey($id)) { $h[$p.Name] = Parse-Tooltip $cache[$id].tooltip }
+            if ($cache.ContainsKey($id)) {
+                $itemStats = Parse-Tooltip $cache[$id].tooltip
+                $idKey = [int]$id
+                if ($p.Name -like 'TRINKET*' -and $TRINKET_EFFECTS.ContainsKey($idKey)) {
+                    $itemStats = $TRINKET_EFFECTS[$idKey]
+                }
+                $h[$p.Name] = $itemStats
+            }
         }
     }
     $wornStats[$pl.Name] = $h
@@ -252,6 +279,12 @@ foreach ($it in $items) {
     $slotKey = $SLOTMAP[$it.Slot]
     $istats = @{}
     foreach ($p in $it.Stats.PSObject.Properties) { $istats[$p.Name] = $p.Value }
+    
+    # Ueberschreibe Stats, falls es ein unterstuetztes Schmuckstueck ist
+    $idKey = [int]$it.Id
+    if ($slotKey -eq 'TRINKET' -and $TRINKET_EFFECTS.ContainsKey($idKey)) {
+        $istats = $TRINKET_EFFECTS[$idKey]
+    }
     
     # Feral-Attackpower auf Waffen ignorieren wir
     if ($it.FormOnly -and $it.Slot -ne 'Two-Hand') { continue }
@@ -430,8 +463,15 @@ foreach ($it in $items) {
                     }
                 }
             }
+            $nichtBewertbar = ($slotKey -eq 'TRINKET' -and -not $TRINKET_EFFECTS.ContainsKey([int]$it.Id))
             $hinweis = ""
-            if ($slotKey -eq 'TRINKET') { $hinweis = "Schmuck: Prokk- und Nutzeneffekte sind nicht bewertbar" }
+            if ($slotKey -eq 'TRINKET') {
+                if ($nichtBewertbar) {
+                    $hinweis = "Schmuck: Prokk- und Nutzeneffekte sind nicht bewertbar"
+                } else {
+                    $hinweis = "Statische Uptime-Approximation (Beta)"
+                }
+            }
             elseif ($it.Quelle -eq 'T6') {
                 # Wie viele T6-Teile traegt er schon?
                 $t6 = 0
@@ -496,7 +536,7 @@ foreach ($it in $items) {
                 ProSchlag=$(if ($istats.ContainsKey('WpnSpeed') -and $istats.ContainsKey('WpnDps')) { [math]::Round([double]$istats['WpnDps'] * [double]$istats['WpnSpeed'],0) } else { 0 })
                 Rolle=$spec.Rolle
                 Hinweis=$hinweis
-                NichtBewertbar=($slotKey -eq 'TRINKET')
+                NichtBewertbar=$nichtBewertbar
                 T5Teile=$t5
             }
         }

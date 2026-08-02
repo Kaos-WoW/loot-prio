@@ -204,7 +204,9 @@ if (Test-Path $tpl) {
     $html = $html.Replace('"__DATEN__"', $json)
     [System.IO.File]::WriteAllText("$base\ausgabe\loot-prio-p3.html", $html, (New-Object System.Text.UTF8Encoding($false)))
     [System.IO.File]::WriteAllText("$base\index.html", $html, (New-Object System.Text.UTF8Encoding($false)))
-    Write-Output ("loot-prio-p3.html & index.html gebaut: " + [math]::Round((Get-Item "$base\index.html").Length/1024,1) + " KB")
+    [System.IO.File]::WriteAllText("$base\ausgabe\loot-prio-p3-beta.html", $html, (New-Object System.Text.UTF8Encoding($false)))
+    [System.IO.File]::WriteAllText("$base\index-beta.html", $html, (New-Object System.Text.UTF8Encoding($false)))
+    Write-Output ("loot-prio-p3.html & index.html gebaut (inklusive Beta-Versionen): " + [math]::Round((Get-Item "$base\index.html").Length/1024,1) + " KB")
 } else {
     Write-Output "Vorlage fehlt noch - nur payload.json erzeugt."
 }
