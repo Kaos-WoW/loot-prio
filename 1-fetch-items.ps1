@@ -39,15 +39,21 @@ Write-Output ("Aus Pool-Datei gelesen: " + $entries.Count + " Items")
 # ---------- 2. Tier-6-Teile ergaenzen ----------
 $t6 = @{
     "Onslaught"          = @(30972,30979,30975,30969,30977)
-    "Lightbringer"       = @(30989,30997,30990,30982,30993)
+    "LightbringerHoly"   = @(30988,30996,30992,30983,30994)
+    "LightbringerProt"   = @(30987,30998,30991,30985,30995)
+    "LightbringerRet"    = @(30989,30997,30990,30982,30993)
     "Gronnstalker"       = @(31003,31006,31004,31001,31005)
     "Slayer"             = @(31027,31030,31028,31026,31029)
     "SkyshatterNah"      = @(31015,31024,31018,31011,31021)
     "SkyshatterCaster"   = @(31014,31023,31017,31008,31020)
+    "SkyshatterResto"    = @(31012,31022,31016,31019,31010)
     "Malefic"            = @(31051,31054,31052,31050,31053)
     "Tempest"            = @(31056,31059,31057,31055,31058)
-    "Absolution"         = @(31064,31070,31065,31061,31067)
+    "AbsolutionHoly"     = @(31064,31070,31066,31061,31067)
+    "AbsolutionShadow"   = @(31063,31069,31065,31060,31068)
     "ThunderheartCaster" = @(31040,31049,31043,31035,31046)
+    "ThunderheartFeral"  = @(31039,31048,31042,31034,31044)
+    "ThunderheartResto"  = @(31037,31047,31041,31033,31045)
 }
 foreach ($set in $t6.Keys) {
     foreach ($id in $t6[$set]) {
@@ -68,7 +74,37 @@ foreach ($id in $badge) {
         }
     }
 }
-Write-Output ("Gesamt inkl. T6 und Marken: " + $entries.Count)
+
+# ---------- 3.5 Legacy BiS Raid-Items (Phase 1 & 2) ----------
+$legacyRaid = @{
+    30106 = "Lady Vashj (SSC)"
+    28830 = "Gruul"
+    30627 = "Leotheras (SSC)"
+    30107 = "Lady Vashj (SSC)"
+    28823 = "Gruul"
+    28789 = "Magtheridon"
+    28785 = "Terestian Illhoof (Karazhan)"
+    28528 = "Moroes (Karazhan)"
+    30015 = "Kael'thas (TK)"
+    30017 = "Al'ar (TK)"
+    30055 = "Fathom-Lord (SSC)"
+    30720 = "Fathom-Lord (SSC)"
+    30450 = "The Lurker Below (SSC)"
+    29993 = "Kael'thas (TK)"
+    30083 = "Solarian (TK)"
+    30007 = "Void Reaver (TK)"
+    30081 = "Doomwalker"
+    30105 = "Lady Vashj (SSC)"
+}
+foreach ($id in $legacyRaid.Keys) {
+    if (-not $entries.ContainsKey($id)) {
+        $entries[$id] = [pscustomobject]@{
+            Id=$id; Name=""; Boss=$legacyRaid[$id]; SlotCode=-1; ClassCode=4; SubCode=-99; Quelle="Raid"
+        }
+    }
+}
+
+Write-Output ("Gesamt inkl. T6, Marken und Legacy BiS: " + $entries.Count)
 
 # ---------- 4. Tooltips holen (mit Cache) ----------
 $cache = @{}

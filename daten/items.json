@@ -1,5 +1,360 @@
 ﻿[
     {
+        "Id":  28528,
+        "Name":  "Moroes\u0027 Lucky Pocket Watch",
+        "Boss":  "Moroes (Karazhan)",
+        "Quelle":  "Raid",
+        "Ilvl":  115,
+        "Phase":  "Phase 1",
+        "Slot":  "Trinket",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sockel":  0,
+                      "Ausw":  38
+                  }
+    },
+    {
+        "Id":  28785,
+        "Name":  "The Lightning Capacitor",
+        "Boss":  "Terestian Illhoof (Karazhan)",
+        "Quelle":  "Raid",
+        "Ilvl":  115,
+        "Phase":  "Phase 1",
+        "Slot":  "Trinket",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sockel":  0
+                  }
+    },
+    {
+        "Id":  28789,
+        "Name":  "Eye of Magtheridon",
+        "Boss":  "Magtheridon",
+        "Quelle":  "Raid",
+        "Ilvl":  125,
+        "Phase":  "Phase 1",
+        "Slot":  "Trinket",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sockel":  0,
+                      "SP":  54
+                  }
+    },
+    {
+        "Id":  28823,
+        "Name":  "Eye of Gruul",
+        "Boss":  "Gruul",
+        "Quelle":  "Raid",
+        "Ilvl":  125,
+        "Phase":  "Phase 1",
+        "Slot":  "Trinket",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sockel":  0,
+                      "Heil":  44
+                  }
+    },
+    {
+        "Id":  28830,
+        "Name":  "Dragonspine Trophy",
+        "Boss":  "Gruul",
+        "Quelle":  "Raid",
+        "Ilvl":  125,
+        "Phase":  "Phase 1",
+        "Slot":  "Trinket",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sockel":  0,
+                      "AP":  40
+                  }
+    },
+    {
+        "Id":  29993,
+        "Name":  "Twinblade of the Phoenix",
+        "Boss":  "Kael\u0027thas (TK)",
+        "Quelle":  "Raid",
+        "Ilvl":  141,
+        "Phase":  "Phase 2",
+        "Slot":  "Two-Hand",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "Sword",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "WpnSpeed":  3.6,
+                      "Sta":  53,
+                      "Sockel":  3,
+                      "Krit":  37,
+                      "WpnDps":  130.42,
+                      "AP":  110
+                  }
+    },
+    {
+        "Id":  30007,
+        "Name":  "The Darkener\u0027s Grasp",
+        "Boss":  "Void Reaver (TK)",
+        "Quelle":  "Raid",
+        "Ilvl":  138,
+        "Phase":  "Phase 2",
+        "Slot":  "Neck",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  40,
+                      "Ausw":  23,
+                      "Vert":  27,
+                      "Sockel":  0
+                  }
+    },
+    {
+        "Id":  30015,
+        "Name":  "The Sun King\u0027s Talisman",
+        "Boss":  "Kael\u0027thas (TK)",
+        "Quelle":  "Raid",
+        "Ilvl":  138,
+        "Phase":  "Phase 2",
+        "Slot":  "Neck",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  22,
+                      "ZKrit":  24,
+                      "Sockel":  0,
+                      "SP":  41,
+                      "Int":  16
+                  }
+    },
+    {
+        "Id":  30017,
+        "Name":  "Telonicus\u0027s Pendant of Mayhem",
+        "Boss":  "Al\u0027ar (TK)",
+        "Quelle":  "Raid",
+        "Ilvl":  138,
+        "Phase":  "Phase 2",
+        "Slot":  "Neck",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  26,
+                      "Agi":  27,
+                      "Sockel":  0,
+                      "AP":  70
+                  }
+    },
+    {
+        "Id":  30055,
+        "Name":  "Shoulderpads of the Stranger",
+        "Boss":  "Fathom-Lord (SSC)",
+        "Quelle":  "Raid",
+        "Ilvl":  128,
+        "Phase":  "Phase 2",
+        "Slot":  "Shoulder",
+        "Armor":  "Leather",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Agi":  35,
+                      "Krit":  16,
+                      "Sta":  28,
+                      "Waffk":  10,
+                      "Sockel":  1,
+                      "AP":  60
+                  }
+    },
+    {
+        "Id":  30081,
+        "Name":  "Warboots of Obliteration",
+        "Boss":  "Doomwalker",
+        "Quelle":  "Raid",
+        "Ilvl":  128,
+        "Phase":  "Phase 2",
+        "Slot":  "Feet",
+        "Armor":  "Plate",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  29,
+                      "Str":  44,
+                      "Krit":  31,
+                      "Sockel":  0
+                  }
+    },
+    {
+        "Id":  30083,
+        "Name":  "Ring of Sundered Souls",
+        "Boss":  "Solarian (TK)",
+        "Quelle":  "Raid",
+        "Ilvl":  128,
+        "Phase":  "Phase 2",
+        "Slot":  "Finger",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  45,
+                      "Ausw":  25,
+                      "Vert":  18,
+                      "Sockel":  0
+                  }
+    },
+    {
+        "Id":  30105,
+        "Name":  "Serpent Spine Longbow",
+        "Boss":  "Lady Vashj (SSC)",
+        "Quelle":  "Raid",
+        "Ilvl":  141,
+        "Phase":  "Phase 2",
+        "Slot":  "Ranged",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "Bow",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "WpnSpeed":  3,
+                      "Sta":  17,
+                      "Sockel":  0,
+                      "Krit":  16,
+                      "WpnDps":  90.67,
+                      "AP":  38
+                  }
+    },
+    {
+        "Id":  30106,
+        "Name":  "Belt of One-Hundred Deaths",
+        "Boss":  "Lady Vashj (SSC)",
+        "Quelle":  "Raid",
+        "Ilvl":  138,
+        "Phase":  "Phase 2",
+        "Slot":  "Waist",
+        "Armor":  "Leather",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  25,
+                      "Agi":  32,
+                      "Waffk":  25,
+                      "AP":  74,
+                      "Sockel":  2
+                  }
+    },
+    {
+        "Id":  30107,
+        "Name":  "Vestments of the Sea-Witch",
+        "Boss":  "Lady Vashj (SSC)",
+        "Quelle":  "Raid",
+        "Ilvl":  138,
+        "Phase":  "Phase 2",
+        "Slot":  "Chest",
+        "Armor":  "Cloth",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "SP":  57,
+                      "Sta":  28,
+                      "ZKrit":  31,
+                      "Int":  28,
+                      "Sockel":  3,
+                      "ZTreffer":  27
+                  }
+    },
+    {
+        "Id":  30450,
+        "Name":  "Warp-Spring Coil",
+        "Boss":  "The Lurker Below (SSC)",
+        "Quelle":  "Raid",
+        "Ilvl":  128,
+        "Phase":  "Phase 2",
+        "Slot":  "Trinket",
+        "Armor":  "",
+        "Classes":  "Rogue",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Treffer":  21,
+                      "Sockel":  0
+                  }
+    },
+    {
+        "Id":  30627,
+        "Name":  "Tsunami Talisman",
+        "Boss":  "Leotheras (SSC)",
+        "Quelle":  "Raid",
+        "Ilvl":  128,
+        "Phase":  "Phase 2",
+        "Slot":  "Trinket",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sockel":  0,
+                      "Krit":  38,
+                      "Treffer":  10
+                  }
+    },
+    {
+        "Id":  30720,
+        "Name":  "Serpent-Coil Braid",
+        "Boss":  "Fathom-Lord (SSC)",
+        "Quelle":  "Raid",
+        "Ilvl":  128,
+        "Phase":  "Phase 2",
+        "Slot":  "Trinket",
+        "Armor":  "",
+        "Classes":  "Mage",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sockel":  0,
+                      "ZKrit":  30,
+                      "ZTreffer":  12
+                  }
+    },
+    {
         "Id":  30861,
         "Name":  "Furious Shackles",
         "Boss":  "Rage Winterchill",
@@ -1257,7 +1612,7 @@
     {
         "Id":  30982,
         "Name":  "Lightbringer Gauntlets",
-        "Boss":  "Tier 6 (Lightbringer)",
+        "Boss":  "Tier 6 (LightbringerRet)",
         "Quelle":  "T6",
         "Ilvl":  146,
         "Phase":  "Phase 3",
@@ -1276,9 +1631,96 @@
                   }
     },
     {
+        "Id":  30983,
+        "Name":  "Lightbringer Gloves",
+        "Boss":  "Tier 6 (LightbringerHoly)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Hands",
+        "Armor":  "Plate",
+        "Classes":  "Paladin",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  35,
+                      "Heil":  86,
+                      "Sockel":  1,
+                      "mp5":  12,
+                      "Int":  29
+                  }
+    },
+    {
+        "Id":  30985,
+        "Name":  "Lightbringer Handguards",
+        "Boss":  "Tier 6 (LightbringerProt)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Hands",
+        "Armor":  "Plate",
+        "Classes":  "Paladin",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "SP":  34,
+                      "Vert":  30,
+                      "Sta":  47,
+                      "Ausw":  22,
+                      "Sockel":  1,
+                      "Parr":  30,
+                      "Int":  28
+                  }
+    },
+    {
+        "Id":  30987,
+        "Name":  "Lightbringer Faceguard",
+        "Boss":  "Tier 6 (LightbringerProt)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Head",
+        "Armor":  "Plate",
+        "Classes":  "Paladin",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "SP":  43,
+                      "Vert":  28,
+                      "Sta":  67,
+                      "Ausw":  37,
+                      "Sockel":  2,
+                      "Int":  27
+                  }
+    },
+    {
+        "Id":  30988,
+        "Name":  "Lightbringer Greathelm",
+        "Boss":  "Tier 6 (LightbringerHoly)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Head",
+        "Armor":  "Plate",
+        "Classes":  "Paladin",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  42,
+                      "ZKrit":  36,
+                      "Sockel":  2,
+                      "Heil":  119,
+                      "Int":  37
+                  }
+    },
+    {
         "Id":  30989,
         "Name":  "Lightbringer War-Helm",
-        "Boss":  "Tier 6 (Lightbringer)",
+        "Boss":  "Tier 6 (LightbringerRet)",
         "Quelle":  "T6",
         "Ilvl":  146,
         "Phase":  "Phase 3",
@@ -1299,7 +1741,7 @@
     {
         "Id":  30990,
         "Name":  "Lightbringer Breastplate",
-        "Boss":  "Tier 6 (Lightbringer)",
+        "Boss":  "Tier 6 (LightbringerRet)",
         "Quelle":  "T6",
         "Ilvl":  146,
         "Phase":  "Phase 3",
@@ -1319,9 +1761,52 @@
                   }
     },
     {
+        "Id":  30991,
+        "Name":  "Lightbringer Chestguard",
+        "Boss":  "Tier 6 (LightbringerProt)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Chest",
+        "Armor":  "Plate",
+        "Classes":  "Paladin",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  75,
+                      "SP":  39,
+                      "Sockel":  3,
+                      "Vert":  31,
+                      "Int":  22
+                  }
+    },
+    {
+        "Id":  30992,
+        "Name":  "Lightbringer Chestpiece",
+        "Boss":  "Tier 6 (LightbringerHoly)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Chest",
+        "Armor":  "Plate",
+        "Classes":  "Paladin",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  42,
+                      "ZKrit":  28,
+                      "mp5":  11,
+                      "Sockel":  3,
+                      "Int":  33,
+                      "Heil":  117
+                  }
+    },
+    {
         "Id":  30993,
         "Name":  "Lightbringer Greaves",
-        "Boss":  "Tier 6 (Lightbringer)",
+        "Boss":  "Tier 6 (LightbringerRet)",
         "Quelle":  "T6",
         "Ilvl":  146,
         "Phase":  "Phase 3",
@@ -1341,9 +1826,75 @@
                   }
     },
     {
+        "Id":  30994,
+        "Name":  "Lightbringer Leggings",
+        "Boss":  "Tier 6 (LightbringerHoly)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Legs",
+        "Armor":  "Plate",
+        "Classes":  "Paladin",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  40,
+                      "ZKrit":  34,
+                      "mp5":  11,
+                      "Sockel":  1,
+                      "Int":  45,
+                      "Heil":  114
+                  }
+    },
+    {
+        "Id":  30995,
+        "Name":  "Lightbringer Legguards",
+        "Boss":  "Tier 6 (LightbringerProt)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Legs",
+        "Armor":  "Plate",
+        "Classes":  "Paladin",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "SP":  46,
+                      "Vert":  37,
+                      "Sta":  69,
+                      "Ausw":  37,
+                      "Sockel":  1,
+                      "Int":  31
+                  }
+    },
+    {
+        "Id":  30996,
+        "Name":  "Lightbringer Pauldrons",
+        "Boss":  "Tier 6 (LightbringerHoly)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Shoulder",
+        "Armor":  "Plate",
+        "Classes":  "Paladin",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  34,
+                      "ZKrit":  18,
+                      "mp5":  8,
+                      "Sockel":  2,
+                      "Int":  29,
+                      "Heil":  86
+                  }
+    },
+    {
         "Id":  30997,
         "Name":  "Lightbringer Shoulderbraces",
-        "Boss":  "Tier 6 (Lightbringer)",
+        "Boss":  "Tier 6 (LightbringerRet)",
         "Quelle":  "T6",
         "Ilvl":  146,
         "Phase":  "Phase 3",
@@ -1359,6 +1910,28 @@
                       "Krit":  19,
                       "Sockel":  2,
                       "Int":  17
+                  }
+    },
+    {
+        "Id":  30998,
+        "Name":  "Lightbringer Shoulderguards",
+        "Boss":  "Tier 6 (LightbringerProt)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Shoulder",
+        "Armor":  "Plate",
+        "Classes":  "Paladin",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "SP":  27,
+                      "Vert":  25,
+                      "Sta":  50,
+                      "Ausw":  23,
+                      "Sockel":  2,
+                      "Int":  24
                   }
     },
     {
@@ -1496,6 +2069,27 @@
                   }
     },
     {
+        "Id":  31010,
+        "Name":  "Slayer\u0027s Axe",
+        "Boss":  "Tier 6 (SkyshatterResto)",
+        "Quelle":  "T6",
+        "Ilvl":  109,
+        "Phase":  "Phase 1",
+        "Slot":  "Two-Hand",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "Axe",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sockel":  0,
+                      "Krit":  21,
+                      "Str":  51,
+                      "WpnDps":  87.34,
+                      "WpnSpeed":  3.2
+                  }
+    },
+    {
         "Id":  31011,
         "Name":  "Skyshatter Grips",
         "Boss":  "Tier 6 (SkyshatterNah)",
@@ -1515,6 +2109,27 @@
                       "Treffer":  13,
                       "Sockel":  1,
                       "Int":  30
+                  }
+    },
+    {
+        "Id":  31012,
+        "Name":  "Skyshatter Helmet",
+        "Boss":  "Tier 6 (SkyshatterResto)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Head",
+        "Armor":  "Mail",
+        "Classes":  "Shaman",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  42,
+                      "Heil":  119,
+                      "Sockel":  2,
+                      "mp5":  14,
+                      "Int":  34
                   }
     },
     {
@@ -1560,6 +2175,27 @@
                       "mp5":  8,
                       "Sockel":  2,
                       "Int":  27
+                  }
+    },
+    {
+        "Id":  31016,
+        "Name":  "Skyshatter Chestguard",
+        "Boss":  "Tier 6 (SkyshatterResto)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Chest",
+        "Armor":  "Mail",
+        "Classes":  "Shaman",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  48,
+                      "Heil":  119,
+                      "Sockel":  3,
+                      "mp5":  14,
+                      "Int":  32
                   }
     },
     {
@@ -1609,6 +2245,27 @@
                   }
     },
     {
+        "Id":  31019,
+        "Name":  "Skyshatter Leggings",
+        "Boss":  "Tier 6 (SkyshatterResto)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Legs",
+        "Armor":  "Mail",
+        "Classes":  "Shaman",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  55,
+                      "Heil":  119,
+                      "Sockel":  1,
+                      "mp5":  14,
+                      "Int":  44
+                  }
+    },
+    {
         "Id":  31020,
         "Name":  "Skyshatter Legguards",
         "Boss":  "Tier 6 (SkyshatterCaster)",
@@ -1651,6 +2308,27 @@
                       "Treffer":  21,
                       "mp5":  9,
                       "Sockel":  1,
+                      "Int":  31
+                  }
+    },
+    {
+        "Id":  31022,
+        "Name":  "Skyshatter Shoulderpads",
+        "Boss":  "Tier 6 (SkyshatterResto)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Shoulder",
+        "Armor":  "Mail",
+        "Classes":  "Shaman",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  28,
+                      "Heil":  86,
+                      "Sockel":  2,
+                      "mp5":  11,
                       "Int":  31
                   }
     },
@@ -1809,6 +2487,44 @@
                   }
     },
     {
+        "Id":  31033,
+        "Name":  "Libram of Righteous Power",
+        "Boss":  "Tier 6 (ThunderheartResto)",
+        "Quelle":  "T6",
+        "Ilvl":  106,
+        "Phase":  "Phase 1",
+        "Slot":  "Relic",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sockel":  0
+                  }
+    },
+    {
+        "Id":  31034,
+        "Name":  "Thunderheart Gauntlets",
+        "Boss":  "Tier 6 (ThunderheartFeral)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Hands",
+        "Armor":  "Leather",
+        "Classes":  "Druid",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Agi":  32,
+                      "Str":  41,
+                      "Sockel":  1,
+                      "Int":  20,
+                      "Sta":  34
+                  }
+    },
+    {
         "Id":  31035,
         "Name":  "Thunderheart Handguards",
         "Boss":  "Tier 6 (ThunderheartCaster)",
@@ -1829,6 +2545,49 @@
                       "Spi":  22,
                       "Int":  30,
                       "ZTreffer":  12
+                  }
+    },
+    {
+        "Id":  31037,
+        "Name":  "Thunderheart Helmet",
+        "Boss":  "Tier 6 (ThunderheartResto)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Head",
+        "Armor":  "Leather",
+        "Classes":  "Druid",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  42,
+                      "Sockel":  2,
+                      "mp5":  8,
+                      "Spi":  28,
+                      "Int":  42,
+                      "Heil":  117
+                  }
+    },
+    {
+        "Id":  31039,
+        "Name":  "Thunderheart Cover",
+        "Boss":  "Tier 6 (ThunderheartFeral)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Head",
+        "Armor":  "Leather",
+        "Classes":  "Druid",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Agi":  39,
+                      "Str":  57,
+                      "Sockel":  2,
+                      "Int":  20,
+                      "Sta":  49
                   }
     },
     {
@@ -1855,6 +2614,49 @@
                   }
     },
     {
+        "Id":  31041,
+        "Name":  "Thunderheart Tunic",
+        "Boss":  "Tier 6 (ThunderheartResto)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Chest",
+        "Armor":  "Leather",
+        "Classes":  "Druid",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  42,
+                      "Sockel":  3,
+                      "mp5":  8,
+                      "Spi":  33,
+                      "Int":  34,
+                      "Heil":  117
+                  }
+    },
+    {
+        "Id":  31042,
+        "Name":  "Thunderheart Chestguard",
+        "Boss":  "Tier 6 (ThunderheartFeral)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Chest",
+        "Armor":  "Leather",
+        "Classes":  "Druid",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Agi":  36,
+                      "Str":  57,
+                      "Sockel":  3,
+                      "Int":  18,
+                      "Sta":  51
+                  }
+    },
+    {
         "Id":  31043,
         "Name":  "Thunderheart Vest",
         "Boss":  "Tier 6 (ThunderheartCaster)",
@@ -1878,6 +2680,50 @@
                   }
     },
     {
+        "Id":  31044,
+        "Name":  "Thunderheart Leggings",
+        "Boss":  "Tier 6 (ThunderheartFeral)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Legs",
+        "Armor":  "Leather",
+        "Classes":  "Druid",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Str":  55,
+                      "Sta":  49,
+                      "Treffer":  27,
+                      "Sockel":  1,
+                      "Agi":  41,
+                      "Int":  12
+                  }
+    },
+    {
+        "Id":  31045,
+        "Name":  "Thunderheart Legguards",
+        "Boss":  "Tier 6 (ThunderheartResto)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Legs",
+        "Armor":  "Leather",
+        "Classes":  "Druid",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  34,
+                      "Sockel":  1,
+                      "mp5":  11,
+                      "Spi":  36,
+                      "Int":  40,
+                      "Heil":  117
+                  }
+    },
+    {
         "Id":  31046,
         "Name":  "Thunderheart Pants",
         "Boss":  "Tier 6 (ThunderheartCaster)",
@@ -1898,6 +2744,49 @@
                       "Spi":  27,
                       "Int":  48,
                       "ZTreffer":  20
+                  }
+    },
+    {
+        "Id":  31047,
+        "Name":  "Thunderheart Spaulders",
+        "Boss":  "Tier 6 (ThunderheartResto)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Shoulder",
+        "Armor":  "Leather",
+        "Classes":  "Druid",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  30,
+                      "Sockel":  2,
+                      "mp5":  7,
+                      "Spi":  19,
+                      "Int":  31,
+                      "Heil":  86
+                  }
+    },
+    {
+        "Id":  31048,
+        "Name":  "Thunderheart Pauldrons",
+        "Boss":  "Tier 6 (ThunderheartFeral)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Shoulder",
+        "Armor":  "Leather",
+        "Classes":  "Druid",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Agi":  36,
+                      "Str":  42,
+                      "Sockel":  2,
+                      "Int":  12,
+                      "Sta":  34
                   }
     },
     {
@@ -2147,9 +3036,31 @@
                   }
     },
     {
+        "Id":  31060,
+        "Name":  "Gloves of Absolution",
+        "Boss":  "Tier 6 (AbsolutionShadow)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Hands",
+        "Armor":  "Cloth",
+        "Classes":  "Priest",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  39,
+                      "Sockel":  1,
+                      "mp5":  5,
+                      "Spi":  27,
+                      "Int":  31,
+                      "Heil":  86
+                  }
+    },
+    {
         "Id":  31061,
         "Name":  "Handguards of Absolution",
-        "Boss":  "Tier 6 (Absolution)",
+        "Boss":  "Tier 6 (AbsolutionHoly)",
         "Quelle":  "T6",
         "Ilvl":  146,
         "Phase":  "Phase 3",
@@ -2169,9 +3080,31 @@
                   }
     },
     {
+        "Id":  31063,
+        "Name":  "Cowl of Absolution",
+        "Boss":  "Tier 6 (AbsolutionShadow)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Head",
+        "Armor":  "Cloth",
+        "Classes":  "Priest",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  36,
+                      "Sockel":  2,
+                      "mp5":  8,
+                      "Spi":  33,
+                      "Int":  32,
+                      "Heil":  117
+                  }
+    },
+    {
         "Id":  31064,
         "Name":  "Hood of Absolution",
-        "Boss":  "Tier 6 (Absolution)",
+        "Boss":  "Tier 6 (AbsolutionHoly)",
         "Quelle":  "T6",
         "Ilvl":  146,
         "Phase":  "Phase 3",
@@ -2194,7 +3127,7 @@
     {
         "Id":  31065,
         "Name":  "Shroud of Absolution",
-        "Boss":  "Tier 6 (Absolution)",
+        "Boss":  "Tier 6 (AbsolutionShadow)",
         "Quelle":  "T6",
         "Ilvl":  146,
         "Phase":  "Phase 3",
@@ -2215,9 +3148,31 @@
                   }
     },
     {
+        "Id":  31066,
+        "Name":  "Vestments of Absolution",
+        "Boss":  "Tier 6 (AbsolutionHoly)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Chest",
+        "Armor":  "Cloth",
+        "Classes":  "Priest",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  48,
+                      "Sockel":  3,
+                      "mp5":  8,
+                      "Spi":  36,
+                      "Int":  32,
+                      "Heil":  117
+                  }
+    },
+    {
         "Id":  31067,
         "Name":  "Leggings of Absolution",
-        "Boss":  "Tier 6 (Absolution)",
+        "Boss":  "Tier 6 (AbsolutionHoly)",
         "Quelle":  "T6",
         "Ilvl":  146,
         "Phase":  "Phase 3",
@@ -2238,9 +3193,53 @@
                   }
     },
     {
+        "Id":  31068,
+        "Name":  "Breeches of Absolution",
+        "Boss":  "Tier 6 (AbsolutionShadow)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Legs",
+        "Armor":  "Cloth",
+        "Classes":  "Priest",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  42,
+                      "Sockel":  1,
+                      "mp5":  8,
+                      "Spi":  34,
+                      "Int":  33,
+                      "Heil":  117
+                  }
+    },
+    {
+        "Id":  31069,
+        "Name":  "Mantle of Absolution",
+        "Boss":  "Tier 6 (AbsolutionShadow)",
+        "Quelle":  "T6",
+        "Ilvl":  146,
+        "Phase":  "Phase 3",
+        "Slot":  "Shoulder",
+        "Armor":  "Cloth",
+        "Classes":  "Priest",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  30,
+                      "Sockel":  2,
+                      "mp5":  8,
+                      "Spi":  19,
+                      "Int":  30,
+                      "Heil":  86
+                  }
+    },
+    {
         "Id":  31070,
         "Name":  "Shoulderpads of Absolution",
-        "Boss":  "Tier 6 (Absolution)",
+        "Boss":  "Tier 6 (AbsolutionHoly)",
         "Quelle":  "T6",
         "Ilvl":  146,
         "Phase":  "Phase 3",

@@ -48,22 +48,22 @@
         "Name":  "Kaosx",
         "Spec":  "RET",
         "Slots":  {
+                      "RANGED":  27484,
                       "FINGER_1":  30834,
                       "HEAD":  30131,
-                      "NECK":  278827,
                       "TRINKET_2":  28830,
                       "LEGS":  30257,
                       "BACK":  30098,
                       "TRINKET_1":  29383,
-                      "HANDS":  29947,
                       "CHEST":  30129,
                       "SHOULDER":  30055,
+                      "FEET":  29951,
                       "WRIST":  30057,
                       "WAIST":  28779,
-                      "RANGED":  27484,
+                      "HANDS":  29947,
                       "MAIN_HAND":  28430,
                       "FINGER_2":  30061,
-                      "FEET":  29951
+                      "NECK":  278827
                   }
     },
     {
