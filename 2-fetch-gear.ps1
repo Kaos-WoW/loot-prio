@@ -216,13 +216,31 @@ function Get-GearScore($slots, $specKey) {
     $specWeights = $SPEC_WEIGHTS[$specKey]
     if (-not $specWeights) { return 0.0 }
     $score = 0.0
-    foreach ($slotProp in $slots.PSObject.Properties) {
-        $id = [string]$slotProp.Value
+    
+    # Ermittle alle Slot-Namen (Keys bei Hashtable, Properties bei PSCustomObject)
+    $keys = @()
+    if ($slots -is [System.Collections.IDictionary]) {
+        $keys = $slots.Keys
+    } else {
+        foreach ($p in $slots.PSObject.Properties) {
+            $keys += $p.Name
+        }
+    }
+    
+    foreach ($name in $keys) {
+        $id = $null
+        if ($slots -is [System.Collections.IDictionary]) {
+            $id = $slots[$name]
+        } else {
+            $id = $slots.$name
+        }
+        $id = [string]$id
+        
         if ($id -and $cache.ContainsKey($id)) {
             $stats = Parse-Tooltip $cache[$id].tooltip
-            $slotKind = $slotProp.Name
-            if ($slotProp.Name -like 'FINGER_*') { $slotKind = 'FINGER' }
-            if ($slotProp.Name -like 'TRINKET_*') { $slotKind = 'TRINKET' }
+            $slotKind = $name
+            if ($name -like 'FINGER_*') { $slotKind = 'FINGER' }
+            if ($name -like 'TRINKET_*') { $slotKind = 'TRINKET' }
             foreach ($k in $stats.Keys) {
                 if ($k -eq 'WpnDps' -or $k -eq 'Sockel' -or $k -eq 'WpnSpeed') { continue }
                 if ($specWeights.ContainsKey($k)) { $score += [double]$stats[$k] * $specWeights[$k] }
@@ -232,7 +250,7 @@ function Get-GearScore($slots, $specKey) {
                 if ($slotKind -eq 'RANGED') {
                     if ($specWeights.ContainsKey('RANGED')) { $score += $wd * $specWeights['RANGED'] }
                 } elseif ($slotKind -eq 'OFF_HAND') {
-                    if ($specWeights.ContainsKey('OH')) { $score += $wd * $score }
+                    if ($specWeights.ContainsKey('OH')) { $score += $wd * $specWeights['OH'] }
                 } elseif ($slotKind -eq 'MAIN_HAND' -or $slotKind -eq 'TWOHAND') {
                     if ($specWeights.ContainsKey('MH')) { $score += $wd * $specWeights['MH'] }
                 }
