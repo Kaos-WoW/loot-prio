@@ -37,7 +37,7 @@ werden.
 .\0-import-roster.ps1   # Kader aus dem Google Sheet                -> roster.json
 .\1-fetch-items.ps1     # Item-Pool + Werte von Wowhead              -> daten/items.json
 .\2-fetch-gear.ps1      # getragene Ausrüstung, live + Plausibilitätscheck -> daten/players.json
-.\wowsims-cli.ps1       # individuelle WoWSims-Stat-Gewichte (Kaosx) -> daten/sim-weights.json
+python 7-stat-gewichte.py # Stat-Gewichte aller DPS-Spieler          -> daten/sim-weights.json
 python 6-trinket-sim.py # Schmuckstuecke per Differenzsimulation     -> daten/trinket-werte.json
 .\3-compute.ps1         # die eigentliche Rechnung                   -> daten/upgrades.json
 .\4-bis-check.ps1       # Gegenprobe der DPS-Empfehlungen            -> daten/bis-listen.json
@@ -49,17 +49,21 @@ python 6-trinket-sim.py # Schmuckstuecke per Differenzsimulation     -> daten/tr
 abbricht, falls der Gear-Abruf verdächtig wenige Spieler liefert):
 
 ```powershell
-.\0-import-roster.ps1; .\2-fetch-gear.ps1; .\wowsims-cli.ps1; .\3-compute.ps1; .\4-bis-check.ps1; .\5-build-payload.ps1
+.\0-import-roster.ps1; .\2-fetch-gear.ps1; python 7-stat-gewichte.py; .\3-compute.ps1; .\4-bis-check.ps1; .\5-build-payload.ps1
 ```
+
+Die Schmuckstück-Simulation (`python 6-trinket-sim.py`) läuft **nicht** bei jedem Durchgang mit — sie
+dauert gut 15 Minuten und ihre Werte ändern sich nur, wenn sich das übrige Gear spürbar ändert. Nach
+einem Raid mit vielen Neuteilen einmal von Hand nachziehen.
 
 `2-fetch-gear.ps1` meldet jeden Slotwechsel seit dem letzten Abruf und verwirft verdächtige Stände
 (siehe Plausibilitätscheck unten). Alle Skripte nutzen `daten/cache-tooltips.json`, Wiederholungsläufe
 sind daher schnell.
 
-Die Kernkette (Schritte 0–5, ohne `wowsims-cli.ps1`) braucht **kein Python und kein Node**.
-`wowsims-cli.ps1` lädt bei Bedarf die WoWSims-Kommandozeilenversion herunter (`bin/wowsimcli-windows.exe`)
-und **braucht zusätzlich Python** — die APL-Rotation wird per `python -c` in die Anfrage eingefügt, weil
-PowerShells `ConvertTo-Json` die tief verschachtelte Struktur zerlegt. Im Ordner `daten/` liegen ein paar
+Die PowerShell-Schritte brauchen **kein Python und kein Node**. Die beiden Simulationsschritte
+(`7-stat-gewichte.py`, `6-trinket-sim.py`) sind dagegen Python und laden bei Bedarf die
+WoWSims-Kommandozeilenversion herunter (`bin/wowsimcli-windows.exe`). Python statt PowerShell, weil
+dessen `ConvertTo-Json` die tief verschachtelten Sim-Anfragen zerlegt. Im Ordner `daten/` liegen ein paar
 Python-Hilfsskripte (`scrape_*.py`, `debug_*.py`) — das sind **einmalige Werkzeuge**, mit denen einzelne
 BiS-Listen von Wowhead nachgepflegt wurden, kein Teil der regulären Kette.
 
@@ -142,9 +146,15 @@ Illidan). Die Anwärter sind **nach Rolle getrennt** aufgeführt: DPS rechnet in
 Tank/Heiler in Prozent — eine gemeinsame Rangliste über beides wäre bedeutungslos. Zusätzlich zeigt der
 Boss-Filter T6-Teile jetzt auch unter dem Boss des zugehörigen Tokens.
 
-**Individuelle Stat-Gewichte statt Presets:** Für Spieler mit hinterlegtem APL-Mapping (aktuell nur
-Kaosx) simuliert `wowsims-cli.ps1` die Stat-Gewichte direkt aus seinem Live-Gear, statt die statischen
-Presets aus `3-compute.ps1` zu verwenden. Alle anderen Specs laufen weiterhin auf den Presets.
+**Individuelle Stat-Gewichte statt Presets:** `7-stat-gewichte.py` simuliert die Stat-Gewichte **für
+jeden DPS-Spieler einzeln** aus seinem Live-Gear, statt die statischen Presets aus `3-compute.ps1` zu
+verwenden — rund 20 Sekunden je Spieler. Das ist wichtig, weil Gewichte vom eigenen Gear abhängen:
+Wer am Trefferkap steht, für den ist Trefferwertung wertlos, für den Nebenmann nicht. Tank und Heiler
+laufen weiterhin auf Presets, dort ist die Leitmetrik ohnehin prozentual.
+
+Die Waffenkoeffizienten lassen sich nicht als Stat messen (Waffenschaden ist kein Eintrag im
+Bonus-Stat-Array) und werden deshalb aus dem gemessenen Angriffskraft-Gewicht hochgerechnet, im
+Verhältnis des jeweiligen Presets.
 
 ⚠️ **Diese Simulation war bis 2026-08-02 in drei Punkten defekt.** Die WoWSims-CLI ignoriert falsch
 platzierte Felder stillschweigend — ohne Fehler, ohne Warnung:
@@ -167,6 +177,12 @@ verhält es sich jetzt. Kaosx' Rangfolge verschiebt sich dadurch spürbar, Zweih
 ---
 
 ## Schutzmechanismen
+
+**Verräter-Items gegen Doppelspec-Verwechslung:** Der Wertungsvergleich unten erkennt nicht, wenn ein
+Feral-Druide statt im Tank- im Katzen-DPS-Set ausgeloggt ist — beide Sets sind Leder auf ähnlichem
+Itemlevel, der Wert bricht also nicht ein. Deshalb gibt es eine Liste von Gegenständen, deren bloße
+Anwesenheit den Offspec verrät: Trägt ein `FERAL_TANK` den **Wolfshead Helm**, wird der Abruf
+unabhängig vom Wert verworfen. Weitere Doppelspec-Spieler brauchen jeweils einen eigenen Marker.
 
 **Plausibilitätscheck beim Gear-Abruf:** `2-fetch-gear.ps1` vergleicht bei jedem Abruf den neuen
 PvE-Statwert der Ausrüstung mit dem zuletzt gespeicherten. Fällt der Wert um mehr als 20 %, wird der
@@ -308,19 +324,22 @@ und die Schmuckstück-Zeilen bleiben auf der Beta-Seite, bis die simulierten Wer
 ## Verlässlichkeit
 
 `4-bis-check.ps1` prüft ausschließlich die **DPS-Empfehlungen** gegen warcrafttavern.com. Letzter Stand
-(Branch `feat/trinket-beta`, gemessen 2026-08-02):
-**155 Empfehlungen · 60 % auf BiS-Platz 1 · 80 % in den BiS-Top-3 · 25 nicht gelistet** (meist Marken-
-oder Trash-Items, die diese Guides gar nicht führen). Nach jeder Modelländerung erneut laufen lassen —
-es ist der beste vorhandene Regressionstest, hat hier bereits mehrere echte Fehler aufgedeckt (Prokk-
-Falle, Distanzwaffen für Nahkämpfer, zu schnelle Waffen für Verstärkung/Schurke).
+(Branch `feat/trinket-beta`, gemessen 2026-08-03):
+**155 Empfehlungen · 58 % auf BiS-Platz 1 · 79 % in den BiS-Top-3**. Die nicht gelisteten Empfehlungen
+sind ausnahmslos Marken- und Trash-Items, die diese Guides gar nicht führen. Nach jeder Modelländerung
+erneut laufen lassen — es ist der beste vorhandene Regressionstest und hat mehrere echte Fehler
+aufgedeckt (Prokk-Falle, Distanzwaffen für Nahkämpfer, zu schnelle Waffen für Verstärkung/Schurke, und
+zuletzt eine Skalenvermischung bei den simulierten Gewichten).
 
-⚠️ **Die früher dokumentierten 88 % stammen vom `main`-Stand** und wurden nach der Pool-Erweiterung des
-Trinket-Branches nie neu gemessen. Der Rückgang auf 79 % ist **kein Bewertungsfehler**: die 25 nicht
-gelisteten Empfehlungen sind ausnahmslos Nicht-Schmuck-Items (Nethervoid Cloak, Wand of Prismatic
-Focus, Pillar of Ferocity …), die in den Guides schlicht fehlen. Die Schmuckstück-Empfehlungen selbst
-schneiden **überdurchschnittlich** ab: 11 Empfehlungen, davon 9 auf BiS-Platz 1 (82 %), keine einzige
-ungelistet. Ohne Schmuckstücke gerechnet (= Produktivseite) sind es 144 Empfehlungen, 57 % Platz 1,
-78 % Top-3.
+⚠️ **Der Wert ist eine Übereinstimmungsquote, kein Genauigkeitsmaß.** Die Guides sind eine einzelne
+Meinung, gerechnet für einen *generischen* Charakter. Dieses Werkzeug rechnet dagegen mit dem
+tatsächlich getragenen Gear jedes Spielers — wer am Trefferkap steht, für den ist Trefferwertung
+wirklich wertlos, im Guide aber nicht. Eine Abweichung kann also genauso gut heißen, dass das Werkzeug
+recht hat. Als **Regressionstest** ist die Zahl trotzdem wertvoll: ein plötzlicher Einbruch deutet
+zuverlässig auf einen echten Fehler hin, so wurde die Skalenvermischung überhaupt erst gefunden.
+
+Die früher dokumentierten 88 % stammen vom `main`-Stand vor der Pool-Erweiterung und sind nicht
+vergleichbar.
 
 Für **Tank und Heiler existiert kein automatisierter Gegentest** — die BiS-Listen dort wurden von Hand
 gegen offizielle Wowhead-Guides abgeglichen und punktuell nachgepflegt.
@@ -331,7 +350,9 @@ gegen offizielle Wowhead-Guides abgeglichen und punktuell nachgepflegt.
 
 | Pfad | Inhalt |
 |---|---|
-| `0`–`5-*.ps1`, `wowsims-cli.ps1` | die Skriptkette |
+| `0`–`5-*.ps1` | die PowerShell-Kette |
+| `7-stat-gewichte.py` | Stat-Gewichte aller DPS-Spieler per Simulation |
+| `wowsims-cli.ps1` | **abgelöst** durch `7-stat-gewichte.py`, liegt nur noch als Referenz herum |
 | `6-trinket-sim.py` | Schmuckstück-Bewertung per Differenzsimulation (Python, braucht die WoWSims-CLI) |
 | `spec-sims/` | Spec-Konfiguration für die Simulation: Talente, Rotationen, gemeinsamer Raid-Aufbau |
 | `roster.json` | wird von `0-import-roster.ps1` aus dem Google Sheet überschrieben, nicht von Hand pflegen |

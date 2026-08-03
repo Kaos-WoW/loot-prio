@@ -17,27 +17,35 @@ getragenen Gear.
 0. `.\0-import-roster.ps1` → Kader aus dem öffentlichen Google Sheet → `roster.json`
 1. `.\1-fetch-items.ps1` → Item-Pool + Werte von Wowhead → `daten/items.json`
 2. `.\2-fetch-gear.ps1` → getragene Ausrüstung live, Plausibilitäts-/PvP-Check → `daten/players.json`
-3. `.\wowsims-cli.ps1` → dynamische WoWSims-Stat-Gewichte (aktuell nur Kaosx) → `daten/sim-weights.json`
+3. `python 7-stat-gewichte.py` → Stat-Gewichte für **alle** DPS-Spieler → `daten/sim-weights.json`
+   (rund 20 s je Spieler). **Löst `wowsims-cli.ps1` ab**, das nur Kaosx konnte und dessen Aufbau
+   drei stille Fehler enthielt (s. u.). Das alte Skript liegt noch da, wird aber nicht mehr gerufen.
 3b. `python 6-trinket-sim.py` → Schmuckstücke per Differenzsimulation → `daten/trinket-werte.json`
    (alle DPS-Specs mit Eintrag in `spec-sims/specs.json`; rund 49 s je Spieler)
+
+**Beide Sim-Schritte teilen sich die Konfiguration in `spec-sims/`** (eigene README dort) und damit
+denselben Raid-Aufbau — nur deshalb liegen Stat-Gewichte und Schmuckstück-Werte auf derselben Skala.
+Wer den Raid-Aufbau ändert, muss **beide** neu rechnen, sonst passen sie nicht mehr zusammen.
 4. `.\3-compute.ps1` → Upgrades berechnen (nutzt `trinket-werte.json` und `sim-weights.json` wo
    vorhanden, sonst statische Presets bzw. Näherung) → `daten/upgrades.json`, `daten/payload.json`
 5. `.\4-bis-check.ps1` → DPS-Empfehlungen gegen BiS-Listen prüfen → `daten/bis-listen.json`
 6. `.\5-build-payload.ps1` → HTML-Ausgabeseite bauen → `ausgabe/loot-prio-p3.html`, `index.html`
 
-**Schritt 3 (`wowsims-cli.ps1`) ist Teil der Kette, seit die WoWSims-CLI integriert wurde — nicht mehr
-weglassen.** Er lädt bei Bedarf `bin/wowsimcli-windows.exe` herunter (Quelle:
-`github.com/wowsims/tbc-new/releases/latest`), baut aus `players.json` eine RaidSimRequest und schreibt
-die simulierten Gewichte weg. Läuft nur für Spieler mit hinterlegtem APL-Mapping — aktuell ausschließlich
-Kaosx (Vergeltungs-Paladin); alle anderen fallen weiterhin auf die statischen Presets in `3-compute.ps1`
-zurück.
+**Schritt 3 lädt bei Bedarf `bin/wowsimcli-windows.exe` herunter** (Quelle:
+`github.com/wowsims/tbc-new/releases/latest`). Simuliert werden alle Spieler, deren Spec in
+`spec-sims/specs.json` steht — das sind die DPS-Specs. Tank und Heiler fallen weiterhin auf die
+statischen Presets in `3-compute.ps1` zurück; dort ist die Leitmetrik ohnehin prozentual.
+
+**`wowsims-cli.ps1` ist abgelöst** und wird nicht mehr gerufen. Die Datei liegt noch da, weil sie den
+alten Aufbau dokumentiert; wer sie startet, überschreibt `sim-weights.json` mit einem Stand, der nur
+Kaosx enthält.
 
 Realer Ablauf laut `.github/workflows/sync.yml` (automatisiert, täglich 03:00 UTC):
 ```powershell
 .\0-import-roster.ps1
 .\2-fetch-gear.ps1
 # Guard: bricht ab, wenn daten/players.json < 5 Einträge hat (verhindert Publish bei kaputtem Abruf)
-.\wowsims-cli.ps1
+python 7-stat-gewichte.py
 .\3-compute.ps1
 .\4-bis-check.ps1
 .\5-build-payload.ps1
@@ -116,6 +124,41 @@ Realer Ablauf laut `.github/workflows/sync.yml` (automatisiert, täglich 03:00 U
   **Plausibilitätsprobe nach jeder Änderung am Sim-Aufbau:** Zaubermacht muss mit und ohne Bossrüstung
   **identisch** herauskommen (Heiligschaden ignoriert Rüstung), alle physischen Gewichte müssen fallen.
   Genau so verhält es sich jetzt (SP 0,121 in beiden Fällen, Stärke 0,786 → 0,641).
+* **★ Der Wertungsvergleich beim Gear-Abruf erkennt Doppelspec-Wechsel NICHT.** `2-fetch-gear.ps1`
+  verwirft einen Stand, wenn der PvE-Wert um mehr als 20 % einbricht — das fängt PvP-Sets, greift
+  aber nicht bei einem **Feral-Druiden, der Tank und Katze spielt**: beide Sets sind Leder auf
+  ähnlichem Itemlevel, der Score bleibt hoch, das Gear ist trotzdem das falsche. Supfreshyo war so
+  im kompletten Katzen-DPS-Set erfasst, inklusive PvP-Waffe, und wurde als Tank bewertet.
+  Dagegen gibt es jetzt in `2-fetch-gear.ps1` die Tabelle **`$VERRAETER`**: Item-IDs, deren blosse
+  Anwesenheit den Offspec verrät, unabhängig vom Score. Erster Eintrag ist **`8345` Wolfshead Helm**
+  für `FERAL_TANK` (reines Katzen-Teil). Weitere Doppelspec-Spieler brauchen einen eigenen Marker —
+  am besten beim Spieler erfragen, welches Teil eindeutig nur im Offspec vorkommt.
+  ⚠️ Die Regel schützt nur **künftige** Abrufe. Ist der gespeicherte Stand schon falsch, hilft nur
+  `$UNSICHER` in `3-compute.ps1` (blendet die Zeilen aus), bis der Spieler einmal korrekt erfasst wird.
+* **★★ Simulierte Gewichte und Preset-Gewichte liegen auf VERSCHIEDENEN Skalen — niemals unbesehen
+  mischen.** Ein simuliertes Gewicht ist ein absoluter DPS-Gewinn pro Statpunkt und hängt damit an der
+  DPS des Spielers. Gemessen über den Kader: **0,48× bis 1,16×** des jeweiligen Presets. Die *relativen*
+  Verhältnisse stimmen dagegen fast perfekt (Grotschak: Sim `MH/Str` = 2,73, Preset 2,74) — das ist die
+  beste Bestätigung, dass die Sim sauber rechnet.
+  Der Cap-Schutz in `Value-Item` setzte den **absoluten** Preset-Wert als Untergrenze für
+  `Treffer`/`Waffk`/`ZTreffer` ein. Da diese Stats am Cap als 0 gemessen werden, griff die Untergrenze
+  immer — und mischte damit bei jedem simulierten Spieler zwei Skalen. Erikadirks Trefferwertung bekam
+  das Preset-Gewicht 1,40, während alles andere bei ihm auf 0,48× lief: **fast dreifach überbewertet.**
+  Der Regressionstest fiel dadurch von 60 % auf 54 %, konzentriert auf die physischen Specs.
+  **Jetzt wird die Untergrenze mit dem Skalenfaktor des Spielers multipliziert** (Median der
+  Verhältnisse `sim/preset` über alle Stats, die *nicht* am Cap sind). Danach: 58 % / 79 %.
+  Dieselbe Skalierung gilt für den Fallback, wenn ein Stat gar nicht simuliert wurde.
+* **★ Waffenkoeffizienten (`MH`/`OH`/`RANGED`) lassen sich nicht als Stat messen.** Waffenschaden ist
+  kein Eintrag im `bonusStats`-Array, es gibt also keine Probe dafür. `7-stat-gewichte.py` rechnet sie
+  deshalb aus dem gemessenen AP-Gewicht hoch, im selben Verhältnis, das das statische Preset in
+  `3-compute.ps1` vorgibt (RET 13,06 · ARMS 13,46 · ROGUE 9,42 · ENH 8,20 · FURY 6,12 · HUNT 37,18).
+  Diese Verhältnisse werden zur Laufzeit **aus `3-compute.ps1` geparst**, bewusst nicht in
+  `specs.json` dupliziert — eine zweite Kopie liefe unbemerkt auseinander. Ändert sich das Format der
+  `NewSpec`-Zeilen, bricht das Parsen laut ab statt still falsche Werte zu liefern.
+* **★ Stat-Indizes stehen in `proto/common.proto`, `enum Stat` — nicht raten.** Die Reihenfolge ist
+  nicht intuitiv: 31 ist die Rüstung, 23 der Rüstungsdurchschlag, 35 mp5, 12/13/14 sind
+  Zaubertreffer/-krit/-tempo, 20/21/22 die Nahkampf-Entsprechungen. Abrufbar mit
+  `gh api "repos/wowsims/tbc-new/contents/proto/common.proto" --jq '.content' | base64 -d`.
 * **★ Stat-Gewichte nie mit einer Probe von 30 Punkten messen.** Tempo wirkt in TBC über
   Angriffstempo-Schwellen, nicht linear. Bei Kaosx: **+30 Tempo → −1,4 DPS** (Gewicht wurde auf 0
   geklemmt, „Tempo ist wertlos“), **+100 Tempo → +47,6 DPS** (Gewicht 0,476, also so wertvoll wie

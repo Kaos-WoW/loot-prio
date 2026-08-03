@@ -83,8 +83,17 @@ $PROF = @{
  'Druid'   = @('Mace','Dagger','Fist Weapon','Polearm','Staff')
 }
 # Spieler, deren Armory-Stand im Offspec erfasst wurde -> Vergleichsbasis unbrauchbar.
-# Seit dem Abruf vom 28.07. sind Valiror und Pflasterelfe im Hauptspec erfasst, Liste daher leer.
-$UNSICHER = @()
+# Ihre Zeilen bekommen Unsicher=true und werden im Frontend ausgeblendet.
+#
+# Supfreshyo (03.08.): steht als Feral-TANK im Roster, ist aber im Katzen-DPS-Set ausgeloggt -
+# erkennbar am 'Wolfshead Helm' (8345), dazu Guertel der hundert Tode, Ring of Lethality und
+# eine PvP-Waffe. Der Wertungsvergleich in 2-fetch-gear.ps1 greift bei ihm nicht, weil beide
+# Sets Leder auf aehnlichem Itemlevel sind und der Score deshalb kaum einbricht. Dagegen steht
+# dort jetzt die Verraeter-Item-Regel - die verhindert aber nur KUENFTIGE Verfaelschung, der
+# gespeicherte Stand ist bereits das falsche Set.
+# ENTFERNEN, sobald er einmal im Tank-Set abgerufen wurde (dann meldet 2-fetch-gear.ps1 die
+# Slotwechsel und 'Wolfshead Helm' ist weg).
+$UNSICHER = @('Supfreshyo')
 
 $specs = @(
  NewSpec 'FURY' 'Furor-Krieger' 'Plate' 'Nah' @{Str=1.14;Agi=0.80;AP=0.51;Treffer=0.60;Krit=1.07;Tempo=0.99;ArP=0.19;Waffk=1.29;MH=3.12;OH=1.64} @{Stat='Str';Menge=8} @('Grotschak','Valiror') '' 2100
@@ -142,25 +151,49 @@ function Value-Item($stats, $spec, $slotKind, $playerName=$null) {
     $w = $spec.W
     # Falls simulierte Gewichte fuer diesen Spieler existieren, diese bevorzugen
     if ($playerName -and $simWeights.ContainsKey($playerName)) {
+        $sw = $simWeights[$playerName]
+        # Hilfsfunktion: PowerShell ConvertFrom-Json liefert Hashtables ODER PSObjects.
+        $holen = {
+            param($k)
+            if ($sw.PSObject.Properties[$k]) { return [double]$sw.$k }
+            elseif ($sw.ContainsKey -and $sw.ContainsKey($k)) { return [double]$sw[$k] }
+            return 0.0
+        }
+
+        # ★ Skalenfaktor bestimmen, BEVOR irgendetwas gemischt wird.
+        # Simulierte Gewichte haengen an der absoluten DPS des Spielers und liegen deshalb je
+        # Spieler auf einer anderen Skala als das statische Preset (gemessen: 0,48x bis 1,16x).
+        # Wer den Preset-Wert unveraendert als Untergrenze einsetzt, mischt zwei Skalen:
+        # Erikadirks Trefferwertung bekaeme das Preset-Gewicht 1,40, waehrend alles andere bei
+        # ihm auf 0,48x laeuft - Treffer waere damit fast dreifach ueberbewertet. Genau das hat
+        # den Regressionstest bei allen physischen Specs einbrechen lassen.
+        # Der Faktor wird aus den Stats gebildet, die NICHT am Cap sind (Cap-Stats sind 0 und
+        # wuerden ihn nach unten ziehen).
+        $verhaeltnisse = @()
+        foreach ($k in $spec.W.Keys) {
+            if ($k -eq 'Treffer' -or $k -eq 'Waffk' -or $k -eq 'ZTreffer') { continue }
+            $sv = & $holen $k
+            $pv = [double]$spec.W[$k]
+            if ($sv -gt 0 -and $pv -gt 0) { $verhaeltnisse += ($sv / $pv) }
+        }
+        $skala = 1.0
+        if ($verhaeltnisse.Count -gt 0) {
+            $sortiert = $verhaeltnisse | Sort-Object
+            $skala = $sortiert[[int]($sortiert.Count / 2)]   # Median, robust gegen Ausreisser
+        }
+
         $w = @{}
         foreach ($k in $spec.W.Keys) {
-            $simVal = 0.0
-            # Beachte: PowerShell ConvertFrom-Json kann Hashtables oder PSObjects liefern.
-            # Wir prüfen beide Zugriffsmöglichkeiten ab.
-            if ($simWeights[$playerName].PSObject.Properties[$k]) {
-                $simVal = [double]$simWeights[$playerName].$k
-            } elseif ($simWeights[$playerName].ContainsKey -and $simWeights[$playerName].ContainsKey($k)) {
-                $simVal = [double]$simWeights[$playerName][$k]
-            }
-            
-            # Sicherheitsnetz für Cap-Stats: Um den "De-gearing"-Effekt zu verhindern,
-            # dürfen Waffenkunde, Trefferwertung und Zaubertrefferwertung niemals unter
-            # ihr statisches "Below-Cap"-Gewicht fallen.
+            $simVal = & $holen $k
+
+            # Sicherheitsnetz für Cap-Stats: Um den "De-gearing"-Effekt zu verhindern, dürfen
+            # Waffenkunde, Trefferwertung und Zaubertrefferwertung niemals unter ihr statisches
+            # "Below-Cap"-Gewicht fallen - dieses aber auf die Skala des Spielers umgerechnet.
             if ($k -eq 'Treffer' -or $k -eq 'Waffk' -or $k -eq 'ZTreffer') {
-                $w[$k] = [math]::Max($simVal, [double]$spec.W[$k])
+                $w[$k] = [math]::Max($simVal, [double]$spec.W[$k] * $skala)
             } else {
                 if ($simVal -le 0.0) {
-                    $w[$k] = $spec.W[$k] # Fallback auf statisches Gewicht bei 0 oder Fehlen
+                    $w[$k] = [double]$spec.W[$k] * $skala   # Fallback, ebenfalls skaliert
                 } else {
                     $w[$k] = $simVal
                 }

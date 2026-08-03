@@ -36,10 +36,17 @@ jobs:
           }
           Write-Output "OK: $($p.Count) Spieler in players.json."
 
-      - name: WoWSims Gewichte simulieren (Kaosx)
+      # Python wird von 7-stat-gewichte.py und 6-trinket-sim.py gebraucht.
+      # windows-latest bringt es zwar mit, aber ausdruecklich ist verlaesslicher.
+      - name: Python bereitstellen
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: WoWSims Stat-Gewichte simulieren (alle DPS-Spieler)
         shell: pwsh
         run: |
-          powershell -ExecutionPolicy Bypass -File .\wowsims-cli.ps1
+          python 7-stat-gewichte.py
 
       # Bewusst NICHT im Nachtlauf: 6-trinket-sim.py braucht rund 49 Sekunden je Spieler
       # (gut 15 Minuten fuer den Kader) und die gemessenen Werte aendern sich nur, wenn sich das
