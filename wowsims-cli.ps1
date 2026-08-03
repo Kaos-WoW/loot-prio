@@ -45,11 +45,19 @@ foreach ($slotName in $slotOrder) {
     $equippedItems += @{ "id" = $itemId }
 }
 
+# Statarray des Ziels (Laenge 46 wie beim Spieler). Nur die Indizes, die das WoWSims-Preset
+# "Raid Target" belegt: 17 = Angriffskraft, 27 = Verteidigung, 31 = RUESTUNG, 33 = Leben.
+$targetStats = @(0) * 46
+$targetStats[17] = 320
+$targetStats[27] = 54
+$targetStats[31] = 7685      # Grundruestung eines Stufe-73-Raidbosses
+$targetStats[33] = 6070400
+
 # Hilfsfunktion zur Durchführung einer Simulation
 function Run-SingleSim($bonusStats) {
     $simRequest = @{
         "simOptions" = @{
-            "iterations" = 4000  # Hoehere Iterationen fuer stabilere Stat-Weights
+            "iterations" = 10000  # Hoehere Iterationen fuer stabilere Stat-Weights (rund 2s je Sim)
             "randomSeed" = 101
         }
         "raid" = @{
@@ -59,8 +67,15 @@ function Run-SingleSim($bonusStats) {
                         @{
                             "name" = $p.Name
                             "class" = "ClassPaladin"
+                            # ACHTUNG: Der Talentstring gehoert als "talentsString" DIREKT an den
+                            # Spieler. Frueher stand er als "talents" im Spec-Block - dort wird er
+                            # von der CLI stillschweigend ignoriert (kein Fehler, kein Hinweis), und
+                            # die Sim lief talentlos: 614 statt 1456 DPS. Die daraus abgeleiteten
+                            # Stat-Gewichte waren dadurch um Faktor 2,4-3,5 zu klein.
+                            # Gegenprobe bei Aenderungen: mit leerem String muss die DPS deutlich
+                            # einbrechen. Bleibt sie gleich, greift das Feld nicht.
+                            "talentsString" = "50000000000000000000-0532010000000000000000-0523005120033125331051"
                             "retributionPaladin" = @{
-                                "talents" = "50000000000000000000-0532010000000000000000-0523005120033125331051"
                                 "options" = @{
                                     "classOptions" = @{}
                                 }
@@ -111,8 +126,23 @@ function Run-SingleSim($bonusStats) {
             "targets" = @(
                 @{
                     "level" = 73
-                    "armor" = 6200
                     "mobType" = "MobTypeDemon"
+                    # ACHTUNG: Ein Feld "armor" gibt es hier NICHT. Es wurde frueher gesetzt und von
+                    # der CLI stillschweigend verworfen - die Sim lief dadurch gegen ein Ziel mit
+                    # NULL Ruestung (1373 statt 1137 DPS, rund 17 % zu hoch), und
+                    # Ruestungsdurchschlag war folgerichtig wertlos (Gewicht immer 0).
+                    # Die Ruestung steht im Ziel-Statarray auf Index 31. Werte uebernommen vom
+                    # WoWSims-Preset "Raid Target" (per 'wowsimcli decodelink' ausgelesen).
+                    # Die Ruestungs-Debuffs (Zerreissen, Feenfeuer, Fluch der Tollkuehnheit) stehen
+                    # im debuffs-Block und werden von der Sim selbst abgezogen - hier gehoert
+                    # deshalb der UNGEDEBUFFTE Grundwert hinein.
+                    # Gegenprobe: mit stats[31]=0 muss die DPS deutlich steigen.
+                    "stats" = $targetStats
+                    "minBaseDamage" = 15113
+                    "damageSpread" = 0.5
+                    "swingSpeed" = 2.0
+                    "parryHaste" = $true
+                    "canCrush" = $true
                 }
             )
         }
@@ -156,7 +186,14 @@ $baseStats = @(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 $baseDps = Run-SingleSim $baseStats
 Write-Output "  Basis-DPS: $baseDps"
 
-# Wir erhoehen die Stats um jeweils 30 Punkte
+# Probengroesse fuer die Gewichtsmessung.
+# ACHTUNG: Frueher standen hier 30 Punkte - das ist zu klein. Tempo wirkt bei TBC nicht linear,
+# sondern ueber Angriffstempo-Schwellen (beim Ret durch Seal-Twisting). Gemessen an Kaosx:
+#   +30 Tempo  ->  -1,4 DPS  (Gewicht wurde auf 0 geklemmt = "Tempo ist wertlos")
+#   +100 Tempo -> +47,6 DPS  (Gewicht 0,476 = so wertvoll wie Krit)
+# Die 0 war also ein Artefakt der Probengroesse, kein Ergebnis. Bei linearen Stats aendert die
+# groessere Probe nichts (Krit liefert bei +30 und +100 identisch 0,483), sie kostet nur Rechenzeit
+# - und die liegt bei rund 2 Sekunden je Sim.
 # WoWSims Stat Indices (TBC):
 # 0=Strength, 1=Agility, 5=SpellDamage, 17=AttackPower, 20=MeleeHit, 21=MeleeCrit, 22=MeleeHaste
 $statsToTest = @{
@@ -172,7 +209,7 @@ $statsToTest = @{
 }
 
 $weights = @{}
-$delta = 30.0
+$delta = 100.0
 
 foreach ($statKey in $statsToTest.Keys) {
     $st = $statsToTest[$statKey]
@@ -183,8 +220,14 @@ foreach ($statKey in $statsToTest.Keys) {
     
     $newDps = Run-SingleSim $testStats
     $statWeight = ($newDps - $baseDps) / $delta
-    if ($statWeight -lt 0) { $statWeight = 0.0 }
-    
+    if ($statWeight -lt 0) {
+        # Negativ heisst fast immer: der Stat ist am Cap (Treffer/Waffenkunde) oder liegt in einem
+        # Schwellen-Totbereich. Wir klemmen auf 0, sagen es aber - stilles Klemmen hat den
+        # Tempo-Fehler oben lange verdeckt. In Value-Item faengt der Cap-Schutz die Folgen ab.
+        Write-Warning ("Negatives Gewicht fuer " + $st.Label + " (" + [math]::Round($statWeight,3) + ") - auf 0 geklemmt. Cap oder Schwellenwert pruefen.")
+        $statWeight = 0.0
+    }
+
     $weights[$statKey] = [math]::Round($statWeight, 3)
     Write-Output "    DPS: $newDps (Gewicht: $($weights[$statKey]))"
 }
