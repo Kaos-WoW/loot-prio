@@ -28,7 +28,11 @@ denselben Raid-Aufbau — nur deshalb liegen Stat-Gewichte und Schmuckstück-Wer
 Wer den Raid-Aufbau ändert, muss **beide** neu rechnen, sonst passen sie nicht mehr zusammen.
 4. `.\3-compute.ps1` → Upgrades berechnen (nutzt `trinket-werte.json` und `sim-weights.json` wo
    vorhanden, sonst statische Presets bzw. Näherung) → `daten/upgrades.json`, `daten/payload.json`
-5. `.\4-bis-check.ps1` → DPS-Empfehlungen gegen BiS-Listen prüfen → `daten/bis-listen.json`
+5. `.\4-bis-check.ps1` → DPS- **und** Tank/Heiler-Empfehlungen gegen `daten/bis-listen.json` prüfen
+   (Konsolen-Report, kein Dateiausgabe). `bis-listen.json` selbst wird nicht bei jedem Lauf neu geholt,
+   sondern von Hand aufgefrischt: `python daten/scrape_bis.py` (DPS, warcrafttavern.com) bzw.
+   `python daten/scrape_wowhead_final.py` (Tank/Heiler, Wowhead-Guides) — beide schreiben in dieselbe
+   Datei, decken aber alle 17 Specs ab, überschreiben sich also gegenseitig komplett.
 6. `.\5-build-payload.ps1` → HTML-Ausgabeseite bauen → `ausgabe/loot-prio-p3.html`, `index.html`
 
 **Schritt 3 lädt bei Bedarf `bin/wowsimcli-windows.exe` herunter** (Quelle:
@@ -50,7 +54,7 @@ python 7-stat-gewichte.py
 .\4-bis-check.ps1
 .\5-build-payload.ps1
 # git add roster.json daten/players.json daten/cache-tooltips.json daten/payload.json
-#         index.html ausgabe/loot-prio-p3.html temp.csv daten/bis-listen.json daten/sim-weights.json
+#         index.html ausgabe/loot-prio-p3.html daten/bis-listen.json daten/sim-weights.json
 # git commit + push, wenn sich etwas geändert hat
 ```
 
@@ -212,6 +216,13 @@ python 7-stat-gewichte.py
 * **Dropdown-Einklappen (`.hidden`):** `.ms-dropdown` nutzt `display: flex`, das HTML-Attribut `hidden`
   wird durch CSS-Spezifität überschrieben. Steuerung deshalb über `.classList.toggle('hidden')`, CSS
   definiert `.ms-dropdown.hidden { display: none !important; }`.
+* **PowerShell-Funktionen mit `Write-Output` UND Rückgabewert vertragen sich nicht mit
+  Variablenzuweisung.** `4-bis-check.ps1` rief ursprünglich eine Hilfsfunktion mit `$result =
+  Test-BisMatches ...` auf, die zeilenweise Diagnosetext per `Write-Output` UND am Ende ein
+  `[PSCustomObject]` zurückgab — PowerShell sammelt aber *alles*, was eine Funktion in die Pipeline
+  schreibt, in den Rückgabewert. Der Diagnosetext landete komplett in `$result` statt auf der Konsole,
+  nur die Zusammenfassung erschien. Fix: Zähler per `[ref]`-Parameter durchreichen statt per
+  Rückgabewert, damit die Funktion nichts zurückgibt und `Write-Output` wieder auf der Konsole landet.
 
 ---
 
@@ -280,7 +291,6 @@ python 7-stat-gewichte.py
 * **Buff-Annahmen stichprobenartig prüfen:** Die statischen Preset-Gewichte sind nicht spec-übergreifend
   auf identische Raid-Buffs verifiziert (siehe
   [p3-stat-gewichte-2026-07-27.md](quellen/p3-stat-gewichte-2026-07-27.md)).
-* **Kein automatisierter Regressionstest für Tank/Heiler**, analog zu `4-bis-check.ps1` für DPS.
 * **`bin/`-Inhalte wachsen mit jedem Lauf:** `sim_input.json`/`sim_output.json` werden bei jeder
   Simulation überschrieben und mitcommittet.
 

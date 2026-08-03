@@ -212,9 +212,10 @@ dass ein kaputter API-Abruf die veröffentlichte Seite mit Fehldaten überschrei
   `wowsims.github.io`) in `3-compute.ps1` fest hinterlegt. Für einzelne Spieler (aktuell Kaosx) werden
   sie zusätzlich dynamisch über die lokale `wowsimcli-windows.exe` simuliert (25er-Raid-Setup mit
   APL-Rotation) und überschreiben das Preset.
-- **DPS-BiS-Gegenprobe:** warcrafttavern.com, automatisiert über `4-bis-check.ps1`.
-- **Tank-/Heiler-BiS-Listen:** offizielle Wowhead-Phase-3-Guides, per Hand bzw. über die
-  Python-Hilfsskripte in `daten/` eingepflegt (kein automatisierter Regressionstest wie bei DPS).
+- **DPS-BiS-Gegenprobe:** warcrafttavern.com über `daten/scrape_bis.py`, geprüft mit `4-bis-check.ps1`.
+- **Tank-/Heiler-BiS-Gegenprobe:** offizielle Wowhead-Phase-3-Guides über
+  `daten/scrape_wowhead_final.py`, seit dem Ausbau von `4-bis-check.ps1` ebenfalls automatisiert
+  geprüft (Sortierung nach `Pct` statt `Delta`, s. „Verlässlichkeit").
 
 ---
 
@@ -305,13 +306,23 @@ Tanks und Heiler.
 
 ## Verlässlichkeit
 
-`4-bis-check.ps1` prüft ausschließlich die **DPS-Empfehlungen** gegen warcrafttavern.com. Letzter Stand
-(gemessen 2026-08-03):
-**155 Empfehlungen · 58 % auf BiS-Platz 1 · 79 % in den BiS-Top-3**. Die nicht gelisteten Empfehlungen
-sind ausnahmslos Marken- und Trash-Items, die diese Guides gar nicht führen. Nach jeder Modelländerung
-erneut laufen lassen — es ist der beste vorhandene Regressionstest und hat mehrere echte Fehler
-aufgedeckt (Prokk-Falle, Distanzwaffen für Nahkämpfer, zu schnelle Waffen für Verstärkung/Schurke, und
-zuletzt eine Skalenvermischung bei den simulierten Gewichten).
+`4-bis-check.ps1` prüft **beide Rollengruppen automatisiert** gegen ihre jeweilige externe BiS-Quelle:
+DPS gegen warcrafttavern.com (Sortierung nach ΔDPS), Tank/Heiler gegen die offiziellen Wowhead-Guides
+(Sortierung nach dem prozentualen Zuwachs `Pct`, da `Delta` dort rollenübergreifend nicht vergleichbar
+ist). Beide Quellen liegen in `daten/bis-listen.json` und werden von `daten/scrape_bis.py`
+(warcrafttavern, alle 17 Specs) bzw. `daten/scrape_wowhead_final.py` (Wowhead, ebenfalls alle 17 Specs)
+neu abgerufen — welche der beiden Quellen für eine Spec zuletzt lief, bestimmt ihren aktuellen Stand in
+der Datei. Letzter Stand (gemessen 2026-08-03):
+
+- **DPS: 155 Empfehlungen · 58 % auf BiS-Platz 1 · 79 % in den BiS-Top-3.** Die nicht gelisteten
+  Empfehlungen sind ausnahmslos Marken- und Trash-Items, die diese Guides gar nicht führen.
+- **Tank/Heiler: 70 Empfehlungen · 77 % auf BiS-Platz 1 · 90 % in den BiS-Top-3.** Der höhere Wert ist
+  erwartbar: Tank/Heiler-Empfehlungen sind bereits gegen dieselbe BiS-Liste gegatet (s. o.), ein
+  Vorschlag außerhalb der Liste kann hier praktisch nicht entstehen.
+
+Nach jeder Modelländerung erneut laufen lassen — es ist der beste vorhandene Regressionstest und hat
+mehrere echte Fehler aufgedeckt (Prokk-Falle, Distanzwaffen für Nahkämpfer, zu schnelle Waffen für
+Verstärkung/Schurke, und zuletzt eine Skalenvermischung bei den simulierten Gewichten).
 
 ⚠️ **Der Wert ist eine Übereinstimmungsquote, kein Genauigkeitsmaß.** Die Guides sind eine einzelne
 Meinung, gerechnet für einen *generischen* Charakter. Dieses Werkzeug rechnet dagegen mit dem
@@ -320,11 +331,8 @@ wirklich wertlos, im Guide aber nicht. Eine Abweichung kann also genauso gut hei
 recht hat. Als **Regressionstest** ist die Zahl trotzdem wertvoll: ein plötzlicher Einbruch deutet
 zuverlässig auf einen echten Fehler hin, so wurde die Skalenvermischung überhaupt erst gefunden.
 
-Die früher dokumentierten 88 % stammen vom `main`-Stand vor der Pool-Erweiterung und sind nicht
+Die früher dokumentierten 88 % (DPS) stammen vom `main`-Stand vor der Pool-Erweiterung und sind nicht
 vergleichbar.
-
-Für **Tank und Heiler existiert kein automatisierter Gegentest** — die BiS-Listen dort wurden von Hand
-gegen offizielle Wowhead-Guides abgeglichen und punktuell nachgepflegt.
 
 ---
 
@@ -340,7 +348,7 @@ gegen offizielle Wowhead-Guides abgeglichen und punktuell nachgepflegt.
 | `roster.json` | wird von `0-import-roster.ps1` aus dem Google Sheet überschrieben, nicht von Hand pflegen |
 | `tier-boni.json` | **von Hand gepflegt**: Set-Boni T5/T6 mit DPS-Einschätzung |
 | `vorlage.html` | Seitengerüst; `"__DATEN__"` wird beim Bau durch die JSON-Nutzlast ersetzt |
-| `daten/` | Zwischenstände, Tooltip-Cache |
+| `daten/` | Zwischenstände, Tooltip-Cache; `scrape_bis.py`/`scrape_wowhead_final.py` holen `bis-listen.json` neu |
 | `bin/` | heruntergeladene WoWSims-CLI plus deren Ein-/Ausgabedateien |
 | `ausgabe/`, `index.html` | die fertige Seite (zweimal, s. „Automatisierung“) |
 | `quellen/` | Rechercheunterlagen aus dem Erstaufbau: Item-Pool, Statgewichte, Alternativen, Gear-Stand |
@@ -357,4 +365,3 @@ gegen offizielle Wowhead-Guides abgeglichen und punktuell nachgepflegt.
 3. **Knappheitsspalten fehlen weiterhin.** Die Rohdaten liegen in `quellen/p3-alternativen-*.md`
    vollständig vor (Marken-Sortiment, T6-Teile, Handwerk, Trash); ausgewertet und in die Seite
    eingebaut ist es noch nicht.
-4. **Ein automatisierter Regressionstest für Tank/Heiler** wäre sinnvoll, analog zu `4-bis-check.ps1`.
