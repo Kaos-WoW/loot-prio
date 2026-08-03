@@ -340,13 +340,12 @@ gegen offizielle Wowhead-Guides abgeglichen und punktuell nachgepflegt.
 | `roster.json` | wird von `0-import-roster.ps1` aus dem Google Sheet überschrieben, nicht von Hand pflegen |
 | `tier-boni.json` | **von Hand gepflegt**: Set-Boni T5/T6 mit DPS-Einschätzung |
 | `vorlage.html` | Seitengerüst; `"__DATEN__"` wird beim Bau durch die JSON-Nutzlast ersetzt |
-| `daten/` | Zwischenstände, Tooltip-Cache, Python-Hilfsskripte (Einmalwerkzeuge, s. o.) |
+| `daten/` | Zwischenstände, Tooltip-Cache |
 | `bin/` | heruntergeladene WoWSims-CLI plus deren Ein-/Ausgabedateien |
 | `ausgabe/`, `index.html` | die fertige Seite (zweimal, s. „Automatisierung“) |
 | `quellen/` | Rechercheunterlagen aus dem Erstaufbau: Item-Pool, Statgewichte, Alternativen, Gear-Stand |
 | `supabase/functions/trigger-sync/` | Edge Function für den Blitz-Knopf |
 | `.github/workflows/sync.yml` | die Automatisierung |
-| `task.md`, `implementation_plan.md` | Planungsnotizen aus dem Ausbau der WoWSims-Integration, kein laufender Code |
 
 ---
 
@@ -354,15 +353,8 @@ gegen offizielle Wowhead-Guides abgeglichen und punktuell nachgepflegt.
 
 1. **Supfreshyo ist ausgeblendet**, weil sein Armory-Stand das Katzen-DPS-Set zeigt. Sobald er einmal
    im Tank-Set erfasst wurde, aus `$UNSICHER` in `3-compute.ps1` entfernen.
-2. **Järgerlie trägt laut Armory eine PvP-Waffe** (*Gladiator's Right Ripper*). Der Effekt ist mit rund
-   15 DPS klein, es sind aber falsche Daten.
-3. **Rassen in `spec-sims/specs.json` sind angenommen**, nicht abgerufen — `players.json` enthält keine.
-4. **Knappheitsspalten fehlen weiterhin.** Die Rohdaten liegen in `quellen/p3-alternativen-*.md`
+2. **Rassen in `spec-sims/specs.json` sind angenommen**, nicht abgerufen — `players.json` enthält keine.
+3. **Knappheitsspalten fehlen weiterhin.** Die Rohdaten liegen in `quellen/p3-alternativen-*.md`
    vollständig vor (Marken-Sortiment, T6-Teile, Handwerk, Trash); ausgewertet und in die Seite
    eingebaut ist es noch nicht.
-5. **Markenhändler im Spiel gegenprüfen**, sobald Phase 3 live ist — Wowheads Phasenzuordnung ist
-   teils widersprüchlich (gleiche Item-Reihe mal Phase 3, mal Phase 4 markiert).
-6. **Ein automatisierter Regressionstest für Tank/Heiler** wäre sinnvoll, analog zu `4-bis-check.ps1`.
-7. **Aufräumen im Repo:** Die Python-Hilfsskripte in `daten/` und `temp.csv` sind Arbeitsartefakte
-   und weiterhin mitversioniert. Ein `.gitignore` gibt es inzwischen; er deckt Python-Caches, die
-   WoWSims-CLI und deren Ein-/Ausgabedateien ab.
+4. **Ein automatisierter Regressionstest für Tank/Heiler** wäre sinnvoll, analog zu `4-bis-check.ps1`.

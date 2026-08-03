@@ -277,21 +277,12 @@ python 7-stat-gewichte.py
   Pool-IDs mit `Slot -eq 'Trinket'` gegen die Schlüssel der Tabelle abgleichen.
 * **Knappheitsspalten:** Einpflege der Daten aus `quellen/p3-alternativen-*.md` in die Ausgabe
   (Alternativen im Slot, ab welchem Boss).
-* **Phasenzuordnung Markenhändler:** Sobald Phase 3 live ist, die ilvl-141-Plattenteile beim Händler
-  gegenprüfen (Wowhead-Phasen-Zuordnung ist teilweise fehlerhaft).
 * **Buff-Annahmen stichprobenartig prüfen:** Die statischen Preset-Gewichte sind nicht spec-übergreifend
   auf identische Raid-Buffs verifiziert (siehe
   [p3-stat-gewichte-2026-07-27.md](quellen/p3-stat-gewichte-2026-07-27.md)).
-* **WoWSims-CLI-Integration auf weitere Spieler ausweiten:** Aktuell nur Kaosx individuell simuliert,
-  alle anderen laufen auf statischen Presets.
 * **Kein automatisierter Regressionstest für Tank/Heiler**, analog zu `4-bis-check.ps1` für DPS.
-* **Aufräumen:** `raw.html`, `temp.csv` und die Python-Hilfsskripte in `daten/` (`scrape_*.py`,
-  `debug_*.py`, `diag_*.py`, `inspect_*.py`, `search_wowhead.py`, `test_fetch.py`) sind
-  Arbeitsartefakte einzelner Sitzungen, kein Teil der regulären Kette, aber weiterhin mitversioniert.
-  Kein `.gitignore` vorhanden.
 * **`bin/`-Inhalte wachsen mit jedem Lauf:** `sim_input.json`/`sim_output.json` werden bei jeder
-  Simulation überschrieben und mitcommittet; `template.json` ist aktuell eine leere Datei (0 Byte) —
-  prüfen, ob sie noch gebraucht wird.
+  Simulation überschrieben und mitcommittet.
 
 ---
 
