@@ -95,6 +95,32 @@
     font-size: var(--step-2); margin: 0 0 0.75rem;
   }
 
+  /* Einklappbare Abschnitte. Der Knopf ersetzt den Text der h2, sieht aber genauso aus -
+     die Ueberschrift bleibt also optisch eine Ueberschrift und ist trotzdem bedienbar. */
+  .klapp {
+    all: unset;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 0.5rem;
+    font-family: var(--f-display); font-weight: 400;
+    font-size: var(--step-2); color: var(--ink);
+    width: 100%;
+  }
+  .klapp:hover { color: var(--accent); }
+  .klapp:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .klapp-pfeil {
+    display: inline-block; font-size: 0.8em; color: var(--muted);
+    transition: transform 0.15s ease;
+  }
+  .klapp[aria-expanded="false"] .klapp-pfeil { transform: rotate(-90deg); }
+  /* Zaehler wird nur im eingeklappten Zustand gezeigt - eingeklappt soll man trotzdem
+     sehen, ob und wie viel drinsteckt. */
+  .klapp-zahl {
+    font-family: var(--f-data); font-size: 0.7rem; color: var(--muted);
+    border: 1px solid var(--line); padding: 0.05rem 0.45rem;
+    margin-left: auto; white-space: nowrap;
+  }
+  .klapp[aria-expanded="true"] .klapp-zahl { display: none; }
+
   .caveats {
     border-left: 2px solid var(--warn);
     background: var(--warn-soft);
@@ -389,8 +415,11 @@
   </header>
 
   <section>
-    <h2>Hinweise zur Vergabe</h2>
-    <div class="caveats">
+    <h2><button type="button" class="klapp" data-ziel="hinweise-inhalt" aria-expanded="true">
+      <span class="klapp-pfeil" aria-hidden="true">▾</span>Hinweise zur Vergabe
+      <span class="klapp-zahl">7 Hinweise</span>
+    </button></h2>
+    <div class="caveats" id="hinweise-inhalt">
       <p><strong>BiS-Schutz:</strong> BiS-Spieler haben immer Vorrang vor Spielern, für die das Item nur ein normales Upgrade ist.</p>
       <p id="caveat-trinkets"><strong>Keine Schmuckstücke:</strong> Schmuckstücke fehlen in dieser Liste, da ihre Effekte (Proks/Nutzen) nicht verlässlich berechnet werden können.</p>
       <p><strong>Waffentempo vorsortiert:</strong> Schnelle Waffen (&lt; 2.4s) wurden für Kampf-Schurken und Verstärker-Schamanen bereits aussortiert.</p>
@@ -402,7 +431,11 @@
   </section>
 
   <section id="contested-section">
-    <h2>🔥 Heiß umkämpfter Loot (Bedarfs-Übersicht)</h2>
+    <h2><button type="button" class="klapp" data-ziel="contested-inhalt" aria-expanded="true">
+      <span class="klapp-pfeil" aria-hidden="true">▾</span>🔥 Heiß umkämpfter Loot (Bedarfs-Übersicht)
+      <span class="klapp-zahl" id="contested-zahl"></span>
+    </button></h2>
+    <div id="contested-inhalt">
     <p class="sub" style="margin-bottom:0.75rem;">Die umkämpftesten Raid-Drops der Phase 3 (Kombination aus BiS #1 Status und Gesamtanzahl Upgrades).</p>
     <div class="tablewrap">
       <table>
@@ -418,10 +451,15 @@
         <tbody id="contested-tbody"></tbody>
       </table>
     </div>
+    </div>
   </section>
 
   <section id="token-section">
-    <h2>🎟️ Tier-6-Tokens (wer braucht welches Token?)</h2>
+    <h2><button type="button" class="klapp" data-ziel="token-inhalt" aria-expanded="true">
+      <span class="klapp-pfeil" aria-hidden="true">▾</span>🎟️ Tier-6-Tokens (wer braucht welches Token?)
+      <span class="klapp-zahl" id="token-zahl"></span>
+    </button></h2>
+    <div id="token-inhalt">
     <p class="sub" style="margin-bottom:0.75rem; max-width:none;">
       Ein Token wird von <b>drei Klassen</b> geteilt — hier steht pro Token, wer alles darauf würfelt und
       wie viel es bringt. Sortiert innerhalb der Rolle nach Zuwachs, <b style="color:#ffd700">gold</b> = BiS #1,
@@ -444,6 +482,7 @@
         </thead>
         <tbody id="token-tbody"></tbody>
       </table>
+    </div>
     </div>
   </section>
 
@@ -970,6 +1009,8 @@ function renderTokenTable() {
     });
 
   const tbody = $('token-tbody');
+  // Zaehler in der Ueberschrift, damit man auch eingeklappt sieht, was drinsteckt.
+  setKlappZahl('token-zahl', list.length, 'Token');
   if (list.length === 0) {
     tbody.innerHTML = `<tr><td colspan="5" class="empty">Keine Token-Anwärter mit den gewählten Filtern.</td></tr>`;
     return;
@@ -1066,6 +1107,7 @@ function renderContestedTable() {
   const topItems = filtered.slice(0, 12);
 
   const tbody = $('contested-tbody');
+  setKlappZahl('contested-zahl', topItems.length, 'Items');
   if (topItems.length === 0) {
     tbody.innerHTML = `<tr><td colspan="5" class="empty">Keine umkämpften Items mit den gewählten Filtern.</td></tr>`;
     return;
@@ -1116,6 +1158,37 @@ $('f-rolle').addEventListener('change', () => {
   updatePlayerFilter();
   render();
 });
+// --- Einklappbare Abschnitte -------------------------------------------------
+// Zustand wird gemerkt, damit der Loot-Rat seine Ansicht nicht bei jedem Aufruf
+// neu herrichten muss. localStorage kann in manchen Browsereinstellungen werfen,
+// deshalb ueberall abgesichert - ein fehlendes Gedaechtnis darf die Seite nicht kippen.
+function klappZustandLesen(id) {
+  try { return localStorage.getItem('klapp:' + id); } catch (e) { return null; }
+}
+function klappZustandSchreiben(id, offen) {
+  try { localStorage.setItem('klapp:' + id, offen ? 'offen' : 'zu'); } catch (e) { /* egal */ }
+}
+// Zaehler in der Ueberschrift. Nur sichtbar, wenn der Abschnitt eingeklappt ist -
+// dann soll man trotzdem erkennen, ob und wie viel dort steckt.
+function setKlappZahl(id, anzahl, wort) {
+  const el = $(id);
+  if (el) el.textContent = anzahl + ' ' + wort;
+}
+function klappSetzen(knopf, offen) {
+  const inhalt = $(knopf.dataset.ziel);
+  if (!inhalt) return;
+  knopf.setAttribute('aria-expanded', offen ? 'true' : 'false');
+  inhalt.hidden = !offen;
+  klappZustandSchreiben(knopf.dataset.ziel, offen);
+}
+document.querySelectorAll('.klapp').forEach(knopf => {
+  const gemerkt = klappZustandLesen(knopf.dataset.ziel);
+  if (gemerkt === 'zu') klappSetzen(knopf, false);
+  knopf.addEventListener('click', () => {
+    klappSetzen(knopf, knopf.getAttribute('aria-expanded') !== 'true');
+  });
+});
+
 ['f-bis-strict','f-hide-equipped','f-prio','f-boss','f-slot','f-quelle'].forEach(id => $(id).addEventListener('change', render));
 $('f-suche').addEventListener('input', render);
 

@@ -1,0 +1,19 @@
+# Python-Zwischenstände
+__pycache__/
+*.pyc
+
+# Ein- und Ausgabedateien der WoWSims-CLI. Werden bei JEDEM Simulationslauf
+# überschrieben und enthalten danach nur den Zustand der zuletzt gerechneten Probe —
+# als Vorlage für eigene Experimente also unbrauchbar (man erbt fremde Bonus-Stats).
+bin/sim_input.json
+bin/sim_output.json
+
+# Die heruntergeladene CLI selbst (22 MB). Wird von den Sim-Skripten bei Bedarf
+# automatisch von github.com/wowsims/tbc-new/releases/latest geholt.
+bin/wowsimcli-windows.exe
+bin/wowsims.zip
+
+# Arbeitsartefakte einzelner Sitzungen
+raw.html
+NACHTLAUF-STATUS.md
+nachtwaechter.ps1

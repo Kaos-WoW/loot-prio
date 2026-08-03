@@ -63,6 +63,31 @@ def lade(pfad):
         return json.load(f)
 
 
+def hole_cli():
+    """WoWSims-CLI herunterladen, falls sie fehlt.
+
+    Die 22-MB-Binaerdatei liegt bewusst NICHT im Repo (siehe .gitignore). Diese Logik
+    steckte frueher nur in wowsims-cli.ps1 - ohne sie schlaegt der Lauf auf einem
+    frischen Checkout (z.B. GitHub Actions) fehl.
+    """
+    if os.path.exists(EXE):
+        return
+    import urllib.request
+    import zipfile
+    url = "https://github.com/wowsims/tbc-new/releases/latest/download/wowsimcli-windows.exe.zip"
+    ziel = os.path.dirname(EXE)
+    os.makedirs(ziel, exist_ok=True)
+    zippfad = os.path.join(ziel, "wowsims.zip")
+    print(f"Lade WoWSims-CLI herunter ({url}) ...")
+    urllib.request.urlretrieve(url, zippfad)
+    with zipfile.ZipFile(zippfad) as z:
+        z.extractall(ziel)
+    os.remove(zippfad)
+    if not os.path.exists(EXE):
+        raise RuntimeError("Download lief durch, aber " + EXE + " fehlt weiterhin.")
+    print("CLI bereit.")
+
+
 def lies_presets():
     """Statische Preset-Gewichte aus 3-compute.ps1 lesen.
 
@@ -129,6 +154,7 @@ def baue(cfg, setup, apl, name, slots, bonus):
 
 def main():
     nur = {a.lower() for a in sys.argv[1:]}
+    hole_cli()
     spieler = lade(os.path.join(BASE, "daten", "players.json"))
     roster = lade(os.path.join(BASE, "roster.json"))
     specs = lade(os.path.join(SPEC_DIR, "specs.json"))
