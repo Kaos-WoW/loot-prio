@@ -255,39 +255,21 @@ De-gearing-Vorschläge.
 
 **Nicht abgebildet:**
 
-- **Schmuckstücke** auf der Produktivseite — ihr Wert steckt fast ganz in Prokks/Nutzeneffekten; die
-  Zeilen sind dort ausgeblendet und laufen in der „Heiß umkämpfter Loot“-Übersicht nur als
-  (BiS)/(Bedarf) mit. **Auf der Beta-Seite (`index-beta.html`) sind sie bewertet** — siehe unten.
+- **Schmuckstücke für Tank und Heiler** — dort läuft weiter die Näherung, weil WoWSims für diese
+  Rollen keine belastbare Zielgröße liefert. Für DPS werden sie simuliert (siehe unten).
 - **Tier-Set-Boni als Zahl.** Prozentboni auf einzelne Fähigkeiten lassen sich ohne Simulation nicht in
   DPS umrechnen. Stattdessen steht unter jeder Tier-Zeile der Set-Übergang als Text mit Einschätzung
   (`hoch/mittel/gering/keiner`) aus `tier-boni.json`.
 - **Tank-/Heiler-Feinmechaniken** wie Blockwert-Verteilung, Heil-Overhealing oder Aggro — die
   BiS-Gate-Logik fängt die gröbsten Fehlanreize ab, ersetzt aber keine Simulation.
-- **Individuelle Simulation für alle DPS-Spieler.** Bisher nur für Kaosx eingerichtet, alle anderen
-  laufen auf spec-weiten statischen Presets statt auf ihrem eigenen Gear simuliert.
 - **Spec-Mechaniken wie Kampfgewandtheit** (schnelle Schildhand gibt dem Schurken Energie zurück) —
   deshalb ist der Warglaive-Vorsprung der Krieger gegenüber dem Schurken vermutlich etwas überzeichnet.
 
-## Schmuckstücke — Beta-Seite (`index-beta.html`)
+## Schmuckstücke
 
-Schmuckstücke waren lange gar nicht bewertet, weil ihr Wert in Prokks und Nutzeneffekten steckt. Auf
-der Beta-Seite laufen sie jetzt über eine **statische Uptime-Näherung (Methode A)**:
-
-```
-Wert = statischer Equip-Wert  +  Prokk-Wert × geschätzte Uptime
-```
-
-Bei Nutzeneffekten ist die Uptime schlicht `Wirkdauer / Abklingzeit` — *Bloodlust Brooch* etwa zählt als
-72 AP (fest) + 278 AP × 20 s/120 s ≈ **118 AP**. Hinterlegt sind alle 22 Schmuckstücke des Item-Pools in
-`$TRINKET_EFFECTS` (`3-compute.ps1`), jeweils mit der Rechnung als Kommentar, damit sie gegen den
-Tooltip nachprüfbar bleibt.
-
-**Produktiv- und Beta-Seite entstehen aus derselben Nutzlast**, unterschieden nur durch den Schalter
-`__BETA__`, den `5-build-payload.ps1` beim Bau ersetzt. `index.html` (die von GitHub Pages
-ausgelieferte Fassung) blendet die Schmuckstück-Zeilen weiter aus, `index-beta.html` zeigt sie und trägt
-oben einen deutlichen Warnbalken.
-
-### Inzwischen werden Schmuckstücke simuliert statt genähert
+Schmuckstücke waren lange gar nicht bewertet, weil ihr Wert in Prokks und Nutzeneffekten steckt.
+Seit dem 03.08.2026 werden sie **simuliert** und sind normaler Teil der Liste — die frühere Beta-Seite
+(`index-beta.html`) ist damit entfallen.
 
 `6-trinket-sim.py` tauscht jedes Schmuckstück im **echten Gear** des Spielers aus und misst die
 DPS-Differenz direkt in WoWSims. Damit entfällt die Frage nach der Prokk-Uptime vollständig — es wird
@@ -318,13 +300,13 @@ Schmuckstücken nicht nur daneben, sondern im **falschen Vorzeichen**:
 
 Das ließ sich nicht über bessere Uptime-Schätzungen reparieren — lineare Statgewichte mal flach
 gemitteltem Prokk bilden weder Burst-Cooldowns noch Rüstungsdurchschlag ab. Deshalb der Umstieg auf
-die Simulation. Die Näherung bleibt als Rückfall für alles, was nicht simuliert wird (Tanks, Heiler),
-und die Schmuckstück-Zeilen bleiben auf der Beta-Seite, bis die simulierten Werte abgenommen sind.
+die Simulation. Die Näherung bleibt als Rückfall für alles, was nicht simuliert wird — also für
+Tanks und Heiler.
 
 ## Verlässlichkeit
 
 `4-bis-check.ps1` prüft ausschließlich die **DPS-Empfehlungen** gegen warcrafttavern.com. Letzter Stand
-(Branch `feat/trinket-beta`, gemessen 2026-08-03):
+(gemessen 2026-08-03):
 **155 Empfehlungen · 58 % auf BiS-Platz 1 · 79 % in den BiS-Top-3**. Die nicht gelisteten Empfehlungen
 sind ausnahmslos Marken- und Trash-Items, die diese Guides gar nicht führen. Nach jeder Modelländerung
 erneut laufen lassen — es ist der beste vorhandene Regressionstest und hat mehrere echte Fehler
@@ -370,20 +352,17 @@ gegen offizielle Wowhead-Guides abgeglichen und punktuell nachgepflegt.
 
 ## Offene Punkte
 
-1. **Schmuckstück-Näherung abnehmen.** Methode A läuft auf `feat/trinket-beta`, alle 22 Schmuckstücke
-   sind gegen die Tooltips geprüft und die Beta-Seite ist von der Produktivseite getrennt. Offen ist
-   die inhaltliche Abnahme der geschätzten Uptimes (am unsichersten: *The Lightning Capacitor*,
-   *Ashtongue Talisman of Lethality*, *Pendant of the Violet Eye*, *Shadowmoon Insignia*). Erst danach
-   für die Produktivseite freischalten.
-2. **Knappheitsspalten fehlen weiterhin.** Die Rohdaten liegen in `quellen/p3-alternativen-*.md`
+1. **Supfreshyo ist ausgeblendet**, weil sein Armory-Stand das Katzen-DPS-Set zeigt. Sobald er einmal
+   im Tank-Set erfasst wurde, aus `$UNSICHER` in `3-compute.ps1` entfernen.
+2. **Järgerlie trägt laut Armory eine PvP-Waffe** (*Gladiator's Right Ripper*). Der Effekt ist mit rund
+   15 DPS klein, es sind aber falsche Daten.
+3. **Rassen in `spec-sims/specs.json` sind angenommen**, nicht abgerufen — `players.json` enthält keine.
+4. **Knappheitsspalten fehlen weiterhin.** Die Rohdaten liegen in `quellen/p3-alternativen-*.md`
    vollständig vor (Marken-Sortiment, T6-Teile, Handwerk, Trash); ausgewertet und in die Seite
    eingebaut ist es noch nicht.
-3. **Markenhändler im Spiel gegenprüfen**, sobald Phase 3 live ist — Wowheads Phasenzuordnung ist
+5. **Markenhändler im Spiel gegenprüfen**, sobald Phase 3 live ist — Wowheads Phasenzuordnung ist
    teils widersprüchlich (gleiche Item-Reihe mal Phase 3, mal Phase 4 markiert).
-4. **Buff-Annahmen der Statgewichte** sind nicht spec-übergreifend auf identische Raid-Buffs verifiziert.
-5. **Ein automatisierter Regressionstest für Tank/Heiler** wäre sinnvoll, analog zu `4-bis-check.ps1`.
-6. **Individuelle Simulation auf mehr Spieler ausweiten** — aktuell nur Kaosx, alle anderen DPS laufen
-   weiterhin auf statischen Presets.
-7. **Aufräumen im Repo:** Python-Hilfsskripte in `daten/`, die Wurzeldateien `raw.html`/`temp.csv`
-   sowie wachsende `bin/`-Zwischendateien sind Arbeitsartefakte und aktuell mitversioniert — ein
-   `.gitignore` gibt es noch nicht.
+6. **Ein automatisierter Regressionstest für Tank/Heiler** wäre sinnvoll, analog zu `4-bis-check.ps1`.
+7. **Aufräumen im Repo:** Die Python-Hilfsskripte in `daten/` und `temp.csv` sind Arbeitsartefakte
+   und weiterhin mitversioniert. Ein `.gitignore` gibt es inzwischen; er deckt Python-Caches, die
+   WoWSims-CLI und deren Ein-/Ausgabedateien ab.

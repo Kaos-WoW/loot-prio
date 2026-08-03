@@ -230,32 +230,22 @@ $json = $payload | ConvertTo-Json -Depth 6 -Compress
 [System.IO.File]::WriteAllText("$base\daten\payload.json", $json, (New-Object System.Text.UTF8Encoding($false)))
 Write-Output ("payload.json geschrieben: " + $rows.Count + " Zeilen, " + [math]::Round($json.Length/1024,1) + " KB")
 
-# Zusammenbau der Seiten aus Vorlage + Daten.
+# Zusammenbau der Seite aus Vorlage + Daten.
 #
-# Es entstehen ZWEI Fassungen aus derselben Nutzlast, unterschieden nur durch den Schalter
-# __BETA__ in der Vorlage:
-#   index.html      (Produktiv, von GitHub Pages ausgeliefert) - Schmuckstuecke ausgeblendet
-#   index-beta.html (Beta)                                     - Schmuckstuecke per Methode A bewertet
-# Die Schmuckstueck-Naeherung aus 3-compute.ps1 steckt in beiden Nutzlasten; nur die Beta-Seite
-# zeigt die Zeilen auch an. So bleibt die Produktivseite unveraendert, solange die Naeherung
-# nicht abgenommen ist.
+# Frueher entstanden hier zwei Fassungen, unterschieden durch einen __BETA__-Schalter: die
+# Produktivseite ohne Schmuckstuecke und eine Beta-Seite mit ihnen. Seit die simulierten
+# Schmuckstueck-Werte abgenommen sind, sind sie ein normaler Teil der Liste - Schalter und
+# Beta-Seite sind deshalb entfallen.
 $tpl = "$base\vorlage.html"
 if (Test-Path $tpl) {
     $tplHtml = [System.IO.File]::ReadAllText($tpl, [System.Text.Encoding]::UTF8)
-    if ($tplHtml -notmatch '__BETA__') {
-        Write-Warning "vorlage.html enthaelt keinen __BETA__-Schalter - Beta- und Produktivseite werden identisch!"
-    }
     $enc = New-Object System.Text.UTF8Encoding($false)
 
-    $prod = $tplHtml.Replace('"__DATEN__"', $json).Replace('"__BETA__"', 'false')
-    [System.IO.File]::WriteAllText("$base\ausgabe\loot-prio-p3.html", $prod, $enc)
-    [System.IO.File]::WriteAllText("$base\index.html", $prod, $enc)
+    $html = $tplHtml.Replace('"__DATEN__"', $json)
+    [System.IO.File]::WriteAllText("$base\ausgabe\loot-prio-p3.html", $html, $enc)
+    [System.IO.File]::WriteAllText("$base\index.html", $html, $enc)
 
-    $beta = $tplHtml.Replace('"__DATEN__"', $json).Replace('"__BETA__"', 'true')
-    [System.IO.File]::WriteAllText("$base\ausgabe\loot-prio-p3-beta.html", $beta, $enc)
-    [System.IO.File]::WriteAllText("$base\index-beta.html", $beta, $enc)
-
-    Write-Output ("index.html (produktiv, ohne Schmuck) und index-beta.html (mit Schmuck) gebaut: " + [math]::Round((Get-Item "$base\index.html").Length/1024,1) + " KB")
+    Write-Output ("index.html und ausgabe/loot-prio-p3.html gebaut: " + [math]::Round((Get-Item "$base\index.html").Length/1024,1) + " KB")
 } else {
     Write-Output "Vorlage fehlt noch - nur payload.json erzeugt."
 }

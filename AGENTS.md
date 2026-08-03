@@ -182,25 +182,12 @@ python 7-stat-gewichte.py
   1,50–1,80 gegen 0,11–0,81 ein grober Fehler), *Ashtongue Talisman of Insight* (gibt Zauber**tempo**,
   war als `SP` codiert) und *Icon of Unyielding Courage* (28121), dessen Werte zu einem **ganz anderen
   Item** gehörten (*Hourglass of the Unraveller*, 28034).
-* **Beta- und Produktivseite entstehen aus derselben Nutzlast.** `5-build-payload.ps1` ersetzt in
-  `vorlage.html` neben `"__DATEN__"` auch `"__BETA__"` durch `false` (→ `index.html`,
-  `ausgabe/loot-prio-p3.html`) bzw. `true` (→ `index-beta.html`, `ausgabe/loot-prio-p3-beta.html`).
-  Nur der Schalter entscheidet, ob die genäherten Schmuckstück-Zeilen angezeigt werden; die Zahlen
-  stecken in beiden Nutzlasten. **Vorher schrieb das Skript beide Dateien byte-identisch** — die Beta
-  war also gar keine. Das Skript warnt jetzt, wenn `__BETA__` in der Vorlage fehlt.
-* **★ `Delta` ist bei Tank/Heiler kein Statwert, sondern ein Ranking-Score.** In `3-compute.ps1`
-  gilt für die BiS-gegateten Rollen `Delta = (neuerWert − getragenerWert) + BiS-Bonus`, wobei der
-  Bonus **+100 für BiS-Rang 0** und **+50 sonst** beträgt (und für ein bereits getragenes BiS-Teil
-  wieder abgezogen wird). `Pct` dagegen rechnet **ohne** Bonus, rein aus der Statdifferenz.
-  Beide Zahlen messen also Verschiedenes. Ist ein BiS-Item statmäßig schlechter als das getragene
-  Teil, kommt genau das Muster **hohes Delta bei `Pct = 0`** heraus — betrifft aktuell 10 Zeilen,
-  z. B. *Idol of the White Stag* für Supfreshyo (Delta 100 = exakt der Bonus, echte Statdifferenz 0)
-  oder *Scepter of Purification* für Heinerm (Delta 44,5 bei Bonus +100, also −55,5 an Stats).
-  **Das ist kein Rechenfehler**, sondern gewollt: die BiS-Gate-Logik soll BiS-Items auch dann
-  anzeigen, wenn sie momentan kein Zugewinn sind. Falsch war nur die *Anzeige* — die Seite gab
-  `Delta` als „(+96,8 Pkt)" neben dem Prozentwert aus, was wie ein Zugewinn aussah. Jetzt steht dort
-  „±0 % — kein Statgewinn, steht nur wegen BiS in der Liste". **Wer `Delta` für Tank/Heiler
-  weiterverwendet, muss den Bonus herausrechnen**, sonst vergleicht er Äpfel mit Birnen.
+* **Es gibt nur noch EINE Ausgabefassung.** Bis zur Abnahme der Schmuckstück-Simulation baute
+  `5-build-payload.ps1` zwei Seiten aus derselben Nutzlast, unterschieden durch einen `__BETA__`-
+  Schalter: `index.html` ohne Schmuckstücke, `index-beta.html` mit ihnen. Seit der Freigabe am
+  03.08.2026 sind Schmuckstücke normaler Teil der Liste; Schalter, Beta-Dateien und der Hinweis
+  „Keine Schmuckstücke" sind entfernt. Wer wieder etwas stufenweise ausrollen will, findet das
+  Muster in der Git-Historie (Commit `d3c4085`).
 * **Zuwachszahlen sind rollenübergreifend nicht vergleichbar.** `d` ist bei DPS absoluter ΔDPS, bei
   Tank/Heiler ein roher Stat-Score (die vergleichbare Größe ist dort `p` in Prozent). Beim Eroberer-Token
   konkurrieren Heilig-Priester, Schutz-Paladin und Hexer im selben Topf — eine gemeinsame Rangliste nach
@@ -276,13 +263,14 @@ python 7-stat-gewichte.py
   `raid.parties[0].buffs`. Das muss umgehängt werden. In der UI gibt es zusätzlich einen Punkt
   **„CLI Export“**, der vermutlich direkt das richtige Format liefert — noch nicht geprüft.
   Ebenfalls beachten: die Presets nutzen `rotation.type = "TypeSimple"` mit `specRotationJson`, nicht
-  die APL-Datei, die `wowsims-cli.ps1` heute per Python einhängt.
-* **Bis dahin bleibt `BETA` aus und der Branch ungemergt.** Offen ist ansonsten die inhaltliche
-  Abnahme der geschätzten Uptimes. Am unsichersten: *The Lightning Capacitor* (Schadensprokk, pauschal als 70 SP angesetzt),
-  *Ashtongue Talisman of Lethality* (~90 % Uptime ist optimistisch), *Pendant of the Violet Eye*
-  (gestapelte mp5 grob gemittelt) und *Shadowmoon Insignia* (Notfall-Leben als Ausdauer gemittelt —
-  methodisch fragwürdig, weil es ein Überlebens-Cooldown ist, kein Durchsatz). Erst nach Abnahme
-  `BETA` auch für die Produktivseite freischalten.
+  die APL-Dateien in `spec-sims/apls/`, die unsere Sim-Skripte verwenden.
+* **Abgenommen und live seit 03.08.2026.** Die simulierten Schmuckstück-Werte sind freigegeben und
+  Teil der normalen Liste. Die Näherung `$TRINKET_EFFECTS` bleibt als Rückfall für alles, was nicht
+  simuliert wird — praktisch also für Tank und Heiler. Dort sind weiterhin unsicher:
+  *The Lightning Capacitor* (Schadensprokk, pauschal 70 SP), *Ashtongue Talisman of Lethality*
+  (~90 % Uptime ist optimistisch), *Pendant of the Violet Eye* (gestapelte mp5 grob gemittelt) und
+  *Shadowmoon Insignia* (Notfall-Leben als Ausdauer gemittelt — methodisch fragwürdig, weil es ein
+  Überlebens-Cooldown ist, kein Durchsatz).
 * **Die Tabelle deckt den Pool derzeit exakt ab** (22 Schmuckstücke im Pool, 22 hinterlegt, kein toter
   Eintrag). Kommt über `1-fetch-items.ps1` ein neues Schmuckstück dazu, fällt es automatisch auf
   `NichtBewertbar` zurück — dann Eintrag in `$TRINKET_EFFECTS` nachziehen. Gegenprobe:

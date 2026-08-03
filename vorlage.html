@@ -426,7 +426,7 @@
     </button></h2>
     <div class="caveats" id="hinweise-inhalt">
       <p><strong>BiS-Schutz:</strong> BiS-Spieler haben immer Vorrang vor Spielern, für die das Item nur ein normales Upgrade ist.</p>
-      <p id="caveat-trinkets"><strong>Keine Schmuckstücke:</strong> Schmuckstücke fehlen in dieser Liste, da ihre Effekte (Proks/Nutzen) nicht verlässlich berechnet werden können.</p>
+      <p><strong>Schmuckstücke:</strong> Ihr Wert steckt fast ganz in Prokks und Nutzeneffekten und wird deshalb nicht aus Statwerten gerechnet, sondern <b>simuliert</b> — das Schmuckstück wird im echten Gear des Spielers getauscht und der DPS-Unterschied gemessen. Gilt nur für DPS; bei Tank und Heiler bleibt es bei einer Näherung.</p>
       <p><strong>Waffentempo vorsortiert:</strong> Schnelle Waffen (&lt; 2.4s) wurden für Kampf-Schurken und Verstärker-Schamanen bereits aussortiert.</p>
       <p><strong>Set-Boni extra beachten:</strong> Die DPS-Zahl enthält keine Set-Boni. Ob du durch den Tausch Boni gewinnst oder verlierst, steht direkt als Text unter dem Item.</p>
       <p><strong>Warglaives (Gleven):</strong> Das Paar ist als Kombi-Zeile berechnet. Nutzt diese Paar-Zeilen für die Vergabe der Gleven.</p>
@@ -564,30 +564,12 @@ window.onerror = function(msg, url, line, col, error) {
   return false;
 };
 const DATA = "__DATEN__";
-// Wird beim Bau ersetzt: false fuer index.html, true fuer index-beta.html.
-// Steuert allein, ob die per Methode A genaeherten Schmuckstueck-Zeilen angezeigt werden.
-const BETA = "__BETA__";
 const rows = DATA.rows.filter(r => !r.un);
-const isTrinket = r => (r.s === 'Trinket' || r.s === 'TRINKET');
 
-// Beta-Seite kenntlich machen: der Loot-Rat muss sofort sehen, dass hier genaeherte
-// Schmuckstueck-Zahlen mitlaufen, die auf der Produktivseite bewusst fehlen.
-if (BETA) {
-  document.addEventListener('DOMContentLoaded', () => {
-    // Auf dieser Seite SIND die Schmuckstuecke in der Liste (per Differenzsimulation
-    // bewertet), der Hinweis "Keine Schmuckstuecke" waere also schlicht falsch. Auf der
-    // Produktivseite bleibt er stehen, denn dort fehlen sie tatsaechlich noch.
-    const c = document.getElementById('caveat-trinkets');
-    if (c) c.remove();
-    const z = document.getElementById('hinweise-zahl');
-    if (z) z.textContent = document.querySelectorAll('#hinweise-inhalt p').length + ' Hinweise';
-    const b = document.createElement('div');
-    b.textContent = '⚠ BETA-Fassung — Schmuckstücke sind hier simuliert und noch nicht abgenommen. Verbindlich ist die normale Seite.';
-    b.style = 'position:sticky; top:0; z-index:50; background:#7c2d12; color:#fed7aa; padding:0.5rem 1rem;'
-            + 'font-weight:700; font-size:0.85rem; text-align:center; border-bottom:1px solid #ea580c;';
-    document.body.prepend(b);
-  });
-}
+// Schmuckstuecke waren bis zur Abnahme der Simulation hinter einem BETA-Schalter
+// versteckt und liefen nur in index-beta.html mit. Seit der Freigabe sind sie ein
+// normaler Teil der Liste - Schalter, Beta-Seite und der Hinweis "Keine
+// Schmuckstuecke" sind deshalb entfallen.
 
 // Tier-6-Tokens: Gruppenschluessel ("CONQ|Head") -> Token-Gegenstand samt echtem Drop-Boss.
 // Die Token selbst haben keine Werte und erzeugen deshalb keine Upgrade-Zeilen; die Zeilen
@@ -861,8 +843,6 @@ function render() {
 
   let list = rows.filter(r => {
     if (r.nb) return false;
-    // Schmuckstuecke sind nur auf der Beta-Seite bewertet (statische Uptime-Naeherung).
-    if (!BETA && isTrinket(r)) return false;
     if (strict && r.bb) return false;
     if (hideEquipped && isEquipped(r)) return false;
     // T6-Teile tragen als Boss "Tier 6 (Onslaught)"; sie sollen aber auch unter dem Boss
@@ -1123,10 +1103,9 @@ function renderContestedTable() {
   tbody.innerHTML = topItems.map(item => {
     const playerLinks = item.upgrades.map(r => {
       const isBis = r.bis === 1 && !r.bb;
-      // Auf der Produktivseite gelten Schmuckstuecke weiterhin als nicht bezifferbar und
-      // laufen nur als (BiS)/(Bedarf) mit - erst die Beta-Seite zeigt dort echte Zahlen.
-      const unrated = r.nb || (!BETA && isTrinket(r));
-      const valText = unrated ? (r.bis === 1 ? 'BiS' : 'Bedarf') : `+${r.p.toFixed(1)}%`;
+      // Nicht bezifferbar sind nur noch Zeilen, die 3-compute.ps1 selbst so markiert -
+      // Schmuckstuecke gehoeren seit der Simulation nicht mehr dazu.
+      const valText = r.nb ? (r.bis === 1 ? 'BiS' : 'Bedarf') : `+${r.p.toFixed(1)}%`;
       const equipped = isEquipped(r);
       const equippedStyle = equipped ? 'text-decoration: line-through; opacity: 0.5;' : '';
       const color = isBis ? 'color:#ffd700; font-weight:700;' : 'color:var(--muted);';
