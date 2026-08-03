@@ -41,6 +41,12 @@ jobs:
         run: |
           powershell -ExecutionPolicy Bypass -File .\wowsims-cli.ps1
 
+      # Bewusst NICHT im Nachtlauf: 6-trinket-sim.py braucht rund 49 Sekunden je Spieler
+      # (gut 15 Minuten fuer den Kader) und die gemessenen Werte aendern sich nur, wenn sich das
+      # uebrige Gear eines Spielers spuerbar aendert. Der Lauf wird daher von Hand angestossen:
+      #   python 6-trinket-sim.py
+      # Die Ergebnisse liegen in daten/trinket-werte.json und werden hier nur mitcommittet.
+
       - name: Upgrades berechnen & Webseiten bauen
         shell: pwsh
         run: |
@@ -52,5 +58,5 @@ jobs:
         run: |
           git config --global user.name "GitHub Action (Auto-Sync)"
           git config --global user.email "action@github.com"
-          git add roster.json daten/players.json daten/cache-tooltips.json daten/payload.json index.html ausgabe/loot-prio-p3.html temp.csv daten/bis-listen.json daten/sim-weights.json
+          git add roster.json daten/players.json daten/cache-tooltips.json daten/payload.json index.html ausgabe/loot-prio-p3.html temp.csv daten/bis-listen.json daten/sim-weights.json daten/trinket-werte.json index-beta.html ausgabe/loot-prio-p3-beta.html
           git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-sync roster and gear [skip ci]" && git push)

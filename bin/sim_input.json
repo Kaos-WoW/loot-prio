@@ -11,6 +11,63 @@
         },
         "players": [
           {
+            "class": "ClassPaladin",
+            "buffs": {
+              "blessingOfKings": true,
+              "blessingOfMight": "BlessingOfMightImproved"
+            },
+            "bonusStats": {
+              "stats": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                100,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "consumables": {
+              "scrollAgi": true,
+              "flaskId": 22861,
+              "foodId": 27655,
+              "scrollStr": true
+            },
+            "retributionPaladin": {
+              "options": {
+                "classOptions": {}
+              }
+            },
+            "name": "Kaosx",
             "equipment": {
               "items": [
                 {
@@ -59,71 +116,14 @@
                   "id": 28430
                 },
                 {
-                  "id": 32332
+                  "id": 0
                 },
                 {
                   "id": 27484
                 }
               ]
             },
-            "name": "Kaosx",
-            "buffs": {
-              "blessingOfKings": true,
-              "blessingOfMight": "BlessingOfMightImproved"
-            },
-            "class": "ClassPaladin",
-            "consumables": {
-              "scrollAgi": true,
-              "flaskId": 22861,
-              "foodId": 27655,
-              "scrollStr": true
-            },
-            "bonusStats": {
-              "stats": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                30,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-              ]
-            },
-            "retributionPaladin": {
-              "options": {
-                "classOptions": {}
-              },
-              "talents": "50000000000000000000-0532010000000000000000-0523005120033125331051"
-            },
+            "talentsString": "50000000000000000000-0532010000000000000000-0523005120033125331051",
             "rotation": {
               "type": "TypeAPL",
               "prepullActions": [
@@ -609,14 +609,66 @@
     "durationVariation": 5,
     "targets": [
       {
-        "armor": 6200,
+        "canCrush": true,
+        "parryHaste": true,
         "level": 73,
-        "mobType": "MobTypeDemon"
+        "swingSpeed": 2,
+        "damageSpread": 0.5,
+        "mobType": "MobTypeDemon",
+        "stats": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          320,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          54,
+          0,
+          0,
+          0,
+          7685,
+          0,
+          6070400,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "minBaseDamage": 15113
       }
     ]
   },
   "simOptions": {
     "randomSeed": 101,
-    "iterations": 4000
+    "iterations": 10000
   }
 }
