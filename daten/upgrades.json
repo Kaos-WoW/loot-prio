@@ -12,14 +12,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  50.4,
         "Ersetzt":  "TRINKET_2",
-        "Pct":  4.43,
+        "Pct":  4.48,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "Statische Uptime-Approximation (Beta)",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  28528,
@@ -120,9 +120,9 @@
         "Spec":  "Hexenmeister",
         "SpecKey":  "WLCK",
         "Spieler":  "Deters",
-        "Delta":  24.4,
+        "Delta":  23.8,
         "Ersetzt":  "TRINKET_2",
-        "Pct":  1.16,
+        "Pct":  1.13,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
@@ -254,14 +254,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  0,
         "Ersetzt":  "TRINKET",
-        "Pct":  1.44,
+        "Pct":  1.46,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "Statische Uptime-Approximation (Beta)",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  28789,
@@ -760,14 +760,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  34.5,
         "Ersetzt":  "TRINKET_2",
-        "Pct":  3.03,
+        "Pct":  3.07,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "Statische Uptime-Approximation (Beta)",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  29370,
@@ -1273,7 +1273,7 @@
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  30007,
@@ -1955,7 +1955,7 @@
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  30083,
@@ -2704,28 +2704,6 @@
         "Hinweis":  "Simuliert (WoWSims-Differenzsimulation)",
         "NichtBewertbar":  false,
         "T5Teile":  5
-    },
-    {
-        "ItemId":  30627,
-        "Item":  "Tsunami Talisman",
-        "Boss":  "Leotheras (SSC)",
-        "Quelle":  "Raid",
-        "Ilvl":  128,
-        "Slot":  "Trinket",
-        "Armor":  "",
-        "Spec":  "Jaeger",
-        "SpecKey":  "HUNT",
-        "Spieler":  "Kroenix",
-        "Delta":  6,
-        "Ersetzt":  "TRINKET_1",
-        "Pct":  0.27,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Fern",
-        "Hinweis":  "Simuliert (WoWSims-Differenzsimulation)",
-        "NichtBewertbar":  false,
-        "T5Teile":  4
     },
     {
         "ItemId":  30627,
@@ -4632,14 +4610,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  60.5,
         "Ersetzt":  "OFF_HAND",
-        "Pct":  0.92,
+        "Pct":  0.93,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  30889,
@@ -4962,14 +4940,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  7.4,
         "Ersetzt":  "FEET",
-        "Pct":  0.65,
+        "Pct":  0.66,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  30894,
@@ -5114,16 +5092,16 @@
         "Spec":  "Schutz-Paladin",
         "SpecKey":  "PROT_PALA",
         "Spieler":  "Chadíkus",
-        "Delta":  58.6,
+        "Delta":  21,
         "Ersetzt":  "CHEST",
-        "Pct":  0.76,
+        "Pct":  1.87,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  30896,
@@ -6172,14 +6150,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  108.5,
         "Ersetzt":  "OFF_HAND",
-        "Pct":  0.75,
+        "Pct":  0.76,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  30909,
@@ -6326,14 +6304,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  150.4,
         "Ersetzt":  "MAIN_HAND",
-        "Pct":  4.43,
+        "Pct":  4.48,
         "Unsicher":  false,
         "Speed":  1.8,
         "ProSchlag":  73,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  30910,
@@ -7690,14 +7668,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  64.4,
         "Ersetzt":  "HANDS",
-        "Pct":  1.27,
+        "Pct":  1.28,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
-        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 4-\u003e3, T6 0-\u003e1 -- VERLIERT T5-4er: Judgement heilt gelegentlich die Gruppe [keiner]",
+        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 3-\u003e2, T6 0-\u003e1",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  30985,
@@ -7734,14 +7712,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  72.8,
         "Ersetzt":  "HEAD",
-        "Pct":  2,
+        "Pct":  2.03,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
-        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 4-\u003e3, T6 0-\u003e1 -- VERLIERT T5-4er: Judgement heilt gelegentlich die Gruppe [keiner]",
+        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 3-\u003e2, T6 0-\u003e1",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  30987,
@@ -7842,16 +7820,16 @@
         "Spec":  "Schutz-Paladin",
         "SpecKey":  "PROT_PALA",
         "Spieler":  "Chadíkus",
-        "Delta":  132.5,
+        "Delta":  94.9,
         "Ersetzt":  "CHEST",
-        "Pct":  2.86,
+        "Pct":  3.99,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
-        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 4-\u003e3, T6 0-\u003e1 -- VERLIERT T5-4er: Judgement heilt gelegentlich die Gruppe [keiner]",
+        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 3-\u003e3, T6 0-\u003e1",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  30991,
@@ -7976,14 +7954,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  139.5,
         "Ersetzt":  "LEGS",
-        "Pct":  3.47,
+        "Pct":  3.51,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
-        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 4-\u003e4, T6 0-\u003e1",
+        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 3-\u003e3, T6 0-\u003e1",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  30995,
@@ -8064,14 +8042,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  114.1,
         "Ersetzt":  "SHOULDER",
-        "Pct":  1.24,
+        "Pct":  1.25,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
-        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 4-\u003e3, T6 0-\u003e1 -- VERLIERT T5-4er: Judgement heilt gelegentlich die Gruppe [keiner]",
+        "Hinweis":  "Set-Boni nicht in der Zahl enthalten. T5 3-\u003e2, T6 0-\u003e1",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  30998,
@@ -10154,14 +10132,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  72.5,
         "Ersetzt":  "WRIST",
-        "Pct":  1.98,
+        "Pct":  2,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  32232,
@@ -11188,14 +11166,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  72.5,
         "Ersetzt":  "FEET",
-        "Pct":  1.98,
+        "Pct":  2,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  32245,
@@ -11474,14 +11452,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  78.8,
         "Ersetzt":  "SHOULDER",
-        "Pct":  2.53,
+        "Pct":  2.56,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  32250,
@@ -12200,14 +12178,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  24,
         "Ersetzt":  "FINGER_2",
-        "Pct":  2.11,
+        "Pct":  2.13,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  32261,
@@ -12332,14 +12310,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  128.3,
         "Ersetzt":  "LEGS",
-        "Pct":  2.49,
+        "Pct":  2.51,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  32263,
@@ -13234,14 +13212,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  70,
         "Ersetzt":  "WRIST",
-        "Pct":  1.76,
+        "Pct":  1.78,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  32279,
@@ -13982,14 +13960,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  60.1,
         "Ersetzt":  "BACK",
-        "Pct":  0.89,
+        "Pct":  0.9,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  32331,
@@ -14077,7 +14055,7 @@
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  32333,
@@ -14774,14 +14752,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  107.9,
         "Ersetzt":  "WAIST",
-        "Pct":  0.69,
+        "Pct":  0.7,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  32342,
@@ -16101,7 +16079,7 @@
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  32362,
@@ -16629,7 +16607,7 @@
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  32367,
@@ -16673,7 +16651,7 @@
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  32368,
@@ -17040,14 +17018,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  131.5,
         "Ersetzt":  "OFF_HAND",
-        "Pct":  2.77,
+        "Pct":  2.8,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  32375,
@@ -17434,9 +17412,9 @@
         "Spec":  "Hexenmeister",
         "SpecKey":  "WLCK",
         "Spieler":  "Deters",
-        "Delta":  43.6,
+        "Delta":  41.9,
         "Ersetzt":  "TRINKET_2",
-        "Pct":  2.08,
+        "Pct":  2,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
@@ -18250,14 +18228,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  140.1,
         "Ersetzt":  "TRINKET_2",
-        "Pct":  7.92,
+        "Pct":  8.01,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "Statische Uptime-Approximation (Beta)",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  32501,
@@ -18434,28 +18412,6 @@
         "Hinweis":  "Simuliert (WoWSims-Differenzsimulation)",
         "NichtBewertbar":  false,
         "T5Teile":  5
-    },
-    {
-        "ItemId":  32505,
-        "Item":  "Madness of the Betrayer",
-        "Boss":  "Illidari-Rat",
-        "Quelle":  "Raid",
-        "Ilvl":  141,
-        "Slot":  "Trinket",
-        "Armor":  "",
-        "Spec":  "Jaeger",
-        "SpecKey":  "HUNT",
-        "Spieler":  "Kroenix",
-        "Delta":  7.8,
-        "Ersetzt":  "TRINKET_1",
-        "Pct":  0.35,
-        "Unsicher":  false,
-        "Speed":  0,
-        "ProSchlag":  0,
-        "Rolle":  "Fern",
-        "Hinweis":  "Simuliert (WoWSims-Differenzsimulation)",
-        "NichtBewertbar":  false,
-        "T5Teile":  4
     },
     {
         "ItemId":  32505,
@@ -18866,14 +18822,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  77.4,
         "Ersetzt":  "HEAD",
-        "Pct":  2.41,
+        "Pct":  2.43,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  32521,
@@ -20382,9 +20338,9 @@
         "Spec":  "Hexenmeister",
         "SpecKey":  "WLCK",
         "Spieler":  "Deters",
-        "Delta":  30.2,
+        "Delta":  28.7,
         "Ersetzt":  "TRINKET_2",
-        "Pct":  1.44,
+        "Pct":  1.37,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
@@ -20560,14 +20516,14 @@
         "Spieler":  "Chadíkus",
         "Delta":  81.4,
         "Ersetzt":  "OFF_HAND",
-        "Pct":  2.76,
+        "Pct":  2.79,
         "Unsicher":  false,
         "Speed":  0,
         "ProSchlag":  0,
         "Rolle":  "Tank",
         "Hinweis":  "",
         "NichtBewertbar":  false,
-        "T5Teile":  4
+        "T5Teile":  3
     },
     {
         "ItemId":  34011,

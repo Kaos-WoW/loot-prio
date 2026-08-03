@@ -1,4 +1,27 @@
 {
+  "_spielerUeberschreibungen": {
+    "_hinweis": [
+      "Die Rechenkette kennt nur je eine HUNT- und WLCK-Spec, einzelne Spieler spielen aber eine",
+      "andere. Hier laesst sich das je Spieler korrigieren, ohne die Kette umzubauen: 'basis' nennt",
+      "die Spec, deren Klasse/Profil/Rasse gilt, 'talente' und 'apl' werden davon abweichend gesetzt.",
+      "Das betrifft NUR die Simulation - die Bewertung ueber Statgewichte laeuft weiterhin auf der",
+      "Roster-Spec."
+    ],
+    "Deters": {
+      "basis": "WLCK",
+      "talente": "05022221112351055003--50500051220001",
+      "apl": "WLCK_AFFLI",
+      "quelle": "presets.ts TalentsAffliction 'Affliction' + apls/affliction.apl.json",
+      "grund": "spielt Gebrechen, nicht Zerstoerung"
+    },
+    "Kroenix": {
+      "basis": "HUNT",
+      "talente": "502-0550201205-333200022003223005103",
+      "apl": "HUNT",
+      "quelle": "presets.ts SVTalents 'SV'; die Hunter-APL ist spec-neutral (kein Bestial Wrath, kein Kill Command)",
+      "grund": "spielt Ueberleben, nicht Tierherrschaft"
+    }
+  },
   "_hinweis": [
     "Spec-Konfiguration fuer die WoWSims-Simulation (6-trinket-sim.py).",
     "Quellen: Talente und APL stammen aus github.com/wowsims/tbc-new (ui/<klasse>/<spec>/presets.ts",
@@ -9,62 +32,94 @@
     "in dieser CLI nicht implementiert und liefert dasselbe wie gar keine Rotation).",
     "'profil' waehlt Verbrauchsgueter und Segen aus raid-setup.json aus."
   ],
-
   "FURY": {
-    "klasse": "ClassWarrior", "specKey": "dpsWarrior", "profil": "physisch",
-    "rasse": "RaceHuman", "talente": "3400502130201-05050005505012050115",
+    "klasse": "ClassWarrior",
+    "specKey": "dpsWarrior",
+    "profil": "physisch",
+    "rasse": "RaceHuman",
+    "talente": "3400502130201-05050005505012050115",
     "quelle": "presets.ts FuryTalents 'Fury' + apls/fury.apl.json"
   },
   "ARMS": {
-    "klasse": "ClassWarrior", "specKey": "dpsWarrior", "profil": "physisch",
-    "rasse": "RaceHuman", "talente": "32005011352010500221-0550000500521203",
+    "klasse": "ClassWarrior",
+    "specKey": "dpsWarrior",
+    "profil": "physisch",
+    "rasse": "RaceHuman",
+    "talente": "32005011352010500221-0550000500521203",
     "quelle": "presets.ts ArmsTalents 'Arms' + apls/arms.apl.json"
   },
   "RET": {
-    "klasse": "ClassPaladin", "specKey": "retributionPaladin", "profil": "physisch",
-    "rasse": "RaceHuman", "talente": "5-053201-0523005120033125331051",
+    "klasse": "ClassPaladin",
+    "specKey": "retributionPaladin",
+    "profil": "physisch",
+    "rasse": "RaceHuman",
+    "talente": "5-053201-0523005120033125331051",
     "quelle": "presets.ts DefaultTalents 'Default' + apls/default.apl.json"
   },
   "ENH": {
-    "klasse": "ClassShaman", "specKey": "enhancementShaman", "profil": "physisch",
-    "rasse": "RaceDraenei", "talente": "03-500502210501133531151-50005301",
+    "klasse": "ClassShaman",
+    "specKey": "enhancementShaman",
+    "profil": "physisch",
+    "rasse": "RaceDraenei",
+    "talente": "03-500502210501133531151-50005301",
     "quelle": "presets.ts SubRestoIWT 'Sub-Restoration IWT' + apls/default.apl.json"
   },
   "ROGUE": {
-    "klasse": "ClassRogue", "specKey": "rogue", "profil": "physisch",
-    "rasse": "RaceHuman", "talente": "0053201252-023305200005015002321151",
+    "klasse": "ClassRogue",
+    "specKey": "rogue",
+    "profil": "physisch",
+    "rasse": "RaceHuman",
+    "talente": "0053201252-023305200005015002321151",
     "quelle": "presets.ts Talents 'Combat Swords' + apls/swords.apl.json"
   },
   "HUNT": {
-    "klasse": "ClassHunter", "specKey": "hunter", "profil": "physisch",
-    "rasse": "RaceNightElf", "talente": "522002005150122431051-0505201205",
+    "klasse": "ClassHunter",
+    "specKey": "hunter",
+    "profil": "physisch",
+    "rasse": "RaceNightElf",
+    "talente": "522002005150122431051-0505201205",
     "quelle": "presets.ts BMTalents 'BM' + apls/default.apl.json",
-    "warnung": "Kroenix spielt Ueberleben, simuliert wird Tierherrschaft (die Kette kennt nur eine HUNT-Spec)."
+    "hinweis": "Abweichende Spieler stehen unter _spielerUeberschreibungen."
   },
   "MAGE": {
-    "klasse": "ClassMage", "specKey": "mage", "profil": "zauberer",
-    "rasse": "RaceGnome", "talente": "2500052300030150330125--053500031003001",
+    "klasse": "ClassMage",
+    "specKey": "mage",
+    "profil": "zauberer",
+    "rasse": "RaceGnome",
+    "talente": "2500052300030150330125--053500031003001",
     "quelle": "presets.ts ARCANE_TALENTS 'Arcane' + apls/arcane.apl.json"
   },
   "WLCK": {
-    "klasse": "ClassWarlock", "specKey": "warlock", "profil": "zauberer",
-    "rasse": "RaceGnome", "talente": "-20500301332101-50500051220051053105",
+    "klasse": "ClassWarlock",
+    "specKey": "warlock",
+    "profil": "zauberer",
+    "rasse": "RaceGnome",
+    "talente": "-20500301332101-50500051220051053105",
     "quelle": "presets.ts TalentsDestruction 'Destruction' + apls/destruction.apl.json",
-    "warnung": "Deters spielt Gebrechen, simuliert wird Zerstoerung (die Kette kennt nur eine WLCK-Spec)."
+    "hinweis": "Abweichende Spieler stehen unter _spielerUeberschreibungen."
   },
   "SPRI": {
-    "klasse": "ClassPriest", "specKey": "priest", "profil": "zauberer",
-    "rasse": "RaceDraenei", "talente": "500230013--503250510240103051451",
+    "klasse": "ClassPriest",
+    "specKey": "priest",
+    "profil": "zauberer",
+    "rasse": "RaceDraenei",
+    "talente": "500230013--503250510240103051451",
     "quelle": "presets.ts StandardTalents 'Shadow' + apls/default.apl.json"
   },
   "ELE": {
-    "klasse": "ClassShaman", "specKey": "elementalShaman", "profil": "zauberer",
-    "rasse": "RaceDraenei", "talente": "55003105100213351051--05105301005",
+    "klasse": "ClassShaman",
+    "specKey": "elementalShaman",
+    "profil": "zauberer",
+    "rasse": "RaceDraenei",
+    "talente": "55003105100213351051--05105301005",
     "quelle": "presets.ts StandardTalents 'Default' + apls/default.apl.json"
   },
   "BAL": {
-    "klasse": "ClassDruid", "specKey": "balanceDruid", "profil": "zauberer",
-    "rasse": "RaceNightElf", "talente": "510022312503135231351--520033",
+    "klasse": "ClassDruid",
+    "specKey": "balanceDruid",
+    "profil": "zauberer",
+    "rasse": "RaceNightElf",
+    "talente": "510022312503135231351--520033",
     "quelle": "presets.ts StandardTalents 'Standard' + apls/default.apl.json"
   }
 }

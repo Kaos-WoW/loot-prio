@@ -148,32 +148,46 @@ def main():
     for p in spieler:
         name = p["Name"]
         spec = spec_von.get(name)
-        if (nur and name.lower() not in nur) or not spec or spec not in specs:
+        if (nur and name.lower() not in nur) or not spec:
             continue
-        cfg = specs[spec]
 
-        if spec not in apls:
-            apldatei = os.path.join(SPEC_DIR, "apls", spec + ".apl.json")
+        # Einzelne Spieler spielen eine andere Spec, als die Kette kennt (nur je eine HUNT
+        # und WLCK). Die Ueberschreibung tauscht Talente und Rotation, sonst nichts.
+        ueber = specs.get("_spielerUeberschreibungen", {}).get(name)
+        if ueber:
+            cfg = dict(specs[ueber["basis"]])
+            cfg["talente"] = ueber["talente"]
+            cfg["warnung"] = None                     # gerade behoben, nicht mehr warnen
+            aplName = ueber["apl"]
+            abweichung = "  [" + ueber["grund"] + "]"
+        elif spec in specs:
+            cfg = specs[spec]
+            aplName = spec
+            abweichung = "  [" + cfg["warnung"] + "]" if cfg.get("warnung") else ""
+        else:
+            continue
+
+        if aplName not in apls:
+            apldatei = os.path.join(SPEC_DIR, "apls", aplName + ".apl.json")
             if not os.path.exists(apldatei):
-                print(f"!! {spec}: keine APL-Datei - uebersprungen "
+                print(f"!! {aplName}: keine APL-Datei - uebersprungen "
                       f"(ohne APL rechnet die Sim ohne Rotation)")
-                apls[spec] = None
+                apls[aplName] = None
             else:
-                apls[spec] = lade(apldatei)
-        if apls[spec] is None:
+                apls[aplName] = lade(apldatei)
+        if apls[aplName] is None:
             continue
 
         tooltipklasse = KLASSE_ZU_TOOLTIP[cfg["klasse"]]
         slots = dict(p["Slots"])
         getragen = [int(slots.get("TRINKET_1", 0) or 0), int(slots.get("TRINKET_2", 0) or 0)]
 
-        basis_anfrage = baue_anfrage(cfg, setup, apls[spec], name)
+        basis_anfrage = baue_anfrage(cfg, setup, apls[aplName], name)
         basis_anfrage["raid"]["parties"][0]["players"][0]["equipment"]["items"] = [
             {"id": int(slots.get(s, 0) or 0)} for s in SLOT_ORDER
         ]
         basis = sim(basis_anfrage)
-        hinweis = "  [" + cfg["warnung"] + "]" if cfg.get("warnung") else ""
-        print(f"--- {name} ({spec})  Basis {basis:.1f} DPS{hinweis}")
+        print(f"--- {name} ({spec})  Basis {basis:.1f} DPS{abweichung}")
 
         werte = {}
         for tid in kandidaten:
