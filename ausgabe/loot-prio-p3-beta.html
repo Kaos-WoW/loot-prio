@@ -120,6 +120,11 @@
     margin-left: auto; white-space: nowrap;
   }
   .klapp[aria-expanded="true"] .klapp-zahl { display: none; }
+  /* WICHTIG: Das HTML-Attribut hidden setzt nur display:none mit sehr niedriger Spezifitaet.
+     Jede eigene display-Regel schlaegt es - .caveats nutzt display:flex und blieb deshalb
+     beim Einklappen sichtbar. Dieselbe Falle gab es schon beim Spieler-Dropdown (.ms-dropdown).
+     Deshalb hier ausdruecklich fuer alle einklappbaren Ziele. */
+  [id$="-inhalt"][hidden] { display: none !important; }
 
   .caveats {
     border-left: 2px solid var(--warn);
@@ -417,7 +422,7 @@
   <section>
     <h2><button type="button" class="klapp" data-ziel="hinweise-inhalt" aria-expanded="true">
       <span class="klapp-pfeil" aria-hidden="true">▾</span>Hinweise zur Vergabe
-      <span class="klapp-zahl">7 Hinweise</span>
+      <span class="klapp-zahl" id="hinweise-zahl"></span>
     </button></h2>
     <div class="caveats" id="hinweise-inhalt">
       <p><strong>BiS-Schutz:</strong> BiS-Spieler haben immer Vorrang vor Spielern, für die das Item nur ein normales Upgrade ist.</p>
@@ -425,7 +430,6 @@
       <p><strong>Waffentempo vorsortiert:</strong> Schnelle Waffen (&lt; 2.4s) wurden für Kampf-Schurken und Verstärker-Schamanen bereits aussortiert.</p>
       <p><strong>Set-Boni extra beachten:</strong> Die DPS-Zahl enthält keine Set-Boni. Ob du durch den Tausch Boni gewinnst oder verlierst, steht direkt als Text unter dem Item.</p>
       <p><strong>Warglaives (Gleven):</strong> Das Paar ist als Kombi-Zeile berechnet. Nutzt diese Paar-Zeilen für die Vergabe der Gleven.</p>
-      <p><strong>Marken-Items:</strong> Händler-Items für Abzeichen sind gelistet, können aber selbst gefarmt werden. T6-Tokens droppen nur bei Bossen.</p>
       <p><strong>Tier-6-Tokens:</strong> Gelistet ist immer das <em>eingetauschte</em> Rüstungsteil. Da sich drei Klassen ein Token teilen, steht die vollständige Konkurrenz in der Tabelle „Tier-6-Tokens“ weiter unten — dort auch der Boss, der das Token wirklich fallen lässt.</p>
     </div>
   </section>
@@ -570,12 +574,15 @@ const isTrinket = r => (r.s === 'Trinket' || r.s === 'TRINKET');
 // Schmuckstueck-Zahlen mitlaufen, die auf der Produktivseite bewusst fehlen.
 if (BETA) {
   document.addEventListener('DOMContentLoaded', () => {
+    // Auf dieser Seite SIND die Schmuckstuecke in der Liste (per Differenzsimulation
+    // bewertet), der Hinweis "Keine Schmuckstuecke" waere also schlicht falsch. Auf der
+    // Produktivseite bleibt er stehen, denn dort fehlen sie tatsaechlich noch.
     const c = document.getElementById('caveat-trinkets');
-    if (c) c.innerHTML = '<strong>Schmuckstücke (BETA):</strong> Schmuckstücke sind hier über eine <b>statische Uptime-Näherung</b> bewertet '
-      + '(Equip-Wert + Prokk-Wert × geschätzte Uptime). Das ersetzt keine Simulation — Prokks mit Sonderverhalten '
-      + '(Aufladungen, Schadensprokks, Notfall-Cooldowns) sind nur grob abgebildet. Auf der Produktivseite fehlen diese Zeilen.';
+    if (c) c.remove();
+    const z = document.getElementById('hinweise-zahl');
+    if (z) z.textContent = document.querySelectorAll('#hinweise-inhalt p').length + ' Hinweise';
     const b = document.createElement('div');
-    b.textContent = '⚠ BETA-Fassung — enthält genäherte Schmuckstück-Werte. Verbindlich ist die normale Seite.';
+    b.textContent = '⚠ BETA-Fassung — Schmuckstücke sind hier simuliert und noch nicht abgenommen. Verbindlich ist die normale Seite.';
     b.style = 'position:sticky; top:0; z-index:50; background:#7c2d12; color:#fed7aa; padding:0.5rem 1rem;'
             + 'font-weight:700; font-size:0.85rem; text-align:center; border-bottom:1px solid #ea580c;';
     document.body.prepend(b);
@@ -1181,6 +1188,10 @@ function klappSetzen(knopf, offen) {
   inhalt.hidden = !offen;
   klappZustandSchreiben(knopf.dataset.ziel, offen);
 }
+// Zaehler der Hinweise aus dem DOM zaehlen statt fest hinschreiben - die Liste aendert
+// sich (Beta entfernt den Schmuckstueck-Hinweis), eine feste Zahl liefe sonst auseinander.
+setKlappZahl('hinweise-zahl', document.querySelectorAll('#hinweise-inhalt p').length, 'Hinweise');
+
 document.querySelectorAll('.klapp').forEach(knopf => {
   const gemerkt = klappZustandLesen(knopf.dataset.ziel);
   if (gemerkt === 'zu') klappSetzen(knopf, false);
