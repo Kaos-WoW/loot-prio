@@ -41,32 +41,62 @@ function Is-2Slot($slot) {
     return ($slot -eq 'Finger' -or $slot -eq 'FINGER' -or $slot -eq 'Trinket' -or $slot -eq 'TRINKET')
 }
 
-# T6 Token-Gruppen: Jedes Tier-6-Item gehoert zu einem der drei Token-Typen pro Slot.
-# Token-Typ: Conqueror (Paladin/Priest/Warlock), Protector (Hunter/Shaman/Warrior), Vanquisher (Druid/Mage/Rogue)
+# T6 Token-Gruppen: Jedes Tier-6-Ruestungsteil gehoert zu genau einem Token (Typ + Slot).
+# Token-Typ: Conqueror (Paladin/Priest/Warlock), Protector (Krieger/Jaeger/Schamane),
+#            Vanquisher (Schurke/Magier/Druide)
 # Items die denselben Token teilen konkurrieren miteinander — bc muss ALLE Token-Konkurrenten zaehlen.
+#
+# WICHTIG: Die Zuordnung wird aus items.json ABGELEITET (Setname im Boss-Feld + Slot), nicht
+# hartcodiert. Eine frueher gepflegte ID-Liste war stark fehlerhaft (nicht existierende IDs,
+# falsche Slots, sogar Items im falschen Token) und hat 33 von 78 T6-Teilen gar nicht erfasst.
+$setToTokenType = @{
+    'Lightbringer' = 'CONQ'   # Paladin
+    'Absolution'   = 'CONQ'   # Priester
+    'Malefic'      = 'CONQ'   # Hexenmeister
+    'Onslaught'    = 'PROT'   # Krieger
+    'Gronnstalker' = 'PROT'   # Jaeger
+    'Skyshatter'   = 'PROT'   # Schamane
+    'Slayer'       = 'VANQ'   # Schurke
+    'Tempest'      = 'VANQ'   # Magier
+    'Thunderheart' = 'VANQ'   # Druide
+}
+$tokenSlots = @('Head','Shoulder','Chest','Hands','Legs')
+
 $tokenGroupMap = @{}
-@(
-    # VANQUISHER: Rogue (Slayer) / Druid-Balance (Thunderheart) / Mage (Tempest of Chaos)
-    @{ids=@(31027,31040,30986); grp="VANQ|Head"},
-    @{ids=@(31030,31049,30988); grp="VANQ|Shoulder"},
-    @{ids=@(31028,31043,31057); grp="VANQ|Chest"},
-    @{ids=@(31026,31035,30982); grp="VANQ|Hands"},
-    @{ids=@(31029,31046,30984); grp="VANQ|Legs"},
-    # PROTECTOR: Hunter (Gronnstalker) / Shaman-Ele (Skyshatter) / Shaman-Enh (Skyshatter) / Warrior (Onslaught)
-    @{ids=@(31001,31014,31015,30961); grp="PROT|Head"},
-    @{ids=@(31006,31023,31024,30979); grp="PROT|Shoulder"},
-    @{ids=@(31004,31017,31018,30967); grp="PROT|Chest"},
-    @{ids=@(31002,31008,31011,30969); grp="PROT|Hands"},
-    @{ids=@(31005,31020,31021,30977); grp="PROT|Legs"},
-    # CONQUEROR: Paladin (Lightbringer) / Priest (Absolution) / Warlock (Malefic)
-    @{ids=@(30990,31064,31051); grp="CONQ|Head"},
-    @{ids=@(30992,31070,31053); grp="CONQ|Shoulder"},
-    @{ids=@(30989,31065,31052); grp="CONQ|Chest"},
-    @{ids=@(30991,31063,31054); grp="CONQ|Hands"},
-    @{ids=@(30993,31066,31055); grp="CONQ|Legs"}
-) | ForEach-Object { $grp=$_.grp; $_.ids | ForEach-Object { $tokenGroupMap[[string]$_] = $grp } }
-# Gronnstalker's Gloves (31001) sind Hands, nicht Head — korrigieren
-$tokenGroupMap["31001"] = "PROT|Hands"
+foreach ($it in $items) {
+    if ($it.Boss -notlike 'Tier 6*') { continue }
+    if ($tokenSlots -notcontains $it.Slot) { continue }   # Relikte/Waffen tragen kein Token
+    $type = $null
+    foreach ($setName in $setToTokenType.Keys) {
+        if ($it.Boss -like ("*" + $setName + "*")) { $type = $setToTokenType[$setName]; break }
+    }
+    if (-not $type) { Write-Warning ("T6-Item ohne bekanntes Set: " + $it.Id + " " + $it.Name + " [" + $it.Boss + "]"); continue }
+    $tokenGroupMap[[string]$it.Id] = $type + "|" + $it.Slot
+}
+
+# Die Token-Gegenstaende selbst ("... of the Forgotten ...") liegen ohne Slot/Werte im Pool und
+# erzeugen daher keine Upgrade-Zeilen. Hier werden sie als Metadaten je Gruppe eingesammelt,
+# damit die Seite Tokenname und echten Drop-Boss anzeigen kann.
+$tokenNameToSlot = @{ 'Helm'='Head'; 'Pauldrons'='Shoulder'; 'Chestguard'='Chest'; 'Gloves'='Hands'; 'Leggings'='Legs' }
+$tokenTypeWord   = @{ 'Conqueror'='CONQ'; 'Protector'='PROT'; 'Vanquisher'='VANQ' }
+$tokenMeta = @{}
+foreach ($it in $items) {
+    if ($it.Name -notlike '*of the Forgotten *') { continue }
+    $m = [regex]::Match($it.Name, '^(\w+) of the Forgotten (\w+)$')
+    if (-not $m.Success) { continue }
+    $slot = $tokenNameToSlot[$m.Groups[1].Value]
+    $type = $tokenTypeWord[$m.Groups[2].Value]
+    if (-not $slot -or -not $type) { continue }
+    $tokenMeta[$type + "|" + $slot] = [pscustomobject]@{
+        grp  = $type + "|" + $slot
+        id   = $it.Id
+        n    = $it.Name
+        b    = $it.Boss
+        s    = $slot
+        typ  = $type
+    }
+}
+Write-Output ("Token-Zuordnung: " + $tokenGroupMap.Count + " T6-Teile in " + ($tokenGroupMap.Values | Sort-Object -Unique).Count + " Gruppen, " + $tokenMeta.Count + " Token-Gegenstaende erkannt")
 
 # Schritt 0: Spec -> Spieler-Map aus Roster aufbauen
 $specToPlayers = @{}
@@ -138,10 +168,11 @@ foreach ($u in $upg) {
     }
     $bc = 0
     $idStr = [string]$u.ItemId
+    $tk = ""
     if ($tokenGroupMap.ContainsKey($idStr)) {
         # T6 Token-Item: bc = alle Spieler die auf denselben Token (egal welches Item) BiS haben
-        $grp = $tokenGroupMap[$idStr]
-        if ($tokenGroupPlayers.ContainsKey($grp)) { $bc = $tokenGroupPlayers[$grp].Count }
+        $tk = $tokenGroupMap[$idStr]
+        if ($tokenGroupPlayers.ContainsKey($tk)) { $bc = $tokenGroupPlayers[$tk].Count }
     } elseif ($itemBisPlayers.ContainsKey($idStr)) {
         $bc = $itemBisPlayers[$idStr].Count
     }
@@ -169,6 +200,7 @@ foreach ($u in $upg) {
         bc  = $bc
         bb  = $bb
         ro  = $u.Rolle
+        tk  = $tk
     }
 }
 
@@ -192,21 +224,38 @@ $payload = [pscustomobject]@{
     roster    = @($roster | ForEach-Object { [pscustomobject]@{ name=$_.name; spec=$_.spec } })
     gear      = $gearMap
     itemNames = $itemNames
+    tokens    = @($tokenMeta.Values | Sort-Object typ, s)
 }
 $json = $payload | ConvertTo-Json -Depth 6 -Compress
 [System.IO.File]::WriteAllText("$base\daten\payload.json", $json, (New-Object System.Text.UTF8Encoding($false)))
 Write-Output ("payload.json geschrieben: " + $rows.Count + " Zeilen, " + [math]::Round($json.Length/1024,1) + " KB")
 
-# Zusammenbau der Seite aus Vorlage + Daten (für ausgabe/ und root index.html für Netlify)
+# Zusammenbau der Seiten aus Vorlage + Daten.
+#
+# Es entstehen ZWEI Fassungen aus derselben Nutzlast, unterschieden nur durch den Schalter
+# __BETA__ in der Vorlage:
+#   index.html      (Produktiv, von GitHub Pages ausgeliefert) - Schmuckstuecke ausgeblendet
+#   index-beta.html (Beta)                                     - Schmuckstuecke per Methode A bewertet
+# Die Schmuckstueck-Naeherung aus 3-compute.ps1 steckt in beiden Nutzlasten; nur die Beta-Seite
+# zeigt die Zeilen auch an. So bleibt die Produktivseite unveraendert, solange die Naeherung
+# nicht abgenommen ist.
 $tpl = "$base\vorlage.html"
 if (Test-Path $tpl) {
-    $html = [System.IO.File]::ReadAllText($tpl, [System.Text.Encoding]::UTF8)
-    $html = $html.Replace('"__DATEN__"', $json)
-    [System.IO.File]::WriteAllText("$base\ausgabe\loot-prio-p3.html", $html, (New-Object System.Text.UTF8Encoding($false)))
-    [System.IO.File]::WriteAllText("$base\index.html", $html, (New-Object System.Text.UTF8Encoding($false)))
-    [System.IO.File]::WriteAllText("$base\ausgabe\loot-prio-p3-beta.html", $html, (New-Object System.Text.UTF8Encoding($false)))
-    [System.IO.File]::WriteAllText("$base\index-beta.html", $html, (New-Object System.Text.UTF8Encoding($false)))
-    Write-Output ("loot-prio-p3.html & index.html gebaut (inklusive Beta-Versionen): " + [math]::Round((Get-Item "$base\index.html").Length/1024,1) + " KB")
+    $tplHtml = [System.IO.File]::ReadAllText($tpl, [System.Text.Encoding]::UTF8)
+    if ($tplHtml -notmatch '__BETA__') {
+        Write-Warning "vorlage.html enthaelt keinen __BETA__-Schalter - Beta- und Produktivseite werden identisch!"
+    }
+    $enc = New-Object System.Text.UTF8Encoding($false)
+
+    $prod = $tplHtml.Replace('"__DATEN__"', $json).Replace('"__BETA__"', 'false')
+    [System.IO.File]::WriteAllText("$base\ausgabe\loot-prio-p3.html", $prod, $enc)
+    [System.IO.File]::WriteAllText("$base\index.html", $prod, $enc)
+
+    $beta = $tplHtml.Replace('"__DATEN__"', $json).Replace('"__BETA__"', 'true')
+    [System.IO.File]::WriteAllText("$base\ausgabe\loot-prio-p3-beta.html", $beta, $enc)
+    [System.IO.File]::WriteAllText("$base\index-beta.html", $beta, $enc)
+
+    Write-Output ("index.html (produktiv, ohne Schmuck) und index-beta.html (mit Schmuck) gebaut: " + [math]::Round((Get-Item "$base\index.html").Length/1024,1) + " KB")
 } else {
     Write-Output "Vorlage fehlt noch - nur payload.json erzeugt."
 }

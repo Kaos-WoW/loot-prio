@@ -369,11 +369,13 @@
       <span>Alle <b id="totalRaiders">— Raider</b></span>
       <span>Gewichte <b>WoWSims 2.5.6</b></span>
       <span class="tooltip-wrapper">
-        Abgleich <b>88 % in BiS-Top-3</b>
+        Abgleich <b>80 % in BiS-Top-3</b>
         <span class="tooltip-content">
           Dieser Qualitäts-Wert zeigt, wie genau die automatische Berechnung der Prio-Liste ist:
           <br><br>
-          In <b>88 % aller Fälle</b> liegt das vom System berechnete Top-Upgrade (Platz 1) auch in der offiziellen Wowhead Phase-3-BiS-Liste des jeweiligen Charakters unter den besten 3 Empfehlungen.
+          In <b>80 % aller Fälle</b> liegt das vom System berechnete Top-Upgrade (Platz 1) auch in der offiziellen Wowhead Phase-3-BiS-Liste des jeweiligen Charakters unter den besten 3 Empfehlungen, in 60 % sogar auf Platz 1.
+          <br><br>
+          Die restlichen Fälle sind fast immer Items, die diese Guides gar nicht führen (Marken- und Trash-Items) — kein Rechenfehler.
         </span>
       </span>
     </div>
@@ -390,11 +392,12 @@
     <h2>Hinweise zur Vergabe</h2>
     <div class="caveats">
       <p><strong>BiS-Schutz:</strong> BiS-Spieler haben immer Vorrang vor Spielern, für die das Item nur ein normales Upgrade ist.</p>
-      <p><strong>Keine Schmuckstücke:</strong> Schmuckstücke fehlen in dieser Liste, da ihre Effekte (Proks/Nutzen) nicht verlässlich berechnet werden können.</p>
+      <p id="caveat-trinkets"><strong>Keine Schmuckstücke:</strong> Schmuckstücke fehlen in dieser Liste, da ihre Effekte (Proks/Nutzen) nicht verlässlich berechnet werden können.</p>
       <p><strong>Waffentempo vorsortiert:</strong> Schnelle Waffen (&lt; 2.4s) wurden für Kampf-Schurken und Verstärker-Schamanen bereits aussortiert.</p>
       <p><strong>Set-Boni extra beachten:</strong> Die DPS-Zahl enthält keine Set-Boni. Ob du durch den Tausch Boni gewinnst oder verlierst, steht direkt als Text unter dem Item.</p>
       <p><strong>Warglaives (Gleven):</strong> Das Paar ist als Kombi-Zeile berechnet. Nutzt diese Paar-Zeilen für die Vergabe der Gleven.</p>
       <p><strong>Marken-Items:</strong> Händler-Items für Abzeichen sind gelistet, können aber selbst gefarmt werden. T6-Tokens droppen nur bei Bossen.</p>
+      <p><strong>Tier-6-Tokens:</strong> Gelistet ist immer das <em>eingetauschte</em> Rüstungsteil. Da sich drei Klassen ein Token teilen, steht die vollständige Konkurrenz in der Tabelle „Tier-6-Tokens“ weiter unten — dort auch der Boss, der das Token wirklich fallen lässt.</p>
     </div>
   </section>
 
@@ -413,6 +416,33 @@
           </tr>
         </thead>
         <tbody id="contested-tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="token-section">
+    <h2>🎟️ Tier-6-Tokens (wer braucht welches Token?)</h2>
+    <p class="sub" style="margin-bottom:0.75rem; max-width:none;">
+      Ein Token wird von <b>drei Klassen</b> geteilt — hier steht pro Token, wer alles darauf würfelt und
+      wie viel es bringt. Sortiert innerhalb der Rolle nach Zuwachs, <b style="color:#ffd700">gold</b> = BiS #1,
+      <span style="text-decoration:line-through; opacity:0.6">durchgestrichen</span> = Teil schon getragen.
+      <br><b>Achtung:</b> Zwischen den Rollen sind die Zahlen <u>nicht</u> vergleichbar (DPS = ΔDPS, Tank/Heiler = % auf den Ausrüstungswert)
+      — deshalb stehen sie in getrennten Blöcken.
+      <br>Diese Tabelle zeigt bewusst <b>alle</b> Anwärter, auch wenn oben der BiS-Schutz aktiv ist — der Loot-Rat soll das
+      ganze Feld sehen und dann entscheiden.
+    </p>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="plain">Token</th>
+            <th class="plain">Dropt bei</th>
+            <th class="plain" style="text-align:center;">Anwärter</th>
+            <th class="plain" style="text-align:center;">davon BiS #1</th>
+            <th class="plain">Wer braucht es (nach Rolle getrennt, bester zuerst)</th>
+          </tr>
+        </thead>
+        <tbody id="token-tbody"></tbody>
       </table>
     </div>
   </section>
@@ -478,7 +508,7 @@
   </section>
 
   <footer>
-    <p>Statgewichte aus echten Simulationsläufen (WoWSims, 23 Simulationen je Spec). Itemwerte aus der Wowhead-TBC-Datenbank, Namensraum <span style="font-family:var(--f-data)">static-2.5.6</span>. Ausrüstungsstände live über classic-armory.org. Gegengeprüft gegen die veröffentlichten Phase-3-BiS-Listen: 88&nbsp;% der Empfehlungen liegen dort in den Top&nbsp;3, 57&nbsp;% auf Platz&nbsp;1.</p>
+    <p>Statgewichte aus echten Simulationsläufen (WoWSims, 23 Simulationen je Spec). Itemwerte aus der Wowhead-TBC-Datenbank, Namensraum <span style="font-family:var(--f-data)">static-2.5.6</span>. Ausrüstungsstände live über classic-armory.org. Gegengeprüft gegen die veröffentlichten Phase-3-BiS-Listen: 80&nbsp;% der Empfehlungen liegen dort in den Top&nbsp;3, 60&nbsp;% auf Platz&nbsp;1 (155 geprüfte Empfehlungen, Stand 2026-08-02).</p>
   </footer>
 </div>
 
@@ -491,7 +521,35 @@ window.onerror = function(msg, url, line, col, error) {
   return false;
 };
 const DATA = "__DATEN__";
+// Wird beim Bau ersetzt: false fuer index.html, true fuer index-beta.html.
+// Steuert allein, ob die per Methode A genaeherten Schmuckstueck-Zeilen angezeigt werden.
+const BETA = "__BETA__";
 const rows = DATA.rows.filter(r => !r.un);
+const isTrinket = r => (r.s === 'Trinket' || r.s === 'TRINKET');
+
+// Beta-Seite kenntlich machen: der Loot-Rat muss sofort sehen, dass hier genaeherte
+// Schmuckstueck-Zahlen mitlaufen, die auf der Produktivseite bewusst fehlen.
+if (BETA) {
+  document.addEventListener('DOMContentLoaded', () => {
+    const c = document.getElementById('caveat-trinkets');
+    if (c) c.innerHTML = '<strong>Schmuckstücke (BETA):</strong> Schmuckstücke sind hier über eine <b>statische Uptime-Näherung</b> bewertet '
+      + '(Equip-Wert + Prokk-Wert × geschätzte Uptime). Das ersetzt keine Simulation — Prokks mit Sonderverhalten '
+      + '(Aufladungen, Schadensprokks, Notfall-Cooldowns) sind nur grob abgebildet. Auf der Produktivseite fehlen diese Zeilen.';
+    const b = document.createElement('div');
+    b.textContent = '⚠ BETA-Fassung — enthält genäherte Schmuckstück-Werte. Verbindlich ist die normale Seite.';
+    b.style = 'position:sticky; top:0; z-index:50; background:#7c2d12; color:#fed7aa; padding:0.5rem 1rem;'
+            + 'font-weight:700; font-size:0.85rem; text-align:center; border-bottom:1px solid #ea580c;';
+    document.body.prepend(b);
+  });
+}
+
+// Tier-6-Tokens: Gruppenschluessel ("CONQ|Head") -> Token-Gegenstand samt echtem Drop-Boss.
+// Die Token selbst haben keine Werte und erzeugen deshalb keine Upgrade-Zeilen; die Zeilen
+// tragen stattdessen das Feld tk mit ihrem Gruppenschluessel.
+const TOKENS = DATA.tokens || [];
+const TOKEN_BY_GRP = {};
+TOKENS.forEach(t => { TOKEN_BY_GRP[t.grp] = t; });
+const tokenBossOf = r => (r.tk && TOKEN_BY_GRP[r.tk]) ? TOKEN_BY_GRP[r.tk].b : null;
 
 const $ = id => document.getElementById(id);
 const uniq = (arr, k) => [...new Set(arr.map(r => r[k]).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'de'));
@@ -757,9 +815,13 @@ function render() {
 
   let list = rows.filter(r => {
     if (r.nb) return false;
+    // Schmuckstuecke sind nur auf der Beta-Seite bewertet (statische Uptime-Naeherung).
+    if (!BETA && isTrinket(r)) return false;
     if (strict && r.bb) return false;
     if (hideEquipped && isEquipped(r)) return false;
-    if (fb && r.b !== fb) return false;
+    // T6-Teile tragen als Boss "Tier 6 (Onslaught)"; sie sollen aber auch unter dem Boss
+    // auftauchen, der das zugehoerige Token wirklich fallen laesst (z.B. Archimonde).
+    if (fb && r.b !== fb && tokenBossOf(r) !== fb) return false;
     if (fs && r.s !== fs) return false;
     if (selectedPlayers.size > 0 && !selectedPlayers.has(r.pl)) return false;
     if (fq && r.q !== fq) return false;
@@ -831,9 +893,14 @@ function render() {
       ? `<span style="color:var(--gain); font-weight:650;">+${r.p.toFixed(2)}%</span> <span style="font-size:0.75rem; font-weight:normal; opacity:0.8; margin-left:2px; color:var(--muted);">(+${r.d.toFixed(1)} Pkt)</span>`
       : `<span style="color:var(--gain); font-weight:650;">+${r.p.toFixed(2)}% dps</span> <span style="font-size:0.75rem; font-weight:normal; opacity:0.8; margin-left:2px; color:var(--muted);">(+${r.d.toFixed(1)} dps)</span>`;
 
+    const tok = r.tk ? TOKEN_BY_GRP[r.tk] : null;
+    const bossCell = tok
+      ? `${esc(r.b)}<span class="muted" style="display:block; font-size:0.72rem; margin-top:0.15rem;">Token: ${wowLink(tok.id, tok.n)}<br>bei <b>${esc(tok.b)}</b></span>`
+      : esc(r.b);
+
     return `<tr ${rowClass}>
       <td><span class="item">${wowLink(r.id, r.n)}</span> ${quelle} ${equippedBadge}${note}${altsNote}</td>
-      <td class="muted">${esc(r.b)}</td>
+      <td class="muted">${bossCell}</td>
       <td class="muted">${esc(r.s)}${speed}</td>
       <td><b>${esc(r.pl)}</b></td>
       <td class="muted">${esc(r.sp)}</td>
@@ -843,6 +910,84 @@ function render() {
     </tr>`;
   }).join('');
   renderContestedTable();
+  renderTokenTable();
+}
+
+// Ein Token wird von drei Klassen geteilt. Diese Tabelle dreht die Sicht um: nicht
+// "welcher Spieler braucht welches Ruestungsteil", sondern "wer konkurriert um dieses Token".
+function renderTokenTable() {
+  const hideEquipped = $('f-hide-equipped').checked;
+  const frolle = $('f-rolle').value;
+  const fb = $('f-boss').value, fs = $('f-slot').value, fq = $('f-quelle').value;
+  const q = $('f-suche').value.trim().toLowerCase();
+
+  const grpRows = {};
+  rows.forEach(r => {
+    if (!r.tk) return;
+    if (hideEquipped && isEquipped(r)) return;
+    if (fs && r.s !== fs) return;
+    if (fq && r.q !== fq) return;
+    if (fb && r.b !== fb && tokenBossOf(r) !== fb) return;
+    if (q && !r.n.toLowerCase().includes(q) && !r.pl.toLowerCase().includes(q)) return;
+    if (selectedPlayers.size > 0 && !selectedPlayers.has(r.pl)) return;
+    if (frolle === 'dps' && (r.ro === 'Tank' || r.ro === 'Heiler')) return;
+    if (frolle === 'tank' && r.ro !== 'Tank') return;
+    if (frolle === 'heiler' && r.ro !== 'Heiler') return;
+    (grpRows[r.tk] = grpRows[r.tk] || []).push(r);
+  });
+
+  // Rollen getrennt halten: DPS rechnet in absolutem DPS-Zuwachs, Tank/Heiler in Prozent
+  // auf den Ausruestungswert. Ein gemeinsames Ranking waere schlicht falsch.
+  // val() ist zugleich Sortierschluessel und Anzeigewert — sonst steht die Liste
+  // scheinbar unsortiert da (Heiler mit hohem Punkte-Delta, aber kleinem Prozentwert).
+  const ROLE_BLOCKS = [
+    { label: 'DPS',    match: r => r.ro !== 'Tank' && r.ro !== 'Heiler', val: r => r.d },
+    { label: 'Tank',   match: r => r.ro === 'Tank',                      val: r => r.p },
+    { label: 'Heiler', match: r => r.ro === 'Heiler',                    val: r => r.p }
+  ];
+
+  const list = TOKENS
+    .filter(t => (grpRows[t.grp] || []).length > 0)
+    .sort((a, b) => {
+      const ia = BOSS_ORDER.indexOf(a.b), ib = BOSS_ORDER.indexOf(b.b);
+      if (ia !== ib) return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
+      return a.typ.localeCompare(b.typ);
+    });
+
+  const tbody = $('token-tbody');
+  if (list.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="5" class="empty">Keine Token-Anwärter mit den gewählten Filtern.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = list.map(t => {
+    const cands = grpRows[t.grp];
+    const bisCount = cands.filter(r => r.bis === 1).length;
+
+    const blocks = ROLE_BLOCKS.map(blk => {
+      const sub = cands.filter(blk.match)
+        .sort((a, b) => (b.bis === 1) - (a.bis === 1) || blk.val(b) - blk.val(a));
+      if (sub.length === 0) return '';
+      const names = sub.map(r => {
+        const isBis = r.bis === 1;
+        const val = (r.ro === 'Tank' || r.ro === 'Heiler')
+          ? `+${r.p.toFixed(1)}%`
+          : `+${r.d.toFixed(0)} dps`;
+        const style = (isBis ? 'color:#ffd700; font-weight:700;' : 'color:var(--muted);')
+                    + (isEquipped(r) ? ' text-decoration:line-through; opacity:0.5;' : '');
+        return `<span style="${style}" title="${esc(r.n)} — ${esc(r.sp)}">${esc(r.pl)} (${val})</span>`;
+      }).join(', ');
+      return `<div style="margin-bottom:0.2rem;"><span class="muted" style="display:inline-block; min-width:3.6rem; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.04em;">${blk.label}</span>${names}</div>`;
+    }).join('');
+
+    return `<tr>
+      <td style="min-width:17rem;"><span class="item">${wowLink(t.id, t.n)}</span> <span class="pill q-t6">${esc(t.s)}</span></td>
+      <td class="muted">${esc(t.b)}</td>
+      <td class="num" style="text-align:center; font-weight:600;">${cands.length}</td>
+      <td class="num" style="text-align:center; font-weight:700; color:#ffd700;">${bisCount}</td>
+      <td style="font-size:0.82rem; line-height:1.45;">${blocks}</td>
+    </tr>`;
+  }).join('');
 }
 
 function renderContestedTable() {
@@ -912,7 +1057,10 @@ function renderContestedTable() {
   tbody.innerHTML = topItems.map(item => {
     const playerLinks = item.upgrades.map(r => {
       const isBis = r.bis === 1 && !r.bb;
-      const valText = r.nb ? (r.bis === 1 ? 'BiS' : 'Bedarf') : (r.ro === 'Tank' || r.ro === 'Heiler' ? `+${r.p.toFixed(1)}%` : `+${r.p.toFixed(1)}%`);
+      // Auf der Produktivseite gelten Schmuckstuecke weiterhin als nicht bezifferbar und
+      // laufen nur als (BiS)/(Bedarf) mit - erst die Beta-Seite zeigt dort echte Zahlen.
+      const unrated = r.nb || (!BETA && isTrinket(r));
+      const valText = unrated ? (r.bis === 1 ? 'BiS' : 'Bedarf') : `+${r.p.toFixed(1)}%`;
       const equipped = isEquipped(r);
       const equippedStyle = equipped ? 'text-decoration: line-through; opacity: 0.5;' : '';
       const color = isBis ? 'color:#ffd700; font-weight:700;' : 'color:var(--muted);';
