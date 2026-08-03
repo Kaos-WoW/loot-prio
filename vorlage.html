@@ -95,6 +95,37 @@
     font-size: var(--step-2); margin: 0 0 0.75rem;
   }
 
+  /* Einklappbare Abschnitte. Der Knopf ersetzt den Text der h2, sieht aber genauso aus -
+     die Ueberschrift bleibt also optisch eine Ueberschrift und ist trotzdem bedienbar. */
+  .klapp {
+    all: unset;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 0.5rem;
+    font-family: var(--f-display); font-weight: 400;
+    font-size: var(--step-2); color: var(--ink);
+    width: 100%;
+  }
+  .klapp:hover { color: var(--accent); }
+  .klapp:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .klapp-pfeil {
+    display: inline-block; font-size: 0.8em; color: var(--muted);
+    transition: transform 0.15s ease;
+  }
+  .klapp[aria-expanded="false"] .klapp-pfeil { transform: rotate(-90deg); }
+  /* Zaehler wird nur im eingeklappten Zustand gezeigt - eingeklappt soll man trotzdem
+     sehen, ob und wie viel drinsteckt. */
+  .klapp-zahl {
+    font-family: var(--f-data); font-size: 0.7rem; color: var(--muted);
+    border: 1px solid var(--line); padding: 0.05rem 0.45rem;
+    margin-left: auto; white-space: nowrap;
+  }
+  .klapp[aria-expanded="true"] .klapp-zahl { display: none; }
+  /* WICHTIG: Das HTML-Attribut hidden setzt nur display:none mit sehr niedriger Spezifitaet.
+     Jede eigene display-Regel schlaegt es - .caveats nutzt display:flex und blieb deshalb
+     beim Einklappen sichtbar. Dieselbe Falle gab es schon beim Spieler-Dropdown (.ms-dropdown).
+     Deshalb hier ausdruecklich fuer alle einklappbaren Ziele. */
+  [id$="-inhalt"][hidden] { display: none !important; }
+
   .caveats {
     border-left: 2px solid var(--warn);
     background: var(--warn-soft);
@@ -369,11 +400,13 @@
       <span>Alle <b id="totalRaiders">— Raider</b></span>
       <span>Gewichte <b>WoWSims 2.5.6</b></span>
       <span class="tooltip-wrapper">
-        Abgleich <b>88 % in BiS-Top-3</b>
+        Abgleich <b>79 % in BiS-Top-3</b>
         <span class="tooltip-content">
           Dieser Qualitäts-Wert zeigt, wie genau die automatische Berechnung der Prio-Liste ist:
           <br><br>
-          In <b>88 % aller Fälle</b> liegt das vom System berechnete Top-Upgrade (Platz 1) auch in der offiziellen Wowhead Phase-3-BiS-Liste des jeweiligen Charakters unter den besten 3 Empfehlungen.
+          In <b>79 % aller Fälle</b> liegt das vom System berechnete Top-Upgrade (Platz 1) auch in der offiziellen Wowhead Phase-3-BiS-Liste des jeweiligen Charakters unter den besten 3 Empfehlungen, in 58 % sogar auf Platz 1.
+          <br><br>
+          Die restlichen Fälle sind fast immer Items, die diese Guides gar nicht führen (Marken- und Trash-Items) — kein Rechenfehler.
         </span>
       </span>
     </div>
@@ -387,19 +420,26 @@
   </header>
 
   <section>
-    <h2>Hinweise zur Vergabe</h2>
-    <div class="caveats">
+    <h2><button type="button" class="klapp" data-ziel="hinweise-inhalt" aria-expanded="true">
+      <span class="klapp-pfeil" aria-hidden="true">▾</span>Hinweise zur Vergabe
+      <span class="klapp-zahl" id="hinweise-zahl"></span>
+    </button></h2>
+    <div class="caveats" id="hinweise-inhalt">
       <p><strong>BiS-Schutz:</strong> BiS-Spieler haben immer Vorrang vor Spielern, für die das Item nur ein normales Upgrade ist.</p>
-      <p><strong>Keine Schmuckstücke:</strong> Schmuckstücke fehlen in dieser Liste, da ihre Effekte (Proks/Nutzen) nicht verlässlich berechnet werden können.</p>
+      <p><strong>Schmuckstücke:</strong> Ihr Wert steckt fast ganz in Prokks und Nutzeneffekten und wird deshalb nicht aus Statwerten gerechnet, sondern <b>simuliert</b> — das Schmuckstück wird im echten Gear des Spielers getauscht und der DPS-Unterschied gemessen. Gilt nur für DPS; bei Tank und Heiler bleibt es bei einer Näherung.</p>
       <p><strong>Waffentempo vorsortiert:</strong> Schnelle Waffen (&lt; 2.4s) wurden für Kampf-Schurken und Verstärker-Schamanen bereits aussortiert.</p>
       <p><strong>Set-Boni extra beachten:</strong> Die DPS-Zahl enthält keine Set-Boni. Ob du durch den Tausch Boni gewinnst oder verlierst, steht direkt als Text unter dem Item.</p>
       <p><strong>Warglaives (Gleven):</strong> Das Paar ist als Kombi-Zeile berechnet. Nutzt diese Paar-Zeilen für die Vergabe der Gleven.</p>
-      <p><strong>Marken-Items:</strong> Händler-Items für Abzeichen sind gelistet, können aber selbst gefarmt werden. T6-Tokens droppen nur bei Bossen.</p>
+      <p><strong>Tier-6-Tokens:</strong> Gelistet ist immer das <em>eingetauschte</em> Rüstungsteil. Da sich drei Klassen ein Token teilen, steht die vollständige Konkurrenz in der Tabelle „Tier-6-Tokens“ weiter unten — dort auch der Boss, der das Token wirklich fallen lässt.</p>
     </div>
   </section>
 
   <section id="contested-section">
-    <h2>🔥 Heiß umkämpfter Loot (Bedarfs-Übersicht)</h2>
+    <h2><button type="button" class="klapp" data-ziel="contested-inhalt" aria-expanded="true">
+      <span class="klapp-pfeil" aria-hidden="true">▾</span>🔥 Heiß umkämpfter Loot (Bedarfs-Übersicht)
+      <span class="klapp-zahl" id="contested-zahl"></span>
+    </button></h2>
+    <div id="contested-inhalt">
     <p class="sub" style="margin-bottom:0.75rem;">Die umkämpftesten Raid-Drops der Phase 3 (Kombination aus BiS #1 Status und Gesamtanzahl Upgrades).</p>
     <div class="tablewrap">
       <table>
@@ -414,6 +454,39 @@
         </thead>
         <tbody id="contested-tbody"></tbody>
       </table>
+    </div>
+    </div>
+  </section>
+
+  <section id="token-section">
+    <h2><button type="button" class="klapp" data-ziel="token-inhalt" aria-expanded="true">
+      <span class="klapp-pfeil" aria-hidden="true">▾</span>🎟️ Tier-6-Tokens (wer braucht welches Token?)
+      <span class="klapp-zahl" id="token-zahl"></span>
+    </button></h2>
+    <div id="token-inhalt">
+    <p class="sub" style="margin-bottom:0.75rem; max-width:none;">
+      Ein Token wird von <b>drei Klassen</b> geteilt — hier steht pro Token, wer alles darauf würfelt und
+      wie viel es bringt. Sortiert innerhalb der Rolle nach Zuwachs, <b style="color:#ffd700">gold</b> = BiS #1,
+      <span style="text-decoration:line-through; opacity:0.6">durchgestrichen</span> = Teil schon getragen.
+      <br><b>Achtung:</b> Zwischen den Rollen sind die Zahlen <u>nicht</u> vergleichbar (DPS = ΔDPS, Tank/Heiler = % auf den Ausrüstungswert)
+      — deshalb stehen sie in getrennten Blöcken.
+      <br>Diese Tabelle zeigt bewusst <b>alle</b> Anwärter, auch wenn oben der BiS-Schutz aktiv ist — der Loot-Rat soll das
+      ganze Feld sehen und dann entscheiden.
+    </p>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="plain">Token</th>
+            <th class="plain">Dropt bei</th>
+            <th class="plain" style="text-align:center;">Anwärter</th>
+            <th class="plain" style="text-align:center;">davon BiS #1</th>
+            <th class="plain">Wer braucht es (nach Rolle getrennt, bester zuerst)</th>
+          </tr>
+        </thead>
+        <tbody id="token-tbody"></tbody>
+      </table>
+    </div>
     </div>
   </section>
 
@@ -478,7 +551,7 @@
   </section>
 
   <footer>
-    <p>Statgewichte aus echten Simulationsläufen (WoWSims, 23 Simulationen je Spec). Itemwerte aus der Wowhead-TBC-Datenbank, Namensraum <span style="font-family:var(--f-data)">static-2.5.6</span>. Ausrüstungsstände live über classic-armory.org. Gegengeprüft gegen die veröffentlichten Phase-3-BiS-Listen: 88&nbsp;% der Empfehlungen liegen dort in den Top&nbsp;3, 57&nbsp;% auf Platz&nbsp;1.</p>
+    <p>Statgewichte aus echten Simulationsläufen (WoWSims, 23 Simulationen je Spec). Itemwerte aus der Wowhead-TBC-Datenbank, Namensraum <span style="font-family:var(--f-data)">static-2.5.6</span>. Ausrüstungsstände live über classic-armory.org. Gegengeprüft gegen die veröffentlichten Phase-3-BiS-Listen: 79&nbsp;% der Empfehlungen liegen dort in den Top&nbsp;3, 58&nbsp;% auf Platz&nbsp;1 (155 geprüfte Empfehlungen, Stand 2026-08-02).</p>
   </footer>
 </div>
 
@@ -492,6 +565,19 @@ window.onerror = function(msg, url, line, col, error) {
 };
 const DATA = "__DATEN__";
 const rows = DATA.rows.filter(r => !r.un);
+
+// Schmuckstuecke waren bis zur Abnahme der Simulation hinter einem BETA-Schalter
+// versteckt und liefen nur in index-beta.html mit. Seit der Freigabe sind sie ein
+// normaler Teil der Liste - Schalter, Beta-Seite und der Hinweis "Keine
+// Schmuckstuecke" sind deshalb entfallen.
+
+// Tier-6-Tokens: Gruppenschluessel ("CONQ|Head") -> Token-Gegenstand samt echtem Drop-Boss.
+// Die Token selbst haben keine Werte und erzeugen deshalb keine Upgrade-Zeilen; die Zeilen
+// tragen stattdessen das Feld tk mit ihrem Gruppenschluessel.
+const TOKENS = DATA.tokens || [];
+const TOKEN_BY_GRP = {};
+TOKENS.forEach(t => { TOKEN_BY_GRP[t.grp] = t; });
+const tokenBossOf = r => (r.tk && TOKEN_BY_GRP[r.tk]) ? TOKEN_BY_GRP[r.tk].b : null;
 
 const $ = id => document.getElementById(id);
 const uniq = (arr, k) => [...new Set(arr.map(r => r[k]).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'de'));
@@ -759,7 +845,9 @@ function render() {
     if (r.nb) return false;
     if (strict && r.bb) return false;
     if (hideEquipped && isEquipped(r)) return false;
-    if (fb && r.b !== fb) return false;
+    // T6-Teile tragen als Boss "Tier 6 (Onslaught)"; sie sollen aber auch unter dem Boss
+    // auftauchen, der das zugehoerige Token wirklich fallen laesst (z.B. Archimonde).
+    if (fb && r.b !== fb && tokenBossOf(r) !== fb) return false;
     if (fs && r.s !== fs) return false;
     if (selectedPlayers.size > 0 && !selectedPlayers.has(r.pl)) return false;
     if (fq && r.q !== fq) return false;
@@ -827,13 +915,33 @@ function render() {
       : equipped ? 'opacity:0.45;' : '';
     const rowClass = rowStyle ? `style="${rowStyle}"` : '';
 
-    const dpsCellContent = isTankOrHeal
-      ? `<span style="color:var(--gain); font-weight:650;">+${r.p.toFixed(2)}%</span> <span style="font-size:0.75rem; font-weight:normal; opacity:0.8; margin-left:2px; color:var(--muted);">(+${r.d.toFixed(1)} Pkt)</span>`
-      : `<span style="color:var(--gain); font-weight:650;">+${r.p.toFixed(2)}% dps</span> <span style="font-size:0.75rem; font-weight:normal; opacity:0.8; margin-left:2px; color:var(--muted);">(+${r.d.toFixed(1)} dps)</span>`;
+    // Bei Tank und Heiler ist r.d KEINE Statgroesse, sondern ein Ranking-Score:
+    // Statdifferenz + BiS-Bonus (+100 fuer Rang 0, +50 sonst). Ein BiS-Item, das
+    // statmaessig schlechter ist als das getragene Teil, kommt dadurch mit grossem
+    // positivem r.d heraus, waehrend r.p korrekt 0 % zeigt. Die Zahl deshalb nicht
+    // als Zugewinn ausgeben - und den Fall ausdruecklich benennen, statt ihn als
+    // "+0,00 %" durchzuwinken, was wie ein Rechenfehler aussieht.
+    let dpsCellContent;
+    if (isTankOrHeal) {
+      if (r.p <= 0) {
+        dpsCellContent = `<span style="color:var(--warn); font-weight:650;">±0 %</span>`
+          + `<span style="font-size:0.72rem; font-weight:normal; display:block; color:var(--muted);">`
+          + `kein Statgewinn — steht nur wegen BiS in der Liste</span>`;
+      } else {
+        dpsCellContent = `<span style="color:var(--gain); font-weight:650;">+${r.p.toFixed(2)}%</span>`;
+      }
+    } else {
+      dpsCellContent = `<span style="color:var(--gain); font-weight:650;">+${r.p.toFixed(2)}% dps</span> <span style="font-size:0.75rem; font-weight:normal; opacity:0.8; margin-left:2px; color:var(--muted);">(+${r.d.toFixed(1)} dps)</span>`;
+    }
+
+    const tok = r.tk ? TOKEN_BY_GRP[r.tk] : null;
+    const bossCell = tok
+      ? `${esc(r.b)}<span class="muted" style="display:block; font-size:0.72rem; margin-top:0.15rem;">Token: ${wowLink(tok.id, tok.n)}<br>bei <b>${esc(tok.b)}</b></span>`
+      : esc(r.b);
 
     return `<tr ${rowClass}>
       <td><span class="item">${wowLink(r.id, r.n)}</span> ${quelle} ${equippedBadge}${note}${altsNote}</td>
-      <td class="muted">${esc(r.b)}</td>
+      <td class="muted">${bossCell}</td>
       <td class="muted">${esc(r.s)}${speed}</td>
       <td><b>${esc(r.pl)}</b></td>
       <td class="muted">${esc(r.sp)}</td>
@@ -843,6 +951,88 @@ function render() {
     </tr>`;
   }).join('');
   renderContestedTable();
+  renderTokenTable();
+}
+
+// Ein Token wird von drei Klassen geteilt. Diese Tabelle dreht die Sicht um: nicht
+// "welcher Spieler braucht welches Ruestungsteil", sondern "wer konkurriert um dieses Token".
+function renderTokenTable() {
+  const hideEquipped = $('f-hide-equipped').checked;
+  const frolle = $('f-rolle').value;
+  const fb = $('f-boss').value, fs = $('f-slot').value, fq = $('f-quelle').value;
+  const q = $('f-suche').value.trim().toLowerCase();
+
+  const grpRows = {};
+  rows.forEach(r => {
+    if (!r.tk) return;
+    if (hideEquipped && isEquipped(r)) return;
+    if (fs && r.s !== fs) return;
+    if (fq && r.q !== fq) return;
+    if (fb && r.b !== fb && tokenBossOf(r) !== fb) return;
+    if (q && !r.n.toLowerCase().includes(q) && !r.pl.toLowerCase().includes(q)) return;
+    if (selectedPlayers.size > 0 && !selectedPlayers.has(r.pl)) return;
+    if (frolle === 'dps' && (r.ro === 'Tank' || r.ro === 'Heiler')) return;
+    if (frolle === 'tank' && r.ro !== 'Tank') return;
+    if (frolle === 'heiler' && r.ro !== 'Heiler') return;
+    (grpRows[r.tk] = grpRows[r.tk] || []).push(r);
+  });
+
+  // Rollen getrennt halten: DPS rechnet in absolutem DPS-Zuwachs, Tank/Heiler in Prozent
+  // auf den Ausruestungswert. Ein gemeinsames Ranking waere schlicht falsch.
+  // val() ist zugleich Sortierschluessel und Anzeigewert — sonst steht die Liste
+  // scheinbar unsortiert da (Heiler mit hohem Punkte-Delta, aber kleinem Prozentwert).
+  const ROLE_BLOCKS = [
+    { label: 'DPS',    match: r => r.ro !== 'Tank' && r.ro !== 'Heiler', val: r => r.d },
+    { label: 'Tank',   match: r => r.ro === 'Tank',                      val: r => r.p },
+    { label: 'Heiler', match: r => r.ro === 'Heiler',                    val: r => r.p }
+  ];
+
+  const list = TOKENS
+    .filter(t => (grpRows[t.grp] || []).length > 0)
+    .sort((a, b) => {
+      const ia = BOSS_ORDER.indexOf(a.b), ib = BOSS_ORDER.indexOf(b.b);
+      if (ia !== ib) return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
+      return a.typ.localeCompare(b.typ);
+    });
+
+  const tbody = $('token-tbody');
+  // Zaehler in der Ueberschrift, damit man auch eingeklappt sieht, was drinsteckt.
+  setKlappZahl('token-zahl', list.length, 'Token');
+  if (list.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="5" class="empty">Keine Token-Anwärter mit den gewählten Filtern.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = list.map(t => {
+    const cands = grpRows[t.grp];
+    const bisCount = cands.filter(r => r.bis === 1).length;
+
+    const blocks = ROLE_BLOCKS.map(blk => {
+      const sub = cands.filter(blk.match)
+        .sort((a, b) => (b.bis === 1) - (a.bis === 1) || blk.val(b) - blk.val(a));
+      if (sub.length === 0) return '';
+      const names = sub.map(r => {
+        const isBis = r.bis === 1;
+        // ±0 % heisst bei Tank/Heiler: BiS-gelistet, aber statmaessig kein Gewinn
+        // gegenueber dem getragenen Teil (siehe Kommentar bei dpsCellContent).
+        const val = (r.ro === 'Tank' || r.ro === 'Heiler')
+          ? (r.p > 0 ? `+${r.p.toFixed(1)}%` : '±0 %')
+          : `+${r.d.toFixed(0)} dps`;
+        const style = (isBis ? 'color:#ffd700; font-weight:700;' : 'color:var(--muted);')
+                    + (isEquipped(r) ? ' text-decoration:line-through; opacity:0.5;' : '');
+        return `<span style="${style}" title="${esc(r.n)} — ${esc(r.sp)}">${esc(r.pl)} (${val})</span>`;
+      }).join(', ');
+      return `<div style="margin-bottom:0.2rem;"><span class="muted" style="display:inline-block; min-width:3.6rem; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.04em;">${blk.label}</span>${names}</div>`;
+    }).join('');
+
+    return `<tr>
+      <td style="min-width:17rem;"><span class="item">${wowLink(t.id, t.n)}</span> <span class="pill q-t6">${esc(t.s)}</span></td>
+      <td class="muted">${esc(t.b)}</td>
+      <td class="num" style="text-align:center; font-weight:600;">${cands.length}</td>
+      <td class="num" style="text-align:center; font-weight:700; color:#ffd700;">${bisCount}</td>
+      <td style="font-size:0.82rem; line-height:1.45;">${blocks}</td>
+    </tr>`;
+  }).join('');
 }
 
 function renderContestedTable() {
@@ -904,6 +1094,7 @@ function renderContestedTable() {
   const topItems = filtered.slice(0, 12);
 
   const tbody = $('contested-tbody');
+  setKlappZahl('contested-zahl', topItems.length, 'Items');
   if (topItems.length === 0) {
     tbody.innerHTML = `<tr><td colspan="5" class="empty">Keine umkämpften Items mit den gewählten Filtern.</td></tr>`;
     return;
@@ -912,7 +1103,9 @@ function renderContestedTable() {
   tbody.innerHTML = topItems.map(item => {
     const playerLinks = item.upgrades.map(r => {
       const isBis = r.bis === 1 && !r.bb;
-      const valText = r.nb ? (r.bis === 1 ? 'BiS' : 'Bedarf') : (r.ro === 'Tank' || r.ro === 'Heiler' ? `+${r.p.toFixed(1)}%` : `+${r.p.toFixed(1)}%`);
+      // Nicht bezifferbar sind nur noch Zeilen, die 3-compute.ps1 selbst so markiert -
+      // Schmuckstuecke gehoeren seit der Simulation nicht mehr dazu.
+      const valText = r.nb ? (r.bis === 1 ? 'BiS' : 'Bedarf') : `+${r.p.toFixed(1)}%`;
       const equipped = isEquipped(r);
       const equippedStyle = equipped ? 'text-decoration: line-through; opacity: 0.5;' : '';
       const color = isBis ? 'color:#ffd700; font-weight:700;' : 'color:var(--muted);';
@@ -951,6 +1144,41 @@ $('f-rolle').addEventListener('change', () => {
   updatePlayerFilter();
   render();
 });
+// --- Einklappbare Abschnitte -------------------------------------------------
+// Zustand wird gemerkt, damit der Loot-Rat seine Ansicht nicht bei jedem Aufruf
+// neu herrichten muss. localStorage kann in manchen Browsereinstellungen werfen,
+// deshalb ueberall abgesichert - ein fehlendes Gedaechtnis darf die Seite nicht kippen.
+function klappZustandLesen(id) {
+  try { return localStorage.getItem('klapp:' + id); } catch (e) { return null; }
+}
+function klappZustandSchreiben(id, offen) {
+  try { localStorage.setItem('klapp:' + id, offen ? 'offen' : 'zu'); } catch (e) { /* egal */ }
+}
+// Zaehler in der Ueberschrift. Nur sichtbar, wenn der Abschnitt eingeklappt ist -
+// dann soll man trotzdem erkennen, ob und wie viel dort steckt.
+function setKlappZahl(id, anzahl, wort) {
+  const el = $(id);
+  if (el) el.textContent = anzahl + ' ' + wort;
+}
+function klappSetzen(knopf, offen) {
+  const inhalt = $(knopf.dataset.ziel);
+  if (!inhalt) return;
+  knopf.setAttribute('aria-expanded', offen ? 'true' : 'false');
+  inhalt.hidden = !offen;
+  klappZustandSchreiben(knopf.dataset.ziel, offen);
+}
+// Zaehler der Hinweise aus dem DOM zaehlen statt fest hinschreiben - die Liste aendert
+// sich (Beta entfernt den Schmuckstueck-Hinweis), eine feste Zahl liefe sonst auseinander.
+setKlappZahl('hinweise-zahl', document.querySelectorAll('#hinweise-inhalt p').length, 'Hinweise');
+
+document.querySelectorAll('.klapp').forEach(knopf => {
+  const gemerkt = klappZustandLesen(knopf.dataset.ziel);
+  if (gemerkt === 'zu') klappSetzen(knopf, false);
+  knopf.addEventListener('click', () => {
+    klappSetzen(knopf, knopf.getAttribute('aria-expanded') !== 'true');
+  });
+});
+
 ['f-bis-strict','f-hide-equipped','f-prio','f-boss','f-slot','f-quelle'].forEach(id => $(id).addEventListener('change', render));
 $('f-suche').addEventListener('input', render);
 

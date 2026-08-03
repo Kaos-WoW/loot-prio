@@ -1,5 +1,23 @@
 ﻿[
     {
+        "Id":  28121,
+        "Name":  "Icon of Unyielding Courage",
+        "Boss":  "Dungeon (BM Heroisch)",
+        "Quelle":  "Raid",
+        "Ilvl":  115,
+        "Phase":  "Phase 1",
+        "Slot":  "Trinket",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Treffer":  30,
+                      "Sockel":  0
+                  }
+    },
+    {
         "Id":  28528,
         "Name":  "Moroes\u0027 Lucky Pocket Watch",
         "Boss":  "Moroes (Karazhan)",
@@ -15,6 +33,24 @@
         "Stats":  {
                       "Sockel":  0,
                       "Ausw":  38
+                  }
+    },
+    {
+        "Id":  28727,
+        "Name":  "Pendant of the Violet Eye",
+        "Boss":  "Arans Schemen (Karazhan)",
+        "Quelle":  "Raid",
+        "Ilvl":  115,
+        "Phase":  "Phase 1",
+        "Slot":  "Trinket",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sockel":  0,
+                      "Int":  40
                   }
     },
     {
@@ -86,6 +122,60 @@
         "Stats":  {
                       "Sockel":  0,
                       "AP":  40
+                  }
+    },
+    {
+        "Id":  29370,
+        "Name":  "Icon of the Silver Crescent",
+        "Boss":  "HÃ¤ndler (Abzeichen)",
+        "Quelle":  "Raid",
+        "Ilvl":  110,
+        "Phase":  "Phase 1",
+        "Slot":  "Trinket",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sockel":  0,
+                      "SP":  43
+                  }
+    },
+    {
+        "Id":  29376,
+        "Name":  "Essence of the Martyr",
+        "Boss":  "HÃ¤ndler (Abzeichen)",
+        "Quelle":  "Raid",
+        "Ilvl":  110,
+        "Phase":  "Phase 1",
+        "Slot":  "Trinket",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sockel":  0,
+                      "Heil":  84
+                  }
+    },
+    {
+        "Id":  29383,
+        "Name":  "Bloodlust Brooch",
+        "Boss":  "HÃ¤ndler (Abzeichen)",
+        "Quelle":  "Raid",
+        "Ilvl":  110,
+        "Phase":  "Phase 1",
+        "Slot":  "Trinket",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sockel":  0,
+                      "AP":  72
                   }
     },
     {
@@ -313,6 +403,24 @@
         "SlotCode":  -1,
         "Stats":  {
                       "Treffer":  21,
+                      "Sockel":  0
+                  }
+    },
+    {
+        "Id":  30626,
+        "Name":  "Sextant of Unstable Currents",
+        "Boss":  "Leotheras (SSC)",
+        "Quelle":  "Raid",
+        "Ilvl":  128,
+        "Phase":  "Phase 2",
+        "Slot":  "Trinket",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "ZKrit":  40,
                       "Sockel":  0
                   }
     },
@@ -5388,6 +5496,57 @@
                   }
     },
     {
+        "Id":  32487,
+        "Name":  "Ashtongue Talisman of Swiftness",
+        "Boss":  "Mutter Shahraz (BT)",
+        "Quelle":  "Raid",
+        "Ilvl":  141,
+        "Phase":  "Phase 3",
+        "Slot":  "Trinket",
+        "Armor":  "",
+        "Classes":  "Hunter",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sockel":  0
+                  }
+    },
+    {
+        "Id":  32488,
+        "Name":  "Ashtongue Talisman of Insight",
+        "Boss":  "Mutter Shahraz (BT)",
+        "Quelle":  "Raid",
+        "Ilvl":  141,
+        "Phase":  "Phase 3",
+        "Slot":  "Trinket",
+        "Armor":  "",
+        "Classes":  "Mage",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sockel":  0
+                  }
+    },
+    {
+        "Id":  32492,
+        "Name":  "Ashtongue Talisman of Lethality",
+        "Boss":  "Mutter Shahraz (BT)",
+        "Quelle":  "Raid",
+        "Ilvl":  141,
+        "Phase":  "Phase 3",
+        "Slot":  "Trinket",
+        "Armor":  "",
+        "Classes":  "Rogue",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sockel":  0
+                  }
+    },
+    {
         "Id":  32496,
         "Name":  "Memento of Tyrande",
         "Boss":  "Illidan Sturmgrimm",
@@ -5911,6 +6070,24 @@
                       "Tempo":  27,
                       "WpnDps":  100.33,
                       "AP":  40
+                  }
+    },
+    {
+        "Id":  33829,
+        "Name":  "Hex Shrunken Head",
+        "Boss":  "Zul\u0027Aman (Hex)",
+        "Quelle":  "Raid",
+        "Ilvl":  133,
+        "Phase":  "Phase 4",
+        "Slot":  "Trinket",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sockel":  0,
+                      "SP":  53
                   }
     },
     {

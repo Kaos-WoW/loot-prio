@@ -17,25 +17,35 @@ getragenen Gear.
 0. `.\0-import-roster.ps1` → Kader aus dem öffentlichen Google Sheet → `roster.json`
 1. `.\1-fetch-items.ps1` → Item-Pool + Werte von Wowhead → `daten/items.json`
 2. `.\2-fetch-gear.ps1` → getragene Ausrüstung live, Plausibilitäts-/PvP-Check → `daten/players.json`
-3. `.\wowsims-cli.ps1` → dynamische WoWSims-Simulation (aktuell nur Kaosx) → `daten/sim-weights.json`
-4. `.\3-compute.ps1` → Upgrades berechnen (nutzt `sim-weights.json` wo vorhanden, sonst statische
-   Presets) → `daten/upgrades.json`, `daten/payload.json`
+3. `python 7-stat-gewichte.py` → Stat-Gewichte für **alle** DPS-Spieler → `daten/sim-weights.json`
+   (rund 20 s je Spieler). **Löst `wowsims-cli.ps1` ab**, das nur Kaosx konnte und dessen Aufbau
+   drei stille Fehler enthielt (s. u.). Das alte Skript liegt noch da, wird aber nicht mehr gerufen.
+3b. `python 6-trinket-sim.py` → Schmuckstücke per Differenzsimulation → `daten/trinket-werte.json`
+   (alle DPS-Specs mit Eintrag in `spec-sims/specs.json`; rund 49 s je Spieler)
+
+**Beide Sim-Schritte teilen sich die Konfiguration in `spec-sims/`** (eigene README dort) und damit
+denselben Raid-Aufbau — nur deshalb liegen Stat-Gewichte und Schmuckstück-Werte auf derselben Skala.
+Wer den Raid-Aufbau ändert, muss **beide** neu rechnen, sonst passen sie nicht mehr zusammen.
+4. `.\3-compute.ps1` → Upgrades berechnen (nutzt `trinket-werte.json` und `sim-weights.json` wo
+   vorhanden, sonst statische Presets bzw. Näherung) → `daten/upgrades.json`, `daten/payload.json`
 5. `.\4-bis-check.ps1` → DPS-Empfehlungen gegen BiS-Listen prüfen → `daten/bis-listen.json`
 6. `.\5-build-payload.ps1` → HTML-Ausgabeseite bauen → `ausgabe/loot-prio-p3.html`, `index.html`
 
-**Schritt 3 (`wowsims-cli.ps1`) ist Teil der Kette, seit die WoWSims-CLI integriert wurde — nicht mehr
-weglassen.** Er lädt bei Bedarf `bin/wowsimcli-windows.exe` herunter (Quelle:
-`github.com/wowsims/tbc-new/releases/latest`), baut aus `players.json` eine RaidSimRequest und schreibt
-die simulierten Gewichte weg. Läuft nur für Spieler mit hinterlegtem APL-Mapping — aktuell ausschließlich
-Kaosx (Vergeltungs-Paladin); alle anderen fallen weiterhin auf die statischen Presets in `3-compute.ps1`
-zurück.
+**Schritt 3 lädt bei Bedarf `bin/wowsimcli-windows.exe` herunter** (Quelle:
+`github.com/wowsims/tbc-new/releases/latest`). Simuliert werden alle Spieler, deren Spec in
+`spec-sims/specs.json` steht — das sind die DPS-Specs. Tank und Heiler fallen weiterhin auf die
+statischen Presets in `3-compute.ps1` zurück; dort ist die Leitmetrik ohnehin prozentual.
+
+**`wowsims-cli.ps1` ist abgelöst** und wird nicht mehr gerufen. Die Datei liegt noch da, weil sie den
+alten Aufbau dokumentiert; wer sie startet, überschreibt `sim-weights.json` mit einem Stand, der nur
+Kaosx enthält.
 
 Realer Ablauf laut `.github/workflows/sync.yml` (automatisiert, täglich 03:00 UTC):
 ```powershell
 .\0-import-roster.ps1
 .\2-fetch-gear.ps1
 # Guard: bricht ab, wenn daten/players.json < 5 Einträge hat (verhindert Publish bei kaputtem Abruf)
-.\wowsims-cli.ps1
+python 7-stat-gewichte.py
 .\3-compute.ps1
 .\4-bis-check.ps1
 .\5-build-payload.ps1
@@ -75,6 +85,114 @@ Realer Ablauf laut `.github/workflows/sync.yml` (automatisiert, täglich 03:00 U
 * **Fähigkeitsnamen nicht selbst übersetzen:** In `tier-boni.json` stehen sie bewusst englisch wie in
   der Quelle (*Arcane Blast* ≠ „Arkane Explosion“, das ist Arkanschlag; *Mutilate* ≠ „Blutsturz“, das
   ist Verstümmeln).
+* **★ Tier-6-Tokens niemals über eine hartcodierte ID-Liste gruppieren.** Ein Token (z. B. *Helm of the
+  Forgotten Vanquisher*) wird von **drei Klassen** geteilt; wer darauf würfelt, muss klassenübergreifend
+  gezählt werden (`bc`). Die früher in `5-build-payload.ps1` gepflegte ID-Liste war massiv falsch:
+  5 IDs existierten gar nicht, 10 lagen im falschen Slot, 2 sogar im falschen Token (*Lightbringer
+  Gauntlets* = Paladin/Eroberer stand unter Bezwinger), und 33 von 78 T6-Teilen fehlten komplett.
+  Ergebnis: `bc` war für dasselbe Token je Zeile unterschiedlich. **Jetzt wird die Zuordnung aus
+  `items.json` abgeleitet** — Setname aus dem Boss-Feld (`Tier 6 (LightbringerRet)`) → Token-Typ, plus
+  `Slot`. Kommt ein Set oder Slot hinzu, zieht das automatisch mit; das Skript warnt bei unbekannten Sets.
+  Zuordnung: Eroberer = Paladin/Priester/Hexer, Beschützer = Krieger/Jäger/Schamane,
+  Bezwinger = Schurke/Magier/Druide.
+* **Die Token-Gegenstände selbst erzeugen keine Upgrade-Zeilen.** IDs 31089–31103 („… of the Forgotten
+  …“) stehen zwar in `items.json`, haben aber weder Slot noch Werte — `3-compute.ps1` überspringt sie.
+  Gelistet wird immer das **eingetauschte** Rüstungsteil mit `Quelle = T6` und `Boss = "Tier 6 (Set)"`.
+  `5-build-payload.ps1` sammelt die Token separat als `payload.tokens` (Name + echter Drop-Boss) ein und
+  hängt jeder T6-Zeile ihren Gruppenschlüssel als Feld `tk` an. Der Boss-Filter im Frontend matcht
+  deshalb zusätzlich gegen den Token-Drop-Boss, sonst fände man T6-Kopfteile nie unter „Archimonde“.
+* **★★ WoWSims-CLI ignoriert falsch platzierte Felder stillschweigend — immer gegenprüfen.** Die CLI
+  meldet weder Fehler noch Warnung, wenn ein Feld an der falschen Stelle steht; sie rechnet einfach
+  ohne. Drei belegte Fälle in diesem Projekt:
+  1. **`talents` im Spec-Block statt `talentsString` am Spieler** — die Sim lief dadurch **komplett
+     talentlos**: 614 statt 1456 DPS. Die daraus abgeleiteten Stat-Gewichte für Kaosx waren um Faktor
+     2,4–3,5 zu klein und lagen so **live auf der Produktivseite** (seine ΔDPS-Werte waren dadurch
+     systematisch zu niedrig, er wirkte im Loot-Rat fälschlich als jemand, der wenig profitiert).
+     Behoben. **Gegenprobe bei jeder Änderung am Sim-Aufbau: mit leerem Talentstring muss die DPS
+     einbrechen. Bleibt sie gleich, greift das Feld nicht.**
+  2. **Ein Feld `encounter.targets[0].armor` gibt es nicht** — es wurde gesetzt und verworfen, die Sim
+     lief dadurch gegen ein Ziel mit **null Rüstung** (1373 statt 1137 DPS, rund 17 % zu hoch).
+     **Die Rüstung steht im Ziel-Statarray auf Index 31.** Behoben, Werte aus dem WoWSims-Preset
+     „Raid Target“: `stats[17]=320` (Angriffskraft), `stats[27]=54`, `stats[31]=7685` (Rüstung),
+     `stats[33]=6070400` (Leben). Dort gehört der **ungedebuffte** Grundwert hinein — die
+     Rüstungs-Debuffs stehen im `debuffs`-Block und werden von der Sim selbst abgezogen.
+     Gegenprobe: mit `stats[31]=0` muss die DPS deutlich steigen.
+  3. **Folgefehler daraus: Rüstungsdurchschlag wurde immer mit 0 gewichtet.** Stat-Index 23 *ist*
+     korrekt ArP — er zeigte nur keine Wirkung, weil das Ziel keine Rüstung hatte. Mit Rüstung 7685
+     bringen +2000 ArP +109,5 DPS. Nach der Korrektur liegt Kaosx' ArP-Gewicht bei 0,047
+     (statisches Preset: 0,08) statt bei 0.
+  **Plausibilitätsprobe nach jeder Änderung am Sim-Aufbau:** Zaubermacht muss mit und ohne Bossrüstung
+  **identisch** herauskommen (Heiligschaden ignoriert Rüstung), alle physischen Gewichte müssen fallen.
+  Genau so verhält es sich jetzt (SP 0,121 in beiden Fällen, Stärke 0,786 → 0,641).
+* **★ Der Wertungsvergleich beim Gear-Abruf erkennt Doppelspec-Wechsel NICHT.** `2-fetch-gear.ps1`
+  verwirft einen Stand, wenn der PvE-Wert um mehr als 20 % einbricht — das fängt PvP-Sets, greift
+  aber nicht bei einem **Feral-Druiden, der Tank und Katze spielt**: beide Sets sind Leder auf
+  ähnlichem Itemlevel, der Score bleibt hoch, das Gear ist trotzdem das falsche. Supfreshyo war so
+  im kompletten Katzen-DPS-Set erfasst, inklusive PvP-Waffe, und wurde als Tank bewertet.
+  Dagegen gibt es jetzt in `2-fetch-gear.ps1` die Tabelle **`$VERRAETER`**: Item-IDs, deren blosse
+  Anwesenheit den Offspec verrät, unabhängig vom Score. Erster Eintrag ist **`8345` Wolfshead Helm**
+  für `FERAL_TANK` (reines Katzen-Teil). Weitere Doppelspec-Spieler brauchen einen eigenen Marker —
+  am besten beim Spieler erfragen, welches Teil eindeutig nur im Offspec vorkommt.
+  ⚠️ Die Regel schützt nur **künftige** Abrufe. Ist der gespeicherte Stand schon falsch, hilft nur
+  `$UNSICHER` in `3-compute.ps1` (blendet die Zeilen aus), bis der Spieler einmal korrekt erfasst wird.
+* **★★ Simulierte Gewichte und Preset-Gewichte liegen auf VERSCHIEDENEN Skalen — niemals unbesehen
+  mischen.** Ein simuliertes Gewicht ist ein absoluter DPS-Gewinn pro Statpunkt und hängt damit an der
+  DPS des Spielers. Gemessen über den Kader: **0,48× bis 1,16×** des jeweiligen Presets. Die *relativen*
+  Verhältnisse stimmen dagegen fast perfekt (Grotschak: Sim `MH/Str` = 2,73, Preset 2,74) — das ist die
+  beste Bestätigung, dass die Sim sauber rechnet.
+  Der Cap-Schutz in `Value-Item` setzte den **absoluten** Preset-Wert als Untergrenze für
+  `Treffer`/`Waffk`/`ZTreffer` ein. Da diese Stats am Cap als 0 gemessen werden, griff die Untergrenze
+  immer — und mischte damit bei jedem simulierten Spieler zwei Skalen. Erikadirks Trefferwertung bekam
+  das Preset-Gewicht 1,40, während alles andere bei ihm auf 0,48× lief: **fast dreifach überbewertet.**
+  Der Regressionstest fiel dadurch von 60 % auf 54 %, konzentriert auf die physischen Specs.
+  **Jetzt wird die Untergrenze mit dem Skalenfaktor des Spielers multipliziert** (Median der
+  Verhältnisse `sim/preset` über alle Stats, die *nicht* am Cap sind). Danach: 58 % / 79 %.
+  Dieselbe Skalierung gilt für den Fallback, wenn ein Stat gar nicht simuliert wurde.
+* **★ Waffenkoeffizienten (`MH`/`OH`/`RANGED`) lassen sich nicht als Stat messen.** Waffenschaden ist
+  kein Eintrag im `bonusStats`-Array, es gibt also keine Probe dafür. `7-stat-gewichte.py` rechnet sie
+  deshalb aus dem gemessenen AP-Gewicht hoch, im selben Verhältnis, das das statische Preset in
+  `3-compute.ps1` vorgibt (RET 13,06 · ARMS 13,46 · ROGUE 9,42 · ENH 8,20 · FURY 6,12 · HUNT 37,18).
+  Diese Verhältnisse werden zur Laufzeit **aus `3-compute.ps1` geparst**, bewusst nicht in
+  `specs.json` dupliziert — eine zweite Kopie liefe unbemerkt auseinander. Ändert sich das Format der
+  `NewSpec`-Zeilen, bricht das Parsen laut ab statt still falsche Werte zu liefern.
+* **★ Stat-Indizes stehen in `proto/common.proto`, `enum Stat` — nicht raten.** Die Reihenfolge ist
+  nicht intuitiv: 31 ist die Rüstung, 23 der Rüstungsdurchschlag, 35 mp5, 12/13/14 sind
+  Zaubertreffer/-krit/-tempo, 20/21/22 die Nahkampf-Entsprechungen. Abrufbar mit
+  `gh api "repos/wowsims/tbc-new/contents/proto/common.proto" --jq '.content' | base64 -d`.
+* **★ Stat-Gewichte nie mit einer Probe von 30 Punkten messen.** Tempo wirkt in TBC über
+  Angriffstempo-Schwellen, nicht linear. Bei Kaosx: **+30 Tempo → −1,4 DPS** (Gewicht wurde auf 0
+  geklemmt, „Tempo ist wertlos“), **+100 Tempo → +47,6 DPS** (Gewicht 0,476, also so wertvoll wie
+  Krit). Die Probengröße steht jetzt auf 100; lineare Stats ändern sich dadurch nicht (Krit liefert bei
+  +30 und +100 identisch 0,483). Negative Gewichte werden weiterhin auf 0 geklemmt, aber **mit
+  Warnung** — das stille Klemmen hatte den Fehler lange verdeckt.
+* **`bin/sim_input.json` ist kein Eingabe-, sondern ein Ausgabestand.** Die Datei wird bei *jeder*
+  Sim überschrieben und enthält danach die Bonus-Stats der zuletzt gemessenen Probe. Wer sie als
+  Vorlage für eigene Experimente lädt, erbt diese Reste und misst gegen eine falsche Basis
+  (bei mir: 1406 statt 1373 DPS). Vor eigenen Läufen `bonusStats.stats` ausdrücklich auf 0 setzen.
+* **★ Schmuckstück-Näherung (Methode A) — zwei Fallen.** `$TRINKET_EFFECTS` in `3-compute.ps1`
+  hinterlegt je Schmuckstück einen Ersatz-Statblock nach der Formel
+  `statischer Equip-Wert + Prokk-Wert × Uptime` (bei Nutzeneffekten `Wirkdauer / Abklingzeit`).
+  1. Der Eintrag **ersetzt** den geparsten Statblock vollständig — die statischen Equip-Werte müssen
+     mit drinstehen, sonst verschwinden sie stillschweigend.
+  2. Nur Schlüssel, die eine Spec auch **gewichtet**, zählen. `Ausw` statt `Dodge` ergab bei *Moroes'
+     Lucky Pocket Watch* stumm den Wert 0, das Schmuckstück galt aber als „bewertet“. Dagegen läuft
+     jetzt ein Check direkt unter der Tabelle, der jeden unbekannten Schlüssel als Warnung meldet.
+  Die Werte gehören **gegen den echten Tooltip** geprüft, nicht aus dem Gedächtnis gesetzt: gefunden
+  wurden dabei *Skull of Gul'dan* (25 ist Zauber**treffer**, war als `ZKrit` codiert — bei Gewichten
+  1,50–1,80 gegen 0,11–0,81 ein grober Fehler), *Ashtongue Talisman of Insight* (gibt Zauber**tempo**,
+  war als `SP` codiert) und *Icon of Unyielding Courage* (28121), dessen Werte zu einem **ganz anderen
+  Item** gehörten (*Hourglass of the Unraveller*, 28034).
+* **Es gibt nur noch EINE Ausgabefassung.** Bis zur Abnahme der Schmuckstück-Simulation baute
+  `5-build-payload.ps1` zwei Seiten aus derselben Nutzlast, unterschieden durch einen `__BETA__`-
+  Schalter: `index.html` ohne Schmuckstücke, `index-beta.html` mit ihnen. Seit der Freigabe am
+  03.08.2026 sind Schmuckstücke normaler Teil der Liste; Schalter, Beta-Dateien und der Hinweis
+  „Keine Schmuckstücke" sind entfernt. Wer wieder etwas stufenweise ausrollen will, findet das
+  Muster in der Git-Historie (Commit `d3c4085`).
+* **Zuwachszahlen sind rollenübergreifend nicht vergleichbar.** `d` ist bei DPS absoluter ΔDPS, bei
+  Tank/Heiler ein roher Stat-Score (die vergleichbare Größe ist dort `p` in Prozent). Beim Eroberer-Token
+  konkurrieren Heilig-Priester, Schutz-Paladin und Hexer im selben Topf — eine gemeinsame Rangliste nach
+  `d` wäre schlicht falsch. Die Token-Tabelle gruppiert deshalb nach Rolle und sortiert je Block nach der
+  Größe, die dort auch angezeigt wird.
 * **Schilde ≠ Schildhand-Item:** Tooltip nennt bei Schilden „Off Hand“ als Slot — ohne Prüfung der
   Rüstungsart (`Shield`) bekommen Caster Schilde vorgeschlagen.
 * **Devastation-Bug im Scraper:** In `daten/scrape_wowhead_final.py` filterte ein Substring-Filter
@@ -99,7 +217,64 @@ Realer Ablauf laut `.github/workflows/sync.yml` (automatisiert, täglich 03:00 U
 
 ## 3. Offene Punkte & TODOs
 
-* **Trinket DPS-Berechnung (Beta):** Implementierung der statischen Uptime-Approximation (Methode A) für Phase 3 und Legacy-BiS Trinkets auf dem Branch `feat/trinket-beta` mit separater HTML-Ausgabe.
+* **★ Schmuckstücke werden simuliert, nicht mehr genähert (`6-trinket-sim.py`).** Das Skript tauscht
+  das Schmuckstück im echten Gear des Spielers aus und misst die DPS-Differenz direkt — damit
+  entfällt die Uptime-Frage vollständig. Ergebnis nach `daten/trinket-werte.json`;
+  `3-compute.ps1` nimmt einen dort vorhandenen Wert **direkt als `Delta`** (er ist bereits ein
+  DPS-Unterschied und darf nicht nochmal über Statgewichte laufen) und fällt nur sonst auf
+  `$TRINKET_EFFECTS` zurück. Konfiguration in `spec-sims/` (eigene README dort).
+  Rund 49 Sekunden je Spieler. Zwei Fallen beim Nachbauen:
+  – **Negative Sim-Werte müssen raus.** Die Sim liefert auch Rückschritte; der reguläre Filter
+    `$delta -le 0 { continue }` läuft im Skript *vor* der Übernahme des Sim-Werts, muss danach also
+    nochmal greifen. `0` bleibt stehen (bereits getragene Teile).
+  – **Ein gefilterter Lauf darf die Datei nicht überschreiben.** `python 6-trinket-sim.py Kaosx`
+    ergänzt jetzt, statt alle anderen Spieler zu verwerfen.
+  ⚠️ **Die Werte veralten mit dem übrigen Gear.** Gemessen wird der Unterschied gegenüber der
+  Ausrüstung, die der Spieler **zum Zeitpunkt der Simulation** trug. Ändert sich sein Gear spürbar,
+  stimmt die Zahl nicht mehr. Deshalb läuft der Schritt **bewusst nicht im Nachtlauf** (gut 15 Minuten
+  für den Kader, und die Werte ändern sich selten) — er wird von Hand angestoßen, die Ergebnisse
+  werden vom Workflow nur mitcommittet. Nach einem Raid mit vielen Neuteilen neu laufen lassen.
+* **Alte Richtungsentscheidung (erledigt, als Begründung erhalten):** Die statische Näherung
+  ist gegen die Sim gemessen worden und **taugt nicht**: für Kaosx sagt das Modell bei drei
+  Schmuckstücken „Upgrade“, die Sim sagt bei allen dreien klar „Downgrade“
+  (Madness of the Betrayer +30,0 gegen −21,4 · Icon of Unyielding Courage +27,4 gegen −49,2 ·
+  Tsunami Talisman +13,5 gegen −15,5). An den Uptime-Konstanten zu drehen hilft nicht — ein
+  Vorzeichenfehler dieser Größe ist kein Kalibrierproblem, sondern ein Methodenproblem (lineare
+  Gewichte × flach gemittelter Prokk bilden Burst-Cooldowns und Rüstungsdurchschlag nicht ab).
+  Geplanter Weg: je Spec einmal alle Schmuckstücke per Differenzsim gegen eine gemeinsame Basis
+  messen (Trinket-ID im `equipment.items`-Array tauschen, ΔDPS ablesen) und das Ergebnis als
+  gemessene Werte in eine `trinket-werte.json` schreiben, die `3-compute.ps1` statt `$TRINKET_EFFECTS`
+  liest. **Eine Sim dauert rund 2 Sekunden**, 22 Schmuckstücke je Spieler also gut 40 Sekunden —
+  Rechenzeit ist nicht der Engpass. Der Engpass ist die **Spec-Konfiguration**: `wowsims-cli.ps1` hat
+  Klasse, Talente, Buffs, Verbrauchsgüter und APL für Kaosx hart verdrahtet; jede weitere Spec braucht
+  ihre eigene — dafür ist `wowsimcli decodelink` das richtige Werkzeug, siehe nächster Punkt.
+* **★ Spec-Konfigurationen über `wowsimcli decodelink` beschaffen, nicht von Hand bauen (erprobt).**
+  Auf `wowsims.com/tbc/<klasse>/<spec>/` gibt es unter **Export → Link** einen Teilen-Link, der den
+  kompletten Zustand kodiert. `wowsimcli decodelink "<link>"` gibt daraus ein vollständiges
+  Einstellungs-JSON aus — mit korrektem `talentsString`, `rotation`, `class`, Spec-Block,
+  `consumables`, `buffs`, `debuffs` **und** dem richtig befüllten `encounter.targets[0].stats`
+  (so wurde der Rüstungsfehler oben überhaupt gefunden). Die Spec-Pfade heißen nicht wie die Specs:
+  Krieger und Schurke, Magier, Hexer, Jäger und Schattenpriester laufen alle über `/dps/`
+  (`/tbc/warrior/dps/`, `/tbc/rogue/dps/`, `/tbc/mage/dps/`, `/tbc/warlock/dps/`, `/tbc/hunter/dps/`,
+  `/tbc/priest/dps/`), der Rest ist benannt (`/paladin/retribution/`, `/shaman/enhancement/`,
+  `/shaman/elemental/`, `/druid/balance/`, `/druid/feralbear/`, `/paladin/protection/` …).
+  ⚠️ **Das decodelink-Ergebnis ist kein RaidSimRequest.** Es hat `player` (Einzahl) auf oberster Ebene;
+  die CLI braucht für `sim` aber `raid.parties[0].players[0]` plus `raid.buffs` / `raid.debuffs` /
+  `raid.parties[0].buffs`. Das muss umgehängt werden. In der UI gibt es zusätzlich einen Punkt
+  **„CLI Export“**, der vermutlich direkt das richtige Format liefert — noch nicht geprüft.
+  Ebenfalls beachten: die Presets nutzen `rotation.type = "TypeSimple"` mit `specRotationJson`, nicht
+  die APL-Dateien in `spec-sims/apls/`, die unsere Sim-Skripte verwenden.
+* **Abgenommen und live seit 03.08.2026.** Die simulierten Schmuckstück-Werte sind freigegeben und
+  Teil der normalen Liste. Die Näherung `$TRINKET_EFFECTS` bleibt als Rückfall für alles, was nicht
+  simuliert wird — praktisch also für Tank und Heiler. Dort sind weiterhin unsicher:
+  *The Lightning Capacitor* (Schadensprokk, pauschal 70 SP), *Ashtongue Talisman of Lethality*
+  (~90 % Uptime ist optimistisch), *Pendant of the Violet Eye* (gestapelte mp5 grob gemittelt) und
+  *Shadowmoon Insignia* (Notfall-Leben als Ausdauer gemittelt — methodisch fragwürdig, weil es ein
+  Überlebens-Cooldown ist, kein Durchsatz).
+* **Die Tabelle deckt den Pool derzeit exakt ab** (22 Schmuckstücke im Pool, 22 hinterlegt, kein toter
+  Eintrag). Kommt über `1-fetch-items.ps1` ein neues Schmuckstück dazu, fällt es automatisch auf
+  `NichtBewertbar` zurück — dann Eintrag in `$TRINKET_EFFECTS` nachziehen. Gegenprobe:
+  Pool-IDs mit `Slot -eq 'Trinket'` gegen die Schlüssel der Tabelle abgleichen.
 * **Knappheitsspalten:** Einpflege der Daten aus `quellen/p3-alternativen-*.md` in die Ausgabe
   (Alternativen im Slot, ab welchem Boss).
 * **Phasenzuordnung Markenhändler:** Sobald Phase 3 live ist, die ilvl-141-Plattenteile beim Händler
@@ -133,7 +308,13 @@ Realer Ablauf laut `.github/workflows/sync.yml` (automatisiert, täglich 03:00 U
   GitHub-Workflow vollautomatisch und sicher im Hintergrund (Netlify-Vorgängerlösung entfernt).
 * **[x] „Heiß umkämpfter Loot“:** Dynamische Übersichtstabelle oberhalb der Haupttabelle zeigt die
   begehrtesten Items (sortiert nach BiS-Kandidaten & Upgrades gesamt) mit den interessierten Spielern.
-  Tier-6-Tokens sind ausgeschlossen, Schmuckstücke als (BiS)/(Bedarf) integriert.
+  Tier-6-Tokens sind ausgeschlossen (die stehen in der eigenen Token-Tabelle), Schmuckstücke als
+  (BiS)/(Bedarf) integriert.
+* **[x] Tier-6-Token-Konkurrenz korrekt gerechnet und sichtbar gemacht:** Gruppen werden aus `items.json`
+  abgeleitet statt hartcodiert (alle 78 T6-Teile in 15 Gruppen statt vorher 45 teils falsch zugeordnete).
+  Neue Tabelle „Tier-6-Tokens“ dreht die Sicht um: pro Token alle Anwärter der drei Klassen, nach Rolle
+  getrennt und nach Zuwachs sortiert, mit BiS-Markierung, Anzahl Anwärter/BiS-Kandidaten und echtem
+  Drop-Boss. T6-Zeilen sind zusätzlich über den Token-Drop-Boss filterbar.
 * **[x] WoWSims-CLI-Integration & dynamische Simulation:** Vollautomatische Simulation für Kaosx zur
   Ermittlung individueller Stat-Gewichte, inklusive automatischem CLI-Download und
   Workflow-Integration.

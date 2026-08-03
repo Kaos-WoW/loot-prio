@@ -83,8 +83,17 @@ $PROF = @{
  'Druid'   = @('Mace','Dagger','Fist Weapon','Polearm','Staff')
 }
 # Spieler, deren Armory-Stand im Offspec erfasst wurde -> Vergleichsbasis unbrauchbar.
-# Seit dem Abruf vom 28.07. sind Valiror und Pflasterelfe im Hauptspec erfasst, Liste daher leer.
-$UNSICHER = @()
+# Ihre Zeilen bekommen Unsicher=true und werden im Frontend ausgeblendet.
+#
+# Supfreshyo (03.08.): steht als Feral-TANK im Roster, ist aber im Katzen-DPS-Set ausgeloggt -
+# erkennbar am 'Wolfshead Helm' (8345), dazu Guertel der hundert Tode, Ring of Lethality und
+# eine PvP-Waffe. Der Wertungsvergleich in 2-fetch-gear.ps1 greift bei ihm nicht, weil beide
+# Sets Leder auf aehnlichem Itemlevel sind und der Score deshalb kaum einbricht. Dagegen steht
+# dort jetzt die Verraeter-Item-Regel - die verhindert aber nur KUENFTIGE Verfaelschung, der
+# gespeicherte Stand ist bereits das falsche Set.
+# ENTFERNEN, sobald er einmal im Tank-Set abgerufen wurde (dann meldet 2-fetch-gear.ps1 die
+# Slotwechsel und 'Wolfshead Helm' ist weg).
+$UNSICHER = @('Supfreshyo')
 
 $specs = @(
  NewSpec 'FURY' 'Furor-Krieger' 'Plate' 'Nah' @{Str=1.14;Agi=0.80;AP=0.51;Treffer=0.60;Krit=1.07;Tempo=0.99;ArP=0.19;Waffk=1.29;MH=3.12;OH=1.64} @{Stat='Str';Menge=8} @('Grotschak','Valiror') '' 2100
@@ -142,25 +151,49 @@ function Value-Item($stats, $spec, $slotKind, $playerName=$null) {
     $w = $spec.W
     # Falls simulierte Gewichte fuer diesen Spieler existieren, diese bevorzugen
     if ($playerName -and $simWeights.ContainsKey($playerName)) {
+        $sw = $simWeights[$playerName]
+        # Hilfsfunktion: PowerShell ConvertFrom-Json liefert Hashtables ODER PSObjects.
+        $holen = {
+            param($k)
+            if ($sw.PSObject.Properties[$k]) { return [double]$sw.$k }
+            elseif ($sw.ContainsKey -and $sw.ContainsKey($k)) { return [double]$sw[$k] }
+            return 0.0
+        }
+
+        # ★ Skalenfaktor bestimmen, BEVOR irgendetwas gemischt wird.
+        # Simulierte Gewichte haengen an der absoluten DPS des Spielers und liegen deshalb je
+        # Spieler auf einer anderen Skala als das statische Preset (gemessen: 0,48x bis 1,16x).
+        # Wer den Preset-Wert unveraendert als Untergrenze einsetzt, mischt zwei Skalen:
+        # Erikadirks Trefferwertung bekaeme das Preset-Gewicht 1,40, waehrend alles andere bei
+        # ihm auf 0,48x laeuft - Treffer waere damit fast dreifach ueberbewertet. Genau das hat
+        # den Regressionstest bei allen physischen Specs einbrechen lassen.
+        # Der Faktor wird aus den Stats gebildet, die NICHT am Cap sind (Cap-Stats sind 0 und
+        # wuerden ihn nach unten ziehen).
+        $verhaeltnisse = @()
+        foreach ($k in $spec.W.Keys) {
+            if ($k -eq 'Treffer' -or $k -eq 'Waffk' -or $k -eq 'ZTreffer') { continue }
+            $sv = & $holen $k
+            $pv = [double]$spec.W[$k]
+            if ($sv -gt 0 -and $pv -gt 0) { $verhaeltnisse += ($sv / $pv) }
+        }
+        $skala = 1.0
+        if ($verhaeltnisse.Count -gt 0) {
+            $sortiert = $verhaeltnisse | Sort-Object
+            $skala = $sortiert[[int]($sortiert.Count / 2)]   # Median, robust gegen Ausreisser
+        }
+
         $w = @{}
         foreach ($k in $spec.W.Keys) {
-            $simVal = 0.0
-            # Beachte: PowerShell ConvertFrom-Json kann Hashtables oder PSObjects liefern.
-            # Wir prüfen beide Zugriffsmöglichkeiten ab.
-            if ($simWeights[$playerName].PSObject.Properties[$k]) {
-                $simVal = [double]$simWeights[$playerName].$k
-            } elseif ($simWeights[$playerName].ContainsKey -and $simWeights[$playerName].ContainsKey($k)) {
-                $simVal = [double]$simWeights[$playerName][$k]
-            }
-            
-            # Sicherheitsnetz für Cap-Stats: Um den "De-gearing"-Effekt zu verhindern,
-            # dürfen Waffenkunde, Trefferwertung und Zaubertrefferwertung niemals unter
-            # ihr statisches "Below-Cap"-Gewicht fallen.
+            $simVal = & $holen $k
+
+            # Sicherheitsnetz für Cap-Stats: Um den "De-gearing"-Effekt zu verhindern, dürfen
+            # Waffenkunde, Trefferwertung und Zaubertrefferwertung niemals unter ihr statisches
+            # "Below-Cap"-Gewicht fallen - dieses aber auf die Skala des Spielers umgerechnet.
             if ($k -eq 'Treffer' -or $k -eq 'Waffk' -or $k -eq 'ZTreffer') {
-                $w[$k] = [math]::Max($simVal, [double]$spec.W[$k])
+                $w[$k] = [math]::Max($simVal, [double]$spec.W[$k] * $skala)
             } else {
                 if ($simVal -le 0.0) {
-                    $w[$k] = $spec.W[$k] # Fallback auf statisches Gewicht bei 0 oder Fehlen
+                    $w[$k] = [double]$spec.W[$k] * $skala   # Fallback, ebenfalls skaliert
                 } else {
                     $w[$k] = $simVal
                 }
@@ -204,6 +237,81 @@ function Value-Item($stats, $spec, $slotKind, $playerName=$null) {
     return $v
 }
 
+# Schmuckstueck-Bewertung, Methode A: statische Uptime-Approximation.
+#
+# Der Wert eines Schmuckstuecks steckt fast ganz in Prokks und Nutzeneffekten, die der
+# Tooltip-Parser bewusst abschneidet (siehe Parse-Tooltip). Hier wird deshalb je Item ein
+# Ersatz-Statblock hinterlegt, der den Prokk als Dauerwert mittelt:
+#
+#     Eintrag = statischer Equip-Wert  +  Prokk-Wert * Uptime
+#     Uptime bei Nutzeneffekten = Wirkdauer / Abklingzeit (z.B. 20s / 120s = 16,7 %)
+#
+# ACHTUNG, zwei Fallen:
+#  1. Der Eintrag ERSETZT den geparsten Statblock vollstaendig. Die statischen Equip-Werte
+#     muessen also mit drin stehen, sonst verschwinden sie stillschweigend.
+#  2. Nur Schluessel, die eine Spec auch gewichtet, zaehlen. Ein Tippfehler wie 'Ausw' statt
+#     'Dodge' ergibt stumm den Wert 0 und laesst das Schmuckstueck wertlos aussehen, obwohl es
+#     als bewertbar markiert ist. Der Check direkt unter dieser Tabelle faengt genau das ab.
+#
+# Die Kommentare nennen die Rechnung, damit sie gegen den Tooltip nachpruefbar bleibt.
+$TRINKET_EFFECTS = @{
+    # --- Nahkampf / Distanz ---
+    28830 = @{ AP = 40; Tempo = 91 }                   # Dragonspine Trophy: 40 AP + 325 Tempo * ~28% Uptime
+    32505 = @{ Treffer = 20; AP = 84; ArP = 135 }      # Madness of the Betrayer: 20 Treffer + 84 AP + 300 ArP * ~45%
+    30627 = @{ Treffer = 10; Krit = 38; AP = 68 }      # Tsunami Talisman: 10 Treffer + 38 Krit + 340 AP * ~20%
+    29383 = @{ AP = 118 }                              # Bloodlust Brooch: 72 AP + 278 AP * 20s/120s
+    28121 = @{ Treffer = 30; ArP = 100 }               # Icon of Unyielding Courage: 30 Treffer + 600 ArP * 20s/120s
+    32492 = @{ Krit = 130 }                            # Ashtongue Lethality (Schurke): 145 Krit * ~90% (Finisher-getaktet)
+    32487 = @{ AP = 124 }                              # Ashtongue Swiftness (Jaeger): 275 AP * ~45% (Zielschuss-Prokk)
+    30450 = @{ Treffer = 21; ArP = 400 }               # Warp-Spring Coil (Schurke): 21 Treffer + 1000 ArP * ~40%
+
+    # --- Zauberer ---
+    32483 = @{ SP = 55; ZTreffer = 25; ZTempo = 29 }   # Skull of Gul'dan: 55 SP + 25 ZAUBERTREFFER + 175 ZTempo * 20s/120s
+    33829 = @{ SP = 88 }                               # Hex Shrunken Head: 53 SP + 211 SP * 20s/120s
+    29370 = @{ SP = 69 }                               # Icon of the Silver Crescent: 43 SP + 155 SP * 20s/120s
+    28785 = @{ SP = 70 }                               # The Lightning Capacitor: Schadensprokk, grob als 70 SP angesetzt
+    32488 = @{ ZTempo = 58 }                           # Ashtongue Insight (Magier): 145 ZAUBERTEMPO * ~40%
+    30626 = @{ ZKrit = 40; SP = 47.5 }                 # Sextant of Unstable Currents: 40 ZKrit + 190 SP * ~25%
+    30720 = @{ ZTreffer = 12; ZKrit = 30; SP = 28 }    # Serpent-Coil Braid (Magier): + 225 SP * ~12,5% (Manastein-getaktet)
+    28789 = @{ SP = 58 }                               # Eye of Magtheridon: 54 SP + Prokk nur bei Resists (am Trefferkap fast tot)
+
+    # --- Heiler ---
+    29376 = @{ Heil = 133 }                            # Essence of the Martyr: 84 Heil + 297 Heil * 20s/120s
+    32496 = @{ Heil = 118; mp5 = 15 }                  # Memento of Tyrande: 118 Heil + 76 mp5 * ~20%
+    28727 = @{ Int = 40; mp5 = 9 }                     # Pendant of the Violet Eye: 40 Int + gestapelte mp5, grob gemittelt
+    28823 = @{ Heil = 44; mp5 = 3 }                    # Eye of Gruul: 44 Heil + seltene Manaersparnis (2% Prokk)
+
+    # --- Tank ---
+    28528 = @{ Dodge = 63 }                            # Moroes' Lucky Pocket Watch: 38 Ausweichen + 300 * 10s/120s
+    32501 = @{ Def = 36; Dodge = 32; Sta = 19 }        # Shadowmoon Insignia: 36 Vert + 32 Ausw + 1750 Leben (~175 Ausd) * 20s/180s
+}
+
+# Simulierte Schmuckstueck-Werte aus 6-trinket-sim.py, falls vorhanden. Sie ersetzen die
+# Naeherung oben spielerweise: dort steht je Spieler und Item bereits der fertige DPS-Unterschied
+# aus einer echten Differenzsimulation, gemessen gegen sein tatsaechliches Gear.
+$trinketWerte = @{}
+$twFile = "$base\daten\trinket-werte.json"
+if (Test-Path $twFile) {
+    $raw = Get-Content $twFile -Raw -Encoding UTF8 | ConvertFrom-Json
+    foreach ($p in $raw.PSObject.Properties) { $trinketWerte[$p.Name] = $p.Value }
+    Write-Output ("Simulierte Schmuckstueck-Werte geladen: " + $trinketWerte.Count + " Spieler")
+} else {
+    Write-Output "Keine trinket-werte.json - Schmuckstuecke laufen auf der statischen Naeherung."
+}
+
+# Schutz gegen stumme Tippfehler: jeder Statschluessel oben muss von mindestens einer Spec
+# gewichtet werden, sonst ist der Eintrag wirkungslos (das Schmuckstueck gilt dann als
+# bewertet, kommt aber auf 0 heraus). Genau so war 'Ausw' statt 'Dodge' monatelang unbemerkt.
+$knownStatKeys = @{}
+foreach ($sp in $specs) { foreach ($k in $sp.W.Keys) { $knownStatKeys[$k] = $true } }
+foreach ($tid in $TRINKET_EFFECTS.Keys) {
+    foreach ($k in $TRINKET_EFFECTS[$tid].Keys) {
+        if (-not $knownStatKeys.ContainsKey($k)) {
+            Write-Warning ("TRINKET_EFFECTS[" + $tid + "]: Statschluessel '" + $k + "' wird von keiner Spec gewichtet und zaehlt daher 0.")
+        }
+    }
+}
+
 # Tier-5-Set-Namen je Klasse, um den aktuellen Set-Stand eines Spielers zu erkennen
 $T5NAME = @{
  'Warrior'='Destroyer'; 'Paladin'='Crystalforge'; 'Hunter'='Rift Stalker'; 'Rogue'='Deathmantle'
@@ -222,7 +330,14 @@ foreach ($pl in $players) {
         $id = [string]$p.Value
         if ($id) {
             $ids[$p.Name] = [int]$id
-            if ($cache.ContainsKey($id)) { $h[$p.Name] = Parse-Tooltip $cache[$id].tooltip }
+            if ($cache.ContainsKey($id)) {
+                $itemStats = Parse-Tooltip $cache[$id].tooltip
+                $idKey = [int]$id
+                if ($p.Name -like 'TRINKET*' -and $TRINKET_EFFECTS.ContainsKey($idKey)) {
+                    $itemStats = $TRINKET_EFFECTS[$idKey]
+                }
+                $h[$p.Name] = $itemStats
+            }
         }
     }
     $wornStats[$pl.Name] = $h
@@ -252,6 +367,12 @@ foreach ($it in $items) {
     $slotKey = $SLOTMAP[$it.Slot]
     $istats = @{}
     foreach ($p in $it.Stats.PSObject.Properties) { $istats[$p.Name] = $p.Value }
+    
+    # Ueberschreibe Stats, falls es ein unterstuetztes Schmuckstueck ist
+    $idKey = [int]$it.Id
+    if ($slotKey -eq 'TRINKET' -and $TRINKET_EFFECTS.ContainsKey($idKey)) {
+        $istats = $TRINKET_EFFECTS[$idKey]
+    }
     
     # Feral-Attackpower auf Waffen ignorieren wir
     if ($it.FormOnly -and $it.Slot -ne 'Two-Hand') { continue }
@@ -430,8 +551,35 @@ foreach ($it in $items) {
                     }
                 }
             }
+            $nichtBewertbar = ($slotKey -eq 'TRINKET' -and -not $TRINKET_EFFECTS.ContainsKey([int]$it.Id))
             $hinweis = ""
-            if ($slotKey -eq 'TRINKET') { $hinweis = "Schmuck: Prokk- und Nutzeneffekte sind nicht bewertbar" }
+            if ($slotKey -eq 'TRINKET') {
+                # Gemessener Wert schlaegt Naeherung: Liegt fuer diesen Spieler und dieses
+                # Schmuckstueck ein simulierter Wert vor (6-trinket-sim.py), wird der DIREKT als
+                # Delta verwendet - er ist bereits ein DPS-Unterschied und muss nicht ueber
+                # Statgewichte gerechnet werden. Die Naeherung bleibt nur der Rueckfall.
+                $simWert = $null
+                if ($trinketWerte.ContainsKey($pn)) {
+                    $tw = $trinketWerte[$pn]
+                    $idStr = [string]$it.Id
+                    if ($tw.PSObject.Properties[$idStr]) { $simWert = [double]$tw.$idStr }
+                }
+                if ($null -ne $simWert) {
+                    # Die Sim liefert auch negative Werte (das Schmuckstueck waere ein Rueckschritt).
+                    # Die gehoeren nicht in eine Upgrade-Liste - die uebrige Kette filtert solche
+                    # Zeilen weiter oben mit '$delta -le 0 { continue }' weg, was hier aber schon
+                    # gelaufen ist. Deshalb hier nachziehen. 0 bleibt stehen: das sind die bereits
+                    # getragenen Teile, die als "Bereits ausgeruestet" sichtbar bleiben sollen.
+                    if ($simWert -lt 0) { continue }
+                    $delta = $simWert
+                    $nichtBewertbar = $false
+                    $hinweis = "Simuliert (WoWSims-Differenzsimulation)"
+                } elseif ($nichtBewertbar) {
+                    $hinweis = "Schmuck: Prokk- und Nutzeneffekte sind nicht bewertbar"
+                } else {
+                    $hinweis = "Statische Uptime-Approximation (Beta)"
+                }
+            }
             elseif ($it.Quelle -eq 'T6') {
                 # Wie viele T6-Teile traegt er schon?
                 $t6 = 0
@@ -496,7 +644,7 @@ foreach ($it in $items) {
                 ProSchlag=$(if ($istats.ContainsKey('WpnSpeed') -and $istats.ContainsKey('WpnDps')) { [math]::Round([double]$istats['WpnDps'] * [double]$istats['WpnSpeed'],0) } else { 0 })
                 Rolle=$spec.Rolle
                 Hinweis=$hinweis
-                NichtBewertbar=($slotKey -eq 'TRINKET')
+                NichtBewertbar=$nichtBewertbar
                 T5Teile=$t5
             }
         }

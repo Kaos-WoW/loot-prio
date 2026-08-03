@@ -260,16 +260,40 @@ function Get-GearScore($slots, $specKey) {
     return $score
 }
 
+# Verräter-Items: Gegenstände, die es NUR im Offspec gibt.
+#
+# Der Wertungsvergleich unten greift nur, wenn der Gesamtwert deutlich einbricht. Bei einem
+# Feral-Druiden, der Tank UND Katze spielt, passiert das nicht: beide Sets sind Leder auf
+# ähnlichem Itemlevel, der Score bleibt hoch, das Gear ist trotzdem das falsche. Deshalb hier
+# zusätzlich einzelne Gegenstände, deren blosse Anwesenheit den Offspec verrät.
+#
+# Item-ID -> @{ Name; Specs (fuer die es Offspec bedeutet); Grund }
+$VERRAETER = @{
+    8345 = @{ Name = 'Wolfshead Helm'; Specs = @('FERAL_TANK'); Grund = 'reines Katzen-DPS-Teil' }
+}
+
 # Vergleiche neu geladenes Gear mit altem Stand
 foreach ($p in $players) {
     if (-not $alt.ContainsKey($p.Name)) { continue }
-    
+
     # Sonderregel für Prot Paladin: falls kein Schild getragen wird, verwerfen
     if ($p.Spec -eq 'PROT_PALA' -and -not $p.Slots.ContainsKey('OFF_HAND')) {
         Write-Output "  [WARNUNG] $($p.Name) (PROT_PALA) hat kein Schild angelegt! Behalte alten Stand."
         $p.Slots = $alt[$p.Name]
         continue
     }
+
+    # Sonderregel: Verräter-Item angelegt -> eindeutig Offspec, unabhaengig vom Score
+    $verraten = $false
+    foreach ($slotName in $p.Slots.Keys) {
+        $id = [int]$p.Slots[$slotName]
+        if ($VERRAETER.ContainsKey($id) -and ($VERRAETER[$id].Specs -contains $p.Spec)) {
+            Write-Output "  [WARNUNG] $($p.Name) ($($p.Spec)) traegt '$($VERRAETER[$id].Name)' ($($VERRAETER[$id].Grund)) - eindeutig Offspec. Behalte alten Stand."
+            $verraten = $true
+            break
+        }
+    }
+    if ($verraten) { $p.Slots = $alt[$p.Name]; continue }
 
     $newScore = Get-GearScore $p.Slots $p.Spec
     $oldScore = Get-GearScore $alt[$p.Name] $p.Spec

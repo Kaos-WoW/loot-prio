@@ -95,6 +95,16 @@ $legacyRaid = @{
     30007 = "Void Reaver (TK)"
     30081 = "Doomwalker"
     30105 = "Lady Vashj (SSC)"
+    29383 = "Händler (Abzeichen)"
+    29370 = "Händler (Abzeichen)"
+    29376 = "Händler (Abzeichen)"
+    33829 = "Zul'Aman (Hex)"
+    32492 = "Mutter Shahraz (BT)"
+    32487 = "Mutter Shahraz (BT)"
+    32488 = "Mutter Shahraz (BT)"
+    28121 = "Dungeon (BM Heroisch)"
+    30626 = "Leotheras (SSC)"
+    28727 = "Arans Schemen (Karazhan)"
 }
 foreach ($id in $legacyRaid.Keys) {
     if (-not $entries.ContainsKey($id)) {
