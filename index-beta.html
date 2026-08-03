@@ -889,9 +889,24 @@ function render() {
       : equipped ? 'opacity:0.45;' : '';
     const rowClass = rowStyle ? `style="${rowStyle}"` : '';
 
-    const dpsCellContent = isTankOrHeal
-      ? `<span style="color:var(--gain); font-weight:650;">+${r.p.toFixed(2)}%</span> <span style="font-size:0.75rem; font-weight:normal; opacity:0.8; margin-left:2px; color:var(--muted);">(+${r.d.toFixed(1)} Pkt)</span>`
-      : `<span style="color:var(--gain); font-weight:650;">+${r.p.toFixed(2)}% dps</span> <span style="font-size:0.75rem; font-weight:normal; opacity:0.8; margin-left:2px; color:var(--muted);">(+${r.d.toFixed(1)} dps)</span>`;
+    // Bei Tank und Heiler ist r.d KEINE Statgroesse, sondern ein Ranking-Score:
+    // Statdifferenz + BiS-Bonus (+100 fuer Rang 0, +50 sonst). Ein BiS-Item, das
+    // statmaessig schlechter ist als das getragene Teil, kommt dadurch mit grossem
+    // positivem r.d heraus, waehrend r.p korrekt 0 % zeigt. Die Zahl deshalb nicht
+    // als Zugewinn ausgeben - und den Fall ausdruecklich benennen, statt ihn als
+    // "+0,00 %" durchzuwinken, was wie ein Rechenfehler aussieht.
+    let dpsCellContent;
+    if (isTankOrHeal) {
+      if (r.p <= 0) {
+        dpsCellContent = `<span style="color:var(--warn); font-weight:650;">±0 %</span>`
+          + `<span style="font-size:0.72rem; font-weight:normal; display:block; color:var(--muted);">`
+          + `kein Statgewinn — steht nur wegen BiS in der Liste</span>`;
+      } else {
+        dpsCellContent = `<span style="color:var(--gain); font-weight:650;">+${r.p.toFixed(2)}%</span>`;
+      }
+    } else {
+      dpsCellContent = `<span style="color:var(--gain); font-weight:650;">+${r.p.toFixed(2)}% dps</span> <span style="font-size:0.75rem; font-weight:normal; opacity:0.8; margin-left:2px; color:var(--muted);">(+${r.d.toFixed(1)} dps)</span>`;
+    }
 
     const tok = r.tk ? TOKEN_BY_GRP[r.tk] : null;
     const bossCell = tok
@@ -970,8 +985,10 @@ function renderTokenTable() {
       if (sub.length === 0) return '';
       const names = sub.map(r => {
         const isBis = r.bis === 1;
+        // ±0 % heisst bei Tank/Heiler: BiS-gelistet, aber statmaessig kein Gewinn
+        // gegenueber dem getragenen Teil (siehe Kommentar bei dpsCellContent).
         const val = (r.ro === 'Tank' || r.ro === 'Heiler')
-          ? `+${r.p.toFixed(1)}%`
+          ? (r.p > 0 ? `+${r.p.toFixed(1)}%` : '±0 %')
           : `+${r.d.toFixed(0)} dps`;
         const style = (isBis ? 'color:#ffd700; font-weight:700;' : 'color:var(--muted);')
                     + (isEquipped(r) ? ' text-decoration:line-through; opacity:0.5;' : '');

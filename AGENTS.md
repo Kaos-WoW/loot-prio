@@ -145,6 +145,19 @@ Realer Ablauf laut `.github/workflows/sync.yml` (automatisiert, täglich 03:00 U
   Nur der Schalter entscheidet, ob die genäherten Schmuckstück-Zeilen angezeigt werden; die Zahlen
   stecken in beiden Nutzlasten. **Vorher schrieb das Skript beide Dateien byte-identisch** — die Beta
   war also gar keine. Das Skript warnt jetzt, wenn `__BETA__` in der Vorlage fehlt.
+* **★ `Delta` ist bei Tank/Heiler kein Statwert, sondern ein Ranking-Score.** In `3-compute.ps1`
+  gilt für die BiS-gegateten Rollen `Delta = (neuerWert − getragenerWert) + BiS-Bonus`, wobei der
+  Bonus **+100 für BiS-Rang 0** und **+50 sonst** beträgt (und für ein bereits getragenes BiS-Teil
+  wieder abgezogen wird). `Pct` dagegen rechnet **ohne** Bonus, rein aus der Statdifferenz.
+  Beide Zahlen messen also Verschiedenes. Ist ein BiS-Item statmäßig schlechter als das getragene
+  Teil, kommt genau das Muster **hohes Delta bei `Pct = 0`** heraus — betrifft aktuell 10 Zeilen,
+  z. B. *Idol of the White Stag* für Supfreshyo (Delta 100 = exakt der Bonus, echte Statdifferenz 0)
+  oder *Scepter of Purification* für Heinerm (Delta 44,5 bei Bonus +100, also −55,5 an Stats).
+  **Das ist kein Rechenfehler**, sondern gewollt: die BiS-Gate-Logik soll BiS-Items auch dann
+  anzeigen, wenn sie momentan kein Zugewinn sind. Falsch war nur die *Anzeige* — die Seite gab
+  `Delta` als „(+96,8 Pkt)" neben dem Prozentwert aus, was wie ein Zugewinn aussah. Jetzt steht dort
+  „±0 % — kein Statgewinn, steht nur wegen BiS in der Liste". **Wer `Delta` für Tank/Heiler
+  weiterverwendet, muss den Bonus herausrechnen**, sonst vergleicht er Äpfel mit Birnen.
 * **Zuwachszahlen sind rollenübergreifend nicht vergleichbar.** `d` ist bei DPS absoluter ΔDPS, bei
   Tank/Heiler ein roher Stat-Score (die vergleichbare Größe ist dort `p` in Prozent). Beim Eroberer-Token
   konkurrieren Heilig-Priester, Schutz-Paladin und Hexer im selben Topf — eine gemeinsame Rangliste nach

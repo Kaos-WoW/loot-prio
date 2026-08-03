@@ -112,6 +112,11 @@ sonst schlägt der CSV-Export fehl.
 | **Tank** | Schutz-Paladin, Feral-Tank | prozentualer Zuwachs relativ zum Gesamtwert der aktuell getragenen Ausrüstung |
 | **Heiler** | Wiederherstellung-Druide/Schamane, Heilig-Paladin, Heilig-Priester | prozentualer Zuwachs relativ zum Gesamtwert der aktuell getragenen Ausrüstung |
 
+Für Tank und Heiler kann der Zuwachs auch **±0 %** sein. Das ist kein Rechenfehler: Diese Rollen werden
+gegen die BiS-Liste gegatet (s. u.), und ein BiS-Item wird auch dann angezeigt, wenn es statmäßig
+gerade **kein** Gewinn gegenüber dem getragenen Teil ist. Solche Zeilen sind auf der Seite ausdrücklich
+als „kein Statgewinn — steht nur wegen BiS in der Liste" gekennzeichnet.
+
 Für Tank und Heiler wird **zusätzlich gegen die jeweilige BiS-Liste gegatet**: ein Item taucht für diese
 Rollen nur auf, wenn es in der hinterlegten Phase-3-BiS-Liste der Spec steht. Das verhindert, dass ein
 rein statistisches Modell (das Blockwert, Abhärtung oder Heilungsmenge nicht simuliert) Tanks und Heilern
