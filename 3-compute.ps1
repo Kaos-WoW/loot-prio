@@ -204,24 +204,79 @@ function Value-Item($stats, $spec, $slotKind, $playerName=$null) {
     return $v
 }
 
-# Custom Trinket-Statistik-Hinterlegung (On-Use & Proc Uptime-Mittelwert)
+# Schmuckstueck-Bewertung, Methode A: statische Uptime-Approximation.
+#
+# Der Wert eines Schmuckstuecks steckt fast ganz in Prokks und Nutzeneffekten, die der
+# Tooltip-Parser bewusst abschneidet (siehe Parse-Tooltip). Hier wird deshalb je Item ein
+# Ersatz-Statblock hinterlegt, der den Prokk als Dauerwert mittelt:
+#
+#     Eintrag = statischer Equip-Wert  +  Prokk-Wert * Uptime
+#     Uptime bei Nutzeneffekten = Wirkdauer / Abklingzeit (z.B. 20s / 120s = 16,7 %)
+#
+# ACHTUNG, zwei Fallen:
+#  1. Der Eintrag ERSETZT den geparsten Statblock vollstaendig. Die statischen Equip-Werte
+#     muessen also mit drin stehen, sonst verschwinden sie stillschweigend.
+#  2. Nur Schluessel, die eine Spec auch gewichtet, zaehlen. Ein Tippfehler wie 'Ausw' statt
+#     'Dodge' ergibt stumm den Wert 0 und laesst das Schmuckstueck wertlos aussehen, obwohl es
+#     als bewertbar markiert ist. Der Check direkt unter dieser Tabelle faengt genau das ab.
+#
+# Die Kommentare nennen die Rechnung, damit sie gegen den Tooltip nachpruefbar bleibt.
 $TRINKET_EFFECTS = @{
-    28830 = @{ AP = 40; Tempo = 91 }                  # Dragonspine Trophy
-    32505 = @{ Treffer = 20; AP = 84; ArP = 135 }      # Madness of the Betrayer
-    30627 = @{ Treffer = 10; Krit = 38; AP = 68 }      # Tsunami Talisman
-    29383 = @{ AP = 118 }                             # Bloodlust Brooch
-    32483 = @{ SP = 55; ZKrit = 25; ZTempo = 29 }     # The Skull of Gul'dan
-    33829 = @{ SP = 88 }                              # Hex Shrunken Head
-    29370 = @{ SP = 69 }                              # Icon of the Silver Crescent
-    28785 = @{ SP = 70 }                              # The Lightning Capacitor
-    32492 = @{ Krit = 130 }                           # Ashtongue Talisman of Lethality (Rogue)
-    32487 = @{ AP = 124 }                             # Ashtongue Talisman of Swiftness (Hunter)
-    32488 = @{ SP = 85 }                              # Ashtongue Talisman of Acumen (Warlock/Mage)
-    28121 = @{ Krit = 32; AP = 45 }                   # Hourglass of the Unraveller
-    30626 = @{ ZKrit = 40; SP = 47.5 }                # Sextant of Unstable Currents
-    28528 = @{ Ausw = 63 }                            # Moroes' Lucky Pocket Watch
-    29376 = @{ Heil = 133 }                           # Essence of the Martyr
-    28727 = @{ Int = 40; mp5 = 9 }                    # Pendant of the Violet Eye
+    # --- Nahkampf / Distanz ---
+    28830 = @{ AP = 40; Tempo = 91 }                   # Dragonspine Trophy: 40 AP + 325 Tempo * ~28% Uptime
+    32505 = @{ Treffer = 20; AP = 84; ArP = 135 }      # Madness of the Betrayer: 20 Treffer + 84 AP + 300 ArP * ~45%
+    30627 = @{ Treffer = 10; Krit = 38; AP = 68 }      # Tsunami Talisman: 10 Treffer + 38 Krit + 340 AP * ~20%
+    29383 = @{ AP = 118 }                              # Bloodlust Brooch: 72 AP + 278 AP * 20s/120s
+    28121 = @{ Treffer = 30; ArP = 100 }               # Icon of Unyielding Courage: 30 Treffer + 600 ArP * 20s/120s
+    32492 = @{ Krit = 130 }                            # Ashtongue Lethality (Schurke): 145 Krit * ~90% (Finisher-getaktet)
+    32487 = @{ AP = 124 }                              # Ashtongue Swiftness (Jaeger): 275 AP * ~45% (Zielschuss-Prokk)
+    30450 = @{ Treffer = 21; ArP = 400 }               # Warp-Spring Coil (Schurke): 21 Treffer + 1000 ArP * ~40%
+
+    # --- Zauberer ---
+    32483 = @{ SP = 55; ZTreffer = 25; ZTempo = 29 }   # Skull of Gul'dan: 55 SP + 25 ZAUBERTREFFER + 175 ZTempo * 20s/120s
+    33829 = @{ SP = 88 }                               # Hex Shrunken Head: 53 SP + 211 SP * 20s/120s
+    29370 = @{ SP = 69 }                               # Icon of the Silver Crescent: 43 SP + 155 SP * 20s/120s
+    28785 = @{ SP = 70 }                               # The Lightning Capacitor: Schadensprokk, grob als 70 SP angesetzt
+    32488 = @{ ZTempo = 58 }                           # Ashtongue Insight (Magier): 145 ZAUBERTEMPO * ~40%
+    30626 = @{ ZKrit = 40; SP = 47.5 }                 # Sextant of Unstable Currents: 40 ZKrit + 190 SP * ~25%
+    30720 = @{ ZTreffer = 12; ZKrit = 30; SP = 28 }    # Serpent-Coil Braid (Magier): + 225 SP * ~12,5% (Manastein-getaktet)
+    28789 = @{ SP = 58 }                               # Eye of Magtheridon: 54 SP + Prokk nur bei Resists (am Trefferkap fast tot)
+
+    # --- Heiler ---
+    29376 = @{ Heil = 133 }                            # Essence of the Martyr: 84 Heil + 297 Heil * 20s/120s
+    32496 = @{ Heil = 118; mp5 = 15 }                  # Memento of Tyrande: 118 Heil + 76 mp5 * ~20%
+    28727 = @{ Int = 40; mp5 = 9 }                     # Pendant of the Violet Eye: 40 Int + gestapelte mp5, grob gemittelt
+    28823 = @{ Heil = 44; mp5 = 3 }                    # Eye of Gruul: 44 Heil + seltene Manaersparnis (2% Prokk)
+
+    # --- Tank ---
+    28528 = @{ Dodge = 63 }                            # Moroes' Lucky Pocket Watch: 38 Ausweichen + 300 * 10s/120s
+    32501 = @{ Def = 36; Dodge = 32; Sta = 19 }        # Shadowmoon Insignia: 36 Vert + 32 Ausw + 1750 Leben (~175 Ausd) * 20s/180s
+}
+
+# Simulierte Schmuckstueck-Werte aus 6-trinket-sim.py, falls vorhanden. Sie ersetzen die
+# Naeherung oben spielerweise: dort steht je Spieler und Item bereits der fertige DPS-Unterschied
+# aus einer echten Differenzsimulation, gemessen gegen sein tatsaechliches Gear.
+$trinketWerte = @{}
+$twFile = "$base\daten\trinket-werte.json"
+if (Test-Path $twFile) {
+    $raw = Get-Content $twFile -Raw -Encoding UTF8 | ConvertFrom-Json
+    foreach ($p in $raw.PSObject.Properties) { $trinketWerte[$p.Name] = $p.Value }
+    Write-Output ("Simulierte Schmuckstueck-Werte geladen: " + $trinketWerte.Count + " Spieler")
+} else {
+    Write-Output "Keine trinket-werte.json - Schmuckstuecke laufen auf der statischen Naeherung."
+}
+
+# Schutz gegen stumme Tippfehler: jeder Statschluessel oben muss von mindestens einer Spec
+# gewichtet werden, sonst ist der Eintrag wirkungslos (das Schmuckstueck gilt dann als
+# bewertet, kommt aber auf 0 heraus). Genau so war 'Ausw' statt 'Dodge' monatelang unbemerkt.
+$knownStatKeys = @{}
+foreach ($sp in $specs) { foreach ($k in $sp.W.Keys) { $knownStatKeys[$k] = $true } }
+foreach ($tid in $TRINKET_EFFECTS.Keys) {
+    foreach ($k in $TRINKET_EFFECTS[$tid].Keys) {
+        if (-not $knownStatKeys.ContainsKey($k)) {
+            Write-Warning ("TRINKET_EFFECTS[" + $tid + "]: Statschluessel '" + $k + "' wird von keiner Spec gewichtet und zaehlt daher 0.")
+        }
+    }
 }
 
 # Tier-5-Set-Namen je Klasse, um den aktuellen Set-Stand eines Spielers zu erkennen
@@ -466,7 +521,27 @@ foreach ($it in $items) {
             $nichtBewertbar = ($slotKey -eq 'TRINKET' -and -not $TRINKET_EFFECTS.ContainsKey([int]$it.Id))
             $hinweis = ""
             if ($slotKey -eq 'TRINKET') {
-                if ($nichtBewertbar) {
+                # Gemessener Wert schlaegt Naeherung: Liegt fuer diesen Spieler und dieses
+                # Schmuckstueck ein simulierter Wert vor (6-trinket-sim.py), wird der DIREKT als
+                # Delta verwendet - er ist bereits ein DPS-Unterschied und muss nicht ueber
+                # Statgewichte gerechnet werden. Die Naeherung bleibt nur der Rueckfall.
+                $simWert = $null
+                if ($trinketWerte.ContainsKey($pn)) {
+                    $tw = $trinketWerte[$pn]
+                    $idStr = [string]$it.Id
+                    if ($tw.PSObject.Properties[$idStr]) { $simWert = [double]$tw.$idStr }
+                }
+                if ($null -ne $simWert) {
+                    # Die Sim liefert auch negative Werte (das Schmuckstueck waere ein Rueckschritt).
+                    # Die gehoeren nicht in eine Upgrade-Liste - die uebrige Kette filtert solche
+                    # Zeilen weiter oben mit '$delta -le 0 { continue }' weg, was hier aber schon
+                    # gelaufen ist. Deshalb hier nachziehen. 0 bleibt stehen: das sind die bereits
+                    # getragenen Teile, die als "Bereits ausgeruestet" sichtbar bleiben sollen.
+                    if ($simWert -lt 0) { continue }
+                    $delta = $simWert
+                    $nichtBewertbar = $false
+                    $hinweis = "Simuliert (WoWSims-Differenzsimulation)"
+                } elseif ($nichtBewertbar) {
                     $hinweis = "Schmuck: Prokk- und Nutzeneffekte sind nicht bewertbar"
                 } else {
                     $hinweis = "Statische Uptime-Approximation (Beta)"

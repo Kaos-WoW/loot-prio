@@ -1,0 +1,145 @@
+{
+  "_hinweis": [
+    "Gemeinsamer Raid-Aufbau fuer ALLE Specs: Buffs, Debuffs, Encounter.",
+    "Bewusst fuer alle gleich - nur so sind die DPS-Zahlen zwischen Specs vergleichbar.",
+    "Genau diese Vergleichbarkeit war bei den statischen Presets ein offener Punkt.",
+    "Ausgelesen aus einem wowsims.com-Preset per `wowsimcli decodelink`.",
+    "targets[0].stats[31] ist die Bossruestung (ungedebufft, die Debuffs zieht die Sim selbst ab)."
+  ],
+  "raidBuffs": {
+    "arcaneBrilliance": true,
+    "powerWordFortitude": "TristateEffectImproved",
+    "shadowProtection": true,
+    "divineSpirit": "TristateEffectImproved",
+    "giftOfTheWild": "TristateEffectImproved",
+    "thorns": "TristateEffectImproved",
+    "bloodlust": true
+  },
+  "debuffs": {
+    "judgementOfWisdom": true,
+    "improvedSealOfTheCrusader": "TristateEffectImproved",
+    "jocRetribution2pt4": true,
+    "misery": true,
+    "curseOfElements": "TristateEffectImproved",
+    "bloodFrenzy": true,
+    "exposeArmor": "TristateEffectImproved",
+    "faerieFire": "TristateEffectImproved",
+    "sunderArmor": true,
+    "curseOfRecklessness": true,
+    "huntersMark": "TristateEffectImproved",
+    "exposeWeaknessUptime": 0.9,
+    "exposeWeaknessHunterAgility": 1150
+  },
+  "partyBuffs": {
+    "leaderOfThePack": "TristateEffectImproved",
+    "drums": "LesserDrumsOfBattle",
+    "manaSpringTotem": "TristateEffectRegular",
+    "graceOfAirTotem": "TristateEffectImproved",
+    "strengthOfEarthTotem": "TristateEffectImproved",
+    "windfuryTotem": "TristateEffectImproved",
+    "totemTwisting": true,
+    "battleShout": "TristateEffectImproved"
+  },
+  "encounter": {
+    "apiVersion": 14,
+    "duration": 180,
+    "durationVariation": 5,
+    "executeProportion20": 0.2,
+    "executeProportion25": 0.25,
+    "executeProportion35": 0.35,
+    "executeProportion45": 0.45,
+    "executeProportion90": 0.9,
+    "targets": [
+      {
+        "id": 31146,
+        "name": "Raid Target",
+        "level": 73,
+        "mobType": "MobTypeMechanical",
+        "stats": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          320,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          54,
+          0,
+          0,
+          0,
+          7685,
+          0,
+          6070400,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "minBaseDamage": 15113,
+        "damageSpread": 0.5,
+        "swingSpeed": 2,
+        "parryHaste": true,
+        "canCrush": true
+      }
+    ]
+  },
+  "profile": {
+    "physisch": {
+      "consumables": {
+        "potId": 22838,
+        "flaskId": 22854,
+        "foodId": 27657,
+        "conjuredId": 12662,
+        "explosiveId": 30217,
+        "superSapper": true,
+        "goblinSapper": true,
+        "scrollAgi": true,
+        "scrollStr": true
+      },
+      "buffs": {
+        "blessingOfKings": true,
+        "blessingOfMight": "TristateEffectImproved",
+        "unleashedRage": true
+      }
+    },
+    "zauberer": {
+      "consumables": {
+        "potId": 22832,
+        "flaskId": 22861,
+        "foodId": 27657,
+        "conjuredId": 22044,
+        "explosiveId": 30217,
+        "superSapper": true,
+        "goblinSapper": true
+      },
+      "buffs": {
+        "blessingOfKings": true,
+        "blessingOfWisdom": "TristateEffectImproved"
+      }
+    }
+  }
+}
