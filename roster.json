@@ -8,16 +8,16 @@
         "spec":  "PROT_PALA"
     },
     {
+        "name":  "Moriamus",
+        "spec":  "ARMS"
+    },
+    {
         "name":  "Kaosx",
         "spec":  "RET"
     },
     {
         "name":  "Järgerlie",
         "spec":  "HUNT"
-    },
-    {
-        "name":  "Moriamus",
-        "spec":  "ARMS"
     },
     {
         "name":  "Valiror",
@@ -34,6 +34,10 @@
     {
         "name":  "Kroenix",
         "spec":  "HUNT"
+    },
+    {
+        "name":  "Heinerm",
+        "spec":  "HOLY_PALA"
     },
     {
         "name":  "Shadowdragôn",
@@ -68,8 +72,12 @@
         "spec":  "MAGE"
     },
     {
-        "name":  "Heinerm",
+        "name":  "Golschi",
         "spec":  "HOLY_PALA"
+    },
+    {
+        "name":  "Lanity",
+        "spec":  "ENH"
     },
     {
         "name":  "Moonspell",
@@ -78,14 +86,6 @@
     {
         "name":  "Xalessa",
         "spec":  "WLCK"
-    },
-    {
-        "name":  "Golschi",
-        "spec":  "HOLY_PALA"
-    },
-    {
-        "name":  "Lanity",
-        "spec":  "ENH"
     },
     {
         "name":  "Simondan",
