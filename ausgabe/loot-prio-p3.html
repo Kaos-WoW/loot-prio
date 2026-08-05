@@ -283,6 +283,8 @@
   .empty { padding: 2rem; text-align: center; color: var(--muted); }
 
   .pill.equipped { border-color: #4ade80; color: #4ade80; background: rgba(74,222,128,0.12); }
+  .col-zuwachs { width: 170px !important; max-width: 170px !important; white-space: nowrap; }
+  .col-prio { width: 250px !important; max-width: 250px !important; white-space: nowrap; }
 
   .sync-bar {
     display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
@@ -539,8 +541,8 @@
             <th class="plain" style="width:1%; white-space:nowrap;">Slot</th>
             <th class="plain" style="width:1%; white-space:nowrap;">Spieler</th>
             <th class="plain" style="width:1%; white-space:nowrap;">Spec</th>
-            <th style="width:1%; white-space:nowrap;"><button type="button" id="btn-sort-prio" data-sort="prio">Prio ▾</button></th>
-            <th style="width:1%; white-space:nowrap;"><button type="button" id="btn-sort-dps" data-sort="d">Zuwachs</button></th>
+            <th class="col-prio"><button type="button" id="btn-sort-prio" data-sort="prio">Prio ▾</button></th>
+            <th class="col-zuwachs"><button type="button" id="btn-sort-dps" data-sort="d">Zuwachs</button></th>
             <th class="plain" style="width:1%; white-space:nowrap;">Ersetzt</th>
           </tr>
         </thead>
@@ -954,8 +956,8 @@ function render() {
       <td class="muted">${esc(r.s)}${speed}</td>
       <td><b>${esc(r.pl)}</b></td>
       <td class="muted">${esc(r.sp)}</td>
-      <td>${prioLabel}</td>
-      <td class="num"><b>${dpsCellContent}</b></td>
+      <td class="col-prio">${prioLabel}</td>
+      <td class="num col-zuwachs"><b>${dpsCellContent}</b></td>
       <td class="muted" style="font-size:0.8rem; line-height:1.4;">${getEquippedCell(r.pl, r.e)}</td>
     </tr>`;
   }).join('');
