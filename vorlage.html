@@ -283,7 +283,7 @@
   .empty { padding: 2rem; text-align: center; color: var(--muted); }
 
   .pill.equipped { border-color: #4ade80; color: #4ade80; background: rgba(74,222,128,0.12); }
-  .col-zuwachs { width: 170px !important; max-width: 170px !important; white-space: nowrap; }
+  .col-zuwachs { width: 90px !important; max-width: 90px !important; white-space: nowrap; }
   .col-prio { width: 250px !important; max-width: 250px !important; white-space: nowrap; }
 
   .sync-bar {
@@ -924,16 +924,12 @@ function render() {
     // als Zugewinn ausgeben - und den Fall ausdruecklich benennen, statt ihn als
     // "+0,00 %" durchzuwinken, was wie ein Rechenfehler aussieht.
     let dpsCellContent;
-    if (isTankOrHeal) {
-      if (r.p <= 0) {
-        dpsCellContent = `<span style="color:var(--warn); font-weight:650;">±0 %</span>`
-          + `<span style="font-size:0.72rem; font-weight:normal; display:block; color:var(--muted);">`
-          + `kein Statgewinn — steht nur wegen BiS in der Liste</span>`;
-      } else {
-        dpsCellContent = `<span style="color:var(--gain); font-weight:650;">+${r.p.toFixed(2)}%</span>`;
-      }
+    if (isTankOrHeal && r.p <= 0) {
+      dpsCellContent = `<span style="color:var(--warn); font-weight:650;">±0 %</span>`
+        + `<span style="font-size:0.72rem; font-weight:normal; display:block; color:var(--muted);">`
+        + `kein Statgewinn — steht nur wegen BiS in der Liste</span>`;
     } else {
-      dpsCellContent = `<span style="color:var(--gain); font-weight:650;">+${r.p.toFixed(2)}% dps</span> <span style="font-size:0.75rem; font-weight:normal; opacity:0.8; margin-left:2px; color:var(--muted);">(+${r.d.toFixed(1)} dps)</span>`;
+      dpsCellContent = `<span style="color:var(--gain); font-weight:650;">+${r.p.toFixed(2)}%</span>`;
     }
 
     const tok = r.tk ? TOKEN_BY_GRP[r.tk] : null;
