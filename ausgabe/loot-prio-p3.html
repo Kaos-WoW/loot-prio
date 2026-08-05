@@ -258,11 +258,11 @@
     font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted);
   }
   th button {
-    all: unset; cursor: pointer; padding: 0.6rem 0.7rem; display: block; width: 100%;
+    all: unset; cursor: pointer; padding: 0.45rem 0.5rem; display: block; width: 100%;
     font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit;
   }
-  th.plain { padding: 0.6rem 0.7rem; }
-  tbody td { padding: 0.5rem 0.7rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th.plain { padding: 0.45rem 0.5rem; }
+  tbody td { padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--line); vertical-align: top; }
   tbody tr:hover { background: var(--surface-2); }
   .num { font-family: var(--f-data); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
 
@@ -542,9 +542,9 @@
             <th class="plain">Slot</th>
             <th class="plain">Spieler</th>
             <th class="plain">Spec</th>
-            <th class="plain" style="text-align:center;">Knappheit & Alternativen</th>
-            <th><button type="button" id="btn-sort-prio" data-sort="prio">Prio / BiS Status ▾</button></th>
-            <th><button type="button" id="btn-sort-dps" data-sort="d">Wert-Zuwachs</button></th>
+            <th class="plain" style="text-align:center;">Knappheit</th>
+            <th><button type="button" id="btn-sort-prio" data-sort="prio">Prio ▾</button></th>
+            <th><button type="button" id="btn-sort-dps" data-sort="d">Zuwachs</button></th>
             <th class="plain">Ersetzt</th>
           </tr>
         </thead>
@@ -871,12 +871,12 @@ function render() {
 
   if (currentSort === 'prio') {
     list.sort((a,b) => (getSortKey(a) - getSortKey(b)) * sortDir);
-    $('btn-sort-prio').textContent = `Prio / BiS Status ${sortDir === -1 ? '▾' : '▴'}`;
-    $('btn-sort-dps').textContent = 'Wert-Zuwachs (%)';
+    $('btn-sort-prio').textContent = `Prio ${sortDir === -1 ? '▾' : '▴'}`;
+    $('btn-sort-dps').textContent = 'Zuwachs (%)';
   } else {
     list.sort((a,b) => (a.p - b.p) * sortDir);
-    $('btn-sort-dps').textContent = `Wert-Zuwachs (%) ${sortDir === -1 ? '▾' : '▴'}`;
-    $('btn-sort-prio').textContent = 'Prio / BiS Status';
+    $('btn-sort-dps').textContent = `Zuwachs (%) ${sortDir === -1 ? '▾' : '▴'}`;
+    $('btn-sort-prio').textContent = 'Prio';
   }
 
   $('count').textContent = list.length + ' von ' + rows.length + ' Zeilen';
@@ -953,7 +953,16 @@ function render() {
     }
 
     return `<tr ${rowClass}>
-      <td><span class="item">${wowLink(r.id, r.n)}</span> ${quelle} ${equippedBadge}${note}${altsNote}</td>
+      <td>
+        <div style="display: flex; flex-direction: column; gap: 0.2rem; min-width: 15rem; max-width: 25rem; white-space: normal;">
+          <span class="item">${wowLink(r.id, r.n)}</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.25rem; align-items: center;">
+            ${quelle} ${equippedBadge}
+          </div>
+          ${note}
+          ${altsNote}
+        </div>
+      </td>
       <td class="muted">${bossCell}</td>
       <td class="muted">${esc(r.s)}${speed}</td>
       <td><b>${esc(r.pl)}</b></td>
