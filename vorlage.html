@@ -2,18 +2,18 @@
 
 <style>
   :root {
-    --ground: #12111a;
-    --surface: #1b1a26;
-    --surface-2: #232130;
-    --line: #302d40;
-    --ink: #e8e6f0;
-    --muted: #8f8aa6;
-    --accent: #a335ee;
-    --accent-soft: rgba(163, 53, 238, 0.16);
-    --gain: #5ad1a8;
-    --gain-soft: rgba(90, 209, 168, 0.16);
-    --warn: #e0a458;
-    --warn-soft: rgba(224, 164, 88, 0.13);
+    --ground: #09070f;
+    --surface: #110e1c;
+    --surface-2: #1b172e;
+    --line: #25203d;
+    --ink: #e5e1f5;
+    --muted: #756f96;
+    --accent: #bf5aff;
+    --accent-soft: rgba(191, 90, 255, 0.08);
+    --gain: #00ff9f;
+    --gain-soft: rgba(0, 255, 159, 0.08);
+    --warn: #ffbc00;
+    --warn-soft: rgba(255, 188, 0, 0.08);
 
     --f-display: Georgia, "Iowan Old Style", "Times New Roman", serif;
     --f-ui: system-ui, "Segoe UI", Roboto, sans-serif;
@@ -28,31 +28,31 @@
 
   @media (prefers-color-scheme: light) {
     :root {
-      --ground: #f6f4f9;
+      --ground: #f2f0f7;
       --surface: #ffffff;
-      --surface-2: #efecf4;
-      --line: #ddd8e6;
-      --ink: #1a1826;
-      --muted: #635e7a;
-      --accent: #7b25c4;
-      --accent-soft: rgba(123, 37, 196, 0.10);
-      --gain: #1d8a68;
-      --gain-soft: rgba(29, 138, 104, 0.12);
-      --warn: #9a6417;
-      --warn-soft: rgba(154, 100, 23, 0.10);
+      --surface-2: #e6e2f0;
+      --line: #d0c9e0;
+      --ink: #120e24;
+      --muted: #5c557a;
+      --accent: #8d2df7;
+      --accent-soft: rgba(141, 45, 247, 0.06);
+      --gain: #10855c;
+      --gain-soft: rgba(16, 133, 92, 0.06);
+      --warn: #8a5a0d;
+      --warn-soft: rgba(138, 90, 13, 0.05);
     }
   }
   :root[data-theme="dark"] {
-    --ground: #12111a; --surface: #1b1a26; --surface-2: #232130; --line: #302d40;
-    --ink: #e8e6f0; --muted: #8f8aa6; --accent: #a335ee;
-    --accent-soft: rgba(163,53,238,0.16); --gain: #5ad1a8; --gain-soft: rgba(90,209,168,0.16);
-    --warn: #e0a458; --warn-soft: rgba(224,164,88,0.13);
+    --ground: #09070f; --surface: #110e1c; --surface-2: #1b172e; --line: #25203d;
+    --ink: #e5e1f5; --muted: #756f96; --accent: #bf5aff;
+    --accent-soft: rgba(191, 90, 255, 0.08); --gain: #00ff9f; --gain-soft: rgba(0, 255, 159, 0.08);
+    --warn: #ffbc00; --warn-soft: rgba(255, 188, 0, 0.08);
   }
   :root[data-theme="light"] {
-    --ground: #f6f4f9; --surface: #ffffff; --surface-2: #efecf4; --line: #ddd8e6;
-    --ink: #1a1826; --muted: #635e7a; --accent: #7b25c4;
-    --accent-soft: rgba(123,37,196,0.10); --gain: #1d8a68; --gain-soft: rgba(29,138,104,0.12);
-    --warn: #9a6417; --warn-soft: rgba(154,100,23,0.10);
+    --ground: #f2f0f7; --surface: #ffffff; --surface-2: #e6e2f0; --line: #d0c9e0;
+    --ink: #120e24; --muted: #5c557a; --accent: #8d2df7;
+    --accent-soft: rgba(141, 45, 247, 0.06); --gain: #10855c; --gain-soft: rgba(16, 133, 92, 0.06);
+    --warn: #8a5a0d; --warn-soft: rgba(138, 90, 13, 0.05);
   }
 
   body {
@@ -283,6 +283,9 @@
   .empty { padding: 2rem; text-align: center; color: var(--muted); }
 
   .pill.equipped { border-color: #4ade80; color: #4ade80; background: rgba(74,222,128,0.12); }
+  .pill.k-sehrhoch { border-color: #ff4d4d; color: #ff8080; background: rgba(255, 77, 77, 0.12); box-shadow: 0 0 6px rgba(255, 77, 77, 0.2); }
+  .pill.k-mittel { border-color: var(--warn); color: #ffd166; background: var(--warn-soft); }
+  .pill.k-gering { border-color: var(--gain); color: #a3ffdc; background: var(--gain-soft); box-shadow: 0 0 6px rgba(0, 255, 159, 0.15); }
 
   .sync-bar {
     display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
@@ -539,6 +542,7 @@
             <th class="plain">Slot</th>
             <th class="plain">Spieler</th>
             <th class="plain">Spec</th>
+            <th class="plain" style="text-align:center;">Knappheit & Alternativen</th>
             <th><button type="button" id="btn-sort-prio" data-sort="prio">Prio / BiS Status ▾</button></th>
             <th><button type="button" id="btn-sort-dps" data-sort="d">Wert-Zuwachs</button></th>
             <th class="plain">Ersetzt</th>
@@ -939,12 +943,22 @@ function render() {
       ? `${esc(r.b)}<span class="muted" style="display:block; font-size:0.72rem; margin-top:0.15rem;">Token: ${wowLink(tok.id, tok.n)}<br>bei <b>${esc(tok.b)}</b></span>`
       : esc(r.b);
 
+    let knappBadge = '';
+    if (r.k === 'Sehr hoch') {
+      knappBadge = '<span class="pill k-sehrhoch">Sehr hoch</span>';
+    } else if (r.k === 'Gering') {
+      knappBadge = '<span class="pill k-gering">Gering</span>';
+    } else {
+      knappBadge = '<span class="pill k-mittel">Mittel</span>';
+    }
+
     return `<tr ${rowClass}>
       <td><span class="item">${wowLink(r.id, r.n)}</span> ${quelle} ${equippedBadge}${note}${altsNote}</td>
       <td class="muted">${bossCell}</td>
       <td class="muted">${esc(r.s)}${speed}</td>
       <td><b>${esc(r.pl)}</b></td>
       <td class="muted">${esc(r.sp)}</td>
+      <td style="text-align:center; vertical-align:middle;">${knappBadge}</td>
       <td>${prioLabel}</td>
       <td class="num"><b>${dpsCellContent}</b></td>
       <td class="muted" style="font-size:0.8rem; line-height:1.4;">${getEquippedCell(r.pl, r.e)}</td>

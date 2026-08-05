@@ -178,6 +178,24 @@ foreach ($u in $upg) {
     }
     $bb = ($bc -gt 0 -and $br -ne 1)
     $hClean = if ($u.Hinweis) { ($u.Hinweis -replace "[\r\n]+", " ").Trim() } else { "" }
+
+    # Knappheit & Alternativen berechnen (statische Klassifizierung)
+    $knappheit = "Mittel"
+    if ($u.Quelle -eq 'Marken' -or $u.Quelle -eq 'Trash' -or $u.Quelle -eq 'Craft' -or $u.Quelle -eq 'Quest' -or $u.Quelle -eq 'Ruf') {
+        $knappheit = "Gering"
+    } elseif ($u.Ilvl -lt 128 -and $u.ItemId -ne 28830) {
+        $knappheit = "Gering"
+    } else {
+        # 16 absolute BiS / Key-Items der Phase 3 und davor ohne echte Alternativen
+        # Warglaives (32837, 32838), DST (28830), Tsunami (30627), Madness (32505), Skull (32483), Hex (33829),
+        # Gurt der 100 Tode (30106), Cursed Vision (32235), Memento (32486), Spire (32247), Tempest (30910),
+        # Apostle (30908), Cataclysm's Edge (30902), Zhar'doom (32374), Bow-stitched (32242)
+        $veryHighIds = @(32837, 32838, 28830, 30627, 32505, 32483, 33829, 30106, 32235, 32486, 32247, 30910, 30908, 30902, 32374, 32242)
+        if ($veryHighIds -contains $u.ItemId) {
+            $knappheit = "Sehr hoch"
+        }
+    }
+
     $rows += [pscustomobject]@{
         id  = $u.ItemId
         n   = ($u.Item -replace "[\r\n]+", " ").Trim()
@@ -201,6 +219,7 @@ foreach ($u in $upg) {
         bb  = $bb
         ro  = $u.Rolle
         tk  = $tk
+        k   = $knappheit
     }
 }
 
