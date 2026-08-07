@@ -1,11 +1,15 @@
 [
     {
+        "name":  "Chadíkus",
+        "spec":  "PROT_PALA"
+    },
+    {
         "name":  "Grotschak",
         "spec":  "FURY"
     },
     {
-        "name":  "Chadíkus",
-        "spec":  "PROT_PALA"
+        "name":  "Järgerlie",
+        "spec":  "HUNT"
     },
     {
         "name":  "Moriamus",
@@ -16,16 +20,12 @@
         "spec":  "RET"
     },
     {
-        "name":  "Järgerlie",
-        "spec":  "HUNT"
+        "name":  "Shana",
+        "spec":  "PROT_PALA"
     },
     {
         "name":  "Valiror",
         "spec":  "FURY"
-    },
-    {
-        "name":  "Shana",
-        "spec":  "PROT_PALA"
     },
     {
         "name":  "Deters",
@@ -88,6 +88,10 @@
         "spec":  "WLCK"
     },
     {
+        "name":  "Empathic",
+        "spec":  "HOLY_PRIEST"
+    },
+    {
         "name":  "Simondan",
         "spec":  "WLCK"
     },
@@ -100,15 +104,11 @@
         "spec":  "BAL"
     },
     {
-        "name":  "Empathic",
-        "spec":  "HOLY_PRIEST"
+        "name":  "Erikadirk",
+        "spec":  "ROGUE"
     },
     {
         "name":  "Pflasterelfe",
         "spec":  "SPRI"
-    },
-    {
-        "name":  "Erikadirk",
-        "spec":  "ROGUE"
     }
 ]
