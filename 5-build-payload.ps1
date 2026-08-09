@@ -191,6 +191,11 @@ foreach ($u in $upg) {
         pl  = ($u.Spieler -replace "[\r\n]+", " ").Trim()
         d   = $u.Delta
         p   = $u.Pct
+        # pb = Bezugsgroesse der Prozentzahl ('dps' oder 'gear'), bd = Basis-DPS,
+        # bsim = ob diese Basis gemessen (simuliert) oder nur ein Spec-Schaetzwert ist.
+        pb  = $u.PctBasis
+        bd  = $u.BasisDps
+        bsim = [bool]$u.BasisSim
         e   = ($u.Ersetzt -replace "[\r\n]+", " ").Trim()
         h   = $hClean
         nb  = [bool]$u.NichtBewertbar

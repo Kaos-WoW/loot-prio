@@ -209,7 +209,15 @@ def main():
                 if pre.get(waffe):
                     gewichte[waffe] = round(gewichte["AP"] * (pre[waffe] / pre["AP"]), 3)
 
-        top = sorted(((k, v) for k, v in gewichte.items() if v > 0), key=lambda kv: -kv[1])[:5]
+        # Die gemessene Basis-DPS mitschreiben. 3-compute.ps1 nutzt sie als Nenner fuer die
+        # Prozentanzeige - vorher lief die gegen einen hartcodierten Spec-Schaetzwert
+        # (RET 1600 gegen tatsaechlich gemessene ~1456), der Zaehler war also individuell
+        # simuliert und der Nenner generisch. Schluessel mit "_" sind KEINE Statgewichte;
+        # Value-Item liest nur Schluessel aus $spec.W und fasst sie deshalb nicht an.
+        gewichte["_basisDps"] = round(basis, 1)
+
+        top = sorted(((k, v) for k, v in gewichte.items() if v > 0 and not k.startswith("_")),
+                     key=lambda kv: -kv[1])[:5]
         print("      " + ", ".join(f"{k} {v}" for k, v in top))
         ergebnis[name] = gewichte
 

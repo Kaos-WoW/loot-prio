@@ -116,6 +116,11 @@ sonst schlägt der CSV-Export fehl.
 | **Tank** | Schutz-Paladin, Feral-Tank | prozentualer Zuwachs relativ zum Gesamtwert der aktuell getragenen Ausrüstung |
 | **Heiler** | Wiederherstellung-Druide/Schamane, Heilig-Paladin, Heilig-Priester | prozentualer Zuwachs relativ zum Gesamtwert der aktuell getragenen Ausrüstung |
 
+⚠️ **Die Prozentzahlen der beiden Zeilen bedeuten nicht dasselbe.** Bei DPS ist es der Anteil an der
+Gesamt-DPS des Spielers, bei Tank/Heiler der Anteil am Wert der getragenen Ausrüstung. Die Seite
+schreibt die Bezugsgröße deshalb unter jede Zahl (`7.38% von 1600 DPS` gegen `1.88% der Ausrüstung`)
+und zeigt bei DPS den absoluten ΔDPS als Hauptzahl.
+
 Für Tank und Heiler kann der Zuwachs auch **±0 %** sein. Das ist kein Rechenfehler: Diese Rollen werden
 gegen die BiS-Liste gegatet (s. u.), und ein BiS-Item wird auch dann angezeigt, wenn es statmäßig
 gerade **kein** Gewinn gegenüber dem getragenen Teil ist. Solche Zeilen sind auf der Seite ausdrücklich
@@ -151,6 +156,11 @@ jeden DPS-Spieler einzeln** aus seinem Live-Gear, statt die statischen Presets a
 verwenden — rund 20 Sekunden je Spieler. Das ist wichtig, weil Gewichte vom eigenen Gear abhängen:
 Wer am Trefferkap steht, für den ist Trefferwertung wertlos, für den Nebenmann nicht. Tank und Heiler
 laufen weiterhin auf Presets, dort ist die Leitmetrik ohnehin prozentual.
+
+Derselbe Lauf schreibt auch die **gemessene Basis-DPS** jedes Spielers als `_basisDps` mit. Sie ist der
+Nenner der Prozentanzeige auf der Seite. Vorher lief der gegen einen hartcodierten Spec-Schätzwert
+(RET 1600 gegen tatsächlich gemessene ~1456) — der Zähler war also individuell simuliert und der Nenner
+generisch. Zeilen, für die keine gemessene Basis vorliegt, sind auf der Seite mit `*` gekennzeichnet.
 
 Die Waffenkoeffizienten lassen sich nicht als Stat messen (Waffenschaden ist kein Eintrag im
 Bonus-Stat-Array) und werden deshalb aus dem gemessenen Angriffskraft-Gewicht hochgerechnet, im

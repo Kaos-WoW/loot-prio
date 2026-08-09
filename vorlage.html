@@ -136,18 +136,36 @@
   .caveats p { margin: 0; }
   .caveats strong { color: var(--ink); }
 
+  /* ★ Filterleiste und Tabellenkopf standen beide auf position:sticky/top:0 und haben sich
+     damit gegenseitig verdeckt. Statt zwei konkurrierender Klebepunkte bilden Leiste und
+     Tabelle jetzt EIN Panel in Viewport-Hoehe: die Leiste steht statisch oben darin, die
+     Tabelle fuellt den Rest und scrollt intern. Dadurch bleiben beide gleichzeitig sichtbar.
+     max-height statt height, damit das Panel bei kurzer Trefferliste mitschrumpft und keinen
+     leeren Kasten stehen laesst. */
+  .upgrades-panel {
+    position: sticky; top: 0;
+    /* min-height haelt den Block stabil hoch, wenn ein Filter die Trefferliste stark
+       kuerzt - sonst springt die Seite beim Tippen (siehe "Seitensprung bei Dynamic
+       Heights" in AGENTS.md). */
+    min-height: 65vh;
+    max-height: 100vh;
+    display: flex; flex-direction: column;
+  }
   .controls {
-    position: sticky; top: 0; z-index: 5;
     background: var(--ground);
     padding: 0.9rem 0; margin-bottom: 0.25rem;
     border-bottom: 1px solid var(--line);
     display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center;
+    flex: 0 0 auto;
   }
-  select, input[type="search"], .ms-trigger {
+  select, input[type="search"], .ms-trigger, #btn-reset {
     font-family: var(--f-ui); font-size: var(--step-0);
     background: var(--surface); color: var(--ink);
     border: 1px solid var(--line); padding: 0.4rem 0.6rem;
   }
+  #btn-reset { cursor: pointer; color: var(--muted); white-space: nowrap; }
+  #btn-reset:hover { color: var(--ink); border-color: var(--muted); }
+  #btn-reset:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
   input[type="search"] { min-width: 15rem; flex: 1 1 15rem; }
   select:focus-visible, input:focus-visible, th button:focus-visible, .ms-trigger:focus-visible {
     outline: 2px solid var(--accent); outline-offset: 1px;
@@ -245,8 +263,22 @@
   .ms-dropdown.hidden {
     display: none !important;
   }
+  /* ★ Der Kopf der Haupttabelle klebte nicht, obwohl thead th auf position:sticky steht.
+     Ursache: .tablewrap hat overflow-x:auto. Laut CSS-Spec zwingt das overflow-y ebenfalls
+     auf auto - der Wrapper wird also in BEIDEN Achsen zum Scrollcontainer. sticky klebt dann
+     an dessen Scrollport, der bei 687 Zeilen rund 46.000 px hoch ist, selbst nie scrollt und
+     mit der Seite wegwandert. Ergebnis: nach wenigen Zeilen war der Spaltenkopf endgueltig weg.
+     Fix: der Wrapper bekommt eine begrenzte Hoehe und scrollt selbst - dann klebt der Kopf an
+     SEINEM Scrollport und bleibt stehen. Der Abzug deckt die Filterleiste (sticky, ~154 px) ab,
+     damit sich beide nicht gegenseitig verdecken; beide standen vorher auf top:0. */
   #main-tablewrap {
-    min-height: 65vh;
+    /* min-height:0 ist im Flex-Container Pflicht - ohne das weigert sich das Element,
+       unter seine Inhaltshoehe zu schrumpfen, und scrollt dann nicht intern.
+       Die Mindesthoehe gegen den Scroll-Sprung sitzt deshalb am Panel, nicht hier. */
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+    overscroll-behavior: contain;
   }
 
   .tablewrap { overflow-x: auto; border: 1px solid var(--line); background: var(--surface); }
@@ -256,6 +288,8 @@
     text-align: left; font-weight: 600; white-space: nowrap;
     border-bottom: 1px solid var(--line);
     font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted);
+    /* Ohne z-index scrollen die Zeilen sichtbar UEBER den klebenden Kopf. */
+    z-index: 2;
   }
   th button {
     all: unset; cursor: pointer; padding: 0.45rem 0.5rem; display: block; width: 100%;
@@ -283,7 +317,36 @@
   .empty { padding: 2rem; text-align: center; color: var(--muted); }
 
   .pill.equipped { border-color: #4ade80; color: #4ade80; background: rgba(74,222,128,0.12); }
-  .col-zuwachs { width: 90px !important; max-width: 90px !important; white-space: nowrap; }
+  .col-zuwachs { width: 120px !important; max-width: 120px !important; white-space: nowrap; }
+  /* Bezugsgroesse unter der Zahl. Ohne sie steht in derselben Spalte zweimal dasselbe
+     Prozentzeichen fuer zwei voellig verschiedene Nenner (DPS-Anteil vs. Ausruestungswert). */
+  .einheit-hint {
+    display: block; font-size: 0.68rem; font-weight: 400;
+    color: var(--muted); white-space: nowrap; letter-spacing: 0;
+  }
+
+  /* Anwaerter-Aufklappung: beantwortet "Item ist gefallen, wer kriegt es?" in einem Klick. */
+  .anwaerter-btn {
+    all: unset; cursor: pointer;
+    font-family: var(--f-ui); font-size: 0.68rem; font-weight: 600;
+    color: var(--accent); border: 1px solid var(--accent);
+    background: var(--accent-soft); padding: 0.08rem 0.4rem;
+    white-space: nowrap;
+  }
+  .anwaerter-btn:hover { background: var(--accent); color: #fff; }
+  .anwaerter-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .anwaerter-btn[aria-expanded="true"] { background: var(--accent); color: #fff; }
+
+  .anwaerter-zeile td { background: var(--surface-2); padding: 0 !important; }
+  .anwaerter-box { padding: 0.75rem 1rem; border-left: 3px solid var(--accent); }
+  .anwaerter-titel { font-size: 0.8rem; margin-bottom: 0.5rem; }
+  .anwaerter-liste { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.3rem; }
+  .anwaerter-liste li {
+    display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
+    font-size: 0.8rem; padding: 0.2rem 0; border-bottom: 1px solid var(--line);
+  }
+  .anwaerter-liste li:last-child { border-bottom: none; }
+  .anwaerter-fuss { margin: 0.5rem 0 0; font-size: 0.7rem; color: var(--muted); }
   .col-prio { width: 250px !important; max-width: 250px !important; white-space: nowrap; }
 
   .sync-bar {
@@ -396,19 +459,26 @@
       <button type="button" id="btnLogout" style="all:unset; cursor:pointer; font-size:0.8rem; color:var(--muted); border:1px solid var(--line); padding:0.25rem 0.6rem; border-radius:4px; font-family:var(--f-ui);">🔓 Abmelden</button>
     </div>
     <h1>Loot-Prioritäten Phase&nbsp;3</h1>
-    <p class="sub">Mount Hyjal und Black Temple, gerechnet gegen die tatsächlich getragene Ausrüstung der Raider. Der Wert einer Zeile ist der DPS-Zuwachs für diesen Spieler. BiS-Items werden gegenüber bloßen Upgrades priorisiert.</p>
+    <p class="sub">Mount Hyjal und Black Temple, gerechnet gegen die tatsächlich getragene Ausrüstung der Raider. Bei <b>DPS</b> steht der absolute Zuwachs in ΔDPS, bei <b>Tank und Heiler</b> der prozentuale Zuwachs auf den Wert der getragenen Ausrüstung — die beiden Zahlen sind <u>nicht</u> miteinander vergleichbar. BiS-Items werden gegenüber bloßen Upgrades priorisiert.</p>
     <div class="provenance">
       <span>Gear-Stand <b id="provStand">—</b></span>
       <span>Alle <b id="totalRaiders">— Raider</b></span>
       <span>Gewichte <b>WoWSims 2.5.6</b></span>
       <span class="tooltip-wrapper">
-        Abgleich <b>79 % in BiS-Top-3</b>
+        Abgleich <b>79 % DPS · 90 % Tank/Heiler</b>
         <span class="tooltip-content">
-          Dieser Qualitäts-Wert zeigt, wie genau die automatische Berechnung der Prio-Liste ist:
+          Dieser Qualitäts-Wert zeigt, wie genau die automatische Berechnung der Prio-Liste ist —
+          gemessen gegen veröffentlichte Phase-3-BiS-Listen:
           <br><br>
-          In <b>79 % aller Fälle</b> liegt das vom System berechnete Top-Upgrade (Platz 1) auch in der offiziellen Wowhead Phase-3-BiS-Liste des jeweiligen Charakters unter den besten 3 Empfehlungen, in 58 % sogar auf Platz 1.
+          <b>DPS</b> (gegen warcrafttavern.com): 79 % der Top-Vorschläge liegen dort in den besten 3,
+          58 % auf Platz 1 — 155 geprüfte Empfehlungen.
           <br><br>
-          Die restlichen Fälle sind fast immer Items, die diese Guides gar nicht führen (Marken- und Trash-Items) — kein Rechenfehler.
+          <b>Tank und Heiler</b> (gegen die Wowhead-Guides): 90 % in den Top 3, 77 % auf Platz 1 —
+          70 geprüfte Empfehlungen. Der höhere Wert ist erwartbar, weil diese Rollen ohnehin gegen
+          dieselbe BiS-Liste gegatet werden.
+          <br><br>
+          Die restlichen Fälle sind fast immer Items, die diese Guides gar nicht führen (Marken- und
+          Trash-Items) — kein Rechenfehler.
         </span>
       </span>
     </div>
@@ -433,6 +503,8 @@
       <p><strong>Set-Boni extra beachten:</strong> Die DPS-Zahl enthält keine Set-Boni. Ob du durch den Tausch Boni gewinnst oder verlierst, steht direkt als Text unter dem Item.</p>
       <p><strong>Warglaives (Gleven):</strong> Das Paar ist als Kombi-Zeile berechnet. Nutzt diese Paar-Zeilen für die Vergabe der Gleven.</p>
       <p><strong>Tier-6-Tokens:</strong> Gelistet ist immer das <em>eingetauschte</em> Rüstungsteil. Da sich drei Klassen ein Token teilen, steht die vollständige Konkurrenz in der Tabelle „Tier-6-Tokens“ weiter unten — dort auch der Boss, der das Token wirklich fallen lässt.</p>
+      <p><strong>Wer braucht das Item noch?</strong> Der Knopf <b>👥 n Anwärter</b> in der Item-Spalte klappt <em>alle</em> Spieler auf, die auf dieses Item Anspruch haben — auch die, die der BiS-Schutz gerade ausblendet. Dafür muss also kein Filter mehr umgestellt werden.</p>
+      <p><strong>Zwei verschiedene Prozentzahlen:</strong> Bei DPS steht der absolute Zuwachs in ΔDPS, darunter sein Anteil an der Gesamt-DPS. Bei Tank und Heiler gibt es keinen absoluten Wert — dort ist die Zahl der Anteil am Wert der getragenen Ausrüstung. Die beiden Prozentangaben sind <u>nicht</u> gegeneinander aufzurechnen. Ein <b>*</b> heißt: die Basis-DPS ist ein Spec-Schätzwert, nicht simuliert.</p>
     </div>
   </section>
 
@@ -492,7 +564,7 @@
     </div>
   </section>
 
-  <section>
+  <section class="upgrades-panel">
     <h2>Alle Upgrades</h2>
     <div class="controls">
       <label style="display:inline-flex; align-items:center; gap:0.45rem; font-size:0.85rem; font-weight:600; cursor:pointer; color:var(--gain); padding:0.3rem 0.6rem; border:1px solid var(--gain-soft); background:var(--gain-soft);">
@@ -530,6 +602,7 @@
       </div>
       <select id="f-quelle"><option value="">Alle Quellen</option></select>
       <input type="search" id="f-suche" placeholder="Item oder Spieler suchen" aria-label="Suchen">
+      <button type="button" id="btn-reset" title="Alle Filter auf den Ausgangszustand zurücksetzen">Filter zurücksetzen</button>
       <span class="count" id="count"></span>
     </div>
     <div class="tablewrap" id="main-tablewrap">
@@ -553,7 +626,7 @@
   </section>
 
   <footer>
-    <p>Statgewichte aus echten Simulationsläufen (WoWSims, 23 Simulationen je Spec). Itemwerte aus der Wowhead-TBC-Datenbank, Namensraum <span style="font-family:var(--f-data)">static-2.5.6</span>. Ausrüstungsstände live über classic-armory.org. Gegengeprüft gegen die veröffentlichten Phase-3-BiS-Listen: 79&nbsp;% der Empfehlungen liegen dort in den Top&nbsp;3, 58&nbsp;% auf Platz&nbsp;1 (155 geprüfte Empfehlungen, Stand 2026-08-02).</p>
+    <p>Statgewichte aus echten Simulationsläufen (WoWSims, 23 Simulationen je Spec). Itemwerte aus der Wowhead-TBC-Datenbank, Namensraum <span style="font-family:var(--f-data)">static-2.5.6</span>. Ausrüstungsstände live über classic-armory.org. Gegengeprüft gegen die veröffentlichten Phase-3-BiS-Listen — <b>DPS</b>: 79&nbsp;% in den Top&nbsp;3, 58&nbsp;% auf Platz&nbsp;1 (155 Empfehlungen); <b>Tank/Heiler</b>: 90&nbsp;% in den Top&nbsp;3, 77&nbsp;% auf Platz&nbsp;1 (70 Empfehlungen). Stand 2026-08-03.</p>
   </footer>
 </div>
 
@@ -835,6 +908,45 @@ function isEquipped(r) {
   return gear ? gear.has(r.id) : false;
 }
 
+// Alle Spieler, die auf dieses Item Anspruch haben - unabhaengig von den aktiven Filtern
+// und vom BiS-Schutz. Genau das ist die Frage beim Drop ("wer kriegt es?"), und sie war
+// bisher nur zu beantworten, indem man den BiS-Schutz abschaltete und neu suchte.
+// Slot wird mitgeprueft, weil die Warglaives unter derselben Item-ID auch als
+// Waffenhand/Schildhand/Paar auftauchen.
+function anwaerterFuer(r) {
+  return rows.filter(x => x.id === r.id && x.s === r.s && !x.nb);
+}
+
+function anwaerterZeile(r) {
+  const liste = anwaerterFuer(r).slice().sort((a, b) => b.p - a.p);
+  const zellen = liste.map(x => {
+    const tankHeal = (x.ro === 'Tank' || x.ro === 'Heiler');
+    const wert = tankHeal
+      ? (x.p > 0 ? `+${x.p.toFixed(2)}%` : '±0 %')
+      : `+${x.d.toFixed(1)} DPS`;
+    const rang = x.bis === 1
+      ? '<span class="pill bis1" style="font-size:0.62rem;">BiS #1</span>'
+      : x.bb
+        ? '<span class="pill q-marken" style="font-size:0.62rem;">gesperrt</span>'
+        : '<span class="pill upg-only" style="font-size:0.62rem;">Upgrade</span>';
+    const getragen = isEquipped(x)
+      ? ' <span class="muted" style="font-size:0.68rem;">(trägt es bereits)</span>' : '';
+    return `<li>
+      <b>${esc(x.pl)}</b> <span class="muted">${esc(x.sp)}</span> ${rang}
+      <span class="num" style="font-weight:600; color:var(--gain);">${wert}</span>${getragen}
+    </li>`;
+  }).join('');
+  return `<tr class="anwaerter-zeile"><td colspan="8">
+    <div class="anwaerter-box">
+      <div class="anwaerter-titel">Alle Anwärter auf <b>${esc(r.n)}</b>
+        <span class="muted">— nach Zuwachs, ohne BiS-Schutz-Filterung</span></div>
+      <ul class="anwaerter-liste">${zellen}</ul>
+      <p class="anwaerter-fuss">Zwischen den Rollen sind die Zahlen nicht vergleichbar
+        (DPS in ΔDPS, Tank/Heiler in % des Ausrüstungswerts).</p>
+    </div>
+  </td></tr>`;
+}
+
 function render() {
   const strict = $('f-bis-strict').checked;
   const hideEquipped = $('f-hide-equipped').checked;
@@ -867,13 +979,16 @@ function render() {
     return true;
   });
 
+  // Sortiert wird bewusst nach r.p (relativ), nicht nach r.d: der absolute ΔDPS ist
+  // zwischen Specs mit unterschiedlicher Grund-DPS nicht vergleichbar, und bei Tank/Heiler
+  // ist r.d ueberhaupt kein Zugewinn, sondern ein Ranking-Score.
   if (currentSort === 'prio') {
     list.sort((a,b) => (getSortKey(a) - getSortKey(b)) * sortDir);
     $('btn-sort-prio').textContent = `Prio ${sortDir === -1 ? '▾' : '▴'}`;
-    $('btn-sort-dps').textContent = 'Zuwachs (%)';
+    $('btn-sort-dps').textContent = 'Zuwachs';
   } else {
     list.sort((a,b) => (a.p - b.p) * sortDir);
-    $('btn-sort-dps').textContent = `Zuwachs (%) ${sortDir === -1 ? '▾' : '▴'}`;
+    $('btn-sort-dps').textContent = `Zuwachs ${sortDir === -1 ? '▾' : '▴'}`;
     $('btn-sort-prio').textContent = 'Prio';
   }
 
@@ -928,8 +1043,20 @@ function render() {
       dpsCellContent = `<span style="color:var(--warn); font-weight:650;">±0 %</span>`
         + `<span style="font-size:0.72rem; font-weight:normal; display:block; color:var(--muted);">`
         + `kein Statgewinn — steht nur wegen BiS in der Liste</span>`;
+    } else if (isTankOrHeal) {
+      // Tank/Heiler: Prozent vom Gesamtwert der getragenen Ausruestung. Ein absoluter
+      // Wert existiert hier nicht - r.d ist bei diesen Rollen ein Ranking-Score
+      // (Statdifferenz + BiS-Bonus) und darf nicht als Zugewinn angezeigt werden.
+      dpsCellContent = `<span style="color:var(--gain); font-weight:650;">+${r.p.toFixed(2)}%</span>`
+        + `<span class="einheit-hint">der Ausrüstung</span>`;
     } else {
-      dpsCellContent = `<span style="color:var(--gain); font-weight:650;">+${r.p.toFixed(2)}%</span>`;
+      // DPS: der absolute ΔDPS ist die Zahl, um die es geht - sie stand bisher gar nicht
+      // auf der Seite, obwohl die gesamte WoWSims-Kette nur existiert, um sie zu berechnen.
+      // Die Prozentzahl bleibt als Einordnung darunter, mit ihrer Bezugsgroesse.
+      const basis = r.bd ? `${r.p.toFixed(2)}% von ${r.bd} DPS` : `${r.p.toFixed(2)}%`;
+      const gemessen = r.bsim ? '' : '<span title="Basis-DPS ist ein Spec-Schätzwert, nicht simuliert">*</span>';
+      dpsCellContent = `<span style="color:var(--gain); font-weight:650;">+${r.d.toFixed(1)}<span style="font-size:0.7rem; font-weight:500;"> DPS</span></span>`
+        + `<span class="einheit-hint">${basis}${gemessen}</span>`;
     }
 
     const tok = r.tk ? TOKEN_BY_GRP[r.tk] : null;
@@ -937,12 +1064,20 @@ function render() {
       ? `${esc(r.b)}<span class="muted" style="display:block; font-size:0.72rem; margin-top:0.15rem;">Token: ${wowLink(tok.id, tok.n)}<br>bei <b>${esc(tok.b)}</b></span>`
       : esc(r.b);
 
-    return `<tr ${rowClass}>
+    // Wie viele Spieler stehen insgesamt auf diesem Item? Der Loot-Rat muss beim Drop
+    // sofort das ganze Feld sehen; bisher musste man dafuer den BiS-Schutz abschalten.
+    const konkurrenz = anwaerterFuer(r).length;
+    const konkurrenzBtn = konkurrenz > 1
+      ? `<button type="button" class="anwaerter-btn" data-item="${r.id}" data-slot="${esc(r.s)}"
+           aria-expanded="false" title="Alle Anwärter auf dieses Item zeigen">👥 ${konkurrenz} Anwärter</button>`
+      : '';
+
+    return `<tr ${rowClass} data-itemid="${r.id}" data-slot="${esc(r.s)}">
       <td>
         <div style="display: flex; flex-direction: column; gap: 0.2rem; min-width: 15rem; max-width: none; white-space: normal;">
           <span class="item">${wowLink(r.id, r.n)}</span>
           <div style="display: flex; flex-wrap: wrap; gap: 0.25rem; align-items: center;">
-            ${quelle} ${equippedBadge}
+            ${quelle} ${equippedBadge} ${konkurrenzBtn}
           </div>
           ${note}
           ${altsNote}
@@ -960,6 +1095,28 @@ function render() {
   renderContestedTable();
   renderTokenTable();
 }
+
+// Anwaerter-Liste unter der geklickten Zeile ein-/ausklappen. Delegiert, weil der
+// Tabellenkoerper bei jedem Filterwechsel komplett neu geschrieben wird - direkt
+// gebundene Handler waeren danach weg.
+document.getElementById('tbody').addEventListener('click', e => {
+  const btn = e.target.closest('.anwaerter-btn');
+  if (!btn) return;
+  const tr = btn.closest('tr');
+  const offen = btn.getAttribute('aria-expanded') === 'true';
+
+  const bestehend = tr.nextElementSibling;
+  if (bestehend && bestehend.classList.contains('anwaerter-zeile')) bestehend.remove();
+
+  if (offen) { btn.setAttribute('aria-expanded', 'false'); return; }
+
+  const id = Number(tr.dataset.itemid);
+  const slot = tr.dataset.slot;
+  const treffer = rows.find(x => x.id === id && x.s === slot);
+  if (!treffer) return;
+  tr.insertAdjacentHTML('afterend', anwaerterZeile(treffer));
+  btn.setAttribute('aria-expanded', 'true');
+});
 
 // Ein Token wird von drei Klassen geteilt. Diese Tabelle dreht die Sicht um: nicht
 // "welcher Spieler braucht welches Ruestungsteil", sondern "wer konkurriert um dieses Token".
@@ -1197,6 +1354,23 @@ $('btn-sort-prio').addEventListener('click', () => {
 $('btn-sort-dps').addEventListener('click', () => {
   if (currentSort === 'd') sortDir *= -1;
   else { currentSort = 'd'; sortDir = -1; }
+  render();
+});
+
+// Mit acht Filtern verliert man schnell den Ueberblick, warum eine erwartete Zeile fehlt.
+// Ein Knopf zurueck auf den Ausgangszustand ist billiger als jeden Filter einzeln zu suchen.
+$('btn-reset').addEventListener('click', () => {
+  $('f-bis-strict').checked = true;
+  $('f-hide-equipped').checked = false;
+  ['f-rolle','f-prio','f-boss','f-slot','f-quelle'].forEach(id => { $(id).value = ''; });
+  $('f-suche').value = '';
+  selectedPlayers.clear();
+  document.querySelectorAll('.ms-player-cb').forEach(cb => { cb.checked = false; });
+  $('ms-search-spieler').value = '';
+  // Erst nach dem Zuruecksetzen von f-rolle und Suchfeld aufrufen - die Funktion
+  // liest beide aus, um zu entscheiden, welche Spieler sichtbar sein duerfen.
+  updatePlayerFilter();
+  currentSort = 'prio'; sortDir = -1;
   render();
 });
 </script>

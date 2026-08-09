@@ -147,6 +147,28 @@ if (Test-Path $simWeightsFile) {
     }
 }
 
+# Basis-DPS des Spielers fuer die Prozentanzeige. Bevorzugt den in 7-stat-gewichte.py
+# GEMESSENEN Wert (_basisDps); nur wenn der fehlt, den hartcodierten Spec-Schaetzwert.
+# Vorher lief der Nenner immer gegen den Schaetzwert, waehrend der Zaehler (Delta) je
+# Spieler simuliert war - fuer Kaosx 1600 statt gemessener ~1456, also rund 10 % daneben.
+function Get-BasisDps($playerName, $spec) {
+    if ($playerName -and $simWeights.ContainsKey($playerName)) {
+        $sw = $simWeights[$playerName]
+        if ($sw.ContainsKey('_basisDps')) {
+            $v = [double]$sw['_basisDps']
+            if ($v -gt 0) { return $v }
+        }
+    }
+    return [double]$spec.BaseDps
+}
+function Test-BasisGemessen($playerName) {
+    if ($playerName -and $simWeights.ContainsKey($playerName)) {
+        $sw = $simWeights[$playerName]
+        if ($sw.ContainsKey('_basisDps') -and [double]$sw['_basisDps'] -gt 0) { return $true }
+    }
+    return $false
+}
+
 function Value-Item($stats, $spec, $slotKind, $playerName=$null) {
     $w = $spec.W
     # Falls simulierte Gewichte fuer diesen Spieler existieren, diese bevorzugen
@@ -637,8 +659,15 @@ foreach ($it in $items) {
                     if ($totalWorn -le 0) { $totalWorn = 1000.0 }
                     [math]::Round(($statDelta / $totalWorn) * 100, 2)
                 } else {
-                    [math]::Round(($delta / $spec.BaseDps) * 100, 2)
+                    [math]::Round(($delta / (Get-BasisDps $pn $spec)) * 100, 2)
                 }
+                # Bezugsgroesse der Prozentzahl mitgeben. Sie bedeutet je Rolle etwas
+                # anderes (DPS: Anteil an der Gesamt-DPS, Tank/Heiler: Anteil am
+                # Ausruestungswert) - ohne diese Angabe steht auf der Seite zweimal
+                # dasselbe Prozentzeichen fuer zwei verschiedene Bezugsgroessen.
+                PctBasis = if ($isTankSpec -or $isHealerSpec) { 'gear' } else { 'dps' }
+                BasisDps = if ($isTankSpec -or $isHealerSpec) { 0 } else { [math]::Round((Get-BasisDps $pn $spec),0) }
+                BasisSim = if ($isTankSpec -or $isHealerSpec) { $false } else { (Test-BasisGemessen $pn) }
                 Unsicher=($UNSICHER -contains $pn)
                 Speed=$(if ($istats.ContainsKey('WpnSpeed')) { $istats['WpnSpeed'] } else { 0 })
                 ProSchlag=$(if ($istats.ContainsKey('WpnSpeed') -and $istats.ContainsKey('WpnDps')) { [math]::Round([double]$istats['WpnDps'] * [double]$istats['WpnSpeed'],0) } else { 0 })
@@ -685,7 +714,10 @@ if ($wgMh -and $wgOh) {
                 Slot="Waffenpaar"; Armor=""
                 Spec=$spec.Name; SpecKey=$spec.Key; Spieler=$pn
                 Delta=[math]::Round($d,1); Ersetzt="MAIN_HAND+OFF_HAND"
-                Pct=[math]::Round(($d / $spec.BaseDps) * 100, 2)
+                Pct=[math]::Round(($d / (Get-BasisDps $pn $spec)) * 100, 2)
+                PctBasis='dps'
+                BasisDps=[math]::Round((Get-BasisDps $pn $spec),0)
+                BasisSim=(Test-BasisGemessen $pn)
                 Unsicher=($UNSICHER -contains $pn)
                 Speed=0; ProSchlag=0; Rolle=$spec.Rolle
                 Hinweis=("beide Klingen zusammen, inkl. 2er-Bonus (+" + [math]::Round($bonus,0) + " DPS: 450 Tempo zu " + [math]::Round($uptime*100,0) + " % Laufzeit, dazu 200 AP gegen Daemonen)")

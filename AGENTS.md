@@ -197,6 +197,28 @@ python 7-stat-gewichte.py
   konkurrieren Heilig-Priester, Schutz-Paladin und Hexer im selben Topf — eine gemeinsame Rangliste nach
   `d` wäre schlicht falsch. Die Token-Tabelle gruppiert deshalb nach Rolle und sortiert je Block nach der
   Größe, die dort auch angezeigt wird.
+* **★ `p` (Prozent) hat je Rolle einen ANDEREN Nenner — das gehört an der Oberfläche dazugeschrieben.**
+  Bei DPS ist `p` der Anteil an der Gesamt-DPS des Spielers, bei Tank/Heiler der Anteil am Gesamtwert
+  der getragenen Ausrüstung. Die Haupttabelle zeigte beides als nacktes „%" in derselben Spalte, also
+  zweimal dasselbe Zeichen für zwei verschiedene Bezugsgrößen. Jetzt steht die Bezugsgröße unter der
+  Zahl (`+118.1 DPS / 7.38% von 1600 DPS` gegen `+1.88% der Ausrüstung`), und bei DPS ist der absolute
+  ΔDPS die Hauptzahl — der stand vorher überhaupt nicht auf der Seite, obwohl die ganze WoWSims-Kette
+  nur existiert, um ihn zu berechnen. Die Felder dafür heißen im Payload `pb` (Bezug: `dps`/`gear`),
+  `bd` (Basis-DPS) und `bsim` (Basis gemessen oder Schätzwert).
+* **★ Der Nenner der DPS-Prozentzahl war ein hartcodierter Spec-Schätzwert.** `Pct` lief gegen
+  `$spec.BaseDps` aus `3-compute.ps1` (RET 1600, FURY 2100 …), während der Zähler je Spieler simuliert
+  ist — für Kaosx also 1600 statt gemessener ~1456. `7-stat-gewichte.py` misst die Basis-DPS ohnehin
+  bei jedem Lauf (Variable `basis`), hat sie aber nur ausgegeben und weggeworfen. Sie steht jetzt als
+  `_basisDps` in `sim-weights.json`; `Get-BasisDps` in `3-compute.ps1` bevorzugt sie und fällt nur ohne
+  sie auf das Preset zurück. **Schlüssel mit `_`-Präfix sind dort keine Statgewichte** — `Value-Item`
+  iteriert nur über `$spec.W.Keys` und fasst sie deshalb nicht an. Zeilen ohne gemessene Basis sind auf
+  der Seite mit `*` markiert.
+* **Anwärter-Aufklappung in der Haupttabelle:** Der Knopf „👥 n Anwärter" listet **alle** Spieler zu
+  einem Item, unabhängig von den aktiven Filtern und vom BiS-Schutz — das ist die eigentliche Frage
+  beim Drop und war vorher nur zu beantworten, indem man den BiS-Schutz abschaltete und neu suchte.
+  Der Handler ist an `#tbody` delegiert, weil der Tabellenkörper bei jedem Filterwechsel komplett neu
+  geschrieben wird; direkt gebundene Handler wären danach weg. Gefiltert wird auf `id` **und** `s`
+  (Slot), weil die Warglaives unter derselben Item-ID auch als Waffenhand/Schildhand/Paar auftauchen.
 * **Schilde ≠ Schildhand-Item:** Tooltip nennt bei Schilden „Off Hand“ als Slot — ohne Prüfung der
   Rüstungsart (`Shield`) bekommen Caster Schilde vorgeschlagen.
 * **Devastation-Bug im Scraper:** In `daten/scrape_wowhead_final.py` filterte ein Substring-Filter
@@ -212,7 +234,27 @@ python 7-stat-gewichte.py
 * **Multi-Select-Spieler-Filter:** Auswahl über ein Dropdown mit Suchfeld und
   Mehrfachauswahl-Checkboxes für direkte Vergleiche (2–4 Spieler) im Loot-Rat.
 * **Seitensprung bei Dynamic Heights:** Schrumpft die Tabelle durch Filter, erzwingt der Browser sonst
-  einen Scroll-Sprung. Fix: `#main-tablewrap` hat eine Mindesthöhe von `65vh`.
+  einen Scroll-Sprung. Die Mindesthöhe von `65vh` sitzt seit dem Panel-Umbau (s. u.) auf
+  `.upgrades-panel`, nicht mehr auf `#main-tablewrap` — dort steht jetzt `min-height: 0`, weil ein
+  Flex-Kind sonst nicht unter seine Inhaltshöhe schrumpft und damit gar nicht intern scrollt.
+* **★★ `overflow-x: auto` macht ein Element in BEIDEN Achsen zum Scrollcontainer — und killt
+  `position: sticky` darin.** Der Kopf der Haupttabelle klebte nie, obwohl `thead th` korrekt auf
+  `position: sticky; top: 0` stand. Ursache: `.tablewrap` hat `overflow-x: auto`; laut CSS-Spec
+  rechnet der Browser `overflow-y` dann ebenfalls auf `auto` hoch (nachgemessen: `overflowY: "auto"`,
+  obwohl nirgends gesetzt). Sticky klebt an dessen Scrollport — der war bei 687 Zeilen rund
+  **46.000 px** hoch, scrollte selbst nie und wanderte mit der Seite weg. Der Kopf war nach wenigen
+  Zeilen endgültig verschwunden. **Ein sticky-Element klebt immer am nächsten scrollenden Vorfahren,
+  nicht am Viewport — wenn der Vorfahre so hoch ist wie sein Inhalt, klebt gar nichts.**
+* **★ Zwei sticky-Elemente auf `top: 0` verdecken sich gegenseitig.** Filterleiste (`.controls`) und
+  Tabellenkopf standen beide auf `top: 0`; nach dem Fix oben klebte der Kopf zwar, lag aber unter der
+  154 px hohen Leiste. Gelöst nicht durch Offsets (die Leiste umbricht je nach Fensterbreite, ihre
+  Höhe ist nicht konstant), sondern strukturell: `.upgrades-panel` (die Sektion) ist jetzt EIN
+  sticky Block in Viewport-Höhe mit `display: flex; flex-direction: column`. Die Leiste steht
+  statisch oben darin, `#main-tablewrap` füllt mit `flex: 1; min-height: 0; overflow: auto` den Rest
+  und scrollt intern. Bewusst `max-height: 100vh` statt `height`, damit das Panel bei kurzer
+  Trefferliste mitschrumpft und keinen leeren Kasten stehen lässt (gemessen: volle Liste 900 px,
+  auf einen Treffer gefiltert 367 px). Nebeneffekt: die Seite ist von **49.000 px auf 4.200 px**
+  geschrumpft.
 * **Dropdown-Einklappen (`.hidden`):** `.ms-dropdown` nutzt `display: flex`, das HTML-Attribut `hidden`
   wird durch CSS-Spezifität überschrieben. Steuerung deshalb über `.classList.toggle('hidden')`, CSS
   definiert `.ms-dropdown.hidden { display: none !important; }`.
