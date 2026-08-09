@@ -328,8 +328,13 @@ python 7-stat-gewichte.py
   Eintrag). Kommt über `1-fetch-items.ps1` ein neues Schmuckstück dazu, fällt es automatisch auf
   `NichtBewertbar` zurück — dann Eintrag in `$TRINKET_EFFECTS` nachziehen. Gegenprobe:
   Pool-IDs mit `Slot -eq 'Trinket'` gegen die Schlüssel der Tabelle abgleichen.
-* **Knappheitsspalten:** Einpflege der Daten aus `quellen/p3-alternativen-*.md` in die Ausgabe
-  (Alternativen im Slot, ab welchem Boss).
+* **★ Knappheitsspalten sind VERWORFEN — nicht erneut vorschlagen.** Einmal gebaut und wieder
+  entfernt (Commit `a413a14`), am 2026-08-09 vom Nutzer endgültig abgelehnt: In Phase 3 gibt es je
+  Slot meist gar keine und sonst genau eine Alternative. Eine Spalte, die fast überall „0" oder „1"
+  zeigt, trägt keine Entscheidung und kostet nur Breite. Die Rohdaten in
+  `quellen/p3-alternativen-*.md` bleiben als Rechercheunterlage liegen. Nicht zu verwechseln mit dem
+  Hinweis „Alternative: …" unter Tier-Zeilen (`getAlternativesNote` in `vorlage.html`) — der nennt
+  das konkrete Ausweichteil samt Zuwachs und bleibt.
 * **Buff-Annahmen stichprobenartig prüfen:** Die statischen Preset-Gewichte sind nicht spec-übergreifend
   auf identische Raid-Buffs verifiziert (siehe
   [p3-stat-gewichte-2026-07-27.md](quellen/p3-stat-gewichte-2026-07-27.md)).

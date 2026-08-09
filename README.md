@@ -372,6 +372,15 @@ vergleichbar.
 1. **Supfreshyo ist ausgeblendet**, weil sein Armory-Stand das Katzen-DPS-Set zeigt. Sobald er einmal
    im Tank-Set erfasst wurde, aus `$UNSICHER` in `3-compute.ps1` entfernen.
 2. **Rassen in `spec-sims/specs.json` sind angenommen**, nicht abgerufen — `players.json` enthält keine.
-3. **Knappheitsspalten fehlen weiterhin.** Die Rohdaten liegen in `quellen/p3-alternativen-*.md`
-   vollständig vor (Marken-Sortiment, T6-Teile, Handwerk, Trash); ausgewertet und in die Seite
-   eingebaut ist es noch nicht.
+
+## Bewusst verworfen
+
+**Knappheitsspalten** (Anzahl Alternativen im Slot, frühester Boss mit Alternative, Exklusiv-Flag).
+Einmal gebaut und wieder entfernt (Commit `a413a14`), am 2026-08-09 endgültig verworfen: In Phase 3
+gibt es je Slot **meist gar keine und sonst genau eine** Alternative. Eine Spalte, die fast überall
+„0" oder „1" anzeigt, trägt keine Entscheidung — sie kostet nur Breite in einer ohnehin breiten
+Tabelle. Die Rohdaten in `quellen/p3-alternativen-*.md` bleiben als Rechercheunterlage liegen.
+**Nicht erneut vorschlagen.**
+
+Der Hinweis „Alternative: …“ unter einzelnen Tier-Zeilen ist etwas anderes und bleibt: er nennt das
+konkrete Ausweichteil samt Zuwachs, statt nur eine Anzahl zu zählen.
