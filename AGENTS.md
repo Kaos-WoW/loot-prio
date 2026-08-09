@@ -18,7 +18,9 @@ getragenen Gear.
 1. `.\1-fetch-items.ps1` → Item-Pool + Werte von Wowhead → `daten/items.json`
 2. `.\2-fetch-gear.ps1` → getragene Ausrüstung live, Plausibilitäts-/PvP-Check → `daten/players.json`
 3. `python 7-stat-gewichte.py` → Stat-Gewichte für **alle** DPS-Spieler → `daten/sim-weights.json`
-   (rund 20 s je Spieler). **Löst `wowsims-cli.ps1` ab**, das nur Kaosx konnte und dessen Aufbau
+   (gemessen 2026-08-09: rund 10 min für 18 Spieler, also ~30 s je Spieler). Schreibt zusätzlich die
+   gemessene Basis-DPS als `_basisDps` mit — Nenner der Prozentanzeige, s. u.
+   **Löst `wowsims-cli.ps1` ab**, das nur Kaosx konnte und dessen Aufbau
    drei stille Fehler enthielt (s. u.). Das alte Skript liegt noch da, wird aber nicht mehr gerufen.
 3b. `python 6-trinket-sim.py` → Schmuckstücke per Differenzsimulation → `daten/trinket-werte.json`
    (alle DPS-Specs mit Eintrag in `spec-sims/specs.json`; rund 49 s je Spieler)
@@ -201,7 +203,7 @@ python 7-stat-gewichte.py
   Bei DPS ist `p` der Anteil an der Gesamt-DPS des Spielers, bei Tank/Heiler der Anteil am Gesamtwert
   der getragenen Ausrüstung. Die Haupttabelle zeigte beides als nacktes „%" in derselben Spalte, also
   zweimal dasselbe Zeichen für zwei verschiedene Bezugsgrößen. Jetzt steht die Bezugsgröße unter der
-  Zahl (`+118.1 DPS / 7.38% von 1600 DPS` gegen `+1.88% der Ausrüstung`), und bei DPS ist der absolute
+  Zahl (`+117.5 DPS / 8.29% von 1418 DPS` gegen `+1.88% der Ausrüstung`), und bei DPS ist der absolute
   ΔDPS die Hauptzahl — der stand vorher überhaupt nicht auf der Seite, obwohl die ganze WoWSims-Kette
   nur existiert, um ihn zu berechnen. Die Felder dafür heißen im Payload `pb` (Bezug: `dps`/`gear`),
   `bd` (Basis-DPS) und `bsim` (Basis gemessen oder Schätzwert).
@@ -371,3 +373,14 @@ python 7-stat-gewichte.py
 * **[x] Interaktiver Multi-Select-Spieler-Filter:** Gleichzeitige Auswahl mehrerer Raider inklusive
   Suchfeld, ohne Scroll-Sprung beim Filtern.
 * **[x] Aufräumen Tabellendesign:** Grüne Verlaufsbalken hinter den Prozentwerten entfernt.
+* **[x] Regressionstest für Tank und Heiler** (2026-08-09): `4-bis-check.ps1` prüft beide Rollen
+  gegen die Wowhead-Guides, sortiert dort nach `Pct` statt `Delta`. Stand 70 / 77 % / 90 %.
+* **[x] Repo aufgeräumt** (2026-08-09): einmalige Scrape-/Debug-Skripte, `raw.html`, `temp.csv`,
+  `task.md`, `implementation_plan.md` und die leere `bin/template.json` entfernt; `temp.csv` fliegt
+  auch nicht mehr in den Auto-Commit. ⚠️ `daten/scrape_bis.py` und `daten/scrape_wowhead_final.py`
+  sahen dabei wie Einmalwerkzeuge aus, sind aber die **Erzeuger von `bis-listen.json`** — sie waren
+  schon gelöscht und mussten zurückgeholt werden.
+* **[x] Haupttabelle lesbar gemacht** (2026-08-09): klebender Spaltenkopf repariert (Panel-Layout,
+  Seite 49.000 → 4.300 px), absoluter ΔDPS wieder sichtbar mit ausgewiesener Bezugsgröße,
+  Prozentnenner auf die gemessene Basis-DPS umgestellt, Anwärter-Aufklappung je Item,
+  Filter-zurücksetzen-Knopf.

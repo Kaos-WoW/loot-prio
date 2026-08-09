@@ -40,9 +40,15 @@ werden.
 python 7-stat-gewichte.py # Stat-Gewichte aller DPS-Spieler          -> daten/sim-weights.json
 python 6-trinket-sim.py # Schmuckstuecke per Differenzsimulation     -> daten/trinket-werte.json
 .\3-compute.ps1         # die eigentliche Rechnung                   -> daten/upgrades.json
-.\4-bis-check.ps1       # Gegenprobe der DPS-Empfehlungen            -> daten/bis-listen.json
+.\4-bis-check.ps1       # Gegenprobe DPS + Tank/Heiler               -> Bericht auf der Konsole
 .\5-build-payload.ps1   # Seite bauen                                -> ausgabe/loot-prio-p3.html
 ```
+
+`4-bis-check.ps1` **liest** `daten/bis-listen.json`, schreibt sie aber nicht. Aufgefrischt wird die
+Datei von Hand über `python daten/scrape_bis.py` (DPS, warcrafttavern.com) bzw.
+`python daten/scrape_wowhead_final.py` (Tank/Heiler, Wowhead-Guides). ⚠️ Beide decken **alle 17 Specs**
+ab und überschreiben die Datei komplett — wer nur eine Rolle auffrischen will, überschreibt die andere
+mit der Sicht der jeweils anderen Quelle.
 
 **Normaler Durchlauf nach einem Raid** (das macht die Automatisierung nachts von selbst — siehe
 `.github/workflows/sync.yml` für die verbindliche Reihenfolge inklusive eines Sicherheits-Checks, der
@@ -77,10 +83,11 @@ Supabase Edge Function auf, die per API den Workflow anstößt — das GitHub-To
 Supabase Vault, nie im Client-Code).
 
 Der Workflow importiert das Roster, holt das Gear, bricht ab, wenn dabei verdächtig wenige Spieler
-zurückkommen (Schutz gegen einen kaputten Abruf), simuliert individuelle Gewichte für einzelne Spieler,
-rechnet neu und **committet und pusht das Ergebnis automatisch** (`roster.json`, `daten/players.json`,
-`daten/cache-tooltips.json`, `daten/payload.json`, `index.html`, `ausgabe/loot-prio-p3.html`,
-`daten/bis-listen.json`, `daten/sim-weights.json`, `temp.csv`). Das ist ein bewusst eingerichteter,
+zurückkommen (Schutz gegen einen kaputten Abruf), simuliert die individuellen Stat-Gewichte **aller**
+DPS-Spieler, rechnet neu und **committet und pusht das Ergebnis automatisch** (`roster.json`,
+`daten/players.json`, `daten/cache-tooltips.json`, `daten/payload.json`, `index.html`,
+`ausgabe/loot-prio-p3.html`, `daten/bis-listen.json`, `daten/sim-weights.json`,
+`daten/trinket-werte.json`). Das ist ein bewusst eingerichteter,
 system-eigener Push und keine Ausnahme von der Regel, dass ein Assistent nicht ungefragt pusht — die
 Automatisierung wurde als solche eingerichtet und genehmigt.
 
@@ -118,7 +125,7 @@ sonst schlägt der CSV-Export fehl.
 
 ⚠️ **Die Prozentzahlen der beiden Zeilen bedeuten nicht dasselbe.** Bei DPS ist es der Anteil an der
 Gesamt-DPS des Spielers, bei Tank/Heiler der Anteil am Wert der getragenen Ausrüstung. Die Seite
-schreibt die Bezugsgröße deshalb unter jede Zahl (`7.38% von 1600 DPS` gegen `1.88% der Ausrüstung`)
+schreibt die Bezugsgröße deshalb unter jede Zahl (`8.29% von 1418 DPS` gegen `1.88% der Ausrüstung`)
 und zeigt bei DPS den absoluten ΔDPS als Hauptzahl.
 
 Für Tank und Heiler kann der Zuwachs auch **±0 %** sein. Das ist kein Rechenfehler: Diese Rollen werden
