@@ -18,7 +18,7 @@
   "Grotschak": {
     "Str": 0.65,
     "Agi": 0.412,
-    "AP": 0.29,
+    "AP": 0.291,
     "Treffer": 0.0,
     "Krit": 0.55,
     "Tempo": 0.517,
@@ -28,9 +28,9 @@
     "SP": 0.0,
     "ZTreffer": 0.0,
     "ZKrit": 0.0,
-    "MH": 1.774,
-    "OH": 0.933,
-    "_basisDps": 1147.2
+    "MH": 1.78,
+    "OH": 0.936,
+    "_basisDps": 1147.1
   },
   "Järgerlie": {
     "Str": 0.081,
@@ -49,24 +49,24 @@
     "_basisDps": 1297.0
   },
   "Moriamus": {
-    "Str": 0.665,
-    "Agi": 0.471,
-    "AP": 0.31,
+    "Str": 0.666,
+    "Agi": 0.47,
+    "AP": 0.311,
     "Treffer": 0.0,
     "Krit": 0.626,
     "Tempo": 0.643,
-    "ArP": 0.102,
+    "ArP": 0.103,
     "Waffk": 0.114,
     "Int": 0.0,
     "SP": 0.0,
     "ZTreffer": 0.0,
     "ZKrit": 0.0,
-    "MH": 4.172,
+    "MH": 4.186,
     "_basisDps": 1417.5
   },
   "Valiror": {
-    "Str": 0.671,
-    "Agi": 0.409,
+    "Str": 0.672,
+    "Agi": 0.41,
     "AP": 0.3,
     "Treffer": 0.0,
     "Krit": 0.545,
@@ -79,7 +79,7 @@
     "ZKrit": 0.0,
     "MH": 1.835,
     "OH": 0.965,
-    "_basisDps": 1194.1
+    "_basisDps": 1194.0
   },
   "Deters": {
     "Int": 0.169,
