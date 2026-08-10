@@ -1,8 +1,20 @@
-# Schritt 3: Upgrade-Rechnung. Fuer jedes Phase-3-Item und jeden Spieler: DeltaDPS gegen getragenes Teil.
+# Schritt 3: Upgrade-Rechnung. Fuer jedes Item der Phase und jeden Spieler: DeltaDPS gegen getragenes Teil.
+#
+# -Phase 3 (Vorgabe) verhaelt sich exakt wie frueher: liest items.json und
+# bis-listen.json, schreibt upgrades.json. -Phase 4/5 liest items-p<N>.json und
+# den passenden Block aus bis-listen-phasen.json und schreibt upgrades-p<N>.json.
+# Die gesamte Bewertungslogik darunter ist gemeinsam - bewusst kein zweiter
+# Rechenweg, der auseinanderlaufen koennte.
+param([ValidateSet(3,4,5)][int]$Phase = 3)
+
 $ErrorActionPreference = "Stop"
 $base = $PSScriptRoot
 
-$items   = Get-Content "$base\daten\items.json"   -Raw -Encoding UTF8 | ConvertFrom-Json
+$itemsDatei = if ($Phase -eq 3) { "items.json" } else { "items-p$Phase.json" }
+if (-not (Test-Path "$base\daten\$itemsDatei")) {
+    throw "$itemsDatei fehlt - erst '.\1-fetch-items.ps1 -Phase $Phase' laufen lassen."
+}
+$items   = Get-Content "$base\daten\$itemsDatei"  -Raw -Encoding UTF8 | ConvertFrom-Json
 $players = Get-Content "$base\daten\players.json" -Raw -Encoding UTF8 | ConvertFrom-Json
 $cacheRaw = Get-Content "$base\daten\cache-tooltips.json" -Raw -Encoding UTF8 | ConvertFrom-Json
 $cache = @{}
@@ -380,7 +392,20 @@ foreach ($pn in $wornStats.Keys) {
 }
 
 # ---------------- Upgrade-Rechnung ----------------
-$bisListen = Get-Content "$base\daten\bis-listen.json" -Raw -Encoding UTF8 | ConvertFrom-Json
+# Phase 3 liest weiter die alte flache Datei, damit die Ausgabe bitgleich bleibt.
+# Phase 4/5 holt ihren Block aus der phasenweisen Datei; die Form darunter
+# ({ SPEC = [Eintraege] }) ist in beiden Faellen dieselbe.
+if ($Phase -eq 3) {
+    $bisListen = Get-Content "$base\daten\bis-listen.json" -Raw -Encoding UTF8 | ConvertFrom-Json
+} else {
+    $phasenDatei = "$base\daten\bis-listen-phasen.json"
+    if (-not (Test-Path $phasenDatei)) {
+        throw "bis-listen-phasen.json fehlt - erst 'python daten\scrape-bis-wowhead.py' laufen lassen."
+    }
+    $alleBis = Get-Content $phasenDatei -Raw -Encoding UTF8 | ConvertFrom-Json
+    $bisListen = $alleBis."$Phase"
+    if (-not $bisListen) { throw "bis-listen-phasen.json enthaelt keinen Block fuer Phase $Phase." }
+}
 $results = @()
 
 foreach ($it in $items) {
@@ -728,7 +753,8 @@ if ($wgMh -and $wgOh) {
 }
 
 Write-Output ("Upgrade-Kombinationen berechnet: " + $results.Count)
-$results | ConvertTo-Json -Depth 4 | Out-File "$base\daten\upgrades.json" -Encoding utf8
+$zielUpgrades = if ($Phase -eq 3) { "upgrades.json" } else { "upgrades-p$Phase.json" }
+$results | ConvertTo-Json -Depth 4 | Out-File "$base\daten\$zielUpgrades" -Encoding utf8
 
 Write-Output ""
 Write-Output "--- Treffer-/Waffenkunde-Diagnose (nur aus Items, ohne Sockel/Verzauberung/Talente) ---"
