@@ -7252,6 +7252,24 @@
                   }
     },
     {
+        "Id":  34578,
+        "Name":  "Battlemaster\u0027s Determination",
+        "Boss":  "Haendler (Sonstige)",
+        "Quelle":  "Haendler",
+        "Ilvl":  133,
+        "Phase":  "Phase 4",
+        "Slot":  "Trinket",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sockel":  0,
+                      "AP":  80
+                  }
+    },
+    {
         "Id":  34887,
         "Name":  "Angelista\u0027s Revenge",
         "Boss":  "Haendler (Abzeichen)",

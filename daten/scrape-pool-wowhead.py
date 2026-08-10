@@ -170,8 +170,12 @@ def quelle_bestimmen(item_id):
     oft zusaetzlich bei einem Haendler (Rezept) auf, umgekehrt nicht.
     """
     roh = hole(f"https://www.wowhead.com/tbc/item={item_id}")
-    if not roh:
-        return "Sonstiges", ""
+    # ⚠️ Fehlgeschlagener Abruf ist NICHT dasselbe wie "keine Quelle". Wowhead
+    # antwortet bei Drosselung mit 403 und einer 900-Byte-Fehlerseite; die wurde
+    # frueher als "Sonstiges" eingestuft und der Gegenstand still uebersprungen.
+    # Solche Faelle werden jetzt gemeldet, damit man sie nachholen kann.
+    if not roh or "403 ERROR" in roh[:400] or len(roh) < 5000:
+        return "FEHLER", ""
     name = ""
     m = re.search(r"<title>(.*?)\s*-\s*(?:Item|Gegenstand)", roh)
     if m:
@@ -237,9 +241,14 @@ def bis_luecke_schliessen(phase, pool, gesehen):
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
         herkunft = list(ex.map(lambda i: (i, quelle_bestimmen(i)), kandidaten))
 
+    # Handwerk UND Haendler uebernehmen. Die 2.4-Stufe (Bladed Chaos Tunic,
+    # Hard Khorium Choker, Sunfire Robe) laeuft ueber Haendler, nicht ueber ein
+    # Handwerksrezept - eine reine Handwerks-Pruefung liess sie durchfallen.
+    # Drops bleiben ausgeschlossen: die stammen aus aelteren Raids, die dieser
+    # Pool bewusst nicht abdeckt.
     nach_quelle = {}
     for iid, (quelle, bossname) in herkunft:
-        if quelle != "Handwerk":
+        if quelle not in ("Handwerk", "Haendler"):
             continue
         gesehen.add(iid)
         nach_quelle.setdefault(bossname or quelle, []).append({
@@ -250,6 +259,13 @@ def bis_luecke_schliessen(phase, pool, gesehen):
     for bossname, liste in sorted(nach_quelle.items()):
         pool.setdefault(bossname, []).extend(liste)
         print(f"    {bossname[:26]:<28} {len(liste):>3} Items (aus BiS-Liste ergaenzt)")
+
+    misslungen = [(i, kandidaten[i]) for i, (q, _) in herkunft if q == "FEHLER"]
+    if misslungen:
+        print(f"    !! {len(misslungen)} Abrufe fehlgeschlagen (Drosselung?) - diese Gegenstaende")
+        print("       fehlen im Pool. Skript spaeter erneut laufen lassen:")
+        for i, n in misslungen[:10]:
+            print(f"         {i} {n}")
 
 
 def phase_bauen(phase):

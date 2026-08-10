@@ -1879,5 +1879,423 @@
    "Ilvl": 141,
    "Quelle": "Marken"
   }
+ ],
+ "Magisterterrasse (heroisch)": [
+  {
+   "Id": 34470,
+   "Name": "Timbal's Focusing Crystal",
+   "SlotCode": 12,
+   "ClassCode": 4,
+   "SubCode": -4,
+   "Ilvl": 115,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34471,
+   "Name": "Vial of the Sunwell",
+   "SlotCode": 12,
+   "ClassCode": 4,
+   "SubCode": -4,
+   "Ilvl": 115,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34472,
+   "Name": "Shard of Contempt",
+   "SlotCode": 12,
+   "ClassCode": 4,
+   "SubCode": -4,
+   "Ilvl": 115,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34473,
+   "Name": "Commendation of Kael'thas",
+   "SlotCode": 12,
+   "ClassCode": 4,
+   "SubCode": -4,
+   "Ilvl": 115,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34601,
+   "Name": "Shoulderplates of Everlasting Pain",
+   "SlotCode": 3,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 115,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34602,
+   "Name": "Eversong Cuffs",
+   "SlotCode": 9,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 115,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34603,
+   "Name": "Distracting Blades",
+   "SlotCode": 25,
+   "ClassCode": 2,
+   "SubCode": 16,
+   "Ilvl": 115,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34604,
+   "Name": "Jaded Crystal Dagger",
+   "SlotCode": 21,
+   "ClassCode": 2,
+   "SubCode": 15,
+   "Ilvl": 115,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34605,
+   "Name": "Breastplate of Fierce Survival",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 115,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34606,
+   "Name": "Edge of Oppression",
+   "SlotCode": 13,
+   "ClassCode": 2,
+   "SubCode": 15,
+   "Ilvl": 115,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34607,
+   "Name": "Fel-tinged Mantle",
+   "SlotCode": 3,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 115,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34608,
+   "Name": "Rod of the Blazing Light",
+   "SlotCode": 17,
+   "ClassCode": 2,
+   "SubCode": 10,
+   "Ilvl": 115,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34609,
+   "Name": "Quickening Blade of the Prince",
+   "SlotCode": 13,
+   "ClassCode": 2,
+   "SubCode": 7,
+   "Ilvl": 125,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34610,
+   "Name": "Scarlet Sin'dorei Robes",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 125,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34611,
+   "Name": "Cudgel of Consecration",
+   "SlotCode": 21,
+   "ClassCode": 2,
+   "SubCode": 4,
+   "Ilvl": 125,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34612,
+   "Name": "Greaves of the Penitent Knight",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 125,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34613,
+   "Name": "Shoulderpads of the Silvermoon Retainer",
+   "SlotCode": 3,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 125,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34614,
+   "Name": "Tunic of the Ranger Lord",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 125,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34615,
+   "Name": "Netherforce Chestplate",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 125,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34616,
+   "Name": "Breeching Comet",
+   "SlotCode": 13,
+   "ClassCode": 2,
+   "SubCode": 0,
+   "Ilvl": 125,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34625,
+   "Name": "Kharmaa's Ring of Fate",
+   "SlotCode": 11,
+   "ClassCode": 4,
+   "SubCode": -2,
+   "Ilvl": 110,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34799,
+   "Name": "Hauberk of the War Bringer",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 110,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34807,
+   "Name": "Sunstrider Warboots",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 110,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34808,
+   "Name": "Gloves of Arcane Acuity",
+   "SlotCode": 10,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 110,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34809,
+   "Name": "Sunrage Treads",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 110,
+   "Quelle": "Dungeon"
+  },
+  {
+   "Id": 34810,
+   "Name": "Cloak of Blade Turning",
+   "SlotCode": 16,
+   "ClassCode": 4,
+   "SubCode": -6,
+   "Ilvl": 110,
+   "Quelle": "Dungeon"
+  }
+ ],
+ "Haendler (Sonstige)": [
+  {
+   "Id": 34388,
+   "Name": "Pauldrons of Berserking",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Haendler"
+  },
+  {
+   "Id": 34392,
+   "Name": "Demontooth Shoulderpads",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Haendler"
+  },
+  {
+   "Id": 34397,
+   "Name": "Bladed Chaos Tunic",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Haendler"
+  },
+  {
+   "Id": 34391,
+   "Name": "Spaulders of Devastation",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Haendler"
+  },
+  {
+   "Id": 34396,
+   "Name": "Garments of Crashing Shores",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Haendler"
+  },
+  {
+   "Id": 34406,
+   "Name": "Gloves of Tyri's Power",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Haendler"
+  },
+  {
+   "Id": 34404,
+   "Name": "Mask of the Fury Hunter",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Haendler"
+  },
+  {
+   "Id": 34408,
+   "Name": "Gloves of the Forest Drifter",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Haendler"
+  },
+  {
+   "Id": 34385,
+   "Name": "Leggings of the Immortal Beast",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Haendler"
+  },
+  {
+   "Id": 34399,
+   "Name": "Robes of Ghostly Hatred",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Haendler"
+  },
+  {
+   "Id": 34401,
+   "Name": "Helm of Uther's Resolve",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Haendler"
+  },
+  {
+   "Id": 34400,
+   "Name": "Crown of Dath'Remar",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Haendler"
+  },
+  {
+   "Id": 34389,
+   "Name": "Spaulders of the Thalassian Defender",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Haendler"
+  },
+  {
+   "Id": 34382,
+   "Name": "Judicator's Legguards",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Haendler"
+  },
+  {
+   "Id": 34678,
+   "Name": "Shattered Sun Pendant of Acumen",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Haendler"
+  },
+  {
+   "Id": 34384,
+   "Name": "Breeches of Natural Splendor",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Haendler"
+  },
+  {
+   "Id": 34402,
+   "Name": "Shroud of Chieftain Ner'zhul",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Haendler"
+  },
+  {
+   "Id": 34409,
+   "Name": "Gauntlets of the Ancient Frostwolf",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Haendler"
+  },
+  {
+   "Id": 34383,
+   "Name": "Kilt of Spiritual Reconstruction",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Haendler"
+  },
+  {
+   "Id": 34386,
+   "Name": "Pantaloons of Growing Strife",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Haendler"
+  }
  ]
 }

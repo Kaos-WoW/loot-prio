@@ -1011,5 +1011,16 @@
    "Ilvl": 141,
    "Quelle": "Marken"
   }
+ ],
+ "Haendler (Sonstige)": [
+  {
+   "Id": 34578,
+   "Name": "Battlemaster's Determination",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Haendler"
+  }
  ]
 }
