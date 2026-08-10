@@ -1,4 +1,12 @@
 # Schritt 1: Item-IDs aus der Pool-Datei lesen, Werte von Wowhead holen, als JSON sichern
+#
+# -Phase 3 (Vorgabe) verhaelt sich exakt wie frueher und schreibt daten/items.json.
+# -Phase 4 / 5 nimmt zusaetzlich die Pools aus quellen/p4-item-pool.json bzw.
+# p5-item-pool.json dazu und schreibt daten/items-p4.json bzw. items-p5.json.
+# Die Phasen sind KUMULATIV: eine Phase-5-BiS-Liste enthaelt weiterhin BT-Teile,
+# also muss der P5-Pool alles aus P3 und P4 mitfuehren.
+param([ValidateSet(3,4,5)][int]$Phase = 3)
+
 $ErrorActionPreference = "Stop"
 $base = $PSScriptRoot
 $cacheFile = "$base\daten\cache-tooltips.json"
@@ -115,6 +123,31 @@ foreach ($id in $legacyRaid.Keys) {
 }
 
 Write-Output ("Gesamt inkl. T6, Marken und Legacy BiS: " + $entries.Count)
+
+# ---------- 3.7 Pools spaeterer Phasen (nur bei -Phase 4/5) ----------
+# Erzeugt von daten/scrape-pool-wowhead.py. Bei -Phase 3 laeuft diese Schleife
+# gar nicht, die Ausgabe bleibt dadurch bitgleich zum bisherigen Stand.
+for ($p = 4; $p -le $Phase; $p++) {
+    $poolFile = "$base\quellen\p$p-item-pool.json"
+    if (-not (Test-Path $poolFile)) {
+        throw "Pool-Datei fuer Phase $p fehlt: $poolFile (erst 'python daten\scrape-pool-wowhead.py' laufen lassen)"
+    }
+    $roh = Get-Content $poolFile -Raw -Encoding UTF8 | ConvertFrom-Json
+    $neu = 0
+    foreach ($bossProp in $roh.PSObject.Properties) {
+        foreach ($it in $bossProp.Value) {
+            $id = [int]$it.Id
+            if ($entries.ContainsKey($id)) { continue }
+            $entries[$id] = [pscustomobject]@{
+                Id = $id; Name = $it.Name; Boss = $bossProp.Name
+                SlotCode = $it.SlotCode; ClassCode = $it.ClassCode; SubCode = $it.SubCode
+                Quelle = $it.Quelle
+            }
+            $neu++
+        }
+    }
+    Write-Output ("Phase-$p-Pool ergaenzt: $neu neue Items (Gesamt " + $entries.Count + ")")
+}
 
 # ---------- 4. Tooltips holen (mit Cache) ----------
 $cache = @{}
@@ -236,8 +269,9 @@ foreach ($id in ($entries.Keys | Sort-Object)) {
         SlotCode=$e.SlotCode; Stats=$p.Stats
     }
 }
-$out | ConvertTo-Json -Depth 5 | Out-File "$base\daten\items.json" -Encoding utf8
-Write-Output ("Geschrieben: items.json mit " + $out.Count + " Items")
+$zielName = if ($Phase -eq 3) { "items.json" } else { "items-p$Phase.json" }
+$out | ConvertTo-Json -Depth 5 | Out-File "$base\daten\$zielName" -Encoding utf8
+Write-Output ("Geschrieben: $zielName mit " + $out.Count + " Items")
 Write-Output ""
 Write-Output "--- Stichprobe ---"
 foreach ($id in @(30902,32235,32837,31052,30975,34942,32505)) {
