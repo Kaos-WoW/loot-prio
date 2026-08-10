@@ -830,6 +830,80 @@
    "Quelle": "Raid"
   }
  ],
+ "Sunwell Plateau-Trash": [
+  {
+   "Id": 34183,
+   "Name": "Shivering Felspine",
+   "SlotCode": 17,
+   "ClassCode": 2,
+   "SubCode": 6,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34346,
+   "Name": "Mounting Vengeance",
+   "SlotCode": 22,
+   "ClassCode": 2,
+   "SubCode": 13,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34347,
+   "Name": "Wand of the Demonsoul",
+   "SlotCode": 15,
+   "ClassCode": 2,
+   "SubCode": 19,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34348,
+   "Name": "Wand of Cleansing Light",
+   "SlotCode": 15,
+   "ClassCode": 2,
+   "SubCode": 19,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34349,
+   "Name": "Blade of Life's Inevitability",
+   "SlotCode": 25,
+   "ClassCode": 2,
+   "SubCode": 16,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34350,
+   "Name": "Gauntlets of the Ancient Shadowmoon",
+   "SlotCode": 10,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34351,
+   "Name": "Tranquil Majesty Wraps",
+   "SlotCode": 10,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 35733,
+   "Name": "Ring of Harmonic Beauty",
+   "SlotCode": 11,
+   "ClassCode": 4,
+   "SubCode": -2,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  }
+ ],
  "Tier 6.5 (Sunwell-Haendler)": [
   {
    "Id": 34431,

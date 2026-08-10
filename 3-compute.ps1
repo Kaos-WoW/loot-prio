@@ -1,7 +1,7 @@
 # Schritt 3: Upgrade-Rechnung. Fuer jedes Item der Phase und jeden Spieler: DeltaDPS gegen getragenes Teil.
 #
 # -Phase 3 (Vorgabe) verhaelt sich exakt wie frueher: liest items.json und
-# bis-listen.json, schreibt upgrades.json. -Phase 4/5 liest items-p<N>.json und
+# bis-listen-phasen.json, schreibt upgrades.json. -Phase 4/5 liest items-p<N>.json und
 # den passenden Block aus bis-listen-phasen.json und schreibt upgrades-p<N>.json.
 # Die gesamte Bewertungslogik darunter ist gemeinsam - bewusst kein zweiter
 # Rechenweg, der auseinanderlaufen koennte.
@@ -392,20 +392,16 @@ foreach ($pn in $wornStats.Keys) {
 }
 
 # ---------------- Upgrade-Rechnung ----------------
-# Phase 3 liest weiter die alte flache Datei, damit die Ausgabe bitgleich bleibt.
-# Phase 4/5 holt ihren Block aus der phasenweisen Datei; die Form darunter
-# ({ SPEC = [Eintraege] }) ist in beiden Faellen dieselbe.
-if ($Phase -eq 3) {
-    $bisListen = Get-Content "$base\daten\bis-listen.json" -Raw -Encoding UTF8 | ConvertFrom-Json
-} else {
-    $phasenDatei = "$base\daten\bis-listen-phasen.json"
-    if (-not (Test-Path $phasenDatei)) {
-        throw "bis-listen-phasen.json fehlt - erst 'python daten\scrape-bis-wowhead.py' laufen lassen."
-    }
-    $alleBis = Get-Content $phasenDatei -Raw -Encoding UTF8 | ConvertFrom-Json
-    $bisListen = $alleBis."$Phase"
-    if (-not $bisListen) { throw "bis-listen-phasen.json enthaelt keinen Block fuer Phase $Phase." }
+# Alle Phasen lesen aus derselben Wowhead-Datei. Die frueher hier verwendete
+# bis-listen.json stammte fuer die DPS-Specs aus warcrafttavern.com und ist
+# ersatzlos entfallen - als BiS-Quelle gilt ausschliesslich Wowhead.
+$phasenDatei = "$base\daten\bis-listen-phasen.json"
+if (-not (Test-Path $phasenDatei)) {
+    throw "bis-listen-phasen.json fehlt - erst 'python daten\scrape-bis-wowhead.py' laufen lassen."
 }
+$alleBis = Get-Content $phasenDatei -Raw -Encoding UTF8 | ConvertFrom-Json
+$bisListen = $alleBis."$Phase"
+if (-not $bisListen) { throw "bis-listen-phasen.json enthaelt keinen Block fuer Phase $Phase." }
 $results = @()
 
 foreach ($it in $items) {
@@ -589,7 +585,25 @@ foreach ($it in $items) {
                         if ($ws.ContainsKey($slotKey)) { $curVal = Value-Item $ws[$slotKey] $spec $slotKey $pn }
                     }
                     $delta = $newVal - $curVal
-                    if ($delta -le 0) { continue }
+                    # ★ Kein Gewinn -> normalerweise raus. ABER: ist der Gegenstand fuer diese
+                    # Spec BiS, muss er trotzdem stehen bleiben. Sonst verschwindet er beim
+                    # Drop spurlos aus der Liste, waehrend die Uebersicht "Heiss umkaempfter
+                    # Loot" den Spieler weiter als BiS-Anwaerter fuehrt - die beiden Ansichten
+                    # widersprachen sich dadurch. Betraf u. a. Madness of the Betrayer fuer
+                    # Grotschak (gemessen -8,0 DPS, laut Guide aber BiS).
+                    # Anders als bei Tank/Heiler wird der Wert NICHT auf 0,1 geschoent - die
+                    # Seite zeigt den echten, ggf. negativen Zuwachs mit Hinweis.
+                    if ($delta -le 0) {
+                        $istBis = $false
+                        if ($bisListen.$($spec.Key)) {
+                            $tr = $bisListen.$($spec.Key) | Where-Object { $_.Id -eq $it.Id } | Select-Object -First 1
+                            if ($tr) {
+                                $zweiPlatz = ($slotKey -eq 'FINGER' -or $slotKey -eq 'TRINKET')
+                                $istBis = if ($zweiPlatz) { $tr.Rank -le 1 } else { $tr.Rank -eq 0 }
+                            }
+                        }
+                        if (-not $istBis) { continue }
+                    }
                 }
             }
             # Set-Stand: wie viele T5-Teile traegt der Spieler aktuell?

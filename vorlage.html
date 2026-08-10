@@ -493,23 +493,22 @@
       <span>Alle <b id="totalRaiders">— Raider</b></span>
       <span>Gewichte <b>WoWSims 2.5.6</b></span>
       <span class="tooltip-wrapper">
-        Abgleich <b>79 % DPS · 90 % Tank/Heiler</b> <span class="muted">(Phase&nbsp;3)</span>
+        Abgleich <b id="abgleich-kurz">—</b>
         <span class="tooltip-content">
-          ⚠️ Dieser Wert ist <b>nur für Phase 3 gemessen</b>. Für Phase 4 und 5 gibt es noch
-          keine Gegenprobe — die Empfehlungen dort sind ungeprüft.
+          Wie genau trifft die Berechnung die veröffentlichten BiS-Listen? Gemessen wird der beste
+          Vorschlag je Spec und Slot gegen die <b>Wowhead</b>-Guides der jeweiligen Phase
+          (Stand 2026-08-10, Skript <span style="font-family:var(--f-data)">4-bis-check.ps1</span>).
           <br><br>
-          Er zeigt, wie genau die automatische Berechnung der Prio-Liste ist —
-          gemessen gegen veröffentlichte Phase-3-BiS-Listen:
+          <span id="abgleich-lang"></span>
+          <br>
+          ⚠️ <b>Eine Übereinstimmungsquote, kein Genauigkeitsmaß.</b> Die Guides rechnen für einen
+          Charakter, der die jeweilige Phase bereits trägt. Unsere Raider stecken in
+          Phase-3-Ausrüstung — für sie sind andere Teile die größten Sprünge. Deshalb liegt der Wert
+          für Phase 4 und 5 niedriger, ohne dass die Rechnung schlechter wäre: In Phase 4 sind
+          23 der 49 Abweichungen Marken-Items.
           <br><br>
-          <b>DPS</b> (gegen warcrafttavern.com): 79 % der Top-Vorschläge liegen dort in den besten 3,
-          58 % auf Platz 1 — 155 geprüfte Empfehlungen.
-          <br><br>
-          <b>Tank und Heiler</b> (gegen die Wowhead-Guides): 90 % in den Top 3, 77 % auf Platz 1 —
-          70 geprüfte Empfehlungen. Der höhere Wert ist erwartbar, weil diese Rollen ohnehin gegen
-          dieselbe BiS-Liste gegatet werden.
-          <br><br>
-          Die restlichen Fälle sind fast immer Items, die diese Guides gar nicht führen (Marken- und
-          Trash-Items) — kein Rechenfehler.
+          Die übrigen Abweichungen sind fast immer Gegenstände, die diese Guides gar nicht führen
+          (Marken- und Trash-Items) — kein Rechenfehler.
         </span>
       </span>
     </div>
@@ -678,6 +677,34 @@ const DATA = "__DATEN__";
 // Phase enthalten auch weiterhin gueltige Teile aus frueheren Raids.
 const PHASEN = (DATA.phasen && DATA.phasen.length) ? DATA.phasen.slice() : [3];
 const PHASEN_NAME = { 3: 'Hyjal & Black Temple', 4: "Zul'Aman", 5: 'Sunwell' };
+
+// Ergebnis von 4-bis-check.ps1 je Phase (Quelle: Wowhead, Stand 2026-08-10).
+// Von Hand gepflegt - nach jedem Lauf des Skripts hier nachziehen.
+// [Empfehlungen, % Platz 1, % Top 3]
+const ABGLEICH = {
+  3: { dps: [160, 61, 81], th: [70, 77, 90] },
+  4: { dps: [165, 52, 63], th: [70, 80, 90] },
+  5: { dps: [168, 56, 66], th: [71, 76, 92] },
+};
+
+function abgleichSetzen(ph) {
+  const a = ABGLEICH[ph];
+  const kurz = document.getElementById('abgleich-kurz');
+  const lang = document.getElementById('abgleich-lang');
+  if (!a) {
+    if (kurz) kurz.textContent = 'nicht gemessen';
+    if (lang) lang.textContent = 'Für diese Phase liegt keine Gegenprobe vor.';
+    return;
+  }
+  if (kurz) kurz.innerHTML = `${a.dps[2]} % DPS · ${a.th[2]} % Tank/Heiler` +
+    ` <span class="muted">(Phase&nbsp;${ph})</span>`;
+  if (lang) lang.innerHTML =
+    `<b>Phase ${ph} — DPS:</b> ${a.dps[2]} % der Top-Vorschläge liegen in den besten 3, ` +
+    `${a.dps[1]} % auf Platz 1 (${a.dps[0]} geprüfte Empfehlungen).<br>` +
+    `<b>Phase ${ph} — Tank und Heiler:</b> ${a.th[2]} % in den Top 3, ${a.th[1]} % auf Platz 1 ` +
+    `(${a.th[0]} Empfehlungen). Der höhere Wert ist erwartbar, weil diese Rollen ohnehin gegen ` +
+    `dieselbe BiS-Liste gegatet werden.`;
+}
 
 function phaseLesen() {
   try {
@@ -1017,7 +1044,12 @@ function render() {
   const q = $('f-suche').value.trim().toLowerCase();
 
   let list = rows.filter(r => {
-    if (r.nb) return false;
+    // ★ Frueher: "if (r.nb) return false" - nicht bewertbare Zeilen flogen still raus.
+    // Damit fehlten Schmuckstuecke, die fuer Tank/Heiler BiS sind, in der Haupttabelle,
+    // waehrend die Uebersicht "Heiss umkaempfter Loot" sie sehr wohl auffuehrte.
+    // Jetzt bleiben sie stehen, wenn sie fuer jemanden BiS sind, und werden als
+    // "nicht bewertbar" gekennzeichnet. Reine Fuellzeilen ohne BiS-Bezug bleiben raus.
+    if (r.nb && r.bis !== 1) return false;
     if (strict && r.bb) return false;
     if (hideEquipped && isEquipped(r)) return false;
     // T6-Teile tragen als Boss "Tier 6 (Onslaught)"; sie sollen aber auch unter dem Boss
@@ -1450,9 +1482,11 @@ function phaseWechseln(ph) {
   });
   const raidEl = $('sub-raid');
   if (raidEl) raidEl.textContent = PHASEN_NAME[ph] || ('Phase ' + ph);
+  abgleichSetzen(ph);
   render();
 }
 phasenLeisteZeichnen();
+abgleichSetzen(aktivePhase);
 
 $('btn-reset').addEventListener('click', () => {
   $('f-bis-strict').checked = true;

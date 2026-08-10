@@ -30,11 +30,14 @@ denselben Raid-Aufbau — nur deshalb liegen Stat-Gewichte und Schmuckstück-Wer
 Wer den Raid-Aufbau ändert, muss **beide** neu rechnen, sonst passen sie nicht mehr zusammen.
 4. `.\3-compute.ps1` → Upgrades berechnen (nutzt `trinket-werte.json` und `sim-weights.json` wo
    vorhanden, sonst statische Presets bzw. Näherung) → `daten/upgrades.json`, `daten/payload.json`
-5. `.\4-bis-check.ps1` → DPS- **und** Tank/Heiler-Empfehlungen gegen `daten/bis-listen.json` prüfen
-   (Konsolen-Report, kein Dateiausgabe). `bis-listen.json` selbst wird nicht bei jedem Lauf neu geholt,
-   sondern von Hand aufgefrischt: `python daten/scrape_bis.py` (DPS, warcrafttavern.com) bzw.
-   `python daten/scrape_wowhead_final.py` (Tank/Heiler, Wowhead-Guides) — beide schreiben in dieselbe
-   Datei, decken aber alle 17 Specs ab, überschreiben sich also gegenseitig komplett.
+5. `.\4-bis-check.ps1` → alle Rollen und alle Phasen gegen `daten/bis-listen-phasen.json` prüfen
+   (Konsolen-Report, keine Dateiausgabe). Die Datei wird nicht bei jedem Lauf neu geholt, sondern
+   von Hand aufgefrischt: `python daten/scrape-bis-wowhead.py`.
+   **★ BiS-Quelle ist ausschließlich Wowhead — Warcraft Tavern nicht mehr verwenden**
+   (ausdrückliche Vorgabe des Nutzers, 2026-08-10). Die alten Skripte `scrape_bis.py`
+   (warcrafttavern) und `scrape_wowhead_final.py` (nur Phase 3) sowie die von ihnen erzeugte
+   `bis-listen.json` sind entfernt. Dieselbe Datei ist auch das BiS-Gate in `3-compute.ps1`,
+   ein Quellenwechsel wirkt sich also nicht nur auf den Bericht aus, sondern auf die Empfehlungen.
 6. `.\5-build-payload.ps1` → HTML-Ausgabeseite bauen → `ausgabe/loot-prio-p3.html`, `index.html`
 
 **Schritt 3 lädt bei Bedarf `bin/wowsimcli-windows.exe` herunter** (Quelle:

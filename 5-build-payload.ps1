@@ -29,16 +29,13 @@ if (Test-Path $tooltipFile) {
         if ($nm -and -not $itemNames.ContainsKey($id)) { $itemNames[$id] = $nm }
     }
 }
-# BiS-Liste einer Phase holen. Phase 3 aus der alten flachen Datei (damit die
-# Ausgabe unveraendert bleibt), Phase 4/5 aus dem phasenweisen Nachfolger.
+# BiS-Liste einer Phase holen - fuer alle Phasen aus derselben Wowhead-Datei.
+# Die frueher fuer Phase 3 genutzte bis-listen.json kam bei den DPS-Specs von
+# warcrafttavern.com und ist entfallen; BiS-Quelle ist ausschliesslich Wowhead.
 function Hole-BisListe($phase) {
-    if ($phase -eq 3) {
-        $rawB = Get-Content "$base\daten\bis-listen.json" -Raw -Encoding UTF8 | ConvertFrom-Json
-    } else {
-        $alle = Get-Content "$base\daten\bis-listen-phasen.json" -Raw -Encoding UTF8 | ConvertFrom-Json
-        $rawB = $alle."$phase"
-        if (-not $rawB) { throw "bis-listen-phasen.json hat keinen Block fuer Phase $phase." }
-    }
+    $alle = Get-Content "$base\daten\bis-listen-phasen.json" -Raw -Encoding UTF8 | ConvertFrom-Json
+    $rawB = $alle."$phase"
+    if (-not $rawB) { throw "bis-listen-phasen.json hat keinen Block fuer Phase $phase." }
     $h = @{}
     foreach ($p in $rawB.PSObject.Properties) { $h[$p.Name] = $p.Value }
     return $h

@@ -44,11 +44,12 @@ python 6-trinket-sim.py # Schmuckstuecke per Differenzsimulation     -> daten/tr
 .\5-build-payload.ps1   # Seite bauen                                -> ausgabe/loot-prio-p3.html
 ```
 
-`4-bis-check.ps1` **liest** `daten/bis-listen.json`, schreibt sie aber nicht. Aufgefrischt wird die
-Datei von Hand über `python daten/scrape_bis.py` (DPS, warcrafttavern.com) bzw.
-`python daten/scrape_wowhead_final.py` (Tank/Heiler, Wowhead-Guides). ⚠️ Beide decken **alle 17 Specs**
-ab und überschreiben die Datei komplett — wer nur eine Rolle auffrischen will, überschreibt die andere
-mit der Sicht der jeweils anderen Quelle.
+`4-bis-check.ps1` **liest** `daten/bis-listen-phasen.json`, schreibt sie aber nicht. Aufgefrischt wird
+die Datei von Hand über `python daten/scrape-bis-wowhead.py` (alle 17 Specs, alle Phasen).
+
+⚠️ **BiS-Listen kommen ausschließlich von Wowhead.** Die früheren Skripte `scrape_bis.py`
+(warcrafttavern.com) und `scrape_wowhead_final.py` (nur Phase 3) sind entfallen, ebenso die von ihnen
+erzeugte `bis-listen.json`.
 
 **Normaler Durchlauf nach einem Raid** (das macht die Automatisierung nachts von selbst — siehe
 `.github/workflows/sync.yml` für die verbindliche Reihenfolge inklusive eines Sicherheits-Checks, der
@@ -69,9 +70,9 @@ sind daher schnell.
 Die PowerShell-Schritte brauchen **kein Python und kein Node**. Die beiden Simulationsschritte
 (`7-stat-gewichte.py`, `6-trinket-sim.py`) sind dagegen Python und laden bei Bedarf die
 WoWSims-Kommandozeilenversion herunter (`bin/wowsimcli-windows.exe`). Python statt PowerShell, weil
-dessen `ConvertTo-Json` die tief verschachtelten Sim-Anfragen zerlegt. Im Ordner `daten/` liegen ein paar
-Python-Hilfsskripte (`scrape_*.py`, `debug_*.py`) — das sind **einmalige Werkzeuge**, mit denen einzelne
-BiS-Listen von Wowhead nachgepflegt wurden, kein Teil der regulären Kette.
+dessen `ConvertTo-Json` die tief verschachtelten Sim-Anfragen zerlegt. Ebenfalls Python sind die beiden
+Beschaffungsskripte in `daten/`: `scrape-bis-wowhead.py` (BiS-Listen) und `scrape-pool-wowhead.py`
+(Item-Pools für Zul'Aman und Sunwell). Sie laufen nicht bei jedem Durchgang, sondern nach Bedarf.
 
 ---
 
@@ -86,8 +87,8 @@ Der Workflow importiert das Roster, holt das Gear, bricht ab, wenn dabei verdäc
 zurückkommen (Schutz gegen einen kaputten Abruf), simuliert die individuellen Stat-Gewichte **aller**
 DPS-Spieler, rechnet neu und **committet und pusht das Ergebnis automatisch** (`roster.json`,
 `daten/players.json`, `daten/cache-tooltips.json`, `daten/payload.json`, `index.html`,
-`ausgabe/loot-prio-p3.html`, `daten/bis-listen.json`, `daten/sim-weights.json`,
-`daten/trinket-werte.json`). Das ist ein bewusst eingerichteter,
+`ausgabe/loot-prio-p3.html`, `daten/bis-listen-phasen.json`, `daten/sim-weights.json`,
+`daten/trinket-werte.json`, `daten/upgrades-p4.json`, `daten/upgrades-p5.json`). Das ist ein bewusst eingerichteter,
 system-eigener Push und keine Ausnahme von der Regel, dass ein Assistent nicht ungefragt pusht — die
 Automatisierung wurde als solche eingerichtet und genehmigt.
 
@@ -141,9 +142,9 @@ fehlen sie, entsteht die Seite von vorher ganz ohne Umschaltleiste.
 
 | Phase | DPS: Platz 1 / Top 3 | Tank/Heiler: Platz 1 / Top 3 |
 |---|---|---|
-| 3 | 59 % / 81 % | 77 % / 90 % |
-| 4 | 49 % / 61 % | 80 % / 90 % |
-| 5 | 55 % / 65 % | 76 % / 92 % |
+| 3 | 61 % / 81 % | 77 % / 90 % |
+| 4 | 52 % / 63 % | 80 % / 90 % |
+| 5 | 56 % / 66 % | 76 % / 92 % |
 
 ⚠️ **Die niedrigere DPS-Quote in Phase 4 und 5 ist kein Defekt**, sondern der oben beschriebene
 Effekt in verstärkter Form: Die Guides optimieren für einen Charakter, der die jeweilige Phase
@@ -285,10 +286,10 @@ dass ein kaputter API-Abruf die veröffentlichte Seite mit Fehldaten überschrei
   `wowsims.github.io`) in `3-compute.ps1` fest hinterlegt. Für einzelne Spieler (aktuell Kaosx) werden
   sie zusätzlich dynamisch über die lokale `wowsimcli-windows.exe` simuliert (25er-Raid-Setup mit
   APL-Rotation) und überschreiben das Preset.
-- **DPS-BiS-Gegenprobe:** warcrafttavern.com über `daten/scrape_bis.py`, geprüft mit `4-bis-check.ps1`.
-- **Tank-/Heiler-BiS-Gegenprobe:** offizielle Wowhead-Phase-3-Guides über
-  `daten/scrape_wowhead_final.py`, seit dem Ausbau von `4-bis-check.ps1` ebenfalls automatisiert
-  geprüft (Sortierung nach `Pct` statt `Delta`, s. „Verlässlichkeit").
+- **BiS-Listen (alle Rollen, alle Phasen):** offizielle Wowhead-Guides über
+  `daten/scrape-bis-wowhead.py` → `daten/bis-listen-phasen.json`. Sie dienen doppelt: als BiS-Gate in
+  `3-compute.ps1` und als Gegenprobe in `4-bis-check.ps1` (dort Tank/Heiler nach `Pct` statt `Delta`
+  sortiert, s. „Verlässlichkeit"). **Warcraft Tavern wird nicht mehr verwendet.**
 
 ---
 
@@ -379,15 +380,12 @@ Tanks und Heiler.
 
 ## Verlässlichkeit
 
-`4-bis-check.ps1` prüft **beide Rollengruppen automatisiert** gegen ihre jeweilige externe BiS-Quelle:
-DPS gegen warcrafttavern.com (Sortierung nach ΔDPS), Tank/Heiler gegen die offiziellen Wowhead-Guides
-(Sortierung nach dem prozentualen Zuwachs `Pct`, da `Delta` dort rollenübergreifend nicht vergleichbar
-ist). Beide Quellen liegen in `daten/bis-listen.json` und werden von `daten/scrape_bis.py`
-(warcrafttavern, alle 17 Specs) bzw. `daten/scrape_wowhead_final.py` (Wowhead, ebenfalls alle 17 Specs)
-neu abgerufen — welche der beiden Quellen für eine Spec zuletzt lief, bestimmt ihren aktuellen Stand in
-der Datei. Letzter Stand (gemessen 2026-08-03):
+`4-bis-check.ps1` prüft **beide Rollengruppen und alle Phasen automatisiert** gegen die
+**Wowhead**-Guides (`daten/bis-listen-phasen.json`): DPS sortiert nach ΔDPS, Tank/Heiler nach dem
+prozentualen Zuwachs `Pct`, da `Delta` dort rollenübergreifend nicht vergleichbar ist. Die aktuellen
+Werte je Phase stehen weiter oben unter „Gegenprobe je Phase". Zur Einordnung des Phase-3-Werts:
 
-- **DPS: 155 Empfehlungen · 58 % auf BiS-Platz 1 · 79 % in den BiS-Top-3.** Die nicht gelisteten
+- **DPS: 160 Empfehlungen · 61 % auf BiS-Platz 1 · 81 % in den BiS-Top-3.** Die nicht gelisteten
   Empfehlungen sind ausnahmslos Marken- und Trash-Items, die diese Guides gar nicht führen.
 - **Tank/Heiler: 70 Empfehlungen · 77 % auf BiS-Platz 1 · 90 % in den BiS-Top-3.** Der höhere Wert ist
   erwartbar: Tank/Heiler-Empfehlungen sind bereits gegen dieselbe BiS-Liste gegatet (s. o.), ein

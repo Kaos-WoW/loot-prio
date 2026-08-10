@@ -174,6 +174,21 @@ def phase_bauen(phase):
     if leer:
         print(f"    ohne verwertbaren Loot (erwartet fuer Event-NPCs): {', '.join(leer)}")
 
+    # ★ Boss-Seiten allein reichen NICHT: Trash-Drops haengen an keinem NPC mit
+    # classification 3 und fehlen dadurch komplett. In Sunwell waren das 8 Teile,
+    # darunter Shivering Felspine - ein Phase-5-BiS-Zweihaender fuer Vergeltung.
+    # Umgekehrt ist die Zonenliste allein auch unzuverlaessig (beim Black Temple
+    # fehlte Teron Blutschatten mit 12 Items). Deshalb die Vereinigung aus beidem.
+    zonen_roh = hole(f"https://www.wowhead.com/tbc/zone={zone_id}")
+    zonen_drops = listview(zonen_roh, "drops") or []
+    rest = [eintrag(it, "Raid") for it in zonen_drops
+            if it.get("quality", 0) >= 4 and it.get("slot") and it["id"] not in gesehen]
+    for i in rest:
+        gesehen.add(i["Id"])
+    if rest:
+        pool[f"{raid}-Trash"] = rest
+        print(f"    {raid + '-Trash':<28} {len(rest):>3} Items (aus der Zonenliste, keinem Boss zugeordnet)")
+
     for npc_id, bezeichnung in HAENDLER.get(phase, []):
         items = [i for i in haendler_items(npc_id, "Tier") if i["Id"] not in gesehen]
         for i in items:

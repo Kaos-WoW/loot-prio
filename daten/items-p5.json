@@ -7557,6 +7557,28 @@
                   }
     },
     {
+        "Id":  34183,
+        "Name":  "Shivering Felspine",
+        "Boss":  "Sunwell Plateau-Trash",
+        "Quelle":  "Raid",
+        "Ilvl":  154,
+        "Phase":  "Phase 5",
+        "Slot":  "Two-Hand",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "Polearm",
+        "FormOnly":  false,
+        "SlotCode":  17,
+        "Stats":  {
+                      "Agi":  52,
+                      "WpnSpeed":  3.5,
+                      "Sockel":  1,
+                      "Tempo":  53,
+                      "WpnDps":  140.43,
+                      "AP":  120
+                  }
+    },
+    {
         "Id":  34184,
         "Name":  "Brooch of the Highborne",
         "Boss":  "Felmyst",
@@ -8802,6 +8824,141 @@
                       "Str":  61,
                       "Krit":  40,
                       "Sockel":  2
+                  }
+    },
+    {
+        "Id":  34346,
+        "Name":  "Mounting Vengeance",
+        "Boss":  "Sunwell Plateau-Trash",
+        "Quelle":  "Raid",
+        "Ilvl":  154,
+        "Phase":  "Phase 5",
+        "Slot":  "Off Hand",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "Fist Weapon",
+        "FormOnly":  false,
+        "SlotCode":  22,
+        "Stats":  {
+                      "Str":  3,
+                      "WpnDps":  107.88,
+                      "Sta":  22,
+                      "Sockel":  2,
+                      "ArP":  140,
+                      "WpnSpeed":  2.6,
+                      "AP":  46
+                  }
+    },
+    {
+        "Id":  34347,
+        "Name":  "Wand of the Demonsoul",
+        "Boss":  "Sunwell Plateau-Trash",
+        "Quelle":  "Raid",
+        "Ilvl":  154,
+        "Phase":  "Phase 5",
+        "Slot":  "Ranged",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "Wand",
+        "FormOnly":  false,
+        "SlotCode":  15,
+        "Stats":  {
+                      "SP":  22,
+                      "WpnDps":  198.33,
+                      "Sta":  9,
+                      "Sockel":  1,
+                      "ZTempo":  18,
+                      "Int":  10,
+                      "WpnSpeed":  1.5
+                  }
+    },
+    {
+        "Id":  34348,
+        "Name":  "Wand of Cleansing Light",
+        "Boss":  "Sunwell Plateau-Trash",
+        "Quelle":  "Raid",
+        "Ilvl":  154,
+        "Phase":  "Phase 5",
+        "Slot":  "Ranged",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "Wand",
+        "FormOnly":  false,
+        "SlotCode":  15,
+        "Stats":  {
+                      "WpnDps":  198.33,
+                      "Sockel":  1,
+                      "ZTempo":  8,
+                      "Spi":  20,
+                      "Int":  8,
+                      "Heil":  42,
+                      "WpnSpeed":  1.5
+                  }
+    },
+    {
+        "Id":  34349,
+        "Name":  "Blade of Life\u0027s Inevitability",
+        "Boss":  "Sunwell Plateau-Trash",
+        "Quelle":  "Raid",
+        "Ilvl":  154,
+        "Phase":  "Phase 5",
+        "Slot":  "Thrown",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "Thrown",
+        "FormOnly":  false,
+        "SlotCode":  25,
+        "Stats":  {
+                      "WpnSpeed":  2,
+                      "Sta":  19,
+                      "Sockel":  1,
+                      "Tempo":  16,
+                      "WpnDps":  97,
+                      "AP":  36
+                  }
+    },
+    {
+        "Id":  34350,
+        "Name":  "Gauntlets of the Ancient Shadowmoon",
+        "Boss":  "Sunwell Plateau-Trash",
+        "Quelle":  "Raid",
+        "Ilvl":  154,
+        "Phase":  "Phase 5",
+        "Slot":  "Hands",
+        "Armor":  "Mail",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  10,
+        "Stats":  {
+                      "SP":  43,
+                      "Sta":  30,
+                      "ZKrit":  28,
+                      "Sockel":  2,
+                      "ZTempo":  24,
+                      "Int":  32
+                  }
+    },
+    {
+        "Id":  34351,
+        "Name":  "Tranquil Majesty Wraps",
+        "Boss":  "Sunwell Plateau-Trash",
+        "Quelle":  "Raid",
+        "Ilvl":  154,
+        "Phase":  "Phase 5",
+        "Slot":  "Hands",
+        "Armor":  "Leather",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  10,
+        "Stats":  {
+                      "Sta":  30,
+                      "Sockel":  2,
+                      "mp5":  8,
+                      "Spi":  33,
+                      "Int":  28,
+                      "Heil":  95
                   }
     },
     {
@@ -11542,6 +11699,27 @@
                       "AP":  58,
                       "Abh":  19,
                       "Sockel":  1
+                  }
+    },
+    {
+        "Id":  35733,
+        "Name":  "Ring of Harmonic Beauty",
+        "Boss":  "Sunwell Plateau-Trash",
+        "Quelle":  "Raid",
+        "Ilvl":  154,
+        "Phase":  "Phase 5",
+        "Slot":  "Finger",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  11,
+        "Stats":  {
+                      "Sta":  31,
+                      "Heil":  73,
+                      "Sockel":  0,
+                      "Int":  22,
+                      "Spi":  32
                   }
     }
 ]
