@@ -1,19 +1,24 @@
 # Schritt 5: kompakte Datennutzlast fuer die HTML-Seite erzeugen
+#
+# Phase 3 ist immer dabei. Phase 4 und 5 kommen NUR dazu, wenn ihre
+# upgrades-p<N>.json existiert - fehlen sie, entsteht exakt die Seite von vorher.
+# Dadurch kann ein unfertiger oder kaputter Phasen-Pfad die Gildenseite nicht treffen.
 $ErrorActionPreference = "Stop"
 $base = $PSScriptRoot
 
-$upg    = Get-Content "$base\daten\upgrades.json" -Raw -Encoding UTF8 | ConvertFrom-Json
-$items  = Get-Content "$base\daten\items.json"   -Raw -Encoding UTF8 | ConvertFrom-Json
-$roster = Get-Content "$base\roster.json"        -Raw -Encoding UTF8 | ConvertFrom-Json
-
-# Kompakter Item-Namen-Cache fuer das Frontend (id -> name)
-# Quelle 1: items.json (Raid-Items, Array mit Id/Name Feldern)
-$itemNames = @{}
-foreach ($item in $items) {
-    if ($item.Id -and $item.Name) {
-        $itemNames[[string]$item.Id] = $item.Name
+$phasen = @(3)
+foreach ($p in 4, 5) {
+    if ((Test-Path "$base\daten\upgrades-p$p.json") -and (Test-Path "$base\daten\items-p$p.json")) {
+        $phasen += $p
     }
 }
+Write-Output ("Phasen in der Nutzlast: " + ($phasen -join ", "))
+
+$roster = Get-Content "$base\roster.json" -Raw -Encoding UTF8 | ConvertFrom-Json
+
+# Item-Namen sammeln sich ueber alle Phasen (id -> name), damit das Frontend auch
+# getragene und phasenfremde Teile benennen kann.
+$itemNames = @{}
 # Quelle 2: cache-tooltips.json (getragene Items aus Armory, Objekt id -> {name, tooltip})
 $tooltipFile = "$base\daten\cache-tooltips.json"
 if (Test-Path $tooltipFile) {
@@ -24,16 +29,19 @@ if (Test-Path $tooltipFile) {
         if ($nm -and -not $itemNames.ContainsKey($id)) { $itemNames[$id] = $nm }
     }
 }
-$rawB  = Get-Content "$base\daten\bis-listen.json" -Raw -Encoding UTF8 | ConvertFrom-Json
-$bis = @{}; foreach ($p in $rawB.PSObject.Properties) { $bis[$p.Name] = $p.Value }
-
-# BiS-Rang je Spec+Item
-$bisRank = @{}
-foreach ($k in $bis.Keys) {
-    foreach ($e in $bis[$k]) {
-        $key = $k + "|" + $e.Id
-        if (-not $bisRank.ContainsKey($key) -or $bisRank[$key] -gt $e.Rank) { $bisRank[$key] = $e.Rank }
+# BiS-Liste einer Phase holen. Phase 3 aus der alten flachen Datei (damit die
+# Ausgabe unveraendert bleibt), Phase 4/5 aus dem phasenweisen Nachfolger.
+function Hole-BisListe($phase) {
+    if ($phase -eq 3) {
+        $rawB = Get-Content "$base\daten\bis-listen.json" -Raw -Encoding UTF8 | ConvertFrom-Json
+    } else {
+        $alle = Get-Content "$base\daten\bis-listen-phasen.json" -Raw -Encoding UTF8 | ConvertFrom-Json
+        $rawB = $alle."$phase"
+        if (-not $rawB) { throw "bis-listen-phasen.json hat keinen Block fuer Phase $phase." }
     }
+    $h = @{}
+    foreach ($p in $rawB.PSObject.Properties) { $h[$p.Name] = $p.Value }
+    return $h
 }
 
 # Helper: Prüfen ob ein Slot 2 Plätze hat (Ringe, Trinkets)
@@ -60,51 +68,92 @@ $setToTokenType = @{
     'Tempest'      = 'VANQ'   # Magier
     'Thunderheart' = 'VANQ'   # Druide
 }
-$tokenSlots = @('Head','Shoulder','Chest','Hands','Legs')
+# ★ Sunwell (Phase 5) bringt eine ZWEITE Token-Familie: Armschienen/Guertel/Stiefel
+# "of the Forgotten ...". Aufbau identisch zu Tier 6, deshalb dieselbe abgeleitete
+# Logik - nur Slots und Namensworte kommen dazu. Wer sie vergisst, bekommt fuer
+# Sunwell-Token eine falsche Anwaerterzahl (bc), nicht etwa eine Fehlermeldung.
+$tokenSlots      = @('Head','Shoulder','Chest','Hands','Legs','Wrist','Waist','Feet')
+$tokenNameToSlot = @{
+    'Helm'='Head'; 'Pauldrons'='Shoulder'; 'Chestguard'='Chest'; 'Gloves'='Hands'; 'Leggings'='Legs'
+    'Bracers'='Wrist'; 'Belt'='Waist'; 'Boots'='Feet'
+}
+$tokenTypeWord = @{ 'Conqueror'='CONQ'; 'Protector'='PROT'; 'Vanquisher'='VANQ' }
 
-$tokenGroupMap = @{}
-foreach ($it in $items) {
-    if ($it.Boss -notlike 'Tier 6*') { continue }
-    if ($tokenSlots -notcontains $it.Slot) { continue }   # Relikte/Waffen tragen kein Token
-    $type = $null
-    foreach ($setName in $setToTokenType.Keys) {
-        if ($it.Boss -like ("*" + $setName + "*")) { $type = $setToTokenType[$setName]; break }
+function Baue-TokenZuordnung($items) {
+    $map = @{}
+    foreach ($it in $items) {
+        if ($it.Boss -notlike 'Tier 6*') { continue }
+        if ($tokenSlots -notcontains $it.Slot) { continue }   # Relikte/Waffen tragen kein Token
+        $type = $null
+        # Der Setname steht bei Tier 6 im Boss-Feld ("Tier 6 (LightbringerRet)"), bei den
+        # Sunwell-Teilen aber nur im Item-Namen ("Lightbringer Bands"), weil sie alle vom
+        # selben Haendler kommen. Deshalb beide Felder durchsuchen.
+        $suchtext = "$($it.Boss) $($it.Name)"
+        foreach ($setName in $setToTokenType.Keys) {
+            if ($suchtext -like ("*" + $setName + "*")) { $type = $setToTokenType[$setName]; break }
+        }
+        if (-not $type) { Write-Warning ("Tier-Item ohne bekanntes Set: " + $it.Id + " " + $it.Name + " [" + $it.Boss + "]"); continue }
+        $map[[string]$it.Id] = $type + "|" + $it.Slot
     }
-    if (-not $type) { Write-Warning ("T6-Item ohne bekanntes Set: " + $it.Id + " " + $it.Name + " [" + $it.Boss + "]"); continue }
-    $tokenGroupMap[[string]$it.Id] = $type + "|" + $it.Slot
+    return $map
 }
 
 # Die Token-Gegenstaende selbst ("... of the Forgotten ...") liegen ohne Slot/Werte im Pool und
 # erzeugen daher keine Upgrade-Zeilen. Hier werden sie als Metadaten je Gruppe eingesammelt,
 # damit die Seite Tokenname und echten Drop-Boss anzeigen kann.
-$tokenNameToSlot = @{ 'Helm'='Head'; 'Pauldrons'='Shoulder'; 'Chestguard'='Chest'; 'Gloves'='Hands'; 'Leggings'='Legs' }
-$tokenTypeWord   = @{ 'Conqueror'='CONQ'; 'Protector'='PROT'; 'Vanquisher'='VANQ' }
-$tokenMeta = @{}
-foreach ($it in $items) {
-    if ($it.Name -notlike '*of the Forgotten *') { continue }
-    $m = [regex]::Match($it.Name, '^(\w+) of the Forgotten (\w+)$')
-    if (-not $m.Success) { continue }
-    $slot = $tokenNameToSlot[$m.Groups[1].Value]
-    $type = $tokenTypeWord[$m.Groups[2].Value]
-    if (-not $slot -or -not $type) { continue }
-    $tokenMeta[$type + "|" + $slot] = [pscustomobject]@{
-        grp  = $type + "|" + $slot
-        id   = $it.Id
-        n    = $it.Name
-        b    = $it.Boss
-        s    = $slot
-        typ  = $type
+function Baue-TokenMeta($items) {
+    $meta = @{}
+    foreach ($it in $items) {
+        if ($it.Name -notlike '*of the Forgotten *') { continue }
+        $m = [regex]::Match($it.Name, '^(\w+) of the Forgotten (\w+)$')
+        if (-not $m.Success) { continue }
+        $slot = $tokenNameToSlot[$m.Groups[1].Value]
+        $type = $tokenTypeWord[$m.Groups[2].Value]
+        if (-not $slot -or -not $type) { continue }
+        $meta[$type + "|" + $slot] = [pscustomobject]@{
+            grp = $type + "|" + $slot; id = $it.Id; n = $it.Name; b = $it.Boss; s = $slot; typ = $type
+        }
     }
+    return $meta
 }
-Write-Output ("Token-Zuordnung: " + $tokenGroupMap.Count + " T6-Teile in " + ($tokenGroupMap.Values | Sort-Object -Unique).Count + " Gruppen, " + $tokenMeta.Count + " Token-Gegenstaende erkannt")
 
-# Schritt 0: Spec -> Spieler-Map aus Roster aufbauen
+# Schritt 0: Spec -> Spieler-Map aus Roster aufbauen (phasenunabhaengig)
 $specToPlayers = @{}
 foreach ($r in $roster) {
     $sk = $r.spec
     if (-not $specToPlayers.ContainsKey($sk)) { $specToPlayers[$sk] = @() }
     $specToPlayers[$sk] += $r.name
 }
+
+# ---- ab hier je Phase ----
+$alleRows   = @()
+$alleTokens = @()
+
+foreach ($phase in $phasen) {
+$upgDatei   = if ($phase -eq 3) { "upgrades.json" } else { "upgrades-p$phase.json" }
+$itemsDatei = if ($phase -eq 3) { "items.json" }    else { "items-p$phase.json" }
+$upg   = Get-Content "$base\daten\$upgDatei"   -Raw -Encoding UTF8 | ConvertFrom-Json
+$items = Get-Content "$base\daten\$itemsDatei" -Raw -Encoding UTF8 | ConvertFrom-Json
+
+foreach ($item in $items) {
+    if ($item.Id -and $item.Name -and -not $itemNames.ContainsKey([string]$item.Id)) {
+        $itemNames[[string]$item.Id] = $item.Name
+    }
+}
+
+$bis = Hole-BisListe $phase
+$bisRank = @{}
+foreach ($k in $bis.Keys) {
+    foreach ($e in $bis[$k]) {
+        $key = $k + "|" + $e.Id
+        if (-not $bisRank.ContainsKey($key) -or $bisRank[$key] -gt $e.Rank) { $bisRank[$key] = $e.Rank }
+    }
+}
+
+$tokenGroupMap = Baue-TokenZuordnung $items
+$tokenMeta     = Baue-TokenMeta $items
+Write-Output ("  Phase " + $phase + ": " + $tokenGroupMap.Count + " Tier-Teile in " +
+    ($tokenGroupMap.Values | Sort-Object -Unique).Count + " Gruppen, " + $tokenMeta.Count + " Token erkannt")
 
 # Schritt 1: BiS-Items zaehlen — alle Spieler des gleichen Specs werden als Kandidaten gewertet.
 # D.h.: Steht ein Item (Rank 0 bzw. Rank 0+1 bei 2-Slot) in der BiS-Liste von Spec X,
@@ -207,10 +256,17 @@ foreach ($u in $upg) {
         bb  = $bb
         ro  = $u.Rolle
         tk  = $tk
+        ph  = $phase
     }
 }
 
-$roster = Get-Content "$base\roster.json" -Raw -Encoding UTF8 | ConvertFrom-Json
+$alleRows += $rows
+foreach ($t in $tokenMeta.Values) {
+    $alleTokens += [pscustomobject]@{ grp=$t.grp; id=$t.id; n=$t.n; b=$t.b; s=$t.s; typ=$t.typ; ph=$phase }
+}
+Write-Output ("  Phase " + $phase + ": " + $rows.Count + " Zeilen")
+}   # Ende Phasen-Schleife
+
 
 # Aktuell getragenes Gear der Spieler einbetten (ItemId je Slot je Spieler)
 $gearMap = @{}
@@ -226,15 +282,16 @@ if (Test-Path $plFile) {
 
 $payload = [pscustomobject]@{
     stand     = (Get-Date -Format "yyyy-MM-dd")
-    rows      = $rows
+    phasen    = @($phasen)
+    rows      = $alleRows
     roster    = @($roster | ForEach-Object { [pscustomobject]@{ name=$_.name; spec=$_.spec } })
     gear      = $gearMap
     itemNames = $itemNames
-    tokens    = @($tokenMeta.Values | Sort-Object typ, s)
+    tokens    = @($alleTokens | Sort-Object ph, typ, s)
 }
 $json = $payload | ConvertTo-Json -Depth 6 -Compress
 [System.IO.File]::WriteAllText("$base\daten\payload.json", $json, (New-Object System.Text.UTF8Encoding($false)))
-Write-Output ("payload.json geschrieben: " + $rows.Count + " Zeilen, " + [math]::Round($json.Length/1024,1) + " KB")
+Write-Output ("payload.json geschrieben: " + $alleRows.Count + " Zeilen, " + [math]::Round($json.Length/1024,1) + " KB")
 
 # Zusammenbau der Seite aus Vorlage + Daten.
 #

@@ -1,4 +1,4 @@
-<title>Loot-Prioritäten Phase 3 — Hyjal & Black Temple</title>
+<title>Loot-Prioritäten — TBC Anniversary</title>
 
 <style>
   :root {
@@ -81,6 +81,31 @@
     font-weight: 400; text-wrap: balance; letter-spacing: -0.01em;
   }
   .sub { color: var(--muted); max-width: 62ch; margin: 0.35rem 0 0; }
+
+  /* Phasen-Umschaltung neben dem Titel. Die nicht gewaehlten Reiter sind bewusst
+     stark abgeblendet - man soll auf einen Blick sehen, welche Phase gilt. */
+  .titelzeile {
+    display: flex; align-items: baseline; gap: 1.25rem; flex-wrap: wrap;
+  }
+  .phasen-leiste { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .phasen-knopf {
+    all: unset; cursor: pointer;
+    font-family: var(--f-display); font-size: var(--step-2); line-height: 1.1;
+    padding: 0.1rem 0.85rem;
+    border: 1px solid var(--line); color: var(--muted);
+    opacity: 0.45; transition: opacity 0.15s, color 0.15s, border-color 0.15s;
+    white-space: nowrap;
+  }
+  .phasen-knopf:hover { opacity: 0.8; color: var(--ink); }
+  .phasen-knopf:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .phasen-knopf[aria-selected="true"] {
+    opacity: 1; color: var(--accent); border-color: var(--accent);
+    background: var(--accent-soft); font-weight: 600;
+  }
+  .phasen-knopf .phasen-raid {
+    display: block; font-family: var(--f-ui); font-size: 0.62rem;
+    letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.85;
+  }
 
   .provenance {
     display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem;
@@ -458,16 +483,22 @@
       <span class="eyebrow">Gilde Resurrected · Thunderstrike EU</span>
       <button type="button" id="btnLogout" style="all:unset; cursor:pointer; font-size:0.8rem; color:var(--muted); border:1px solid var(--line); padding:0.25rem 0.6rem; border-radius:4px; font-family:var(--f-ui);">🔓 Abmelden</button>
     </div>
-    <h1>Loot-Prioritäten Phase&nbsp;3</h1>
-    <p class="sub">Mount Hyjal und Black Temple, gerechnet gegen die tatsächlich getragene Ausrüstung der Raider. Bei <b>DPS</b> steht der absolute Zuwachs in ΔDPS, bei <b>Tank und Heiler</b> der prozentuale Zuwachs auf den Wert der getragenen Ausrüstung — die beiden Zahlen sind <u>nicht</u> miteinander vergleichbar. BiS-Items werden gegenüber bloßen Upgrades priorisiert.</p>
+    <div class="titelzeile">
+      <h1>Loot-Prioritäten</h1>
+      <div class="phasen-leiste" id="phasen-leiste" role="tablist" aria-label="Phase wählen"></div>
+    </div>
+    <p class="sub"><span id="sub-raid">Mount Hyjal und Black Temple</span>, gerechnet gegen die tatsächlich getragene Ausrüstung der Raider. Bei <b>DPS</b> steht der absolute Zuwachs in ΔDPS, bei <b>Tank und Heiler</b> der prozentuale Zuwachs auf den Wert der getragenen Ausrüstung — die beiden Zahlen sind <u>nicht</u> miteinander vergleichbar. BiS-Items werden gegenüber bloßen Upgrades priorisiert.</p>
     <div class="provenance">
       <span>Gear-Stand <b id="provStand">—</b></span>
       <span>Alle <b id="totalRaiders">— Raider</b></span>
       <span>Gewichte <b>WoWSims 2.5.6</b></span>
       <span class="tooltip-wrapper">
-        Abgleich <b>79 % DPS · 90 % Tank/Heiler</b>
+        Abgleich <b>79 % DPS · 90 % Tank/Heiler</b> <span class="muted">(Phase&nbsp;3)</span>
         <span class="tooltip-content">
-          Dieser Qualitäts-Wert zeigt, wie genau die automatische Berechnung der Prio-Liste ist —
+          ⚠️ Dieser Wert ist <b>nur für Phase 3 gemessen</b>. Für Phase 4 und 5 gibt es noch
+          keine Gegenprobe — die Empfehlungen dort sind ungeprüft.
+          <br><br>
+          Er zeigt, wie genau die automatische Berechnung der Prio-Liste ist —
           gemessen gegen veröffentlichte Phase-3-BiS-Listen:
           <br><br>
           <b>DPS</b> (gegen warcrafttavern.com): 79 % der Top-Vorschläge liegen dort in den besten 3,
@@ -639,19 +670,45 @@ window.onerror = function(msg, url, line, col, error) {
   return false;
 };
 const DATA = "__DATEN__";
-const rows = DATA.rows.filter(r => !r.un);
+
+// ---- Phasen ----------------------------------------------------------------
+// Die Nutzlast kann mehrere Phasen enthalten (3 = Hyjal/BT, 4 = Zul'Aman,
+// 5 = Sunwell). Enthaelt sie nur eine, wird die Leiste gar nicht gezeichnet und
+// die Seite verhaelt sich wie vorher. Die Phasen sind kumulativ: die Zeilen einer
+// Phase enthalten auch weiterhin gueltige Teile aus frueheren Raids.
+const PHASEN = (DATA.phasen && DATA.phasen.length) ? DATA.phasen.slice() : [3];
+const PHASEN_NAME = { 3: 'Hyjal & Black Temple', 4: "Zul'Aman", 5: 'Sunwell' };
+
+function phaseLesen() {
+  try {
+    const g = parseInt(localStorage.getItem('lootprio:phase'), 10);
+    if (PHASEN.includes(g)) return g;
+  } catch (e) { /* localStorage kann in manchen Einstellungen werfen */ }
+  return PHASEN[0];
+}
+let aktivePhase = phaseLesen();
+
+// rows/TOKENS haengen an der Phase und werden bei jedem Wechsel neu gesetzt.
+let rows = [];
+let TOKENS = [];
+let TOKEN_BY_GRP = {};
 
 // Schmuckstuecke waren bis zur Abnahme der Simulation hinter einem BETA-Schalter
 // versteckt und liefen nur in index-beta.html mit. Seit der Freigabe sind sie ein
 // normaler Teil der Liste - Schalter, Beta-Seite und der Hinweis "Keine
 // Schmuckstuecke" sind deshalb entfallen.
 
-// Tier-6-Tokens: Gruppenschluessel ("CONQ|Head") -> Token-Gegenstand samt echtem Drop-Boss.
+// Tier-Tokens: Gruppenschluessel ("CONQ|Head") -> Token-Gegenstand samt echtem Drop-Boss.
 // Die Token selbst haben keine Werte und erzeugen deshalb keine Upgrade-Zeilen; die Zeilen
-// tragen stattdessen das Feld tk mit ihrem Gruppenschluessel.
-const TOKENS = DATA.tokens || [];
-const TOKEN_BY_GRP = {};
-TOKENS.forEach(t => { TOKEN_BY_GRP[t.grp] = t; });
+// tragen stattdessen das Feld tk mit ihrem Gruppenschluessel. Ab Phase 5 kommt die
+// Sunwell-Familie (Armschienen/Guertel/Stiefel) dazu, deshalb je Phase eigene Karte.
+function datenFuerPhase(ph) {
+  rows = DATA.rows.filter(r => !r.un && (r.ph === undefined || r.ph === ph));
+  TOKENS = (DATA.tokens || []).filter(t => t.ph === undefined || t.ph === ph);
+  TOKEN_BY_GRP = {};
+  TOKENS.forEach(t => { TOKEN_BY_GRP[t.grp] = t; });
+}
+datenFuerPhase(aktivePhase);
 const tokenBossOf = r => (r.tk && TOKEN_BY_GRP[r.tk]) ? TOKEN_BY_GRP[r.tk].b : null;
 
 const $ = id => document.getElementById(id);
@@ -813,15 +870,19 @@ function updatePlayerFilterUI() {
   }
 }
 
-fillSelect($('f-boss'), sortBosses(uniq(rows,'b')));
-fillSelect($('f-slot'), uniq(rows,'s'));
-updatePlayerFilter();
-fillSelect($('f-quelle'), uniq(rows,'q'));
+// Die Auswahllisten haengen am Datenbestand der Phase (Sunwell hat andere Bosse
+// als Hyjal), muessen beim Wechsel also neu befuellt werden.
+function auswahllistenFuellen() {
+  fillSelect($('f-boss'), sortBosses(uniq(rows,'b')));
+  fillSelect($('f-slot'), uniq(rows,'s'));
+  updatePlayerFilter();
+  fillSelect($('f-quelle'), uniq(rows,'q'));
+}
+auswahllistenFuellen();
 
 
 let currentSort = 'prio'; // 'prio' or 'd'
 let sortDir = -1; // -1 = descending
-const maxD = Math.max(...rows.map(r => r.d));
 
 // liveGear: { playerName -> Set<itemId> } — befüllt durch Armory-Sync
 let liveGear = {};
@@ -1359,6 +1420,40 @@ $('btn-sort-dps').addEventListener('click', () => {
 
 // Mit acht Filtern verliert man schnell den Ueberblick, warum eine erwartete Zeile fehlt.
 // Ein Knopf zurueck auf den Ausgangszustand ist billiger als jeden Filter einzeln zu suchen.
+// ---- Phasen-Umschaltung ----------------------------------------------------
+function phasenLeisteZeichnen() {
+  const box = $('phasen-leiste');
+  // Nur eine Phase in der Nutzlast? Dann gar keine Leiste - die Seite sieht
+  // dann exakt so aus wie vor der Phasen-Erweiterung.
+  if (PHASEN.length < 2) { box.remove(); return; }
+  box.innerHTML = PHASEN.map(p =>
+    `<button type="button" class="phasen-knopf" role="tab" data-phase="${p}"
+             aria-selected="${p === aktivePhase}">Phase ${p}` +
+    `<span class="phasen-raid">${esc(PHASEN_NAME[p] || '')}</span></button>`).join('');
+  box.querySelectorAll('.phasen-knopf').forEach(b => {
+    b.addEventListener('click', () => phaseWechseln(parseInt(b.dataset.phase, 10)));
+  });
+}
+
+function phaseWechseln(ph) {
+  if (ph === aktivePhase || !PHASEN.includes(ph)) return;
+  aktivePhase = ph;
+  try { localStorage.setItem('lootprio:phase', String(ph)); } catch (e) { /* egal */ }
+  datenFuerPhase(ph);
+  // Ein Boss- oder Quellenfilter aus der alten Phase existiert in der neuen oft
+  // gar nicht mehr (Sunwell hat andere Bosse als Hyjal) - stehen liesse man eine
+  // leere Tabelle ohne erkennbaren Grund. Deshalb zuruecksetzen.
+  ['f-boss','f-slot','f-quelle'].forEach(id => { $(id).value = ''; });
+  auswahllistenFuellen();
+  document.querySelectorAll('.phasen-knopf').forEach(b => {
+    b.setAttribute('aria-selected', String(parseInt(b.dataset.phase, 10) === ph));
+  });
+  const raidEl = $('sub-raid');
+  if (raidEl) raidEl.textContent = PHASEN_NAME[ph] || ('Phase ' + ph);
+  render();
+}
+phasenLeisteZeichnen();
+
 $('btn-reset').addEventListener('click', () => {
   $('f-bis-strict').checked = true;
   $('f-hide-equipped').checked = false;

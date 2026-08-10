@@ -115,6 +115,35 @@ sonst schlägt der CSV-Export fehl.
 
 ---
 
+## Phasen 3, 4 und 5
+
+Die Seite hat oben eine Umschaltleiste: **Phase 3** (Hyjal & Black Temple), **Phase 4** (Zul'Aman),
+**Phase 5** (Sunwell). Die gewählte Phase bestimmt Item-Pool *und* BiS-Listen; die Wahl wird im
+Browser gemerkt. Die Phasen sind **kumulativ** — eine Phase-5-Liste enthält weiterhin BT-Teile, weil
+die dort oft BiS bleiben.
+
+```powershell
+python daten\scrape-bis-wowhead.py       # BiS-Listen aller Phasen -> daten/bis-listen-phasen.json
+python daten\scrape-pool-wowhead.py      # Item-Pools ZA/Sunwell   -> quellen/p4-,p5-item-pool.json
+.\1-fetch-items.ps1 -Phase 4             # -> daten/items-p4.json  (ohne -Phase: items.json wie bisher)
+.\3-compute.ps1     -Phase 4             # -> daten/upgrades-p4.json
+```
+
+**Ohne `-Phase` verhalten sich beide Skripte exakt wie vorher** — das ist bewusst so gebaut und
+wurde per Prüfsumme nachgewiesen, damit die laufende Phase-3-Seite von der Erweiterung nicht
+berührt wird. `5-build-payload.ps1` nimmt Phase 4 und 5 nur auf, wenn ihre Dateien existieren;
+fehlen sie, entsteht die Seite von vorher ganz ohne Umschaltleiste.
+
+⚠️ **Der Abgleichswert (79 % / 90 %) ist nur für Phase 3 gemessen.** Für Phase 4 und 5 gibt es noch
+keine Gegenprobe — `4-bis-check.ps1` prüft weiterhin nur Phase 3. Auf der Seite ist der Wert
+entsprechend als „(Phase 3)" gekennzeichnet.
+
+⚠️ **Sunwell-Schmuckstücke sind noch nicht bewertet.** 33 Zeilen in Phase 5 (Naaru-Splitter u. a.)
+stehen als „nicht bewertbar", weil weder simulierte Werte noch ein Näherungseintrag vorliegen.
+Dafür müsste `6-trinket-sim.py` gegen den Phase-5-Pool laufen.
+
+---
+
 ## Rollen und Bewertungsmethodik
 
 | Rolle | Specs | Bewertung |

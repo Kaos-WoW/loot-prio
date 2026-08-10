@@ -54,10 +54,17 @@ jobs:
       #   python 6-trinket-sim.py
       # Die Ergebnisse liegen in daten/trinket-werte.json und werden hier nur mitcommittet.
 
+      # Alle drei Phasen rechnen. Sobald upgrades-p4/p5.json einmal im Repo liegen,
+      # nimmt 5-build-payload sie in die Nutzlast auf - wuerden sie hier nicht
+      # mitgerechnet, zeigte die Seite fuer Phase 4 und 5 dauerhaft den Gear-Stand
+      # vom Tag ihrer Erzeugung, waehrend Phase 3 taeglich frisch ist. Genau diese
+      # stille Vermischung von altem und neuem Stand soll nicht passieren.
       - name: Upgrades berechnen & Webseiten bauen
         shell: pwsh
         run: |
           powershell -ExecutionPolicy Bypass -File .\3-compute.ps1
+          powershell -ExecutionPolicy Bypass -File .\3-compute.ps1 -Phase 4
+          powershell -ExecutionPolicy Bypass -File .\3-compute.ps1 -Phase 5
           powershell -ExecutionPolicy Bypass -File .\4-bis-check.ps1
           powershell -ExecutionPolicy Bypass -File .\5-build-payload.ps1
 
@@ -65,5 +72,5 @@ jobs:
         run: |
           git config --global user.name "GitHub Action (Auto-Sync)"
           git config --global user.email "action@github.com"
-          git add roster.json daten/players.json daten/cache-tooltips.json daten/payload.json index.html ausgabe/loot-prio-p3.html daten/bis-listen.json daten/sim-weights.json daten/trinket-werte.json
+          git add roster.json daten/players.json daten/cache-tooltips.json daten/payload.json index.html ausgabe/loot-prio-p3.html daten/bis-listen.json daten/sim-weights.json daten/trinket-werte.json daten/upgrades-p4.json daten/upgrades-p5.json
           git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-sync roster and gear [skip ci]" && git push)
