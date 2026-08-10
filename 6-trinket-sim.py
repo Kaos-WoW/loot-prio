@@ -186,7 +186,7 @@ def main():
     print(f"{len(kandidaten)} Schmuckstuecke im Pool, "
           f"{sum(1 for v in bindung.values() if v)} davon klassengebunden\n")
 
-    ergebnis, apls = {}, {}
+    ergebnis, apls, unbekannt = {}, {}, set()
     for p in spieler:
         name = p["Name"]
         spec = spec_von.get(name)
@@ -239,17 +239,33 @@ def main():
             if tid in getragen:
                 werte[str(tid)] = 0.0         # traegt er schon
                 continue
+            # ⚠️ Die WoWSims-Datenbank kennt nicht jeden Gegenstand aus dem Wowhead-Pool
+            # (z.B. Battlemaster's Determination, 34578). Frueher riss so ein Fall den
+            # KOMPLETTEN Lauf ab - 18 Spieler mal 35 Schmuckstuecke waren dann umsonst.
+            # Jetzt wird der einzelne Gegenstand uebersprungen und am Ende gemeldet.
             beste = None
-            for idx in (IDX_T1, IDX_T2):
-                a = copy.deepcopy(basis_anfrage)
-                a["raid"]["parties"][0]["players"][0]["equipment"]["items"][idx] = {"id": tid}
-                d = sim(a) - basis
-                beste = d if beste is None else max(beste, d)
+            try:
+                for idx in (IDX_T1, IDX_T2):
+                    a = copy.deepcopy(basis_anfrage)
+                    a["raid"]["parties"][0]["players"][0]["equipment"]["items"][idx] = {"id": tid}
+                    d = sim(a) - basis
+                    beste = d if beste is None else max(beste, d)
+            except RuntimeError as e:
+                if "No item with id" in str(e):
+                    unbekannt.add(tid)
+                    continue
+                raise
             werte[str(tid)] = round(beste, 1)
 
         for tid, d in sorted(werte.items(), key=lambda kv: -kv[1])[:4]:
             print(f"      {namen.get(tid, tid):<34} {d:+8.1f} DPS")
         ergebnis[name] = werte
+
+    if unbekannt:
+        print("")
+        print(f"!! {len(unbekannt)} Gegenstaende kennt die WoWSims-Datenbank nicht - uebersprungen:")
+        for t in sorted(unbekannt):
+            print(f"     {t} {namen.get(str(t), '?')}")
 
     if not ergebnis:
         print("Keine Spieler simuliert - specs.json und spec-sims/apls/ pruefen.")
