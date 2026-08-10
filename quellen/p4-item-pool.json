@@ -1,0 +1,1015 @@
+{
+ "Akil'zon": [
+  {
+   "Id": 33214,
+   "Name": "Akil'zon's Talonblade",
+   "SlotCode": 13,
+   "ClassCode": 2,
+   "SubCode": 7,
+   "Ilvl": 132,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33215,
+   "Name": "Bloodstained Elven Battlevest",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33216,
+   "Name": "Chestguard of Hidden Purpose",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33281,
+   "Name": "Brooch of Nature's Mercy",
+   "SlotCode": 2,
+   "ClassCode": 4,
+   "SubCode": -3,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33283,
+   "Name": "Amani Punisher",
+   "SlotCode": 21,
+   "ClassCode": 2,
+   "SubCode": 4,
+   "Ilvl": 132,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33286,
+   "Name": "Mojo-mender's Mask",
+   "SlotCode": 1,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33293,
+   "Name": "Signet of Ancient Magics",
+   "SlotCode": 11,
+   "ClassCode": 4,
+   "SubCode": -2,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  }
+ ],
+ "Nalorakk": [
+  {
+   "Id": 33191,
+   "Name": "Jungle Stompers",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33203,
+   "Name": "Robes of Heavenly Purpose",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33206,
+   "Name": "Pauldrons of Primal Fury",
+   "SlotCode": 3,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33211,
+   "Name": "Bladeangel's Money Belt",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33285,
+   "Name": "Fury of the Ursine",
+   "SlotCode": 9,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33327,
+   "Name": "Mask of Introspection",
+   "SlotCode": 1,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33640,
+   "Name": "Fury",
+   "SlotCode": 22,
+   "ClassCode": 2,
+   "SubCode": 13,
+   "Ilvl": 132,
+   "Quelle": "Raid"
+  }
+ ],
+ "Halazzi": [
+  {
+   "Id": 33297,
+   "Name": "The Savage's Choker",
+   "SlotCode": 2,
+   "ClassCode": 4,
+   "SubCode": -3,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33299,
+   "Name": "Spaulders of the Advocate",
+   "SlotCode": 3,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33300,
+   "Name": "Shoulderpads of Dancing Blades",
+   "SlotCode": 3,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33303,
+   "Name": "Skullshatter Warboots",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33317,
+   "Name": "Robe of Departed Spirits",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33322,
+   "Name": "Shimmer-pelt Vest",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33533,
+   "Name": "Avalanche Leggings",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  }
+ ],
+ "Jan'alai": [
+  {
+   "Id": 33326,
+   "Name": "Bulwark of the Amani Empire",
+   "SlotCode": 14,
+   "ClassCode": 4,
+   "SubCode": 6,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33328,
+   "Name": "Arrow-fall Chestguard",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33329,
+   "Name": "Shadowtooth Trollskin Cuirass",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33332,
+   "Name": "Enamelled Disc of Mojo",
+   "SlotCode": 14,
+   "ClassCode": 4,
+   "SubCode": 6,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33354,
+   "Name": "Wub's Cursed Hexblade",
+   "SlotCode": 21,
+   "ClassCode": 2,
+   "SubCode": 15,
+   "Ilvl": 132,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33356,
+   "Name": "Helm of Natural Regeneration",
+   "SlotCode": 1,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33357,
+   "Name": "Footpads of Madness",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  }
+ ],
+ "Zul'jin": [
+  {
+   "Id": 33466,
+   "Name": "Loop of Cursed Bones",
+   "SlotCode": 2,
+   "ClassCode": 4,
+   "SubCode": -3,
+   "Ilvl": 133,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33467,
+   "Name": "Blade of Twisted Visions",
+   "SlotCode": 21,
+   "ClassCode": 2,
+   "SubCode": 7,
+   "Ilvl": 138,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33468,
+   "Name": "Dark Blessing",
+   "SlotCode": 21,
+   "ClassCode": 2,
+   "SubCode": 4,
+   "Ilvl": 138,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33469,
+   "Name": "Hauberk of the Empire's Champion",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 133,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33471,
+   "Name": "Two-toed Sandals",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 133,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33473,
+   "Name": "Chestguard of the Warlord",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 133,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33474,
+   "Name": "Ancient Amani Longbow",
+   "SlotCode": 15,
+   "ClassCode": 2,
+   "SubCode": 2,
+   "Ilvl": 132,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33476,
+   "Name": "Cleaver of the Unforgiving",
+   "SlotCode": 13,
+   "ClassCode": 2,
+   "SubCode": 0,
+   "Ilvl": 138,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33478,
+   "Name": "Jin'rohk, The Great Apocalypse",
+   "SlotCode": 17,
+   "ClassCode": 2,
+   "SubCode": 8,
+   "Ilvl": 138,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33479,
+   "Name": "Grimgrin Faceguard",
+   "SlotCode": 1,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 133,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33830,
+   "Name": "Ancient Aqir Artifact",
+   "SlotCode": 12,
+   "ClassCode": 4,
+   "SubCode": -4,
+   "Ilvl": 133,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33831,
+   "Name": "Berserker's Call",
+   "SlotCode": 12,
+   "ClassCode": 4,
+   "SubCode": -4,
+   "Ilvl": 133,
+   "Quelle": "Raid"
+  }
+ ],
+ "Hex Lord Malacrass": [
+  {
+   "Id": 33298,
+   "Name": "Prowler's Strikeblade",
+   "SlotCode": 13,
+   "ClassCode": 2,
+   "SubCode": 15,
+   "Ilvl": 132,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33388,
+   "Name": "Heartless",
+   "SlotCode": 13,
+   "ClassCode": 2,
+   "SubCode": 7,
+   "Ilvl": 132,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33389,
+   "Name": "Dagger of Bad Mojo",
+   "SlotCode": 13,
+   "ClassCode": 2,
+   "SubCode": 15,
+   "Ilvl": 132,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33421,
+   "Name": "Battleworn Tuskguard",
+   "SlotCode": 1,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 133,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33432,
+   "Name": "Coif of the Jungle Stalker",
+   "SlotCode": 1,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 133,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33446,
+   "Name": "Girdle of Stromgarde's Hope",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33453,
+   "Name": "Hood of Hexing",
+   "SlotCode": 1,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 133,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33463,
+   "Name": "Hood of the Third Eye",
+   "SlotCode": 1,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 133,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33464,
+   "Name": "Hex Lord's Voodoo Pauldrons",
+   "SlotCode": 3,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 133,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33465,
+   "Name": "Staff of Primal Fury",
+   "SlotCode": 17,
+   "ClassCode": 2,
+   "SubCode": 10,
+   "Ilvl": 132,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33592,
+   "Name": "Cloak of Ancient Rituals",
+   "SlotCode": 16,
+   "ClassCode": 4,
+   "SubCode": -6,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33828,
+   "Name": "Tome of Diabolic Remedy",
+   "SlotCode": 12,
+   "ClassCode": 4,
+   "SubCode": -4,
+   "Ilvl": 133,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 33829,
+   "Name": "Hex Shrunken Head",
+   "SlotCode": 12,
+   "ClassCode": 4,
+   "SubCode": -4,
+   "Ilvl": 133,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34029,
+   "Name": "Tiny Voodoo Mask",
+   "SlotCode": 12,
+   "ClassCode": 4,
+   "SubCode": -4,
+   "Ilvl": 128,
+   "Quelle": "Raid"
+  }
+ ],
+ "Haendler (Abzeichen)": [
+  {
+   "Id": 34891,
+   "Name": "The Blade of Harbingers",
+   "SlotCode": 17,
+   "ClassCode": 2,
+   "SubCode": 1,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34892,
+   "Name": "Crossbow of Relentless Strikes",
+   "SlotCode": 15,
+   "ClassCode": 2,
+   "SubCode": 18,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34895,
+   "Name": "Scryer's Blade of Focus",
+   "SlotCode": 21,
+   "ClassCode": 2,
+   "SubCode": 15,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34896,
+   "Name": "Gavel of Naaru Blessings",
+   "SlotCode": 21,
+   "ClassCode": 2,
+   "SubCode": 4,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34898,
+   "Name": "Staff of the Forest Lord",
+   "SlotCode": 17,
+   "ClassCode": 2,
+   "SubCode": 10,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34893,
+   "Name": "Vanir's Right Fist of Brutality",
+   "SlotCode": 21,
+   "ClassCode": 2,
+   "SubCode": 13,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34894,
+   "Name": "Blade of Serration",
+   "SlotCode": 13,
+   "ClassCode": 2,
+   "SubCode": 15,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34949,
+   "Name": "Swift Blade of Uncertainty",
+   "SlotCode": 22,
+   "ClassCode": 2,
+   "SubCode": 15,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34950,
+   "Name": "Vanir's Left Fist of Savagery",
+   "SlotCode": 22,
+   "ClassCode": 2,
+   "SubCode": 13,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34951,
+   "Name": "Vanir's Left Fist of Brutality",
+   "SlotCode": 22,
+   "ClassCode": 2,
+   "SubCode": 13,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34952,
+   "Name": "The Mutilator",
+   "SlotCode": 22,
+   "ClassCode": 2,
+   "SubCode": 15,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34902,
+   "Name": "Oakleaf-Spun Handguards",
+   "SlotCode": 10,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34904,
+   "Name": "Barbed Gloves of the Sage",
+   "SlotCode": 10,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34911,
+   "Name": "Handwraps of the Aggressor",
+   "SlotCode": 10,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34916,
+   "Name": "Gauntlets of Rapidity",
+   "SlotCode": 10,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34919,
+   "Name": "Boots of Incantations",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34923,
+   "Name": "Waistguard of Reparation",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34926,
+   "Name": "Slippers of Dutiful Mending",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34929,
+   "Name": "Belt of the Silent Path",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34932,
+   "Name": "Clutch of the Soothing Breeze",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34935,
+   "Name": "Aftershock Waistguard",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34938,
+   "Name": "Enslaved Doomguard Soulgrips",
+   "SlotCode": 10,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34941,
+   "Name": "Girdle of the Fearless",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34944,
+   "Name": "Girdle of Seething Rage",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34947,
+   "Name": "Blue's Greaves of the Righteous Guardian",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34887,
+   "Name": "Angelista's Revenge",
+   "SlotCode": 11,
+   "ClassCode": 4,
+   "SubCode": -2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34888,
+   "Name": "Ring of the Stalwart Protector",
+   "SlotCode": 11,
+   "ClassCode": 4,
+   "SubCode": -2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34889,
+   "Name": "Fused Nethergon Band",
+   "SlotCode": 11,
+   "ClassCode": 4,
+   "SubCode": -2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34890,
+   "Name": "Anveena's Touch",
+   "SlotCode": 11,
+   "ClassCode": 4,
+   "SubCode": -2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34900,
+   "Name": "Shroud of Nature's Harmony",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34901,
+   "Name": "Grovewalker's Leggings",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34903,
+   "Name": "Embrace of Starlight",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34905,
+   "Name": "Crystalwind Leggings",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34906,
+   "Name": "Embrace of Everlasting Prowess",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34910,
+   "Name": "Tameless Breeches",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34912,
+   "Name": "Scaled Drakeskin Chestguard",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34914,
+   "Name": "Leggings of the Pursuit",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34917,
+   "Name": "Shroud of the Lore`nial",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34918,
+   "Name": "Legwraps of Sweltering Flame",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34921,
+   "Name": "Ecclesiastical Cuirass",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34922,
+   "Name": "Greaves of Pacification",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34924,
+   "Name": "Gown of Spiritual Wonder",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34925,
+   "Name": "Adorned Supernal Legwraps",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34927,
+   "Name": "Tunic of the Dark Hour",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34928,
+   "Name": "Trousers of the Scryers' Retainer",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34930,
+   "Name": "Wave of Life Chestguard",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34931,
+   "Name": "Runed Scales of Antiquity",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34933,
+   "Name": "Hauberk of Whirling Fury",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34934,
+   "Name": "Rushing Storm Kilt",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34936,
+   "Name": "Tormented Demonsoul Robes",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34937,
+   "Name": "Corrupted Soulcloth Pantaloons",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34939,
+   "Name": "Chestplate of Stoicism",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34940,
+   "Name": "Sunguard Legplates",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34942,
+   "Name": "Breastplate of Ire",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34943,
+   "Name": "Legplates of Unending Fury",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34945,
+   "Name": "Shattrath Protectorate's Breastplate",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34946,
+   "Name": "Inscribed Legplates of the Aldor",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  }
+ ]
+}

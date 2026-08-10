@@ -330,6 +330,21 @@ python 7-stat-gewichte.py
   Eintrag). Kommt über `1-fetch-items.ps1` ein neues Schmuckstück dazu, fällt es automatisch auf
   `NichtBewertbar` zurück — dann Eintrag in `$TRINKET_EFFECTS` nachziehen. Gegenprobe:
   Pool-IDs mit `Slot -eq 'Trinket'` gegen die Schlüssel der Tabelle abgleichen.
+* **★★ Sunwell (Phase 5) bringt eine ZWEITE Tier-Token-Familie.** Neben Tier 6 gibt es
+  „Bracers/Belt/Boots of the Forgotten Conqueror/Protector/Vanquisher" (ilvl 154). Die Token droppen
+  bei den ersten drei Sunwell-Bossen (Armschienen Kalecgos, Gürtel Brutallus, Stiefel Felmyst), das
+  Rüstungsteil holt man damit bei **Theremis (NPC 25976)**, der 51 klassenspezifische Teile führt.
+  Struktur also identisch zu Tier 6 — und damit gilt dieselbe Falle: **niemals über hartcodierte
+  Item-IDs gruppieren**, sondern aus `items.json` ableiten. Wer die Phasen-Umschaltung fertigbaut,
+  muss die T6-Token-Logik in `5-build-payload.ps1` für diese Familie mitziehen, sonst zählt `bc`
+  (Anzahl Anwärter) für Sunwell-Token falsch.
+* **⚠️ Der Drop-Tabellen-Schlüssel heißt auf Wowhead mal `data: [` und mal `data:[`.** Diese Datei
+  warnte bisher nur vor der Variante ohne Leerzeichen; auf den NPC-Seiten ist es genau umgekehrt.
+  `daten/scrape-pool-wowhead.py` matcht deshalb `data:\s*\[`. Ein Muster auf nur eine Form scheitert
+  stumm mit leerem Ergebnis.
+* **Token haben `slot: 0` und fallen durch jeden „nur ausrüstbare Items"-Filter.** Genau das ist mir
+  beim ersten Lauf des Pool-Scrapers passiert: die Sunwell-Token fehlten komplett, ohne Fehlermeldung.
+  Der Filter lässt sie jetzt ausdrücklich über den Namen durch.
 * **★ Knappheitsspalten sind VERWORFEN — nicht erneut vorschlagen.** Einmal gebaut und wieder
   entfernt (Commit `a413a14`), am 2026-08-09 vom Nutzer endgültig abgelehnt: In Phase 3 gibt es je
   Slot meist gar keine und sonst genau eine Alternative. Eine Spalte, die fast überall „0" oder „1"

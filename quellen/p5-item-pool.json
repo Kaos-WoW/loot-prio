@@ -1,0 +1,1809 @@
+{
+ "Kalecgos": [
+  {
+   "Id": 34164,
+   "Name": "Dragonscale-Encrusted Longblade",
+   "SlotCode": 13,
+   "ClassCode": 2,
+   "SubCode": 7,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34165,
+   "Name": "Fang of Kalecgos",
+   "SlotCode": 13,
+   "ClassCode": 2,
+   "SubCode": 15,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34166,
+   "Name": "Band of Lucent Beams",
+   "SlotCode": 11,
+   "ClassCode": 4,
+   "SubCode": -2,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34167,
+   "Name": "Legplates of the Holy Juggernaut",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34168,
+   "Name": "Starstalker Legguards",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34169,
+   "Name": "Breeches of Natural Aggression",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34170,
+   "Name": "Pantaloons of Calming Strife",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34848,
+   "Name": "Bracers of the Forgotten Conqueror",
+   "SlotCode": 0,
+   "ClassCode": 15,
+   "SubCode": -2,
+   "Ilvl": 70,
+   "Quelle": "Token"
+  },
+  {
+   "Id": 34851,
+   "Name": "Bracers of the Forgotten Protector",
+   "SlotCode": 0,
+   "ClassCode": 15,
+   "SubCode": -2,
+   "Ilvl": 70,
+   "Quelle": "Token"
+  },
+  {
+   "Id": 34852,
+   "Name": "Bracers of the Forgotten Vanquisher",
+   "SlotCode": 0,
+   "ClassCode": 15,
+   "SubCode": -2,
+   "Ilvl": 70,
+   "Quelle": "Token"
+  }
+ ],
+ "Brutallus": [
+  {
+   "Id": 34176,
+   "Name": "Reign of Misery",
+   "SlotCode": 21,
+   "ClassCode": 2,
+   "SubCode": 4,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34177,
+   "Name": "Clutch of Demise",
+   "SlotCode": 2,
+   "ClassCode": 4,
+   "SubCode": -3,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34178,
+   "Name": "Collar of the Pit Lord",
+   "SlotCode": 2,
+   "ClassCode": 4,
+   "SubCode": -3,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34179,
+   "Name": "Heart of the Pit",
+   "SlotCode": 23,
+   "ClassCode": 4,
+   "SubCode": -5,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34180,
+   "Name": "Felfury Legplates",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34181,
+   "Name": "Leggings of Calamity",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34853,
+   "Name": "Belt of the Forgotten Conqueror",
+   "SlotCode": 0,
+   "ClassCode": 15,
+   "SubCode": -2,
+   "Ilvl": 70,
+   "Quelle": "Token"
+  },
+  {
+   "Id": 34854,
+   "Name": "Belt of the Forgotten Protector",
+   "SlotCode": 0,
+   "ClassCode": 15,
+   "SubCode": -2,
+   "Ilvl": 70,
+   "Quelle": "Token"
+  },
+  {
+   "Id": 34855,
+   "Name": "Belt of the Forgotten Vanquisher",
+   "SlotCode": 0,
+   "ClassCode": 15,
+   "SubCode": -2,
+   "Ilvl": 70,
+   "Quelle": "Token"
+  }
+ ],
+ "Felmyst": [
+  {
+   "Id": 34182,
+   "Name": "Grand Magister's Staff of Torrents",
+   "SlotCode": 17,
+   "ClassCode": 2,
+   "SubCode": 10,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34184,
+   "Name": "Brooch of the Highborne",
+   "SlotCode": 2,
+   "ClassCode": 4,
+   "SubCode": -3,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34185,
+   "Name": "Sword Breaker's Bulwark",
+   "SlotCode": 14,
+   "ClassCode": 4,
+   "SubCode": 6,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34186,
+   "Name": "Chain Links of the Tumultuous Storm",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34188,
+   "Name": "Leggings of the Immortal Night",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34352,
+   "Name": "Borderland Fortress Grips",
+   "SlotCode": 10,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 156,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34856,
+   "Name": "Boots of the Forgotten Conqueror",
+   "SlotCode": 0,
+   "ClassCode": 15,
+   "SubCode": -2,
+   "Ilvl": 70,
+   "Quelle": "Token"
+  },
+  {
+   "Id": 34857,
+   "Name": "Boots of the Forgotten Protector",
+   "SlotCode": 0,
+   "ClassCode": 15,
+   "SubCode": -2,
+   "Ilvl": 70,
+   "Quelle": "Token"
+  },
+  {
+   "Id": 34858,
+   "Name": "Boots of the Forgotten Vanquisher",
+   "SlotCode": 0,
+   "ClassCode": 15,
+   "SubCode": -2,
+   "Ilvl": 70,
+   "Quelle": "Token"
+  }
+ ],
+ "Lady Sacrolash": [
+  {
+   "Id": 34189,
+   "Name": "Band of Ruinous Delight",
+   "SlotCode": 11,
+   "ClassCode": 4,
+   "SubCode": -2,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34190,
+   "Name": "Crimson Paragon's Cover",
+   "SlotCode": 16,
+   "ClassCode": 4,
+   "SubCode": -6,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34192,
+   "Name": "Pauldrons of Perseverance",
+   "SlotCode": 3,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34193,
+   "Name": "Spaulders of the Thalassian Savior",
+   "SlotCode": 3,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34194,
+   "Name": "Mantle of the Golden Forest",
+   "SlotCode": 3,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34195,
+   "Name": "Shoulderpads of Vehemence",
+   "SlotCode": 3,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34196,
+   "Name": "Golden Bow of Quel'Thalas",
+   "SlotCode": 15,
+   "ClassCode": 2,
+   "SubCode": 2,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34197,
+   "Name": "Shiv of Exsanguination",
+   "SlotCode": 13,
+   "ClassCode": 2,
+   "SubCode": 15,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34198,
+   "Name": "Stanchion of Primal Instinct",
+   "SlotCode": 17,
+   "ClassCode": 2,
+   "SubCode": 10,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34199,
+   "Name": "Archon's Gavel",
+   "SlotCode": 21,
+   "ClassCode": 2,
+   "SubCode": 4,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34202,
+   "Name": "Shawl of Wonderment",
+   "SlotCode": 3,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34203,
+   "Name": "Grip of Mannoroth",
+   "SlotCode": 22,
+   "ClassCode": 2,
+   "SubCode": 13,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34204,
+   "Name": "Amulet of Unfettered Magics",
+   "SlotCode": 2,
+   "ClassCode": 4,
+   "SubCode": -3,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34205,
+   "Name": "Shroud of Redeemed Souls",
+   "SlotCode": 16,
+   "ClassCode": 4,
+   "SubCode": -6,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34206,
+   "Name": "Book of Highborne Hymns",
+   "SlotCode": 23,
+   "ClassCode": 4,
+   "SubCode": -5,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34208,
+   "Name": "Equilibrium Epaulets",
+   "SlotCode": 3,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34209,
+   "Name": "Spaulders of Reclamation",
+   "SlotCode": 3,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34210,
+   "Name": "Amice of the Convoker",
+   "SlotCode": 3,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 35290,
+   "Name": "Sin'dorei Pendant of Conquest",
+   "SlotCode": 2,
+   "ClassCode": 4,
+   "SubCode": -3,
+   "Ilvl": 141,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 35291,
+   "Name": "Sin'dorei Pendant of Salvation",
+   "SlotCode": 2,
+   "ClassCode": 4,
+   "SubCode": -3,
+   "Ilvl": 141,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 35292,
+   "Name": "Sin'dorei Pendant of Triumph",
+   "SlotCode": 2,
+   "ClassCode": 4,
+   "SubCode": -3,
+   "Ilvl": 141,
+   "Quelle": "Raid"
+  }
+ ],
+ "Kil'jaeden": [
+  {
+   "Id": 34241,
+   "Name": "Cloak of Unforgivable Sin",
+   "SlotCode": 16,
+   "ClassCode": 4,
+   "SubCode": -6,
+   "Ilvl": 164,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34242,
+   "Name": "Tattered Cape of Antonidas",
+   "SlotCode": 16,
+   "ClassCode": 4,
+   "SubCode": -6,
+   "Ilvl": 164,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34243,
+   "Name": "Helm of Burning Righteousness",
+   "SlotCode": 1,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 164,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34244,
+   "Name": "Duplicitous Guise",
+   "SlotCode": 1,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 164,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34245,
+   "Name": "Cover of Ursol the Wise",
+   "SlotCode": 1,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 164,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34247,
+   "Name": "Apolyon, the Soul-Render",
+   "SlotCode": 17,
+   "ClassCode": 2,
+   "SubCode": 8,
+   "Ilvl": 164,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34329,
+   "Name": "Crux of the Apocalypse",
+   "SlotCode": 13,
+   "ClassCode": 2,
+   "SubCode": 15,
+   "Ilvl": 164,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34331,
+   "Name": "Hand of the Deceiver",
+   "SlotCode": 21,
+   "ClassCode": 2,
+   "SubCode": 13,
+   "Ilvl": 164,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34332,
+   "Name": "Cowl of Gul'dan",
+   "SlotCode": 1,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 164,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34333,
+   "Name": "Coif of Alleria",
+   "SlotCode": 1,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 164,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34334,
+   "Name": "Thori'dal, the Stars' Fury",
+   "SlotCode": 15,
+   "ClassCode": 2,
+   "SubCode": 2,
+   "Ilvl": 164,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34335,
+   "Name": "Hammer of Sanctification",
+   "SlotCode": 21,
+   "ClassCode": 2,
+   "SubCode": 4,
+   "Ilvl": 164,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34336,
+   "Name": "Sunflare",
+   "SlotCode": 21,
+   "ClassCode": 2,
+   "SubCode": 15,
+   "Ilvl": 164,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34337,
+   "Name": "Golden Staff of the Sin'dorei",
+   "SlotCode": 17,
+   "ClassCode": 2,
+   "SubCode": 10,
+   "Ilvl": 164,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34339,
+   "Name": "Cowl of Light's Purity",
+   "SlotCode": 1,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 164,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34340,
+   "Name": "Dark Conjuror's Collar",
+   "SlotCode": 1,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 164,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34341,
+   "Name": "Borderland Paingrips",
+   "SlotCode": 10,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 164,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34342,
+   "Name": "Handguards of the Dawn",
+   "SlotCode": 10,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 164,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34343,
+   "Name": "Thalassian Ranger Gauntlets",
+   "SlotCode": 10,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 164,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34344,
+   "Name": "Handguards of Defiled Worlds",
+   "SlotCode": 10,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 164,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34345,
+   "Name": "Crown of Anasterian",
+   "SlotCode": 1,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 164,
+   "Quelle": "Raid"
+  }
+ ],
+ "M'uru": [
+  {
+   "Id": 34211,
+   "Name": "Harness of Carnal Instinct",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34212,
+   "Name": "Sunglow Vest",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34213,
+   "Name": "Ring of Hardened Resolve",
+   "SlotCode": 11,
+   "ClassCode": 4,
+   "SubCode": -2,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34214,
+   "Name": "Muramasa",
+   "SlotCode": 13,
+   "ClassCode": 2,
+   "SubCode": 7,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34215,
+   "Name": "Warharness of Reckless Fury",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34216,
+   "Name": "Heroic Judicator's Chestguard",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34228,
+   "Name": "Vicious Hawkstrider Hauberk",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34229,
+   "Name": "Garments of Serene Shores",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34230,
+   "Name": "Ring of Omnipotence",
+   "SlotCode": 11,
+   "ClassCode": 4,
+   "SubCode": -2,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34231,
+   "Name": "Aegis of Angelic Fortune",
+   "SlotCode": 14,
+   "ClassCode": 4,
+   "SubCode": 6,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34232,
+   "Name": "Fel Conquerer Raiments",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34233,
+   "Name": "Robes of Faltered Light",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34234,
+   "Name": "Shadowed Gauntlets of Paroxysm",
+   "SlotCode": 10,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34240,
+   "Name": "Gauntlets of the Soothed Soul",
+   "SlotCode": 10,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 159,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34427,
+   "Name": "Blackened Naaru Sliver",
+   "SlotCode": 12,
+   "ClassCode": 4,
+   "SubCode": -4,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34428,
+   "Name": "Steely Naaru Sliver",
+   "SlotCode": 12,
+   "ClassCode": 4,
+   "SubCode": -4,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34429,
+   "Name": "Shifting Naaru Sliver",
+   "SlotCode": 12,
+   "ClassCode": 4,
+   "SubCode": -4,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 34430,
+   "Name": "Glimmering Naaru Sliver",
+   "SlotCode": 12,
+   "ClassCode": 4,
+   "SubCode": -4,
+   "Ilvl": 154,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 35282,
+   "Name": "Sin'dorei Band of Dominance",
+   "SlotCode": 11,
+   "ClassCode": 4,
+   "SubCode": -2,
+   "Ilvl": 141,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 35283,
+   "Name": "Sin'dorei Band of Salvation",
+   "SlotCode": 11,
+   "ClassCode": 4,
+   "SubCode": -2,
+   "Ilvl": 141,
+   "Quelle": "Raid"
+  },
+  {
+   "Id": 35284,
+   "Name": "Sin'dorei Band of Triumph",
+   "SlotCode": 11,
+   "ClassCode": 4,
+   "SubCode": -2,
+   "Ilvl": 141,
+   "Quelle": "Raid"
+  }
+ ],
+ "Tier 6.5 (Sunwell-Haendler)": [
+  {
+   "Id": 34431,
+   "Name": "Lightbringer Bands",
+   "SlotCode": 9,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34432,
+   "Name": "Lightbringer Bracers",
+   "SlotCode": 9,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34433,
+   "Name": "Lightbringer Wristguards",
+   "SlotCode": 9,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34434,
+   "Name": "Bracers of Absolution",
+   "SlotCode": 9,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34435,
+   "Name": "Cuffs of Absolution",
+   "SlotCode": 9,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34436,
+   "Name": "Bracers of the Malefic",
+   "SlotCode": 9,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34437,
+   "Name": "Skyshatter Bands",
+   "SlotCode": 9,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34438,
+   "Name": "Skyshatter Bracers",
+   "SlotCode": 9,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34439,
+   "Name": "Skyshatter Wristguards",
+   "SlotCode": 9,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34441,
+   "Name": "Onslaught Bracers",
+   "SlotCode": 9,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34442,
+   "Name": "Onslaught Wristguards",
+   "SlotCode": 9,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34443,
+   "Name": "Gronnstalker's Bracers",
+   "SlotCode": 9,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34444,
+   "Name": "Thunderheart Wristguards",
+   "SlotCode": 9,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34445,
+   "Name": "Thunderheart Bracers",
+   "SlotCode": 9,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34446,
+   "Name": "Thunderheart Bands",
+   "SlotCode": 9,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34447,
+   "Name": "Bracers of the Tempest",
+   "SlotCode": 9,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34448,
+   "Name": "Slayer's Bracers",
+   "SlotCode": 9,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34485,
+   "Name": "Lightbringer Girdle",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34487,
+   "Name": "Lightbringer Belt",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34488,
+   "Name": "Lightbringer Waistguard",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34527,
+   "Name": "Belt of Absolution",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34528,
+   "Name": "Cord of Absolution",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34541,
+   "Name": "Belt of the Malefic",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34542,
+   "Name": "Skyshatter Cord",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34543,
+   "Name": "Skyshatter Belt",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34545,
+   "Name": "Skyshatter Girdle",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34546,
+   "Name": "Onslaught Belt",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34547,
+   "Name": "Onslaught Waistguard",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34549,
+   "Name": "Gronnstalker's Belt",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34554,
+   "Name": "Thunderheart Belt",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34555,
+   "Name": "Thunderheart Cord",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34556,
+   "Name": "Thunderheart Waistguard",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34557,
+   "Name": "Belt of the Tempest",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34558,
+   "Name": "Slayer's Belt",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34559,
+   "Name": "Lightbringer Treads",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34560,
+   "Name": "Lightbringer Stompers",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34561,
+   "Name": "Lightbringer Boots",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34562,
+   "Name": "Boots of Absolution",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34563,
+   "Name": "Treads of Absolution",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34564,
+   "Name": "Boots of the Malefic",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34565,
+   "Name": "Skyshatter Boots",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34566,
+   "Name": "Skyshatter Treads",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34567,
+   "Name": "Skyshatter Greaves",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34568,
+   "Name": "Onslaught Boots",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34569,
+   "Name": "Onslaught Treads",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34570,
+   "Name": "Gronnstalker's Boots",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34571,
+   "Name": "Thunderheart Boots",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34572,
+   "Name": "Thunderheart Footwraps",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34573,
+   "Name": "Thunderheart Treads",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34574,
+   "Name": "Boots of the Tempest",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  },
+  {
+   "Id": 34575,
+   "Name": "Slayer's Boots",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 154,
+   "Quelle": "Tier"
+  }
+ ],
+ "Haendler (Abzeichen)": [
+  {
+   "Id": 34891,
+   "Name": "The Blade of Harbingers",
+   "SlotCode": 17,
+   "ClassCode": 2,
+   "SubCode": 1,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34892,
+   "Name": "Crossbow of Relentless Strikes",
+   "SlotCode": 15,
+   "ClassCode": 2,
+   "SubCode": 18,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34895,
+   "Name": "Scryer's Blade of Focus",
+   "SlotCode": 21,
+   "ClassCode": 2,
+   "SubCode": 15,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34896,
+   "Name": "Gavel of Naaru Blessings",
+   "SlotCode": 21,
+   "ClassCode": 2,
+   "SubCode": 4,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34898,
+   "Name": "Staff of the Forest Lord",
+   "SlotCode": 17,
+   "ClassCode": 2,
+   "SubCode": 10,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34893,
+   "Name": "Vanir's Right Fist of Brutality",
+   "SlotCode": 21,
+   "ClassCode": 2,
+   "SubCode": 13,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34894,
+   "Name": "Blade of Serration",
+   "SlotCode": 13,
+   "ClassCode": 2,
+   "SubCode": 15,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34949,
+   "Name": "Swift Blade of Uncertainty",
+   "SlotCode": 22,
+   "ClassCode": 2,
+   "SubCode": 15,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34950,
+   "Name": "Vanir's Left Fist of Savagery",
+   "SlotCode": 22,
+   "ClassCode": 2,
+   "SubCode": 13,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34951,
+   "Name": "Vanir's Left Fist of Brutality",
+   "SlotCode": 22,
+   "ClassCode": 2,
+   "SubCode": 13,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34952,
+   "Name": "The Mutilator",
+   "SlotCode": 22,
+   "ClassCode": 2,
+   "SubCode": 15,
+   "Ilvl": 146,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34902,
+   "Name": "Oakleaf-Spun Handguards",
+   "SlotCode": 10,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34904,
+   "Name": "Barbed Gloves of the Sage",
+   "SlotCode": 10,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34911,
+   "Name": "Handwraps of the Aggressor",
+   "SlotCode": 10,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34916,
+   "Name": "Gauntlets of Rapidity",
+   "SlotCode": 10,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34919,
+   "Name": "Boots of Incantations",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34923,
+   "Name": "Waistguard of Reparation",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34926,
+   "Name": "Slippers of Dutiful Mending",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34929,
+   "Name": "Belt of the Silent Path",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34932,
+   "Name": "Clutch of the Soothing Breeze",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34935,
+   "Name": "Aftershock Waistguard",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34938,
+   "Name": "Enslaved Doomguard Soulgrips",
+   "SlotCode": 10,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34941,
+   "Name": "Girdle of the Fearless",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34944,
+   "Name": "Girdle of Seething Rage",
+   "SlotCode": 6,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34947,
+   "Name": "Blue's Greaves of the Righteous Guardian",
+   "SlotCode": 8,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34887,
+   "Name": "Angelista's Revenge",
+   "SlotCode": 11,
+   "ClassCode": 4,
+   "SubCode": -2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34888,
+   "Name": "Ring of the Stalwart Protector",
+   "SlotCode": 11,
+   "ClassCode": 4,
+   "SubCode": -2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34889,
+   "Name": "Fused Nethergon Band",
+   "SlotCode": 11,
+   "ClassCode": 4,
+   "SubCode": -2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34890,
+   "Name": "Anveena's Touch",
+   "SlotCode": 11,
+   "ClassCode": 4,
+   "SubCode": -2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34900,
+   "Name": "Shroud of Nature's Harmony",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34901,
+   "Name": "Grovewalker's Leggings",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34903,
+   "Name": "Embrace of Starlight",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34905,
+   "Name": "Crystalwind Leggings",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34906,
+   "Name": "Embrace of Everlasting Prowess",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34910,
+   "Name": "Tameless Breeches",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34912,
+   "Name": "Scaled Drakeskin Chestguard",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34914,
+   "Name": "Leggings of the Pursuit",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34917,
+   "Name": "Shroud of the Lore`nial",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34918,
+   "Name": "Legwraps of Sweltering Flame",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34921,
+   "Name": "Ecclesiastical Cuirass",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34922,
+   "Name": "Greaves of Pacification",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34924,
+   "Name": "Gown of Spiritual Wonder",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34925,
+   "Name": "Adorned Supernal Legwraps",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34927,
+   "Name": "Tunic of the Dark Hour",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34928,
+   "Name": "Trousers of the Scryers' Retainer",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 2,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34930,
+   "Name": "Wave of Life Chestguard",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34931,
+   "Name": "Runed Scales of Antiquity",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34933,
+   "Name": "Hauberk of Whirling Fury",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34934,
+   "Name": "Rushing Storm Kilt",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 3,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34936,
+   "Name": "Tormented Demonsoul Robes",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34937,
+   "Name": "Corrupted Soulcloth Pantaloons",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 1,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34939,
+   "Name": "Chestplate of Stoicism",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34940,
+   "Name": "Sunguard Legplates",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34942,
+   "Name": "Breastplate of Ire",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34943,
+   "Name": "Legplates of Unending Fury",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34945,
+   "Name": "Shattrath Protectorate's Breastplate",
+   "SlotCode": 5,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  },
+  {
+   "Id": 34946,
+   "Name": "Inscribed Legplates of the Aldor",
+   "SlotCode": 7,
+   "ClassCode": 4,
+   "SubCode": 4,
+   "Ilvl": 141,
+   "Quelle": "Marken"
+  }
+ ]
+}
