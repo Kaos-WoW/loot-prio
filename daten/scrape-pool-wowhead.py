@@ -22,6 +22,7 @@ Aufruf:
     python daten/scrape-pool-wowhead.py          # Phase 4 und 5
     python daten/scrape-pool-wowhead.py 5        # nur Sunwell
 """
+import concurrent.futures
 import json
 import os
 import re
@@ -35,6 +36,15 @@ ZIEL = os.path.join(BASE, "quellen")
 ZONEN = {
     "4": (3805, "Zul'Aman"),
     "5": (4075, "Sunwell Plateau"),
+}
+
+# Zusaetzliche Zonen je Phase. Die heroische Magisterterrasse kam mit Patch 2.4 und
+# liefert mit Shard of Contempt und Commendation of Kael'thas zwei Schmuckstuecke,
+# die fuer mehrere Specs Phase-5-BiS sind - ohne sie fehlen genau die Teile, nach
+# denen im Loot-Rat gefragt wird. 5-Mann-Inhalt, deshalb als eigene Quelle
+# gekennzeichnet und nicht unter den Raid-Bossen.
+ZUSATZZONEN = {
+    "5": [(4131, "Magisterterrasse (heroisch)")],
 }
 
 # ★ Sunwell bringt eine EIGENE Tier-Token-Familie: "Bracers/Belt/Boots of the
@@ -153,6 +163,95 @@ def marken_items(min_ilvl):
             and it.get("level", 0) >= min_ilvl]
 
 
+def quelle_bestimmen(item_id):
+    """Herkunft eines Gegenstands von seiner Wowhead-Seite ablesen.
+
+    Reihenfolge bewusst: Handwerk vor Haendler vor Drop. Ein Handwerksitem taucht
+    oft zusaetzlich bei einem Haendler (Rezept) auf, umgekehrt nicht.
+    """
+    roh = hole(f"https://www.wowhead.com/tbc/item={item_id}")
+    if not roh:
+        return "Sonstiges", ""
+    name = ""
+    m = re.search(r"<title>(.*?)\s*-\s*(?:Item|Gegenstand)", roh)
+    if m:
+        name = m.group(1).strip()
+    if listview(roh, "created-by"):
+        return "Handwerk", "Handwerk"
+    verkauf = listview(roh, "sold-by")
+    if verkauf:
+        return "Haendler", "Haendler (Sonstige)"
+    drop = listview(roh, "dropped-by")
+    if drop:
+        # Der Name des staerksten Droppers dient als "Boss"-Angabe.
+        bester = max(drop, key=lambda x: x.get("classification", 0))
+        return "Dungeon", bester.get("name", "Dungeon")
+    return "Sonstiges", "Sonstiges"
+
+
+# Gegenstaende, die zwar in BiS-Listen stehen, aber keine Loot-Rat-Entscheidung sind
+# und den Pool nur zumuellen wuerden.
+AUSSCHLUSS = re.compile(r"Gladiator's|Guardian's|Direbrew|Brewfest|Merciless|Vengeful|Brutal ", re.I)
+
+
+def bis_luecke_schliessen(phase, pool, gesehen):
+    """Handwerksitems ergaenzen, die BiS sind, aber aus keiner Loot-Quelle stammen.
+
+    ★ Patch 2.4 bringt eine komplette Handwerks-Stufe, die es in Phase 3 so nicht gab:
+    Bladed Chaos Tunic, Hard Khorium Choker und Sunfire Robe sind BiS fuer bis zu SECHS
+    Specs. Sie haben keinen Boss und keinen Haendler, tauchten also in keiner der
+    anderen Quellen auf.
+
+    ⚠️ BEWUSST nur Handwerk. Ein erster Versuch nahm alle BiS-#1-Gegenstaende auf, die
+    im Pool fehlten - das zog fuer Phase 4 rund 250 Teile aus Black Temple, SSC,
+    Karazhan und von Weltbossen herein und legte sie unter ENGLISCHEN Bossnamen ab,
+    also als Dubletten zu den vorhandenen deutschen ("Illidan Stormrage" neben
+    "Illidan Sturmgrimm"). Aeltere Raid-Inhalte gehoeren nicht in diesen Pool; dass
+    ihre Teile in den BiS-Listen stehen, ist normal und kein Fehler.
+    """
+    bis_datei = os.path.join(BASE, "daten", "bis-listen-phasen.json")
+    if not os.path.exists(bis_datei):
+        print("    (bis-listen-phasen.json fehlt - BiS-Luecke wird nicht geschlossen)")
+        return
+    with open(bis_datei, encoding="utf-8-sig") as f:
+        bis = json.load(f).get(str(phase), {})
+
+    # ⚠️ Nur Gegenstaende aus dem 2.4-Zeitraum nachschlagen (ID >= 34000). Alles
+    # darunter stammt aus aelteren Raids, die dieser Pool bewusst nicht abdeckt -
+    # und jede Nachfrage kostet einen Seitenabruf. Ein erster Versuch ohne diese
+    # Grenze schlug 248 Seiten nach, wurde von Wowhead gedrosselt und liess danach
+    # auch Haendler- und Markenabruf ins Leere laufen; das Skript schrieb den
+    # verkuerzten Pool trotzdem. Beides ist jetzt abgestellt (s. main()).
+    kandidaten = {}
+    for eintraege in bis.values():
+        for e in eintraege:
+            if e.get("Rank") != 0 or e["Id"] in gesehen or e["Id"] < 34000:
+                continue
+            if AUSSCHLUSS.search(e.get("Name", "")):
+                continue
+            kandidaten.setdefault(e["Id"], e.get("Name", ""))
+    if not kandidaten:
+        return
+
+    print(f"    BiS-Luecke: {len(kandidaten)} Gegenstaende nachschlagen ...")
+    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
+        herkunft = list(ex.map(lambda i: (i, quelle_bestimmen(i)), kandidaten))
+
+    nach_quelle = {}
+    for iid, (quelle, bossname) in herkunft:
+        if quelle != "Handwerk":
+            continue
+        gesehen.add(iid)
+        nach_quelle.setdefault(bossname or quelle, []).append({
+            "Id": iid, "Name": kandidaten[iid],
+            "SlotCode": -1, "ClassCode": -1, "SubCode": -99,
+            "Ilvl": 0, "Quelle": quelle,
+        })
+    for bossname, liste in sorted(nach_quelle.items()):
+        pool.setdefault(bossname, []).extend(liste)
+        print(f"    {bossname[:26]:<28} {len(liste):>3} Items (aus BiS-Liste ergaenzt)")
+
+
 def phase_bauen(phase):
     zone_id, raid = ZONEN[phase]
     print(f"=== Phase {phase}: {raid} (zone={zone_id})")
@@ -206,10 +305,37 @@ def phase_bauen(phase):
             print(f"    {'Haendler (Abzeichen)':<28} {len(items):>3} Items "
                   f"(ab ilvl {MARKEN_MIN_ILVL[phase]})")
 
+    for zz_id, zz_name in ZUSATZZONEN.get(phase, []):
+        zz_roh = hole(f"https://www.wowhead.com/tbc/zone={zz_id}")
+        zz_drops = listview(zz_roh, "drops") or []
+        neu = [eintrag(it, "Dungeon") for it in zz_drops
+               if it.get("quality", 0) >= 4 and it.get("slot") and it["id"] not in gesehen]
+        for i in neu:
+            gesehen.add(i["Id"])
+        if neu:
+            pool[zz_name] = neu
+            print(f"    {zz_name:<28} {len(neu):>3} Items")
+
+    bis_luecke_schliessen(phase, pool, gesehen)
+
     ziel = os.path.join(ZIEL, f"p{phase}-item-pool.json")
+    gesamt = sum(len(v) for v in pool.values())
+
+    # ★ Schutz gegen einen halb misslungenen Lauf. Wowhead drosselt bei vielen
+    # Abrufen; schlaegt dann etwa der Haendlerabruf fehl, entsteht ein deutlich
+    # kleinerer Pool - und der wuerde die gute Datei stillschweigend ersetzen.
+    # Genau das ist am 2026-08-10 passiert (Phase 5: 207 -> 99 Items).
+    if os.path.exists(ziel):
+        with open(ziel, encoding="utf-8-sig") as f:
+            alt = sum(len(v) for v in json.load(f).values())
+        if gesamt < alt * 0.9:
+            print(f"    !! ABBRUCH: neuer Pool hat nur {gesamt} statt bisher {alt} Items.")
+            print("       Sieht nach einem abgebrochenen Abruf aus (Drosselung?) - Datei bleibt unveraendert.")
+            print("       Bei einer beabsichtigten Verkleinerung die Datei vorher loeschen.")
+            return alt
+
     with open(ziel, "w", encoding="utf-8") as f:
         json.dump(pool, f, indent=1, ensure_ascii=False)
-    gesamt = sum(len(v) for v in pool.values())
     print(f"    -> {ziel}: {len(pool)} Bosse, {gesamt} Items\n")
     return gesamt
 
