@@ -421,10 +421,18 @@ foreach ($it in $items) {
         $istats = $TRINKET_EFFECTS[$idKey]
     }
     
-    # Feral-Attackpower auf Waffen ignorieren wir
-    if ($it.FormOnly -and $it.Slot -ne 'Two-Hand') { continue }
+    # ★ Gegenstaende, deren Angriffskraft NUR in Tierform wirkt (Feral-Staebe u. a.).
+    # Frueher stand hier "ueberspringen, ausser es ist ein Zweihaender" - gedacht war,
+    # dem Feral-Tank seine Staebe zu erhalten. Die Ausnahme galt aber fuer ALLE Specs,
+    # der volle Feral-Angriffskraftwert landete also bei Kriegern und Jaegern:
+    # Stanchion of Primal Instinct mit +239,9 DPS fuer Waffen-Krieger, Pillar of
+    # Ferocity mit +115,9 - beides Teile, die dort keinerlei Wirkung haetten.
+    # Jetzt bleiben solche Gegenstaende ausschliesslich bei den Feral-Specs.
+    $nurFeral = [bool]$it.FormOnly
 
     foreach ($spec in $specs) {
+        if ($nurFeral -and $spec.Key -notlike 'FERAL*') { continue }
+
         # Rollenspezifischer Filter
         $isHealerSpec = ($spec.Rolle -eq 'Heiler')
         $isTankSpec = ($spec.Rolle -eq 'Tank')

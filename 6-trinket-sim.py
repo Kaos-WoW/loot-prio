@@ -130,8 +130,13 @@ def baue_anfrage(spec_cfg, setup, apl, name):
 
 
 def sim(anfrage):
-    fi = os.path.join(tempfile.gettempdir(), "ts_in.json")
-    fo = os.path.join(tempfile.gettempdir(), "ts_out.json")
+    # ⚠️ Die Dateinamen MUESSEN prozesseigen sein. Vorher hiessen sie fest
+    # ts_in/ts_out.json: zwei gleichzeitig laufende Simulationen (z.B. ein Lauf
+    # fuer Phase 3 und einer fuer Phase 5) haben sich dann gegenseitig die
+    # Ausgabedatei geloescht. Der Abbruch sieht dabei irrefuehrend aus - die CLI
+    # meldet "All 16 sims finished successfully", und trotzdem fehlt das Ergebnis.
+    fi = os.path.join(tempfile.gettempdir(), f"ts_in_{os.getpid()}.json")
+    fo = os.path.join(tempfile.gettempdir(), f"ts_out_{os.getpid()}.json")
     if os.path.exists(fo):
         os.remove(fo)
     with open(fi, "w", encoding="utf-8") as f:
@@ -148,12 +153,23 @@ def sim(anfrage):
 
 
 def main():
-    nur = {a.lower() for a in sys.argv[1:]}
+    # --phase N waehlt den Item-Pool. Ohne Angabe Phase 3 wie bisher.
+    # Die Ergebnisdatei ist gemeinsam (Spieler -> Item-ID -> DeltaDPS) und wird
+    # ergaenzt, nicht ersetzt - ein Phase-5-Lauf laesst die P3-Werte also stehen.
+    argv = list(sys.argv[1:])
+    phase = 3
+    if "--phase" in argv:
+        i = argv.index("--phase")
+        phase = int(argv[i + 1])
+        del argv[i:i + 2]
+    nur = {a.lower() for a in argv}
     hole_cli()
 
+    itemsDatei = "items.json" if phase == 3 else f"items-p{phase}.json"
+    print(f"Item-Pool: {itemsDatei}")
     spieler = lade(os.path.join(BASE, "daten", "players.json"))
     roster = lade(os.path.join(BASE, "roster.json"))
-    items = lade(os.path.join(BASE, "daten", "items.json"))
+    items = lade(os.path.join(BASE, "daten", itemsDatei))
     cache = lade(os.path.join(BASE, "daten", "cache-tooltips.json"))
     specs = lade(os.path.join(SPEC_DIR, "specs.json"))
     setup = lade(os.path.join(SPEC_DIR, "raid-setup.json"))

@@ -1,50 +1,38 @@
-# Schritt 4: Gegenprobe gegen veroeffentlichte Phase-3-BiS-Listen
-# DPS gegen warcrafttavern.com (daten/scrape_bis.py), Tank/Heiler gegen die
-# offiziellen Wowhead-Guides (daten/scrape_wowhead_final.py) -- beide schreiben
-# in dieselbe daten/bis-listen.json.
+# Schritt 4: Gegenprobe der Empfehlungen gegen veroeffentlichte BiS-Listen.
+#
+# Quelle ist ausschliesslich Wowhead (daten/bis-listen-phasen.json, erzeugt von
+# daten/scrape-bis-wowhead.py) - ausdrueckliche Vorgabe des Nutzers. Frueher lief
+# der DPS-Teil gegen warcrafttavern.com; die dort gemessenen Werte (58 % / 79 %)
+# sind mit den heutigen deshalb NICHT vergleichbar.
+#
+# Geprueft werden alle Phasen, fuer die eine Upgrade-Datei vorliegt.
+# Aufruf:  .\4-bis-check.ps1            (alle vorhandenen Phasen)
+#          .\4-bis-check.ps1 -Phasen 5  (nur eine)
+param([int[]]$Phasen = @(3, 4, 5))
+
 $ErrorActionPreference = "Stop"
 $base = $PSScriptRoot
 
-$dpsSpecs = [ordered]@{
- 'FURY'  = 'fury-warrior-dps-phase-3-best-in-slot-bis'
- 'ARMS'  = 'arms-warrior-dps-phase-3-best-in-slot-bis'
- 'RET'   = 'pve-retribution-paladin-phase-3-bis'
- 'ENH'   = 'pve-enhancement-shaman-phase-3-bis'
- 'ROGUE' = 'combat-rogue-pve-phase-3-best-in-slot-bis'
- 'HUNT'  = 'pve-beast-mastery-hunter-phase-3-bis'
- 'WLCK'  = 'pve-destruction-warlock-phase-3-bis'
- 'MAGE'  = 'arcane-mage-pve-phase-3-best-in-slot-bis'
- 'SPRI'  = 'pve-shadow-priest-phase-3-bis'
- 'ELE'   = 'pve-elemental-shaman-phase-3-bis'
- 'BAL'   = 'pve-balance-druid-phase-3-bis'
+$dpsSpecs      = @('FURY','ARMS','RET','ENH','ROGUE','HUNT','WLCK','MAGE','SPRI','ELE','BAL')
+$tankHealSpecs = @('PROT_PALA','FERAL_TANK','RESTO_SHAM','HOLY_PALA','RESTO_DRUID','HOLY_PRIEST')
+
+$phasenDatei = "$base\daten\bis-listen-phasen.json"
+if (-not (Test-Path $phasenDatei)) {
+    throw "bis-listen-phasen.json fehlt - erst 'python daten\scrape-bis-wowhead.py' laufen lassen."
 }
+$alleBis = Get-Content $phasenDatei -Raw -Encoding UTF8 | ConvertFrom-Json
 
-$tankHealSpecs = [ordered]@{
- 'PROT_PALA'   = 'Tank'
- 'FERAL_TANK'  = 'Tank'
- 'RESTO_SHAM'  = 'Heiler'
- 'HOLY_PALA'   = 'Heiler'
- 'RESTO_DRUID' = 'Heiler'
- 'HOLY_PRIEST' = 'Heiler'
-}
-
-$bisFile = "$base\daten\bis-listen.json"
-$bis = @{}
-if (Test-Path $bisFile) {
-    $raw = Get-Content $bisFile -Raw -Encoding UTF8 | ConvertFrom-Json
-    foreach ($p in $raw.PSObject.Properties) { $bis[$p.Name] = $p.Value }
-}
-
-$upg = Get-Content "$base\daten\upgrades.json" -Raw -Encoding UTF8 | ConvertFrom-Json
-$items = Get-Content "$base\daten\items.json" -Raw -Encoding UTF8 | ConvertFrom-Json
-$byId = @{}; foreach ($i in $items) { $byId[[string]$i.Id] = $i }
-
+# Prueft je Spec den besten Vorschlag pro Slot gegen die BiS-Liste.
+# Die Zaehler laufen ueber [ref]-Parameter, NICHT ueber den Rueckgabewert: eine
+# PowerShell-Funktion sammelt alles, was sie in die Pipeline schreibt, in ihren
+# Rueckgabewert ein - der Diagnosetext landete sonst in der Variablen statt auf
+# der Konsole (siehe AGENTS.md).
 function Show-BisBlock {
-    param($specKeys, $sortField, $unitFormat, [ref]$geprueft, [ref]$platz1, [ref]$top3)
+    param($bis, $upg, $specKeys, $sortField, $unitFormat, [ref]$geprueft, [ref]$platz1, [ref]$top3)
 
     foreach ($k in $specKeys) {
-        if (-not $bis.ContainsKey($k)) { Write-Output "$k : keine BiS-Daten"; continue }
-        $bl = $bis[$k]
+        if (-not $bis.PSObject.Properties[$k]) { Write-Output "$k : keine BiS-Daten"; continue }
+        $bl = $bis.$k
         if ($bl.Count -eq 0) { Write-Output "$k : keine BiS-Daten"; continue }
         $bisAll = @{}      # Id -> bester Rang
         foreach ($e in $bl) {
@@ -54,17 +42,14 @@ function Show-BisBlock {
         $mine = $upg | Where-Object { $_.SpecKey -eq $k -and -not $_.Unsicher -and -not $_.NichtBewertbar }
         if (-not $mine) { Write-Output "$k : keine Upgrades berechnet"; continue }
         Write-Output ("--- " + $k + " ---")
-        $grp = $mine | Group-Object Slot
-        foreach ($g in ($grp | Sort-Object Name)) {
+        foreach ($g in ($mine | Group-Object Slot | Sort-Object Name)) {
             $best = $g.Group | Sort-Object $sortField -Descending | Select-Object -First 1
             $sid = [string]$best.ItemId
             $rank = if ($bisAll.ContainsKey($sid)) { $bisAll[$sid] } else { -1 }
             $urteil = if ($rank -eq 0) { "BiS Platz 1" }
-                      elseif ($rank -gt 0) { "BiS Platz " + ($rank+1) }
+                      elseif ($rank -gt 0) { "BiS Platz " + ($rank + 1) }
                       else { "NICHT in BiS-Liste" }
-            $wert = $unitFormat -f $best.$sortField
-            Write-Output ("  {0,-12} {1,-38} {2,12}   {3}" -f $g.Name, $best.Item, $wert, $urteil)
-
+            Write-Output ("  {0,-12} {1,-38} {2,12}   {3}" -f $g.Name, $best.Item, ($unitFormat -f $best.$sortField), $urteil)
             $geprueft.Value++
             if ($rank -eq 0) { $platz1.Value++ }
             if ($rank -ge 0 -and $rank -le 2) { $top3.Value++ }
@@ -73,24 +58,46 @@ function Show-BisBlock {
     }
 }
 
-Write-Output "=== GEGENPROBE DPS: mein bester Vorschlag je Slot vs. BiS-Rang (warcrafttavern.com) ==="
-Write-Output ""
-$dpsGeprueft = 0; $dpsPlatz1 = 0; $dpsTop3 = 0
-Show-BisBlock -specKeys $dpsSpecs.Keys -sortField 'Delta' -unitFormat '{0:N1} DPS' -geprueft ([ref]$dpsGeprueft) -platz1 ([ref]$dpsPlatz1) -top3 ([ref]$dpsTop3)
+$zusammenfassung = @()
 
-Write-Output "=== GEGENPROBE TANK/HEILER: mein bester Vorschlag je Slot vs. BiS-Rang (Wowhead-Guides) ==="
-Write-Output ""
-$thGeprueft = 0; $thPlatz1 = 0; $thTop3 = 0
-Show-BisBlock -specKeys $tankHealSpecs.Keys -sortField 'Pct' -unitFormat '{0:N2} %' -geprueft ([ref]$thGeprueft) -platz1 ([ref]$thPlatz1) -top3 ([ref]$thTop3)
+foreach ($phase in $Phasen) {
+    $upgDatei = if ($phase -eq 3) { "upgrades.json" } else { "upgrades-p$phase.json" }
+    if (-not (Test-Path "$base\daten\$upgDatei")) {
+        Write-Output "Phase $phase uebersprungen - $upgDatei fehlt."
+        continue
+    }
+    if (-not $alleBis.PSObject.Properties["$phase"]) {
+        Write-Output "Phase $phase uebersprungen - kein Block in bis-listen-phasen.json."
+        continue
+    }
+    $bis = $alleBis."$phase"
+    $upg = Get-Content "$base\daten\$upgDatei" -Raw -Encoding UTF8 | ConvertFrom-Json
 
-Write-Output "=== ZUSAMMENFASSUNG ==="
-if ($dpsGeprueft -gt 0) {
-    $p1 = [math]::Round(100 * $dpsPlatz1 / $dpsGeprueft, 0)
-    $t3 = [math]::Round(100 * $dpsTop3 / $dpsGeprueft, 0)
-    Write-Output ("DPS         : {0} Empfehlungen - {1}% auf BiS-Platz 1 - {2}% in den BiS-Top-3" -f $dpsGeprueft, $p1, $t3)
+    Write-Output "############ PHASE $phase ############"
+    Write-Output ""
+    Write-Output "=== DPS: bester Vorschlag je Slot vs. BiS-Rang (Wowhead) ==="
+    Write-Output ""
+    $dG = 0; $dP = 0; $dT = 0
+    Show-BisBlock $bis $upg $dpsSpecs 'Delta' '{0:N1} DPS' ([ref]$dG) ([ref]$dP) ([ref]$dT)
+
+    Write-Output "=== TANK/HEILER: bester Vorschlag je Slot vs. BiS-Rang (Wowhead) ==="
+    Write-Output ""
+    $tG = 0; $tP = 0; $tT = 0
+    Show-BisBlock $bis $upg $tankHealSpecs 'Pct' '{0:N2} %' ([ref]$tG) ([ref]$tP) ([ref]$tT)
+
+    $zusammenfassung += [pscustomobject]@{
+        Phase = $phase; Gruppe = 'DPS';         Geprueft = $dG; Platz1 = $dP; Top3 = $dT
+    }
+    $zusammenfassung += [pscustomobject]@{
+        Phase = $phase; Gruppe = 'Tank/Heiler'; Geprueft = $tG; Platz1 = $tP; Top3 = $tT
+    }
 }
-if ($thGeprueft -gt 0) {
-    $p1 = [math]::Round(100 * $thPlatz1 / $thGeprueft, 0)
-    $t3 = [math]::Round(100 * $thTop3 / $thGeprueft, 0)
-    Write-Output ("Tank/Heiler : {0} Empfehlungen - {1}% auf BiS-Platz 1 - {2}% in den BiS-Top-3" -f $thGeprueft, $p1, $t3)
+
+Write-Output "=== ZUSAMMENFASSUNG (Quelle: Wowhead) ==="
+foreach ($z in $zusammenfassung) {
+    if ($z.Geprueft -le 0) { continue }
+    $p1 = [math]::Round(100 * $z.Platz1 / $z.Geprueft, 0)
+    $t3 = [math]::Round(100 * $z.Top3   / $z.Geprueft, 0)
+    Write-Output ("Phase {0}  {1,-12}: {2,3} Empfehlungen - {3,3}% auf BiS-Platz 1 - {4,3}% in den BiS-Top-3" -f `
+        $z.Phase, $z.Gruppe, $z.Geprueft, $p1, $t3)
 }

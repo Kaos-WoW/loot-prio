@@ -134,9 +134,28 @@ wurde per Prüfsumme nachgewiesen, damit die laufende Phase-3-Seite von der Erwe
 berührt wird. `5-build-payload.ps1` nimmt Phase 4 und 5 nur auf, wenn ihre Dateien existieren;
 fehlen sie, entsteht die Seite von vorher ganz ohne Umschaltleiste.
 
-⚠️ **Der Abgleichswert (79 % / 90 %) ist nur für Phase 3 gemessen.** Für Phase 4 und 5 gibt es noch
-keine Gegenprobe — `4-bis-check.ps1` prüft weiterhin nur Phase 3. Auf der Seite ist der Wert
-entsprechend als „(Phase 3)" gekennzeichnet.
+### Gegenprobe je Phase
+
+`4-bis-check.ps1` prüft inzwischen **alle Phasen** und ausschließlich gegen **Wowhead**
+(`.\4-bis-check.ps1 -Phasen 5` für eine einzelne). Stand 2026-08-10:
+
+| Phase | DPS: Platz 1 / Top 3 | Tank/Heiler: Platz 1 / Top 3 |
+|---|---|---|
+| 3 | 60 % / 81 % | 77 % / 90 % |
+| 4 | 49 % / 61 % | 80 % / 90 % |
+| 5 | 54 % / 64 % | 76 % / 92 % |
+
+⚠️ **Die niedrigere DPS-Quote in Phase 4 und 5 ist kein Defekt**, sondern der oben beschriebene
+Effekt in verstärkter Form: Die Guides optimieren für einen Charakter, der die jeweilige Phase
+bereits trägt. Unsere Raider stecken in Phase-3-Ausrüstung, für sie sind andere Teile die größten
+Sprünge. Nachgemessen: In Phase 4 sind **23 der 49 Abweichungen Marken-Items** (für einen
+P3-Charakter echte Upgrades, für einen P4-Charakter längst überholt), in Phase 5 überwiegend
+Sunwell-Raid-Teile. Als **Änderungsdetektor je Phase** bleibt die Zahl trotzdem brauchbar — ein
+plötzlicher Einbruch deutet weiterhin auf einen echten Fehler hin.
+
+Die früher dokumentierten 58 % / 79 % (Phase 3) stammen von warcrafttavern.com. Seit dem Wechsel
+auf Wowhead sind es 60 % / 81 % — praktisch derselbe Wert, was für die Belastbarkeit beider
+Quellen spricht, aber streng genommen nicht vergleichbar.
 
 ⚠️ **Sunwell-Schmuckstücke sind noch nicht bewertet.** 33 Zeilen in Phase 5 (Naaru-Splitter u. a.)
 stehen als „nicht bewertbar", weil weder simulierte Werte noch ein Näherungseintrag vorliegen.
