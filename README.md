@@ -141,9 +141,9 @@ fehlen sie, entsteht die Seite von vorher ganz ohne Umschaltleiste.
 
 | Phase | DPS: Platz 1 / Top 3 | Tank/Heiler: Platz 1 / Top 3 |
 |---|---|---|
-| 3 | 60 % / 81 % | 77 % / 90 % |
+| 3 | 59 % / 81 % | 77 % / 90 % |
 | 4 | 49 % / 61 % | 80 % / 90 % |
-| 5 | 54 % / 64 % | 76 % / 92 % |
+| 5 | 55 % / 65 % | 76 % / 92 % |
 
 ⚠️ **Die niedrigere DPS-Quote in Phase 4 und 5 ist kein Defekt**, sondern der oben beschriebene
 Effekt in verstärkter Form: Die Guides optimieren für einen Charakter, der die jeweilige Phase
@@ -157,9 +157,17 @@ Die früher dokumentierten 58 % / 79 % (Phase 3) stammen von warcrafttavern.com.
 auf Wowhead sind es 60 % / 81 % — praktisch derselbe Wert, was für die Belastbarkeit beider
 Quellen spricht, aber streng genommen nicht vergleichbar.
 
-⚠️ **Sunwell-Schmuckstücke sind noch nicht bewertet.** 33 Zeilen in Phase 5 (Naaru-Splitter u. a.)
-stehen als „nicht bewertbar", weil weder simulierte Werte noch ein Näherungseintrag vorliegen.
-Dafür müsste `6-trinket-sim.py` gegen den Phase-5-Pool laufen.
+**Schmuckstücke späterer Phasen** werden mit `python 6-trinket-sim.py --phase 5` simuliert (ohne
+`--phase` weiterhin Phase 3). Die Ergebnisdatei `daten/trinket-werte.json` ist gemeinsam und wird
+ergänzt, ein Phase-5-Lauf wirft die Phase-3-Werte also nicht weg. Nach dem Lauf für Phase 5 sind
+alle DPS-Schmuckstücke bewertet; es bleiben 13 Zeilen „nicht bewertbar", ausschließlich **Tank und
+Heiler** — für die simuliert das Werkzeug grundsätzlich nicht und die Näherung kennt diese neuen
+Gegenstände nicht.
+
+⚠️ **Zwei Simulationen dürfen nicht gleichzeitig laufen.** Die Ein-/Ausgabedateien der WoWSims-CLI
+liegen im Temp-Verzeichnis; sie tragen seit 2026-08-10 die Prozessnummer im Namen, vorher hießen sie
+fest und zwei parallele Läufe löschten sich gegenseitig das Ergebnis. Der Abbruch sieht dabei
+irreführend aus: die CLI meldet „All 16 sims finished successfully", trotzdem fehlt die Ausgabedatei.
 
 ---
 
