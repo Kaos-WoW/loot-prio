@@ -220,17 +220,26 @@ function Value-Item($stats, $spec, $slotKind, $playerName=$null) {
         foreach ($k in $spec.W.Keys) {
             $simVal = & $holen $k
 
-            # Sicherheitsnetz für Cap-Stats: Um den "De-gearing"-Effekt zu verhindern, dürfen
-            # Waffenkunde, Trefferwertung und Zaubertrefferwertung niemals unter ihr statisches
-            # "Below-Cap"-Gewicht fallen - dieses aber auf die Skala des Spielers umgerechnet.
-            if ($k -eq 'Treffer' -or $k -eq 'Waffk' -or $k -eq 'ZTreffer') {
-                $w[$k] = [math]::Max($simVal, [double]$spec.W[$k] * $skala)
+            # ★ Cap-Schutz: greift NUR, wenn die Messung nichts aussagt.
+            #
+            # Frueher stand hier fuer Treffer/Waffk/ZTreffer ein Max() gegen das skalierte
+            # Preset. Das ueberschrieb auch dann, wenn die Sim einen ehrlichen, bloss
+            # niedrigen Wert gemessen hatte - der Spieler war gar nicht am Cap, bekam aber
+            # trotzdem das generische Vorgabegewicht. Folge: Gegenstaende MIT Trefferwertung
+            # wurden pauschal ueberbewertet. Bei Lariesel (Magierin, ZTreffer gemessen 0,353)
+            # hob der Schutz auf 1,33 an; damit bekam Tempest of Chaos aus dem Black Temple
+            # 22,6 statt 6,0 Punkte und schlug die hoeherwertige Sunwell-Waffe Sunflare.
+            #
+            # Die Sim klemmt negative Gewichte auf exakt 0. Genau dann - und nur dann - ist
+            # der Stat am Cap und die Messung traegt keine Information; dort schuetzt das
+            # skalierte Preset weiter vor De-gearing. Jeder Wert > 0 ist die gemessene
+            # Grenzbewertung fuer DIESEN Spieler und gilt unveraendert.
+            #
+            # Damit gilt fuer alle Stats dieselbe Regel - der Sonderfall entfaellt.
+            if ($simVal -le 0.0) {
+                $w[$k] = [double]$spec.W[$k] * $skala   # Fallback bzw. Cap-Schutz, skaliert
             } else {
-                if ($simVal -le 0.0) {
-                    $w[$k] = [double]$spec.W[$k] * $skala   # Fallback, ebenfalls skaliert
-                } else {
-                    $w[$k] = $simVal
-                }
+                $w[$k] = $simVal
             }
         }
     }

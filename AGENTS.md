@@ -82,11 +82,26 @@ python 7-stat-gewichte.py
   des echten Typs aus dem Wowhead-Tooltip ein.
 * **Stat-Gewichte (wowsims.com):** Immer die absolute „DPS Weight“ (Gewinn pro Statpunkt) verwenden,
   niemals die relative „DPS EP“ — letztere ist nicht klassenübergreifend vergleichbar.
-* **Cap-Stat-Abwärtsspirale (De-gearing):** Wird ein Spieler am Hit- oder Expertise-Cap simuliert bzw.
-  mit einem statischen Preset am Cap bewertet, fällt das Gewicht für diesen Stat fast auf 0 — die Formel
-  will dann faelschlich Cap-Gear ablegen. Lösung: Gewichte für `Treffer`, `Waffk` und `ZTreffer` dürfen
-  in `Value-Item` (`3-compute.ps1`) nie unter ihr statisches „Below-Cap“-Gewicht fallen (z. B. RET
-  Treffer = 1.20, Waffk = 1.69 statt 0).
+* **★★ Cap-Stat-Abwärtsspirale (De-gearing) — der Schutz greift NUR bei gemessener Null.**
+  Wird ein Spieler am Hit- oder Waffenkunde-Cap simuliert, fällt das Gewicht für diesen Stat auf 0 —
+  die Formel will dann fälschlich Cap-Gear ablegen. Dagegen setzt `Value-Item` (`3-compute.ps1`) das
+  auf die Spielerskala umgerechnete Preset-Gewicht ein.
+  ⚠️ **Bis 2026-08-10 lief das als `Max(simVal, preset*skala)`** und überschrieb damit auch ehrlich
+  gemessene, bloß niedrige Werte — der Spieler war gar nicht am Cap, bekam aber trotzdem das
+  generische Gewicht. Gegenstände **mit** Trefferwertung wurden dadurch pauschal überbewertet:
+  Lariesel (Magierin, ZTreffer gemessen **0,353**) bekam den Schutzwert **1,33** aufgedrückt, wodurch
+  *Tempest of Chaos* (BT, i151) mit 22,6 statt 6,0 Punkten die höherwertige Sunwell-Waffe *Sunflare*
+  (i164) schlug.
+  **Die Sim klemmt negative Gewichte auf exakt 0** — genau dann, und nur dann, trägt die Messung
+  keine Information. Jeder Wert > 0 ist die Grenzbewertung für DIESEN Spieler und gilt unverändert.
+  Damit gilt für alle Stats dieselbe Regel, der Sonderfall für `Treffer`/`Waffk`/`ZTreffer` ist weg.
+  **Wirkung, über die Gegenprobe gemessen:** DPS Phase 3 von 61/81 % auf **70/86 %**, Phase 4 von
+  52/63 % auf **59/69 %**, Phase 5 von 56/66 % auf **68/79 %**. Tank/Heiler unverändert (nutzen keine
+  simulierten Gewichte).
+  ⚠️ Die eigentlich saubere Lösung wäre eine Stufenfunktion aus dem echten Gear („würde dieser Tausch
+  mich unter den Cap drücken?"). Sie scheitert derzeit daran, dass `daten/players.json` nur
+  Slot → Item-ID speichert: **Sockel und Verzauberungen fehlen**, die Cap-Summe wäre also
+  systematisch zu niedrig. Die Armory liefert beides, `2-fetch-gear.ps1` verwirft es nur.
 * **Waffentempo-Normierung:** Da in TBC fast alle physischen Spezialangriffe (Mortal Strike, Stormstrike, Sinister Strike) normiert sind, wird die Waffentempo-Normierung in `Value-Item` (`3-compute.ps1`) nur für **RET-Paladine** (wegen Crusader Strike / Seal of Blood) angewendet, und zwar **linear** (`speed / normSpeed`) statt quadratisch, um eine krasse Überbewertung langsamer Waffen (wie *Torch of the Damned* vs. *Cataclysm's Edge* bei Arms) zu verhindern.
 * **Bereits ausgerüstete Items (alreadyEquipped):** Damit Spieler, die ein Item bereits tragen, das in ihrer BiS-Liste steht, auf der Seite als „Bereits ausgerüstet“ gelistet werden, trackt `3-compute.ps1` die getragenen Item-IDs in `$wornIds` (der alte Check lief fälschlich gegen die stats-Hashtable) und schreibt diese Zeilen mit `Delta = 0.0` in `upgrades.json` (sowohl für DPS- als auch für Tank/Heilspezialisierungen).
 * **Plausibilitäts-Check (Hashtables):** Die Funktion `Get-GearScore` in `2-fetch-gear.ps1` prüft live abgerufene Ausrüstung (die als `Hashtables` vorliegt) sowie gespeicherte Ausrüstung aus `players.json` (die als `PSCustomObjects` geladen wird). Sie iteriert universell über die Keys, um Rechenfehler (die den PvP/Offspec-Schutz durch 0-Wertungen umgehen würden) zu verhindern.

@@ -142,9 +142,9 @@ fehlen sie, entsteht die Seite von vorher ganz ohne Umschaltleiste.
 
 | Phase | DPS: Platz 1 / Top 3 | Tank/Heiler: Platz 1 / Top 3 |
 |---|---|---|
-| 3 | 61 % / 81 % | 77 % / 90 % |
-| 4 | 52 % / 63 % | 80 % / 90 % |
-| 5 | 56 % / 66 % | 76 % / 92 % |
+| 3 | 70 % / 86 % | 77 % / 90 % |
+| 4 | 59 % / 69 % | 80 % / 90 % |
+| 5 | 68 % / 79 % | 76 % / 92 % |
 
 ⚠️ **Die niedrigere DPS-Quote in Phase 4 und 5 ist kein Defekt**, sondern der oben beschriebene
 Effekt in verstärkter Form: Die Guides optimieren für einen Charakter, der die jeweilige Phase
@@ -385,7 +385,7 @@ Tanks und Heiler.
 prozentualen Zuwachs `Pct`, da `Delta` dort rollenübergreifend nicht vergleichbar ist. Die aktuellen
 Werte je Phase stehen weiter oben unter „Gegenprobe je Phase". Zur Einordnung des Phase-3-Werts:
 
-- **DPS: 160 Empfehlungen · 61 % auf BiS-Platz 1 · 81 % in den BiS-Top-3.** Die nicht gelisteten
+- **DPS: 160 Empfehlungen · 70 % auf BiS-Platz 1 · 86 % in den BiS-Top-3.** Die nicht gelisteten
   Empfehlungen sind ausnahmslos Marken- und Trash-Items, die diese Guides gar nicht führen.
 - **Tank/Heiler: 70 Empfehlungen · 77 % auf BiS-Platz 1 · 90 % in den BiS-Top-3.** Der höhere Wert ist
   erwartbar: Tank/Heiler-Empfehlungen sind bereits gegen dieselbe BiS-Liste gegatet (s. o.), ein
