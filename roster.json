@@ -4,6 +4,10 @@
         "spec":  "PROT_PALA"
     },
     {
+        "name":  "Moriamus",
+        "spec":  "ARMS"
+    },
+    {
         "name":  "Grotschak",
         "spec":  "FURY"
     },
@@ -12,8 +16,8 @@
         "spec":  "HUNT"
     },
     {
-        "name":  "Moriamus",
-        "spec":  "ARMS"
+        "name":  "Valiror",
+        "spec":  "FURY"
     },
     {
         "name":  "Kaosx",
@@ -24,8 +28,12 @@
         "spec":  "PROT_PALA"
     },
     {
-        "name":  "Valiror",
-        "spec":  "FURY"
+        "name":  "Chilini",
+        "spec":  "ENH"
+    },
+    {
+        "name":  "Mìlla",
+        "spec":  "HOLY_PRIEST"
     },
     {
         "name":  "Deters",
@@ -44,20 +52,12 @@
         "spec":  "RESTO_SHAM"
     },
     {
-        "name":  "Chilini",
-        "spec":  "ENH"
-    },
-    {
         "name":  "Supfreshyo",
         "spec":  "FERAL_TANK"
     },
     {
         "name":  "Sandycheekz",
         "spec":  "ROGUE"
-    },
-    {
-        "name":  "Mìlla",
-        "spec":  "HOLY_PRIEST"
     },
     {
         "name":  "Discusting",
@@ -88,6 +88,10 @@
         "spec":  "WLCK"
     },
     {
+        "name":  "Exfreya",
+        "spec":  "BAL"
+    },
+    {
         "name":  "Empathic",
         "spec":  "HOLY_PRIEST"
     },
@@ -98,10 +102,6 @@
     {
         "name":  "Exotica",
         "spec":  "ELE"
-    },
-    {
-        "name":  "Exfreya",
-        "spec":  "BAL"
     },
     {
         "name":  "Erikadirk",
