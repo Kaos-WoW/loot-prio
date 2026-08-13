@@ -97,7 +97,15 @@ def klassenbindung(tooltip):
     ABSTUERZEN (z.B. Serpent-Coil Braid am Paladin -> 'not mage.MageAgent'). Diese Zeilen
     muessen also vorher aussortiert werden, nicht erst im Fehlerfall.
     """
-    m = re.search(r"Classes:\s*([A-Za-z, ]+)", re.sub(r"<[^>]+>", " ", tooltip or ""))
+    # ⚠️ Das Muster darf NICHT [A-Za-z, ]+ sein. Die HTML-Tags werden vorher durch
+    # Leerzeichen ersetzt, damit fehlt die Grenze und der Ausdruck frisst den
+    # Folgetext mit: aus "Classes: Mage" wurde
+    # {'Mage        Requires  Ashtongue Deathsworn'}. Da "Mage" darin nicht als
+    # eigener Eintrag steht, wurde das Schmuckstueck AUCH FUER DIE RICHTIGE KLASSE
+    # uebersprungen - kein klassengebundenes Schmuckstueck war je simuliert.
+    # Klassennamen sind in TBC durchweg ein Wort, mehrere durch Komma getrennt.
+    m = re.search(r"Classes:\s*([A-Za-z]+(?:\s*,\s*[A-Za-z]+)*)",
+                  re.sub(r"<[^>]+>", " ", tooltip or ""))
     if not m:
         return None
     return {k.strip() for k in m.group(1).split(",") if k.strip()}
