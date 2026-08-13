@@ -144,7 +144,7 @@ fehlen sie, entsteht die Seite von vorher ganz ohne Umschaltleiste.
 |---|---|---|
 | 3 | 71 % / 86 % | 77 % / 90 % |
 | 4 | 59 % / 69 % | 80 % / 90 % |
-| 5 | 73 % / 80 % | 82 % / 94 % |
+| 5 | 73 % / 82 % | 86 % / 94 % |
 
 ⚠️ **Die niedrigere DPS-Quote in Phase 4 und 5 ist kein Defekt**, sondern der oben beschriebene
 Effekt in verstärkter Form: Die Guides optimieren für einen Charakter, der die jeweilige Phase

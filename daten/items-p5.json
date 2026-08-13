@@ -8983,6 +8983,354 @@
                   }
     },
     {
+        "Id":  34358,
+        "Name":  "Hard Khorium Choker",
+        "Boss":  "Handwerk",
+        "Quelle":  "Handwerk",
+        "Ilvl":  159,
+        "Phase":  "Phase 5",
+        "Slot":  "Neck",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  42,
+                      "ArP":  150,
+                      "Sockel":  1,
+                      "AP":  58,
+                      "Tempo":  29
+                  }
+    },
+    {
+        "Id":  34359,
+        "Name":  "Pendant of Sunfire",
+        "Boss":  "Handwerk",
+        "Quelle":  "Handwerk",
+        "Ilvl":  159,
+        "Phase":  "Phase 5",
+        "Slot":  "Neck",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "SP":  34,
+                      "Sta":  27,
+                      "ZKrit":  25,
+                      "Sockel":  1,
+                      "ZTempo":  25,
+                      "Int":  19
+                  }
+    },
+    {
+        "Id":  34360,
+        "Name":  "Amulet of Flowing Life",
+        "Boss":  "Handwerk",
+        "Quelle":  "Handwerk",
+        "Ilvl":  159,
+        "Phase":  "Phase 5",
+        "Slot":  "Neck",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  27,
+                      "Sockel":  1,
+                      "mp5":  10,
+                      "ZTempo":  25,
+                      "Int":  19,
+                      "Heil":  64
+                  }
+    },
+    {
+        "Id":  34361,
+        "Name":  "Hard Khorium Band",
+        "Boss":  "Handwerk",
+        "Quelle":  "Handwerk",
+        "Ilvl":  159,
+        "Phase":  "Phase 5",
+        "Slot":  "Finger",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  42,
+                      "Agi":  30,
+                      "Sockel":  0,
+                      "AP":  58,
+                      "Tempo":  28
+                  }
+    },
+    {
+        "Id":  34362,
+        "Name":  "Loop of Forged Power",
+        "Boss":  "Handwerk",
+        "Quelle":  "Handwerk",
+        "Ilvl":  159,
+        "Phase":  "Phase 5",
+        "Slot":  "Finger",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "SP":  34,
+                      "Sta":  27,
+                      "Sockel":  0,
+                      "Int":  28,
+                      "ZTempo":  30,
+                      "ZTreffer":  19
+                  }
+    },
+    {
+        "Id":  34363,
+        "Name":  "Ring of Flowing Life",
+        "Boss":  "Handwerk",
+        "Quelle":  "Handwerk",
+        "Ilvl":  159,
+        "Phase":  "Phase 5",
+        "Slot":  "Finger",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  27,
+                      "Sockel":  0,
+                      "mp5":  8,
+                      "ZTempo":  30,
+                      "Int":  28,
+                      "Heil":  64
+                  }
+    },
+    {
+        "Id":  34364,
+        "Name":  "Sunfire Robe",
+        "Boss":  "Handwerk",
+        "Quelle":  "Handwerk",
+        "Ilvl":  159,
+        "Phase":  "Phase 5",
+        "Slot":  "Chest",
+        "Armor":  "Cloth",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "SP":  71,
+                      "Sta":  36,
+                      "ZKrit":  40,
+                      "Sockel":  3,
+                      "ZTempo":  40,
+                      "Int":  34
+                  }
+    },
+    {
+        "Id":  34365,
+        "Name":  "Robe of Eternal Light",
+        "Boss":  "Handwerk",
+        "Quelle":  "Handwerk",
+        "Ilvl":  159,
+        "Phase":  "Phase 5",
+        "Slot":  "Chest",
+        "Armor":  "Cloth",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  36,
+                      "Sockel":  3,
+                      "mp5":  16,
+                      "ZTempo":  40,
+                      "Int":  34,
+                      "Heil":  134
+                  }
+    },
+    {
+        "Id":  34367,
+        "Name":  "Hands of Eternal Light",
+        "Boss":  "Handwerk",
+        "Quelle":  "Handwerk",
+        "Ilvl":  159,
+        "Phase":  "Phase 5",
+        "Slot":  "Hands",
+        "Armor":  "Cloth",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  33,
+                      "Heil":  99,
+                      "Sockel":  2,
+                      "Int":  30,
+                      "Spi":  40
+                  }
+    },
+    {
+        "Id":  34369,
+        "Name":  "Carapace of Sun and Shadow",
+        "Boss":  "Handwerk",
+        "Quelle":  "Handwerk",
+        "Ilvl":  159,
+        "Phase":  "Phase 5",
+        "Slot":  "Chest",
+        "Armor":  "Leather",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Agi":  42,
+                      "Sta":  45,
+                      "Treffer":  30,
+                      "Sockel":  3,
+                      "Tempo":  38,
+                      "AP":  120
+                  }
+    },
+    {
+        "Id":  34370,
+        "Name":  "Gloves of Immortal Dusk",
+        "Boss":  "Handwerk",
+        "Quelle":  "Handwerk",
+        "Ilvl":  159,
+        "Phase":  "Phase 5",
+        "Slot":  "Hands",
+        "Armor":  "Leather",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Agi":  30,
+                      "Krit":  30,
+                      "Sta":  33,
+                      "Sockel":  2,
+                      "ArP":  154,
+                      "AP":  90
+                  }
+    },
+    {
+        "Id":  34371,
+        "Name":  "Leather Chestguard of the Sun",
+        "Boss":  "Handwerk",
+        "Quelle":  "Handwerk",
+        "Ilvl":  159,
+        "Phase":  "Phase 5",
+        "Slot":  "Chest",
+        "Armor":  "Leather",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  48,
+                      "Sockel":  3,
+                      "mp5":  13,
+                      "Spi":  33,
+                      "Int":  41,
+                      "Heil":  134
+                  }
+    },
+    {
+        "Id":  34372,
+        "Name":  "Leather Gauntlets of the Sun",
+        "Boss":  "Handwerk",
+        "Quelle":  "Handwerk",
+        "Ilvl":  159,
+        "Phase":  "Phase 5",
+        "Slot":  "Hands",
+        "Armor":  "Leather",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  25,
+                      "Sockel":  2,
+                      "ZTempo":  38,
+                      "Spi":  33,
+                      "Int":  26,
+                      "Heil":  84
+                  }
+    },
+    {
+        "Id":  34375,
+        "Name":  "Sun-Drenched Scale Chestguard",
+        "Boss":  "Handwerk",
+        "Quelle":  "Handwerk",
+        "Ilvl":  159,
+        "Phase":  "Phase 5",
+        "Slot":  "Chest",
+        "Armor":  "Mail",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  48,
+                      "Sockel":  3,
+                      "mp5":  10,
+                      "ZTempo":  40,
+                      "Int":  41,
+                      "Heil":  134
+                  }
+    },
+    {
+        "Id":  34377,
+        "Name":  "Hard Khorium Battleplate",
+        "Boss":  "Handwerk",
+        "Quelle":  "Handwerk",
+        "Ilvl":  159,
+        "Phase":  "Phase 5",
+        "Slot":  "Chest",
+        "Armor":  "Plate",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  55,
+                      "ArP":  280,
+                      "Str":  61,
+                      "Krit":  41,
+                      "Sockel":  3
+                  }
+    },
+    {
+        "Id":  34380,
+        "Name":  "Sunblessed Gauntlets",
+        "Boss":  "Handwerk",
+        "Quelle":  "Handwerk",
+        "Ilvl":  159,
+        "Phase":  "Phase 5",
+        "Slot":  "Hands",
+        "Armor":  "Plate",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sta":  33,
+                      "ZKrit":  36,
+                      "mp5":  8,
+                      "Sockel":  2,
+                      "Int":  31,
+                      "Heil":  84
+                  }
+    },
+    {
         "Id":  34382,
         "Name":  "Judicator\u0027s Legguards",
         "Boss":  "Haendler (Sonstige)",
@@ -12715,6 +13063,24 @@
                       "Sockel":  0,
                       "Int":  22,
                       "Spi":  32
+                  }
+    },
+    {
+        "Id":  35750,
+        "Name":  "Redeemer\u0027s Alchemist Stone",
+        "Boss":  "Handwerk",
+        "Quelle":  "Handwerk",
+        "Ilvl":  125,
+        "Phase":  "Phase 5",
+        "Slot":  "Trinket",
+        "Armor":  "",
+        "Classes":  "",
+        "WeaponType":  "",
+        "FormOnly":  false,
+        "SlotCode":  -1,
+        "Stats":  {
+                      "Sockel":  0,
+                      "Heil":  119
                   }
     }
 ]

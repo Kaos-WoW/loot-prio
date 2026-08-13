@@ -2297,5 +2297,160 @@
    "Ilvl": 0,
    "Quelle": "Haendler"
   }
+ ],
+ "Handwerk": [
+  {
+   "Id": 34377,
+   "Name": "Hard Khorium Battleplate",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Handwerk"
+  },
+  {
+   "Id": 34370,
+   "Name": "Gloves of Immortal Dusk",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Handwerk"
+  },
+  {
+   "Id": 34358,
+   "Name": "Hard Khorium Choker",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Handwerk"
+  },
+  {
+   "Id": 34361,
+   "Name": "Hard Khorium Band",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Handwerk"
+  },
+  {
+   "Id": 34364,
+   "Name": "Sunfire Robe",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Handwerk"
+  },
+  {
+   "Id": 34359,
+   "Name": "Pendant of Sunfire",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Handwerk"
+  },
+  {
+   "Id": 34362,
+   "Name": "Loop of Forged Power",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Handwerk"
+  },
+  {
+   "Id": 34369,
+   "Name": "Carapace of Sun and Shadow",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Handwerk"
+  },
+  {
+   "Id": 34380,
+   "Name": "Sunblessed Gauntlets",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Handwerk"
+  },
+  {
+   "Id": 34360,
+   "Name": "Amulet of Flowing Life",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Handwerk"
+  },
+  {
+   "Id": 34363,
+   "Name": "Ring of Flowing Life",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Handwerk"
+  },
+  {
+   "Id": 35750,
+   "Name": "Redeemer's Alchemist Stone",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Handwerk"
+  },
+  {
+   "Id": 34365,
+   "Name": "Robe of Eternal Light",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Handwerk"
+  },
+  {
+   "Id": 34371,
+   "Name": "Leather Chestguard of the Sun",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Handwerk"
+  },
+  {
+   "Id": 34372,
+   "Name": "Leather Gauntlets of the Sun",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Handwerk"
+  },
+  {
+   "Id": 34367,
+   "Name": "Hands of Eternal Light",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Handwerk"
+  },
+  {
+   "Id": 34375,
+   "Name": "Sun-Drenched Scale Chestguard",
+   "SlotCode": -1,
+   "ClassCode": -1,
+   "SubCode": -99,
+   "Ilvl": 0,
+   "Quelle": "Handwerk"
+  }
  ]
 }

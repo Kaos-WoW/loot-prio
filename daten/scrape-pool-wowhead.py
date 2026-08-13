@@ -180,7 +180,11 @@ def quelle_bestimmen(item_id):
     m = re.search(r"<title>(.*?)\s*-\s*(?:Item|Gegenstand)", roh)
     if m:
         name = m.group(1).strip()
-    if listview(roh, "created-by"):
+    # ⚠️ Die Liste heisst "created-by-spell", NICHT "created-by". Da listview() mit
+    # dem schliessenden Anführungszeichen sucht, hat die kurze Form nie getroffen -
+    # und weil ein Fehlschlag hier bloss "keine Quelle" bedeutete, fielen die
+    # Handwerksitems still durch (Hard Khorium Choker, Sunfire Robe u. a.).
+    if listview(roh, "created-by-spell") or listview(roh, "created-by"):
         return "Handwerk", "Handwerk"
     verkauf = listview(roh, "sold-by")
     if verkauf:
