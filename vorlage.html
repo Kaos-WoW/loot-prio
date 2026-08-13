@@ -678,14 +678,13 @@ const DATA = "__DATEN__";
 const PHASEN = (DATA.phasen && DATA.phasen.length) ? DATA.phasen.slice() : [3];
 const PHASEN_NAME = { 3: 'Hyjal & Black Temple', 4: "Zul'Aman", 5: 'Sunwell' };
 
-// Ergebnis von 4-bis-check.ps1 je Phase (Quelle: Wowhead, Stand 2026-08-10).
-// Von Hand gepflegt - nach jedem Lauf des Skripts hier nachziehen.
-// [Empfehlungen, % Platz 1, % Top 3]
-const ABGLEICH = {
-  3: { dps: [160, 70, 86], th: [70, 77, 90] },
-  4: { dps: [165, 59, 69], th: [70, 80, 90] },
-  5: { dps: [168, 68, 79], th: [71, 76, 92] },
-};
+// Ergebnis von 4-bis-check.ps1 je Phase, Quelle Wowhead. Kommt aus der Nutzlast
+// (daten/bis-check.json), wird also bei jedem Lauf des Pruefskripts automatisch
+// mitgezogen. Frueher standen diese Zahlen hier fest verdrahtet UND in der README -
+// drei Stellen, die zwangslaeufig auseinanderlaufen.
+// Form je Phase: [Anzahl Empfehlungen, % Platz 1, % Top 3]
+const ABGLEICH = (DATA.abgleich && DATA.abgleich.phasen) ? DATA.abgleich.phasen : {};
+const ABGLEICH_STAND = (DATA.abgleich && DATA.abgleich.stand) ? DATA.abgleich.stand : null;
 
 function abgleichSetzen(ph) {
   const a = ABGLEICH[ph];
@@ -703,7 +702,8 @@ function abgleichSetzen(ph) {
     `${a.dps[1]} % auf Platz 1 (${a.dps[0]} geprüfte Empfehlungen).<br>` +
     `<b>Phase ${ph} — Tank und Heiler:</b> ${a.th[2]} % in den Top 3, ${a.th[1]} % auf Platz 1 ` +
     `(${a.th[0]} Empfehlungen). Der höhere Wert ist erwartbar, weil diese Rollen ohnehin gegen ` +
-    `dieselbe BiS-Liste gegatet werden.`;
+    `dieselbe BiS-Liste gegatet werden.` +
+    (ABGLEICH_STAND ? `<br><span class="muted">Gemessen am ${esc(ABGLEICH_STAND)}.</span>` : '');
 }
 
 function phaseLesen() {

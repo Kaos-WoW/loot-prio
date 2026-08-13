@@ -277,9 +277,21 @@ if (Test-Path $plFile) {
     }
 }
 
+# Abgleichswerte aus dem letzten Lauf von 4-bis-check.ps1. Fehlt die Datei, zeigt die
+# Seite "nicht gemessen" statt veralteter Zahlen - das ist ehrlicher als ein Platzhalter.
+$abgleich = $null
+$abgleichDatei = "$base\daten\bis-check.json"
+if (Test-Path $abgleichDatei) {
+    $abgleich = Get-Content $abgleichDatei -Raw -Encoding UTF8 | ConvertFrom-Json
+    Write-Output ("Abgleichswerte uebernommen (Stand " + $abgleich.stand + ")")
+} else {
+    Write-Warning "daten/bis-check.json fehlt - die Seite zeigt keine Abgleichswerte. Erst .\4-bis-check.ps1 laufen lassen."
+}
+
 $payload = [pscustomobject]@{
     stand     = (Get-Date -Format "yyyy-MM-dd")
     phasen    = @($phasen)
+    abgleich  = $abgleich
     rows      = $alleRows
     roster    = @($roster | ForEach-Object { [pscustomobject]@{ name=$_.name; spec=$_.spec } })
     gear      = $gearMap

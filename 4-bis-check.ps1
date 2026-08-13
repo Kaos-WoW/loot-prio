@@ -101,3 +101,25 @@ foreach ($z in $zusammenfassung) {
     Write-Output ("Phase {0}  {1,-12}: {2,3} Empfehlungen - {3,3}% auf BiS-Platz 1 - {4,3}% in den BiS-Top-3" -f `
         $z.Phase, $z.Gruppe, $z.Geprueft, $p1, $t3)
 }
+
+# ★ Ergebnis auch als Datei ablegen. 5-build-payload.ps1 nimmt sie in die Nutzlast auf,
+# damit die Seite IMMER die zuletzt gemessenen Werte zeigt. Vorher standen die Zahlen
+# von Hand gepflegt in vorlage.html und in der README - drei Stellen, die zwangslaeufig
+# auseinanderlaufen. Wer 4-bis-check laufen laesst, aktualisiert damit automatisch auch
+# die Anzeige; nur die README bleibt Handarbeit.
+$ausgabe = [ordered]@{ stand = (Get-Date -Format "yyyy-MM-dd"); phasen = [ordered]@{} }
+foreach ($z in $zusammenfassung) {
+    if ($z.Geprueft -le 0) { continue }
+    $k = [string]$z.Phase
+    if (-not $ausgabe.phasen.Contains($k)) { $ausgabe.phasen[$k] = [ordered]@{} }
+    $feld = if ($z.Gruppe -eq 'DPS') { 'dps' } else { 'th' }
+    $ausgabe.phasen[$k][$feld] = @(
+        $z.Geprueft,
+        [int][math]::Round(100 * $z.Platz1 / $z.Geprueft, 0),
+        [int][math]::Round(100 * $z.Top3   / $z.Geprueft, 0)
+    )
+}
+$json = $ausgabe | ConvertTo-Json -Depth 5 -Compress
+[System.IO.File]::WriteAllText("$base\daten\bis-check.json", $json, (New-Object System.Text.UTF8Encoding($false)))
+Write-Output ""
+Write-Output "daten/bis-check.json geschrieben - die Seite uebernimmt diese Werte beim naechsten Bau."

@@ -87,7 +87,7 @@ Der Workflow importiert das Roster, holt das Gear, bricht ab, wenn dabei verdäc
 zurückkommen (Schutz gegen einen kaputten Abruf), simuliert die individuellen Stat-Gewichte **aller**
 DPS-Spieler, rechnet neu und **committet und pusht das Ergebnis automatisch** (`roster.json`,
 `daten/players.json`, `daten/cache-tooltips.json`, `daten/payload.json`, `index.html`,
-`ausgabe/loot-prio-p3.html`, `daten/bis-listen-phasen.json`, `daten/sim-weights.json`,
+`ausgabe/loot-prio-p3.html`, `daten/bis-listen-phasen.json`, `daten/bis-check.json`, `daten/sim-weights.json`,
 `daten/trinket-werte.json`, `daten/upgrades-p4.json`, `daten/upgrades-p5.json`). Das ist ein bewusst eingerichteter,
 system-eigener Push und keine Ausnahme von der Regel, dass ein Assistent nicht ungefragt pusht — die
 Automatisierung wurde als solche eingerichtet und genehmigt.
@@ -142,9 +142,9 @@ fehlen sie, entsteht die Seite von vorher ganz ohne Umschaltleiste.
 
 | Phase | DPS: Platz 1 / Top 3 | Tank/Heiler: Platz 1 / Top 3 |
 |---|---|---|
-| 3 | 70 % / 86 % | 77 % / 90 % |
+| 3 | 71 % / 86 % | 77 % / 90 % |
 | 4 | 59 % / 69 % | 80 % / 90 % |
-| 5 | 68 % / 79 % | 76 % / 92 % |
+| 5 | 73 % / 80 % | 82 % / 94 % |
 
 ⚠️ **Die niedrigere DPS-Quote in Phase 4 und 5 ist kein Defekt**, sondern der oben beschriebene
 Effekt in verstärkter Form: Die Guides optimieren für einen Charakter, der die jeweilige Phase
@@ -385,7 +385,7 @@ Tanks und Heiler.
 prozentualen Zuwachs `Pct`, da `Delta` dort rollenübergreifend nicht vergleichbar ist. Die aktuellen
 Werte je Phase stehen weiter oben unter „Gegenprobe je Phase". Zur Einordnung des Phase-3-Werts:
 
-- **DPS: 160 Empfehlungen · 70 % auf BiS-Platz 1 · 86 % in den BiS-Top-3.** Die nicht gelisteten
+- **DPS: 160 Empfehlungen · 71 % auf BiS-Platz 1 · 86 % in den BiS-Top-3.** Die nicht gelisteten
   Empfehlungen sind ausnahmslos Marken- und Trash-Items, die diese Guides gar nicht führen.
 - **Tank/Heiler: 70 Empfehlungen · 77 % auf BiS-Platz 1 · 90 % in den BiS-Top-3.** Der höhere Wert ist
   erwartbar: Tank/Heiler-Empfehlungen sind bereits gegen dieselbe BiS-Liste gegatet (s. o.), ein
