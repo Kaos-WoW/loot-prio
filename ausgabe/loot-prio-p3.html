@@ -656,7 +656,7 @@
   </section>
 
   <footer>
-    <p>Statgewichte aus echten Simulationsläufen (WoWSims, 23 Simulationen je Spec). Itemwerte aus der Wowhead-TBC-Datenbank, Namensraum <span style="font-family:var(--f-data)">static-2.5.6</span>. Ausrüstungsstände live über classic-armory.org. Gegengeprüft gegen die veröffentlichten Phase-3-BiS-Listen — <b>DPS</b>: 79&nbsp;% in den Top&nbsp;3, 58&nbsp;% auf Platz&nbsp;1 (155 Empfehlungen); <b>Tank/Heiler</b>: 90&nbsp;% in den Top&nbsp;3, 77&nbsp;% auf Platz&nbsp;1 (70 Empfehlungen). Stand 2026-08-03.</p>
+    <p>Statgewichte aus echten Simulationsläufen (WoWSims, 23 Simulationen je Spec). Itemwerte aus der Wowhead-TBC-Datenbank, Namensraum <span style="font-family:var(--f-data)">static-2.5.6</span>. Ausrüstungsstände live über Blizzards Classic-Armory (Fallback: classic-armory.org). Gegengeprüft gegen die veröffentlichten Phase-3-BiS-Listen — <b>DPS</b>: 79&nbsp;% in den Top&nbsp;3, 58&nbsp;% auf Platz&nbsp;1 (155 Empfehlungen); <b>Tank/Heiler</b>: 90&nbsp;% in den Top&nbsp;3, 77&nbsp;% auf Platz&nbsp;1 (70 Empfehlungen). Stand 2026-08-03.</p>
   </footer>
 </div>
 
@@ -1550,20 +1550,22 @@ sb.auth.onAuthStateChange((event, session) => {
 
 // ---- Armory Sync ----
 const ROSTER = DATA.roster || [];
-const ARMORY_URL = 'https://corsproxy.io/?https://classic-armory.org/api/v1/character/equipment';
 
+// Laeuft ueber die Supabase-Edge-Function 'armory-gear' statt direkt per Browser-fetch() gegen
+// die Armory: die braeuchte sonst einen CORS-Proxy (corsproxy.io hat sein anonymes Format 2026-08
+// abgeschafft, kostenlose Alternativen sind unzuverlaessig). Die Function laeuft serverseitig und
+// hat kein CORS-Problem; sie nutzt Blizzards Armory mit classic-armory.org-Fallback, s.
+// supabase/functions/armory-gear/index.ts.
 async function fetchPlayerGear(name) {
-  const body = JSON.stringify({ region: 'eu', realm: 'thunderstrike', name, flavor: 'tbc-anniversary' });
-  const res = await fetch(ARMORY_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const data = await res.json();
-  if (!data.equipment) throw new Error('no equipment');
-  const ids = new Set(data.equipment.map(e => Number(e.item.id)));
-  return ids;
+  const { data, error } = await sb.functions.invoke('armory-gear', { body: { name } });
+  if (error || data?.error) {
+    let detail = data?.error || null;
+    if (!detail && error?.context && typeof error.context.json === 'function') {
+      try { detail = (await error.context.json())?.error || null; } catch (_) { /* kein JSON-Body */ }
+    }
+    throw new Error(detail || error?.message || 'Server-Fehler');
+  }
+  return new Set(data.ids.map(Number));
 }
 
 async function doSync() {
