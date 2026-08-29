@@ -4,16 +4,8 @@
         "spec":  "HOLY_PRIEST"
     },
     {
-        "name":  "Johma",
-        "spec":  "FURY"
-    },
-    {
         "name":  "Chadíkus",
         "spec":  "PROT_PALA"
-    },
-    {
-        "name":  "Sinrakss",
-        "spec":  "MAGE"
     },
     {
         "name":  "Lariesel",
@@ -49,10 +41,6 @@
     },
     {
         "name":  "Exotica",
-        "spec":  "ELE"
-    },
-    {
-        "name":  "Socthar",
         "spec":  "ELE"
     },
     {
@@ -98,10 +86,6 @@
     {
         "name":  "Golschi",
         "spec":  "HOLY_PALA"
-    },
-    {
-        "name":  "Supabase",
-        "spec":  "WLCK"
     },
     {
         "name":  "Pflasterelfe",
