@@ -67,6 +67,22 @@ python 7-stat-gewichte.py
 
 ## 2. Bekannte Fallen & Konventionen
 
+* **★ Primärquelle für Gear seit 2026-08-29: Blizzards eigene Classic-Armory.** Blizzard hat unter
+  `worldofwarcraft.blizzard.com/<locale>/classicann/<region>/armory/character/<realm>/<name>`
+  eine offizielle, oeffentlich per einfachem `GET` abrufbare Armory-Seite fuer Classic-Inhalte
+  freigeschaltet (keine Battle.net-API, kein OAuth). Das komplette Gear steckt im HTML als
+  JS-Variable `characterProfileInitialState` (`Get-BlizzardEquipment` in `2-fetch-gear.ps1`
+  extrahiert sie per Regex). Vorteil gegenueber `classic-armory.org`: Slots kommen bereits
+  korrekt typisiert (`slot.type`, z. B. `FINGER_1`, `TRINKET_2`, `MAIN_HAND`) — der
+  Armory-Slot-Bug (naechster Punkt) tritt hier nicht auf, das Tooltip-basierte Slot-Raten
+  entfaellt fuer diese Spieler komplett. `classic-armory.org` bleibt als Fallback
+  (`Get-ClassicArmoryEquipment`) fuer den Fall, dass die Blizzard-Seite mal nicht erreichbar ist
+  oder ein Charakter dort nicht gefunden wird (liefert dann HTTP 500 statt 404 — kein Fehler,
+  einfach `$null` und weiter zum Fallback). Getestet 2026-08-29 gegen den kompletten Kader:
+  alle 28 Spieler liefen ueber Blizzard, kein Fallback noetig. Verzauberungen und Sockel stehen
+  in der Blizzard-Antwort ebenfalls strukturiert zur Verfuegung (`gear.*.enchantments[]`,
+  `gear.*.sockets[]`) — bisher ungenutzt, waere aber die Grundlage, um die unter "Cap-Stat-
+  Abwaertsspirale" beschriebene fehlende Sockel/Verzauberungs-Info irgendwann sauber zu loesen.
 * **Prokks aus Tooltips abschneiden:** WoW-Tooltips formulieren Prokks wie Dauereffekte. Tooltips
   müssen vor der Wertelesung bei Schlüsselwörtern wie `Chance on hit`, `Use:`, `have a chance`
   abgeschnitten werden (nicht bei `Equip: Your`, sonst gehen echte Dauereffekte wie „ignore 335 armor“
@@ -79,7 +95,8 @@ python 7-stat-gewichte.py
   manuell gesetztem `application/json`-Header statt `Invoke-RestMethod` mit String-Body.
 * **Armory-Slot-Bug:** Die API von classic-armory.org liefert bei TBC Anniversary die Items manchmal in
   willkürlichen Slots zurück. `2-fetch-gear.ps1` ignoriert die API-Slotangabe und sortiert Items anhand
-  des echten Typs aus dem Wowhead-Tooltip ein.
+  des echten Typs aus dem Wowhead-Tooltip ein. ⚠️ Betrifft seit dem Wechsel auf Blizzards eigene
+  Armory (s. o.) nur noch den Fallback-Pfad — die Blizzard-Antwort liefert den Slot bereits korrekt.
 * **Stat-Gewichte (wowsims.com):** Immer die absolute „DPS Weight“ (Gewinn pro Statpunkt) verwenden,
   niemals die relative „DPS EP“ — letztere ist nicht klassenübergreifend vergleichbar.
 * **★★ Cap-Stat-Abwärtsspirale (De-gearing) — der Schutz greift NUR bei gemessener Null.**

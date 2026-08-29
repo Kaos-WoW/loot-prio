@@ -16,11 +16,14 @@ if ($spreadsheetUrlOrId -match "/d/([a-zA-Z0-9-_]+)") {
     $spreadsheetId = $Matches[1]
 }
 
-Write-Output "Lade Roster aus Google Sheet Übersicht (ID: $spreadsheetId)..."
+Write-Output "Lade Roster aus Google Sheet 'Spieler Spec' (ID: $spreadsheetId)..."
 
-# Download als CSV (sheet=Übersicht)
-# Google Sheets exportiert das Sheet "Übersicht" über diese URL-Struktur:
-$url = "https://docs.google.com/spreadsheets/d/$spreadsheetId/gviz/tq?tqx=out:csv&sheet=%C3%9Cbersicht"
+# Download als CSV (sheet=Spieler Spec).
+# ★ Bis 2026-08-29 stand hier "Übersicht" - dieser Tab wird aber nicht mehr gepflegt und steht
+# aktuell komplett leer (nur Kopfzeile). "Spieler Spec" ist der tatsaechlich aktuelle, dedizierte
+# Tab fuer Spieler->Klasse/Spec-Zuordnung (34 statt 28 Eintraege zum Zeitpunkt der Umstellung).
+# Google Sheets exportiert das Sheet "Spieler Spec" über diese URL-Struktur:
+$url = "https://docs.google.com/spreadsheets/d/$spreadsheetId/gviz/tq?tqx=out:csv&sheet=Spieler%20Spec"
 
 try {
     $tempFile = [System.IO.Path]::GetTempFileName()

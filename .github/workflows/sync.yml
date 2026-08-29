@@ -72,5 +72,5 @@ jobs:
         run: |
           git config --global user.name "GitHub Action (Auto-Sync)"
           git config --global user.email "action@github.com"
-          git add roster.json daten/players.json daten/cache-tooltips.json daten/payload.json index.html ausgabe/loot-prio-p3.html daten/bis-listen-phasen.json daten/bis-check.json daten/sim-weights.json daten/trinket-werte.json daten/upgrades-p4.json daten/upgrades-p5.json
+          git add roster.json daten/players.json daten/cache-tooltips.json daten/payload.json index.html ausgabe/loot-prio-p3.html daten/bis-listen-phasen.json daten/bis-check.json daten/sim-weights.json daten/trinket-werte.json daten/upgrades.json daten/upgrades-p4.json daten/upgrades-p5.json
           git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-sync roster and gear [skip ci]" && git push)

@@ -1624,10 +1624,19 @@ async function triggerWorkflowSync() {
 
   try {
     const { data, error } = await sb.functions.invoke('trigger-sync');
-    if (error || (data && data.error)) throw new Error(error?.message || data?.error || 'Server-Fehler');
+    if (error || (data && data.error)) {
+      // sb.functions.invoke() liefert bei einem Non-2xx-Status nur die generische Meldung
+      // "Edge Function returned a non-2xx status code" in error.message - der eigentliche
+      // Grund steckt im JSON-Body der Antwort, den error.context (ein Response-Objekt) traegt.
+      let detail = data?.error || null;
+      if (!detail && error?.context && typeof error.context.json === 'function') {
+        try { detail = (await error.context.json())?.error || null; } catch (_) { /* kein JSON-Body */ }
+      }
+      throw new Error(detail || error?.message || 'Server-Fehler');
+    }
     alert('Server-Update erfolgreich gestartet!\n\nDas Google Sheet wird ausgelesen, das Gear aller Spieler synchronisiert, alle DPS-Werte neu berechnet und die Seite neu gebaut.\n\nDas dauert etwa 5 Minuten. Die Seite aktualisiert sich danach von selbst.');
   } catch (e) {
-    alert('Fehler beim Starten des Updates: ' + e.message + '\n\nHast du das GitHub Token (GITHUB_TOKEN) in den Supabase Secrets konfiguriert?');
+    alert('Fehler beim Starten des Updates: ' + e.message);
   } finally {
     btn.textContent = '⚡ Roster & Gear neu berechnen (Admin)';
     btn.disabled = false;

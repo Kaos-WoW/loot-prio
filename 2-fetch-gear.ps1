@@ -16,12 +16,53 @@ if (Test-Path $plFile) {
     }
 }
 
-# Der Armory braucht echte UTF-8-Bytes (sonst finden Namen mit Umlaut nichts),
-# lehnt aber ein "charset=utf-8" im Content-Type mit HTTP 400 ab. Deshalb
-# ByteArrayContent mit explizit gesetztem, nacktem Header statt Invoke-RestMethod.
 Add-Type -AssemblyName System.Net.Http
 $http = New-Object System.Net.Http.HttpClient
-function Get-Equipment($name) {
+$http.Timeout = [TimeSpan]::FromSeconds(20)
+$http.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (TBC-Lootprio-Sync)")
+
+$blizzardRegion = "eu"
+$blizzardRealm  = "thunderstrike"
+$blizzardLocale = "en-gb"
+
+# ★ Primärquelle seit 2026-08-29: Blizzards eigene, seit kurzem live geschaltete Armory-Seite
+# fuer Classic-Inhalte (worldofwarcraft.blizzard.com/.../classicann/...). Es ist keine Battle.net-
+# API mit OAuth, sondern eine oeffentliche, serverseitig gerenderte Seite: das komplette Gear
+# steckt unkommentiert als JS-Variable "characterProfileInitialState" im HTML und laesst sich per
+# einfachem GET abrufen. Vorteil gegenueber classic-armory.org: Slots kommen bereits korrekt
+# typisiert (slot.type, z.B. "FINGER_1", "TRINKET_2", "MAIN_HAND") - der bisherige
+# Armory-Slot-Bug (s. AGENTS.md) tritt hier nicht auf, das Tooltip-basierte Slot-Raten entfaellt.
+# Liefert die Seite nichts Brauchbares (Downtime, unbekannter Endpunkt-Wechsel, Charaktername
+# nicht gefunden -> HTTP 500), faellt der Aufrufer unten auf classic-armory.org zurueck.
+function Get-BlizzardEquipment($name) {
+    $encoded = [Uri]::EscapeDataString($name)
+    $url = "https://worldofwarcraft.blizzard.com/$blizzardLocale/classicann/$blizzardRegion/armory/character/$blizzardRealm/$encoded"
+    try {
+        $resp = $http.GetAsync($url).Result
+        if (-not $resp.IsSuccessStatusCode) { return $null }
+        $html = $resp.Content.ReadAsStringAsync().Result
+    } catch { return $null }
+
+    if ($html -notmatch "characterProfileInitialState = (\{.*?\});\s*</script>") { return $null }
+    try { $data = $Matches[1] | ConvertFrom-Json } catch { return $null }
+    if (-not $data.character -or -not $data.character.gear) { return $null }
+
+    $slots = @{}
+    foreach ($p in $data.character.gear.PSObject.Properties) {
+        $g = $p.Value
+        if (-not $g.slot -or -not $g.slot.type) { continue }
+        $t = $g.slot.type
+        if ($t -eq 'SHIRT' -or $t -eq 'TABARD') { continue }
+        if ($g.id -gt 0) { $slots[$t] = [int]$g.id }
+    }
+    if ($slots.Count -eq 0) { return $null }
+    return $slots
+}
+
+# Fallback (bisherige Quelle). Der Armory braucht echte UTF-8-Bytes (sonst finden Namen mit
+# Umlaut nichts), lehnt aber ein "charset=utf-8" im Content-Type mit HTTP 400 ab. Deshalb
+# ByteArrayContent mit explizit gesetztem, nacktem Header statt Invoke-RestMethod.
+function Get-ClassicArmoryEquipment($name) {
     $body  = @{ region="eu"; realm="thunderstrike"; name=$name; flavor="tbc-anniversary" } | ConvertTo-Json -Compress
     $bytes = [System.Text.Encoding]::UTF8.GetBytes($body)
     $c = New-Object System.Net.Http.ByteArrayContent(,$bytes)
@@ -40,11 +81,22 @@ if (Test-Path $cacheFile) {
 
 $rawPlayers = @()
 $fehler  = @()
+$viaBlizzard = 0
+$viaFallback = 0
 foreach ($r in $roster) {
-    try { $resp = Get-Equipment $r.name }
+    $bzSlots = $null
+    try { $bzSlots = Get-BlizzardEquipment $r.name } catch { $bzSlots = $null }
+
+    if ($bzSlots) {
+        $viaBlizzard++
+        $rawPlayers += [pscustomobject]@{ Name = $r.name; Spec = $r.spec; ItemIds = @($bzSlots.Values); Slots = $bzSlots }
+        continue
+    }
+
+    try { $resp = Get-ClassicArmoryEquipment $r.name }
     catch { $fehler += ($r.name + " (Abruf)"); continue }
     if (-not $resp -or -not $resp.equipment) { $fehler += ($r.name + " (keine Daten)"); continue }
-    
+
     # Hole alle angelegten Item-IDs flach ab
     $itemIds = @()
     foreach ($e in $resp.equipment) {
@@ -52,9 +104,10 @@ foreach ($r in $roster) {
             $itemIds += [int]$e.item.id
         }
     }
-    $rawPlayers += [pscustomobject]@{ Name = $r.name; Spec = $r.spec; ItemIds = $itemIds }
+    $viaFallback++
+    $rawPlayers += [pscustomobject]@{ Name = $r.name; Spec = $r.spec; ItemIds = $itemIds; Slots = $null }
 }
-Write-Output ("Abgerufen: " + $rawPlayers.Count + " von " + $roster.Count)
+Write-Output ("Abgerufen: " + $rawPlayers.Count + " von " + $roster.Count + " (Blizzard Armory: $viaBlizzard, Fallback classic-armory.org: $viaFallback)")
 if ($fehler.Count) { Write-Output ("Fehlgeschlagen: " + ($fehler -join ", ")) }
 
 # Sicherheitsnetz
@@ -82,13 +135,19 @@ foreach ($p in $rawPlayers) {
 $cache | ConvertTo-Json -Depth 4 -Compress | Out-File $cacheFile -Encoding utf8
 Write-Output ("Neue Item-Tooltips geladen: $neu")
 
-# Slot-Mapping-Tabelle anhand des Tooltip-Texts
+# Slot-Mapping-Tabelle anhand des Tooltip-Texts (nur fuer den classic-armory.org-Fallback -
+# die Blizzard Armory liefert den Slot bereits korrekt typisiert in $p.Slots).
 $players = @()
 foreach ($p in $rawPlayers) {
+    if ($p.Slots) {
+        $players += [pscustomobject]@{ Name = $p.Name; Spec = $p.Spec; Slots = $p.Slots }
+        continue
+    }
+
     $slots = @{}
     $fingerCount = 1
     $trinketCount = 1
-    
+
     foreach ($id in $p.ItemIds) {
         $k = [string]$id
         if (-not $cache.ContainsKey($k)) { continue }
