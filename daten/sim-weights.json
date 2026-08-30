@@ -1,19 +1,19 @@
 {
   "Kaosx": {
-    "Str": 0.752,
+    "Str": 0.746,
     "Agi": 0.534,
-    "AP": 0.311,
+    "AP": 0.308,
     "Treffer": 0.0,
     "Krit": 0.55,
-    "Tempo": 0.599,
-    "ArP": 0.071,
+    "Tempo": 0.609,
+    "ArP": 0.07,
     "Waffk": 0.245,
-    "Int": 0.304,
+    "Int": 0.3,
     "SP": 0.127,
     "ZTreffer": 0.0,
     "ZKrit": 0.0,
-    "MH": 4.061,
-    "_basisDps": 1628.8
+    "MH": 4.022,
+    "_basisDps": 1617.8
   },
   "Grotschak": {
     "Str": 0.899,
@@ -65,21 +65,21 @@
     "_basisDps": 1270.9
   },
   "Valiror": {
-    "Str": 0.927,
-    "Agi": 0.625,
-    "AP": 0.431,
-    "Treffer": 0.484,
-    "Krit": 0.85,
-    "Tempo": 0.725,
-    "ArP": 0.143,
+    "Str": 0.95,
+    "Agi": 0.646,
+    "AP": 0.425,
+    "Treffer": 0.488,
+    "Krit": 0.863,
+    "Tempo": 0.739,
+    "ArP": 0.132,
     "Waffk": 0.0,
     "Int": 0.0,
     "SP": 0.0,
     "ZTreffer": 0.0,
     "ZKrit": 0.0,
-    "MH": 2.637,
-    "OH": 1.386,
-    "_basisDps": 1628.9
+    "MH": 2.6,
+    "OH": 1.367,
+    "_basisDps": 1632.6
   },
   "Deters": {
     "Int": 0.172,
@@ -125,41 +125,41 @@
     "_basisDps": 1302.7
   },
   "Sandycheekz": {
-    "Str": 0.362,
-    "Agi": 0.727,
-    "AP": 0.329,
-    "Treffer": 0.79,
-    "Krit": 0.565,
-    "Tempo": 0.668,
-    "ArP": 0.105,
-    "Waffk": 0.272,
+    "Str": 0.393,
+    "Agi": 0.788,
+    "AP": 0.357,
+    "Treffer": 0.469,
+    "Krit": 0.614,
+    "Tempo": 0.731,
+    "ArP": 0.12,
+    "Waffk": 0.449,
     "Int": 0.0,
     "SP": 0.0,
     "ZTreffer": 0.0,
     "ZKrit": 0.0,
-    "MH": 3.1,
-    "OH": 1.151,
-    "_basisDps": 1452.6
+    "MH": 3.363,
+    "OH": 1.249,
+    "_basisDps": 1604.9
   },
   "Lariesel": {
-    "Int": 1.247,
-    "SP": 0.581,
-    "Spi": 0.618,
-    "ZTreffer": 0.344,
-    "ZKrit": 0.401,
-    "ZTempo": 0.041,
-    "mp5": 1.198,
-    "_basisDps": 1266.1
+    "Int": 1.171,
+    "SP": 0.552,
+    "Spi": 0.603,
+    "ZTreffer": 0.441,
+    "ZKrit": 0.371,
+    "ZTempo": 0.0,
+    "mp5": 1.169,
+    "_basisDps": 1166.6
   },
   "Lupitus": {
-    "Int": 1.238,
-    "SP": 0.602,
-    "Spi": 0.633,
-    "ZTreffer": 0.355,
-    "ZKrit": 0.412,
-    "ZTempo": 0.046,
-    "mp5": 1.202,
-    "_basisDps": 1308.2
+    "Int": 1.261,
+    "SP": 0.567,
+    "Spi": 0.641,
+    "ZTreffer": 0.303,
+    "ZKrit": 0.392,
+    "ZTempo": 0.0,
+    "mp5": 1.24,
+    "_basisDps": 1225.5
   },
   "Xalessa": {
     "Int": 0.205,
@@ -266,13 +266,13 @@
     "_basisDps": 387.3
   },
   "Fínníck": {
-    "Int": 1.215,
-    "SP": 0.592,
-    "Spi": 0.626,
-    "ZTreffer": 0.154,
-    "ZKrit": 0.411,
-    "ZTempo": 0.049,
-    "mp5": 1.187,
-    "_basisDps": 1278.3
+    "Int": 1.23,
+    "SP": 0.606,
+    "Spi": 0.66,
+    "ZTreffer": 0.166,
+    "ZKrit": 0.421,
+    "ZTempo": 0.052,
+    "mp5": 1.247,
+    "_basisDps": 1334.7
   }
 }
