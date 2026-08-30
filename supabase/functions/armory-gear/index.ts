@@ -72,16 +72,17 @@ Deno.serve(async (req) => {
   }
 
   try {
-    // Authentifizierung pruefen (gleiche Gate wie trigger-sync)
+    // Authentifizierung pruefen (gleiche Gate wie trigger-sync, aber ohne den
+    // @supabase/supabase-js-Import - der laesst sich beim Editor-Deploy nicht bundeln,
+    // "Cannot import from github.com:443". Direkter REST-Call gegen Supabase Auth stattdessen.
     const authHeader = req.headers.get("Authorization") ?? "";
-    const { createClient } = await import("jsr:@supabase/supabase-js@2");
-    const supa = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_ANON_KEY")!,
-      { global: { headers: { Authorization: authHeader } } },
-    );
-    const { data: userData, error: userErr } = await supa.auth.getUser();
-    if (userErr || !userData?.user) {
+    const userResp = await fetch(`${Deno.env.get("SUPABASE_URL")}/auth/v1/user`, {
+      headers: {
+        Authorization: authHeader,
+        apikey: Deno.env.get("SUPABASE_ANON_KEY")!,
+      },
+    });
+    if (!userResp.ok) {
       return new Response(JSON.stringify({ error: "Nicht angemeldet." }), {
         status: 401,
         headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
