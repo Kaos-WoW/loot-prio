@@ -108,21 +108,21 @@
     "_basisDps": 1521.1
   },
   "Chilini": {
-    "Str": 0.56,
-    "Agi": 0.443,
-    "AP": 0.254,
-    "Treffer": 0.33,
-    "Krit": 0.456,
-    "Tempo": 0.475,
+    "Str": 0.553,
+    "Agi": 0.456,
+    "AP": 0.251,
+    "Treffer": 0.482,
+    "Krit": 0.466,
+    "Tempo": 0.485,
     "ArP": 0.067,
-    "Waffk": 0.581,
-    "Int": 0.02,
+    "Waffk": 0.586,
+    "Int": 0.021,
     "SP": 0.225,
-    "ZTreffer": 0.195,
+    "ZTreffer": 0.198,
     "ZKrit": 0.038,
-    "MH": 2.083,
-    "OH": 0.933,
-    "_basisDps": 1302.7
+    "MH": 2.058,
+    "OH": 0.922,
+    "_basisDps": 1302.0
   },
   "Sandycheekz": {
     "Str": 0.393,
@@ -152,24 +152,24 @@
     "_basisDps": 1271.8
   },
   "Lupitus": {
-    "Int": 1.234,
-    "SP": 0.607,
-    "Spi": 0.641,
-    "ZTreffer": 0.428,
-    "ZKrit": 0.423,
-    "ZTempo": 0.032,
-    "mp5": 1.211,
-    "_basisDps": 1341.2
+    "Int": 1.271,
+    "SP": 0.601,
+    "Spi": 0.669,
+    "ZTreffer": 0.458,
+    "ZKrit": 0.424,
+    "ZTempo": 0.239,
+    "mp5": 1.243,
+    "_basisDps": 1334.3
   },
   "Xalessa": {
-    "Int": 0.219,
-    "SP": 0.712,
-    "Spi": 0.078,
-    "ZTreffer": 0.333,
-    "ZKrit": 0.379,
-    "ZTempo": 0.551,
-    "mp5": 0.181,
-    "_basisDps": 1044.3
+    "Int": 0.208,
+    "SP": 0.714,
+    "Spi": 0.07,
+    "ZTreffer": 0.335,
+    "ZKrit": 0.377,
+    "ZTempo": 0.552,
+    "mp5": 0.177,
+    "_basisDps": 1052.5
   },
   "Lanity": {
     "Str": 0.557,
@@ -246,24 +246,24 @@
     "_basisDps": 1390.1
   },
   "Velera": {
-    "Int": 0.652,
-    "SP": 0.672,
-    "Spi": 0.402,
-    "ZTreffer": 0.848,
-    "ZKrit": 0.347,
-    "ZTempo": 0.185,
-    "mp5": 0.351,
-    "_basisDps": 1178.8
+    "Int": 0.56,
+    "SP": 0.687,
+    "Spi": 0.324,
+    "ZTreffer": 0.562,
+    "ZKrit": 0.358,
+    "ZTempo": 0.188,
+    "mp5": 0.255,
+    "_basisDps": 1208.5
   },
   "Renbi": {
-    "Int": 1.094,
-    "SP": 0.565,
-    "Spi": 0.123,
+    "Int": 1.07,
+    "SP": 0.585,
+    "Spi": 0.116,
     "ZTreffer": 0.017,
-    "ZKrit": 0.687,
-    "ZTempo": 0.058,
-    "mp5": 1.567,
-    "_basisDps": 1027.9
+    "ZKrit": 0.715,
+    "ZTempo": 0.075,
+    "mp5": 1.378,
+    "_basisDps": 1075.5
   },
   "Fínníck": {
     "Int": 1.239,
