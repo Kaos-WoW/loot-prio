@@ -90,22 +90,22 @@
         "Name":  "Shana",
         "Spec":  "PROT_PALA",
         "Slots":  {
-                      "FINGER_1":  31399,
-                      "HEAD":  31368,
-                      "TRINKET_2":  27891,
-                      "LEGS":  31367,
+                      "FINGER_1":  29172,
+                      "HEAD":  30125,
+                      "TRINKET_2":  28789,
+                      "LEGS":  30126,
                       "BACK":  29992,
                       "OFF_HAND":  28825,
-                      "TRINKET_1":  30629,
-                      "CHEST":  31364,
+                      "TRINKET_1":  29370,
+                      "CHEST":  29066,
                       "SHOULDER":  29070,
-                      "NECK":  24095,
-                      "WRIST":  29252,
+                      "NECK":  30007,
+                      "WRIST":  32515,
                       "WAIST":  30034,
                       "HANDS":  30124,
                       "MAIN_HAND":  28802,
-                      "FINGER_2":  33054,
-                      "FEET":  29254
+                      "FINGER_2":  30083,
+                      "FEET":  32267
                   }
     },
     {
@@ -156,6 +156,7 @@
         "Name":  "Järgerlie",
         "Spec":  "HUNT",
         "Slots":  {
+                      "RANGED":  28772,
                       "FINGER_1":  29298,
                       "HEAD":  30141,
                       "TRINKET_2":  30627,
@@ -163,16 +164,15 @@
                       "BACK":  28672,
                       "OFF_HAND":  29948,
                       "TRINKET_1":  29383,
-                      "HANDS":  30140,
                       "CHEST":  30139,
                       "SHOULDER":  30143,
-                      "NECK":  30059,
+                      "FEET":  29951,
                       "WRIST":  30026,
                       "WAIST":  30040,
-                      "RANGED":  28772,
+                      "HANDS":  30140,
                       "MAIN_HAND":  28313,
                       "FINGER_2":  28791,
-                      "FEET":  29951
+                      "NECK":  30059
                   }
     },
     {
@@ -244,22 +244,22 @@
         "Name":  "Kroenix",
         "Spec":  "HUNT",
         "Slots":  {
+                      "RANGED":  30105,
                       "FINGER_1":  28791,
                       "HEAD":  30141,
                       "TRINKET_2":  28830,
                       "LEGS":  30739,
                       "BACK":  29994,
                       "TRINKET_1":  29383,
-                      "HANDS":  30140,
                       "CHEST":  30139,
                       "SHOULDER":  30143,
-                      "NECK":  30017,
+                      "FEET":  30104,
                       "WRIST":  30026,
                       "WAIST":  30040,
-                      "RANGED":  30105,
+                      "HANDS":  30140,
                       "MAIN_HAND":  29924,
                       "FINGER_2":  29298,
-                      "FEET":  30104
+                      "NECK":  30017
                   }
     },
     {
@@ -379,7 +379,7 @@
                       "HEAD":  30206,
                       "TRINKET_2":  29370,
                       "LEGS":  30207,
-                      "BACK":  28766,
+                      "BACK":  28797,
                       "TRINKET_1":  30720,
                       "CHEST":  30196,
                       "SHOULDER":  30210,
@@ -405,13 +405,13 @@
                       "TRINKET_1":  29383,
                       "CHEST":  30118,
                       "SHOULDER":  30122,
-                      "NECK":  30022,
+                      "FEET":  28608,
                       "WRIST":  30057,
                       "WAIST":  30032,
                       "HANDS":  30119,
                       "MAIN_HAND":  28439,
                       "FINGER_2":  28757,
-                      "FEET":  28608
+                      "NECK":  30022
                   }
     },
     {
@@ -494,7 +494,7 @@
                       "CHEST":  30107,
                       "SHOULDER":  21869,
                       "NECK":  30666,
-                      "WRIST":  29918,
+                      "WRIST":  32586,
                       "WAIST":  30064,
                       "HANDS":  28507,
                       "MAIN_HAND":  34009,
@@ -518,7 +518,7 @@
                       "NECK":  32591,
                       "WRIST":  30057,
                       "WAIST":  30106,
-                      "HANDS":  30119,
+                      "HANDS":  32608,
                       "MAIN_HAND":  28439,
                       "FINGER_2":  29301,
                       "FEET":  30081
@@ -528,21 +528,21 @@
         "Name":  "Supfreshyo",
         "Spec":  "FERAL_TANK",
         "Slots":  {
-                      "FINGER_1":  30834,
-                      "HEAD":  31039,
+                      "FINGER_1":  34837,
+                      "HEAD":  31968,
                       "TRINKET_2":  32658,
                       "LEGS":  30229,
-                      "BACK":  28660,
-                      "TRINKET_1":  28579,
-                      "CHEST":  30222,
-                      "SHOULDER":  30230,
-                      "NECK":  33066,
+                      "BACK":  29382,
+                      "TRINKET_1":  28235,
+                      "CHEST":  31972,
+                      "SHOULDER":  31971,
+                      "NECK":  278827,
                       "WRIST":  32810,
-                      "WAIST":  30106,
-                      "HANDS":  31034,
+                      "WAIST":  32798,
+                      "HANDS":  31967,
                       "MAIN_HAND":  32014,
-                      "FINGER_2":  29299,
-                      "FEET":  32790
+                      "FINGER_2":  34837,
+                      "FEET":  32786
                   }
     },
     {
@@ -558,13 +558,13 @@
                       "TRINKET_1":  30665,
                       "CHEST":  30150,
                       "SHOULDER":  30154,
-                      "NECK":  28822,
+                      "FEET":  28663,
                       "WRIST":  32980,
                       "WAIST":  32979,
                       "HANDS":  30151,
                       "MAIN_HAND":  32964,
                       "FINGER_2":  29307,
-                      "FEET":  28663
+                      "NECK":  28822
                   }
     },
     {
@@ -605,7 +605,7 @@
                       "NECK":  29381,
                       "WRIST":  29966,
                       "WAIST":  30040,
-                      "HANDS":  30145,
+                      "HANDS":  31026,
                       "MAIN_HAND":  29124,
                       "FINGER_2":  28757,
                       "FEET":  28545
@@ -621,7 +621,7 @@
                       "LEGS":  30234,
                       "BACK":  28797,
                       "OFF_HAND":  32361,
-                      "TRINKET_1":  29179,
+                      "TRINKET_1":  32481,
                       "CHEST":  30231,
                       "SHOULDER":  30235,
                       "NECK":  28762,
