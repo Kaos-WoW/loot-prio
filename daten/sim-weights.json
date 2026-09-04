@@ -1,19 +1,19 @@
 {
   "Kaosx": {
     "Str": 0.746,
-    "Agi": 0.534,
+    "Agi": 0.539,
     "AP": 0.308,
-    "Treffer": 0.0,
-    "Krit": 0.55,
-    "Tempo": 0.609,
-    "ArP": 0.07,
-    "Waffk": 0.245,
-    "Int": 0.3,
-    "SP": 0.127,
+    "Treffer": 0.11,
+    "Krit": 0.556,
+    "Tempo": 0.727,
+    "ArP": 0.071,
+    "Waffk": 0.235,
+    "Int": 0.45,
+    "SP": 0.12,
     "ZTreffer": 0.0,
     "ZKrit": 0.0,
     "MH": 4.022,
-    "_basisDps": 1617.8
+    "_basisDps": 1627.4
   },
   "Grotschak": {
     "Str": 0.899,
@@ -65,31 +65,31 @@
     "_basisDps": 1270.9
   },
   "Valiror": {
-    "Str": 0.941,
-    "Agi": 0.664,
-    "AP": 0.43,
-    "Treffer": 0.52,
-    "Krit": 0.897,
-    "Tempo": 0.726,
-    "ArP": 0.16,
+    "Str": 0.93,
+    "Agi": 0.647,
+    "AP": 0.424,
+    "Treffer": 0.507,
+    "Krit": 0.874,
+    "Tempo": 0.719,
+    "ArP": 0.14,
     "Waffk": 0.0,
     "Int": 0.0,
     "SP": 0.0,
     "ZTreffer": 0.0,
     "ZKrit": 0.0,
-    "MH": 2.631,
-    "OH": 1.383,
-    "_basisDps": 1623.8
+    "MH": 2.594,
+    "OH": 1.363,
+    "_basisDps": 1636.9
   },
   "Deters": {
-    "Int": 0.172,
-    "SP": 0.702,
-    "Spi": 0.076,
-    "ZTreffer": 0.521,
-    "ZKrit": 0.316,
-    "ZTempo": 0.544,
-    "mp5": 0.165,
-    "_basisDps": 1142.5
+    "Int": 0.185,
+    "SP": 0.706,
+    "Spi": 0.081,
+    "ZTreffer": 0.371,
+    "ZKrit": 0.328,
+    "ZTempo": 0.578,
+    "mp5": 0.17,
+    "_basisDps": 1166.2
   },
   "Kroenix": {
     "Str": 0.109,
@@ -125,31 +125,31 @@
     "_basisDps": 1302.0
   },
   "Sandycheekz": {
-    "Str": 0.393,
-    "Agi": 0.788,
-    "AP": 0.357,
-    "Treffer": 0.469,
-    "Krit": 0.614,
-    "Tempo": 0.731,
+    "Str": 0.39,
+    "Agi": 0.786,
+    "AP": 0.354,
+    "Treffer": 0.624,
+    "Krit": 0.618,
+    "Tempo": 0.713,
     "ArP": 0.12,
     "Waffk": 0.449,
     "Int": 0.0,
     "SP": 0.0,
     "ZTreffer": 0.0,
     "ZKrit": 0.0,
-    "MH": 3.363,
-    "OH": 1.249,
-    "_basisDps": 1604.9
+    "MH": 3.335,
+    "OH": 1.239,
+    "_basisDps": 1603.8
   },
   "Lariesel": {
-    "Int": 1.376,
-    "SP": 0.635,
-    "Spi": 0.655,
-    "ZTreffer": 0.366,
-    "ZKrit": 0.436,
-    "ZTempo": 0.112,
-    "mp5": 1.253,
-    "_basisDps": 1389.6
+    "Int": 1.386,
+    "SP": 0.63,
+    "Spi": 0.635,
+    "ZTreffer": 0.476,
+    "ZKrit": 0.431,
+    "ZTempo": 0.093,
+    "mp5": 1.263,
+    "_basisDps": 1389.5
   },
   "Lupitus": {
     "Int": 1.405,
@@ -189,14 +189,14 @@
     "_basisDps": 1310.2
   },
   "Simondan": {
-    "Int": 0.208,
-    "SP": 0.714,
-    "Spi": 0.077,
-    "ZTreffer": 0.747,
-    "ZKrit": 0.354,
-    "ZTempo": 0.564,
-    "mp5": 0.176,
-    "_basisDps": 1057.1
+    "Int": 0.199,
+    "SP": 0.709,
+    "Spi": 0.076,
+    "ZTreffer": 0.741,
+    "ZKrit": 0.36,
+    "ZTempo": 0.58,
+    "mp5": 0.179,
+    "_basisDps": 1073.3
   },
   "Exotica": {
     "Int": 0.689,
@@ -209,14 +209,14 @@
     "_basisDps": 1261.9
   },
   "Exfreya": {
-    "Int": 1.266,
-    "SP": 0.682,
-    "Spi": 0.646,
-    "ZTreffer": 0.875,
-    "ZKrit": 0.376,
-    "ZTempo": 0.199,
-    "mp5": 0.979,
-    "_basisDps": 1198.6
+    "Int": 1.249,
+    "SP": 0.685,
+    "Spi": 0.65,
+    "ZTreffer": 0.876,
+    "ZKrit": 0.372,
+    "ZTempo": 0.2,
+    "mp5": 0.956,
+    "_basisDps": 1207.3
   },
   "Pflasterelfe": {
     "Int": 0.022,
@@ -229,21 +229,21 @@
     "_basisDps": 1008.0
   },
   "Erikadirk": {
-    "Str": 0.353,
-    "Agi": 0.711,
-    "AP": 0.321,
-    "Treffer": 0.758,
-    "Krit": 0.545,
-    "Tempo": 0.633,
-    "ArP": 0.102,
-    "Waffk": 0.269,
+    "Str": 0.361,
+    "Agi": 0.721,
+    "AP": 0.328,
+    "Treffer": 0.759,
+    "Krit": 0.556,
+    "Tempo": 0.677,
+    "ArP": 0.105,
+    "Waffk": 0.27,
     "Int": 0.0,
     "SP": 0.0,
     "ZTreffer": 0.0,
     "ZKrit": 0.0,
-    "MH": 3.024,
-    "OH": 1.123,
-    "_basisDps": 1400.4
+    "MH": 3.09,
+    "OH": 1.148,
+    "_basisDps": 1431.8
   },
   "Velera": {
     "Int": 0.89,
