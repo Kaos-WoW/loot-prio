@@ -152,14 +152,14 @@
     "_basisDps": 1282.9
   },
   "Lupitus": {
-    "Int": 1.424,
-    "SP": 0.658,
-    "Spi": 0.657,
-    "ZTreffer": 0.459,
-    "ZKrit": 0.458,
-    "ZTempo": 0.211,
-    "mp5": 1.238,
-    "_basisDps": 1463.7
+    "Int": 1.354,
+    "SP": 0.617,
+    "Spi": 0.673,
+    "ZTreffer": 0.854,
+    "ZKrit": 0.418,
+    "ZTempo": 0.168,
+    "mp5": 1.289,
+    "_basisDps": 1337.8
   },
   "Xalessa": {
     "Int": 0.208,
@@ -220,13 +220,13 @@
   },
   "Pflasterelfe": {
     "Int": 0.022,
-    "SP": 0.471,
-    "Spi": 0.052,
+    "SP": 0.478,
+    "Spi": 0.053,
     "ZTreffer": 0.0,
-    "ZKrit": 0.072,
-    "ZTempo": 0.36,
+    "ZKrit": 0.073,
+    "ZTempo": 0.373,
     "mp5": 0.0,
-    "_basisDps": 1008.0
+    "_basisDps": 1019.5
   },
   "Erikadirk": {
     "Str": 0.336,
