@@ -162,14 +162,14 @@
     "_basisDps": 1337.8
   },
   "Xalessa": {
-    "Int": 0.208,
-    "SP": 0.714,
-    "Spi": 0.07,
-    "ZTreffer": 0.335,
-    "ZKrit": 0.377,
-    "ZTempo": 0.552,
-    "mp5": 0.177,
-    "_basisDps": 1052.5
+    "Int": 0.217,
+    "SP": 0.728,
+    "Spi": 0.076,
+    "ZTreffer": 0.341,
+    "ZKrit": 0.378,
+    "ZTempo": 0.566,
+    "mp5": 0.189,
+    "_basisDps": 1054.3
   },
   "Lanity": {
     "Str": 0.558,
@@ -246,14 +246,14 @@
     "_basisDps": 1233.1
   },
   "Velera": {
-    "Int": 0.794,
-    "SP": 0.686,
-    "Spi": 0.491,
-    "ZTreffer": 0.739,
-    "ZKrit": 0.372,
-    "ZTempo": 0.227,
-    "mp5": 0.47,
-    "_basisDps": 1177.2
+    "Int": 0.916,
+    "SP": 0.699,
+    "Spi": 0.562,
+    "ZTreffer": 0.597,
+    "ZKrit": 0.389,
+    "ZTempo": 0.242,
+    "mp5": 0.57,
+    "_basisDps": 1224.1
   },
   "Renbi": {
     "Int": 0.951,
