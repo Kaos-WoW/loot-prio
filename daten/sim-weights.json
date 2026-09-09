@@ -229,31 +229,31 @@
     "_basisDps": 1019.5
   },
   "Erikadirk": {
-    "Str": 0.361,
-    "Agi": 0.721,
-    "AP": 0.328,
-    "Treffer": 0.759,
-    "Krit": 0.556,
-    "Tempo": 0.677,
-    "ArP": 0.105,
-    "Waffk": 0.27,
+    "Str": 0.334,
+    "Agi": 0.646,
+    "AP": 0.303,
+    "Treffer": 0.669,
+    "Krit": 0.481,
+    "Tempo": 0.53,
+    "ArP": 0.088,
+    "Waffk": 0.227,
     "Int": 0.0,
     "SP": 0.0,
     "ZTreffer": 0.0,
     "ZKrit": 0.0,
-    "MH": 3.09,
-    "OH": 1.148,
-    "_basisDps": 1431.8
+    "MH": 2.855,
+    "OH": 1.06,
+    "_basisDps": 1214.3
   },
   "Velera": {
-    "Int": 0.916,
-    "SP": 0.699,
-    "Spi": 0.562,
-    "ZTreffer": 0.597,
-    "ZKrit": 0.389,
-    "ZTempo": 0.242,
-    "mp5": 0.57,
-    "_basisDps": 1224.1
+    "Int": 1.116,
+    "SP": 0.697,
+    "Spi": 0.648,
+    "ZTreffer": 0.569,
+    "ZKrit": 0.393,
+    "ZTempo": 0.238,
+    "mp5": 0.777,
+    "_basisDps": 1224.3
   },
   "Renbi": {
     "Int": 0.951,
@@ -266,13 +266,13 @@
     "_basisDps": 1116.0
   },
   "Fínníck": {
-    "Int": 1.395,
+    "Int": 1.426,
     "SP": 0.663,
-    "Spi": 0.673,
-    "ZTreffer": 0.158,
-    "ZKrit": 0.444,
-    "ZTempo": 0.103,
-    "mp5": 1.266,
-    "_basisDps": 1409.8
+    "Spi": 0.687,
+    "ZTreffer": 0.164,
+    "ZKrit": 0.463,
+    "ZTempo": 0.122,
+    "mp5": 1.296,
+    "_basisDps": 1473.5
   }
 }
