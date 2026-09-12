@@ -125,21 +125,21 @@
     "_basisDps": 1361.7
   },
   "Sandycheekz": {
-    "Str": 0.325,
-    "Agi": 0.665,
-    "AP": 0.295,
-    "Treffer": 0.718,
-    "Krit": 0.527,
-    "Tempo": 0.601,
-    "ArP": 0.093,
-    "Waffk": 0.378,
+    "Str": 0.39,
+    "Agi": 0.789,
+    "AP": 0.354,
+    "Treffer": 0.628,
+    "Krit": 0.622,
+    "Tempo": 0.718,
+    "ArP": 0.12,
+    "Waffk": 0.452,
     "Int": 0.0,
     "SP": 0.0,
     "ZTreffer": 0.0,
     "ZKrit": 0.0,
-    "MH": 2.779,
-    "OH": 1.032,
-    "_basisDps": 1317.9
+    "MH": 3.335,
+    "OH": 1.239,
+    "_basisDps": 1612.6
   },
   "Lariesel": {
     "Int": 1.386,
@@ -152,14 +152,14 @@
     "_basisDps": 1389.5
   },
   "Lupitus": {
-    "Int": 1.424,
-    "SP": 0.658,
-    "Spi": 0.657,
-    "ZTreffer": 0.459,
-    "ZKrit": 0.458,
-    "ZTempo": 0.211,
-    "mp5": 1.238,
-    "_basisDps": 1463.7
+    "Int": 1.354,
+    "SP": 0.617,
+    "Spi": 0.673,
+    "ZTreffer": 0.854,
+    "ZKrit": 0.418,
+    "ZTempo": 0.168,
+    "mp5": 1.289,
+    "_basisDps": 1337.8
   },
   "Xalessa": {
     "Int": 0.217,
@@ -189,14 +189,14 @@
     "_basisDps": 1324.1
   },
   "Simondan": {
-    "Int": 0.214,
-    "SP": 0.722,
+    "Int": 0.199,
+    "SP": 0.709,
     "Spi": 0.076,
-    "ZTreffer": 0.597,
-    "ZKrit": 0.37,
-    "ZTempo": 0.592,
-    "mp5": 0.189,
-    "_basisDps": 1078.7
+    "ZTreffer": 0.741,
+    "ZKrit": 0.36,
+    "ZTempo": 0.58,
+    "mp5": 0.179,
+    "_basisDps": 1073.3
   },
   "Exotica": {
     "Int": 0.419,
@@ -229,21 +229,21 @@
     "_basisDps": 1019.5
   },
   "Erikadirk": {
-    "Str": 0.357,
-    "Agi": 0.72,
-    "AP": 0.325,
-    "Treffer": 0.768,
-    "Krit": 0.562,
-    "Tempo": 0.656,
-    "ArP": 0.106,
-    "Waffk": 0.26,
+    "Str": 0.316,
+    "Agi": 0.639,
+    "AP": 0.287,
+    "Treffer": 0.669,
+    "Krit": 0.492,
+    "Tempo": 0.527,
+    "ArP": 0.085,
+    "Waffk": 0.228,
     "Int": 0.0,
     "SP": 0.0,
     "ZTreffer": 0.0,
     "ZKrit": 0.0,
-    "MH": 3.062,
-    "OH": 1.137,
-    "_basisDps": 1440.2
+    "MH": 2.704,
+    "OH": 1.004,
+    "_basisDps": 1212.1
   },
   "Velera": {
     "Int": 1.003,
