@@ -152,14 +152,14 @@
     "_basisDps": 1389.5
   },
   "Lupitus": {
-    "Int": 1.354,
-    "SP": 0.617,
-    "Spi": 0.673,
-    "ZTreffer": 0.854,
-    "ZKrit": 0.418,
-    "ZTempo": 0.168,
-    "mp5": 1.289,
-    "_basisDps": 1337.8
+    "Int": 1.405,
+    "SP": 0.65,
+    "Spi": 0.641,
+    "ZTreffer": 0.712,
+    "ZKrit": 0.448,
+    "ZTempo": 0.207,
+    "mp5": 1.221,
+    "_basisDps": 1445.8
   },
   "Xalessa": {
     "Int": 0.217,
@@ -230,40 +230,40 @@
   },
   "Erikadirk": {
     "Str": 0.316,
-    "Agi": 0.639,
+    "Agi": 0.635,
     "AP": 0.287,
-    "Treffer": 0.669,
-    "Krit": 0.492,
-    "Tempo": 0.527,
-    "ArP": 0.085,
-    "Waffk": 0.228,
+    "Treffer": 0.659,
+    "Krit": 0.494,
+    "Tempo": 0.53,
+    "ArP": 0.086,
+    "Waffk": 0.337,
     "Int": 0.0,
     "SP": 0.0,
     "ZTreffer": 0.0,
     "ZKrit": 0.0,
     "MH": 2.704,
     "OH": 1.004,
-    "_basisDps": 1212.1
+    "_basisDps": 1219.8
   },
   "Velera": {
-    "Int": 1.003,
-    "SP": 0.711,
-    "Spi": 0.616,
-    "ZTreffer": 0.298,
-    "ZKrit": 0.418,
-    "ZTempo": 0.275,
-    "mp5": 0.647,
-    "_basisDps": 1273.9
+    "Int": 1.043,
+    "SP": 0.719,
+    "Spi": 0.642,
+    "ZTreffer": 0.306,
+    "ZKrit": 0.42,
+    "ZTempo": 0.263,
+    "mp5": 0.684,
+    "_basisDps": 1304.7
   },
   "Renbi": {
-    "Int": 0.951,
-    "SP": 0.607,
-    "Spi": 0.106,
-    "ZTreffer": 0.018,
-    "ZKrit": 0.76,
-    "ZTempo": 0.076,
-    "mp5": 1.029,
-    "_basisDps": 1116.0
+    "Int": 1.005,
+    "SP": 0.605,
+    "Spi": 0.114,
+    "ZTreffer": 0.006,
+    "ZKrit": 0.796,
+    "ZTempo": 0.09,
+    "mp5": 1.102,
+    "_basisDps": 1164.0
   },
   "Fínníck": {
     "Int": 1.426,
