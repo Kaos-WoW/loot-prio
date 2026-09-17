@@ -65,21 +65,21 @@
     "_basisDps": 1277.3
   },
   "Valiror": {
-    "Str": 0.935,
-    "Agi": 0.641,
-    "AP": 0.427,
-    "Treffer": 0.499,
-    "Krit": 0.866,
-    "Tempo": 0.718,
-    "ArP": 0.151,
+    "Str": 0.93,
+    "Agi": 0.619,
+    "AP": 0.407,
+    "Treffer": 0.504,
+    "Krit": 0.863,
+    "Tempo": 0.744,
+    "ArP": 0.135,
     "Waffk": 0.0,
     "Int": 0.0,
     "SP": 0.0,
     "ZTreffer": 0.0,
     "ZKrit": 0.0,
-    "MH": 2.612,
-    "OH": 1.373,
-    "_basisDps": 1659.8
+    "MH": 2.49,
+    "OH": 1.309,
+    "_basisDps": 1677.8
   },
   "Deters": {
     "Int": 0.178,
@@ -128,18 +128,18 @@
     "Str": 0.389,
     "Agi": 0.795,
     "AP": 0.354,
-    "Treffer": 0.75,
-    "Krit": 0.623,
-    "Tempo": 0.721,
-    "ArP": 0.121,
-    "Waffk": 0.458,
+    "Treffer": 0.864,
+    "Krit": 0.628,
+    "Tempo": 0.742,
+    "ArP": 0.122,
+    "Waffk": 0.444,
     "Int": 0.0,
     "SP": 0.0,
     "ZTreffer": 0.0,
     "ZKrit": 0.0,
     "MH": 3.335,
     "OH": 1.239,
-    "_basisDps": 1623.7
+    "_basisDps": 1632.2
   },
   "Lariesel": {
     "Int": 1.386,
@@ -152,14 +152,14 @@
     "_basisDps": 1389.5
   },
   "Lupitus": {
-    "Int": 1.354,
-    "SP": 0.617,
-    "Spi": 0.673,
-    "ZTreffer": 0.854,
-    "ZKrit": 0.418,
-    "ZTempo": 0.168,
-    "mp5": 1.289,
-    "_basisDps": 1337.8
+    "Int": 1.405,
+    "SP": 0.65,
+    "Spi": 0.641,
+    "ZTreffer": 0.712,
+    "ZKrit": 0.448,
+    "ZTempo": 0.207,
+    "mp5": 1.221,
+    "_basisDps": 1445.8
   },
   "Xalessa": {
     "Int": 0.217,
@@ -189,24 +189,24 @@
     "_basisDps": 1324.1
   },
   "Simondan": {
-    "Int": 0.214,
-    "SP": 0.722,
-    "Spi": 0.076,
-    "ZTreffer": 0.597,
+    "Int": 0.215,
+    "SP": 0.73,
+    "Spi": 0.073,
+    "ZTreffer": 0.522,
     "ZKrit": 0.37,
-    "ZTempo": 0.592,
-    "mp5": 0.189,
-    "_basisDps": 1078.7
+    "ZTempo": 0.578,
+    "mp5": 0.19,
+    "_basisDps": 1079.0
   },
   "Exotica": {
-    "Int": 0.419,
-    "SP": 0.669,
-    "Spi": 0.081,
-    "ZTreffer": 0.024,
-    "ZKrit": 0.634,
-    "ZTempo": 0.332,
-    "mp5": 0.311,
-    "_basisDps": 1363.9
+    "Int": 0.489,
+    "SP": 0.667,
+    "Spi": 0.083,
+    "ZTreffer": 0.02,
+    "ZKrit": 0.665,
+    "ZTempo": 0.296,
+    "mp5": 0.377,
+    "_basisDps": 1359.2
   },
   "Exfreya": {
     "Int": 1.249,

@@ -156,6 +156,7 @@
         "Name":  "Järgerlie",
         "Spec":  "HUNT",
         "Slots":  {
+                      "RANGED":  28772,
                       "FINGER_1":  29298,
                       "HEAD":  30141,
                       "TRINKET_2":  30627,
@@ -163,16 +164,15 @@
                       "BACK":  28672,
                       "OFF_HAND":  29948,
                       "TRINKET_1":  29383,
-                      "HANDS":  30140,
                       "CHEST":  30139,
                       "SHOULDER":  30143,
-                      "NECK":  30059,
+                      "FEET":  29951,
                       "WRIST":  30026,
                       "WAIST":  30040,
-                      "RANGED":  28772,
+                      "HANDS":  30140,
                       "MAIN_HAND":  28313,
                       "FINGER_2":  28791,
-                      "FEET":  29951
+                      "NECK":  30059
                   }
     },
     {
@@ -223,7 +223,7 @@
         "Name":  "Exotica",
         "Spec":  "ELE",
         "Slots":  {
-                      "FINGER_1":  29305,
+                      "FINGER_1":  32247,
                       "HEAD":  31014,
                       "TRINKET_2":  28785,
                       "LEGS":  30172,
@@ -236,7 +236,7 @@
                       "WAIST":  30038,
                       "HANDS":  31008,
                       "MAIN_HAND":  29988,
-                      "FINGER_2":  30667,
+                      "FINGER_2":  29305,
                       "FEET":  30043
                   }
     },
@@ -244,22 +244,22 @@
         "Name":  "Kroenix",
         "Spec":  "HUNT",
         "Slots":  {
+                      "RANGED":  30105,
                       "FINGER_1":  28791,
                       "HEAD":  30141,
                       "TRINKET_2":  28830,
                       "LEGS":  30739,
                       "BACK":  29994,
                       "TRINKET_1":  29383,
-                      "HANDS":  30140,
                       "CHEST":  30139,
                       "SHOULDER":  30143,
-                      "NECK":  30017,
+                      "FEET":  30104,
                       "WRIST":  30026,
                       "WAIST":  30040,
-                      "RANGED":  30105,
+                      "HANDS":  30140,
                       "MAIN_HAND":  29924,
                       "FINGER_2":  29298,
-                      "FEET":  30104
+                      "NECK":  30017
                   }
     },
     {
@@ -279,7 +279,7 @@
                       "WRIST":  32324,
                       "WAIST":  30040,
                       "HANDS":  31026,
-                      "MAIN_HAND":  30082,
+                      "MAIN_HAND":  33762,
                       "FINGER_2":  32266,
                       "FEET":  32366
                   }
@@ -317,7 +317,7 @@
                       "OFF_HAND":  30049,
                       "TRINKET_1":  27683,
                       "CHEST":  30214,
-                      "SHOULDER":  28967,
+                      "SHOULDER":  31054,
                       "NECK":  30015,
                       "WRIST":  29918,
                       "WAIST":  30038,
@@ -362,13 +362,13 @@
                       "TRINKET_1":  27683,
                       "CHEST":  30214,
                       "SHOULDER":  30215,
-                      "NECK":  30015,
+                      "FEET":  30037,
                       "WRIST":  24250,
                       "WAIST":  30064,
                       "HANDS":  30211,
                       "MAIN_HAND":  28770,
                       "FINGER_2":  28793,
-                      "FEET":  30037
+                      "NECK":  30015
                   }
     },
     {
@@ -380,7 +380,7 @@
                       "TRINKET_2":  29370,
                       "LEGS":  30207,
                       "BACK":  28797,
-                      "TRINKET_1":  32863,
+                      "TRINKET_1":  30720,
                       "CHEST":  30196,
                       "SHOULDER":  30210,
                       "NECK":  30015,
@@ -493,13 +493,13 @@
                       "TRINKET_1":  27683,
                       "CHEST":  30107,
                       "SHOULDER":  32587,
-                      "NECK":  30666,
+                      "FEET":  21870,
                       "WRIST":  32586,
                       "WAIST":  30064,
                       "HANDS":  28507,
                       "MAIN_HAND":  34009,
                       "FINGER_2":  29305,
-                      "FEET":  21870
+                      "NECK":  30666
                   }
     },
     {
@@ -510,8 +510,8 @@
                       "HEAD":  30120,
                       "TRINKET_2":  28830,
                       "LEGS":  29995,
-                      "BACK":  24259,
-                      "OFF_HAND":  32943,
+                      "BACK":  32323,
+                      "OFF_HAND":  30881,
                       "TRINKET_1":  30627,
                       "CHEST":  30118,
                       "SHOULDER":  30979,
@@ -558,13 +558,13 @@
                       "TRINKET_1":  30665,
                       "CHEST":  30150,
                       "SHOULDER":  30154,
-                      "FEET":  33902,
-                      "WRIST":  32980,
+                      "NECK":  28822,
+                      "WRIST":  33901,
                       "WAIST":  33900,
                       "HANDS":  30151,
                       "MAIN_HAND":  32964,
-                      "FINGER_2":  29308,
-                      "NECK":  28822
+                      "FINGER_2":  32528,
+                      "FEET":  33902
                   }
     },
     {
@@ -593,7 +593,7 @@
         "Name":  "Erikadirk",
         "Spec":  "ROGUE",
         "Slots":  {
-                      "FINGER_1":  30052,
+                      "FINGER_1":  29301,
                       "HEAD":  31027,
                       "TRINKET_2":  29383,
                       "LEGS":  30148,
@@ -607,7 +607,7 @@
                       "WAIST":  30040,
                       "HANDS":  31026,
                       "MAIN_HAND":  30082,
-                      "FINGER_2":  29301,
+                      "FINGER_2":  30052,
                       "FEET":  28545
                   }
     },
