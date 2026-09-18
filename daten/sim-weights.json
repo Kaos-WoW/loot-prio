@@ -125,21 +125,21 @@
     "_basisDps": 1361.7
   },
   "Sandycheekz": {
-    "Str": 0.389,
-    "Agi": 0.795,
-    "AP": 0.354,
-    "Treffer": 0.864,
-    "Krit": 0.628,
-    "Tempo": 0.742,
-    "ArP": 0.122,
-    "Waffk": 0.444,
+    "Str": 0.394,
+    "Agi": 0.807,
+    "AP": 0.359,
+    "Treffer": 0.899,
+    "Krit": 0.644,
+    "Tempo": 0.743,
+    "ArP": 0.126,
+    "Waffk": 0.463,
     "Int": 0.0,
     "SP": 0.0,
     "ZTreffer": 0.0,
     "ZKrit": 0.0,
-    "MH": 3.335,
-    "OH": 1.239,
-    "_basisDps": 1632.2
+    "MH": 3.382,
+    "OH": 1.256,
+    "_basisDps": 1673.7
   },
   "Lariesel": {
     "Int": 1.386,
