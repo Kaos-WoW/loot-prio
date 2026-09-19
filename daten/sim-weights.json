@@ -1,10 +1,10 @@
 {
   "Kaosx": {
     "Str": 0.749,
-    "Agi": 0.551,
+    "Agi": 0.55,
     "AP": 0.309,
-    "Treffer": 0.118,
-    "Krit": 0.567,
+    "Treffer": 0.12,
+    "Krit": 0.566,
     "Tempo": 0.71,
     "ArP": 0.071,
     "Waffk": 0.236,
@@ -229,21 +229,21 @@
     "_basisDps": 1019.5
   },
   "Erikadirk": {
-    "Str": 0.359,
-    "Agi": 0.738,
-    "AP": 0.327,
-    "Treffer": 0.812,
-    "Krit": 0.589,
-    "Tempo": 0.666,
-    "ArP": 0.111,
-    "Waffk": 0.285,
+    "Str": 0.318,
+    "Agi": 0.632,
+    "AP": 0.289,
+    "Treffer": 0.661,
+    "Krit": 0.484,
+    "Tempo": 0.552,
+    "ArP": 0.085,
+    "Waffk": 0.339,
     "Int": 0.0,
     "SP": 0.0,
     "ZTreffer": 0.0,
     "ZKrit": 0.0,
-    "MH": 3.081,
-    "OH": 1.145,
-    "_basisDps": 1506.7
+    "MH": 2.723,
+    "OH": 1.011,
+    "_basisDps": 1211.1
   },
   "Velera": {
     "Int": 1.284,
