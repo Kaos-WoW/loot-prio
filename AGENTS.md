@@ -49,7 +49,7 @@ statischen Presets in `3-compute.ps1` zurück; dort ist die Leitmetrik ohnehin p
 alten Aufbau dokumentiert; wer sie startet, überschreibt `sim-weights.json` mit einem Stand, der nur
 Kaosx enthält.
 
-Realer Ablauf laut `.github/workflows/sync.yml` (automatisiert, täglich 03:00 UTC):
+Realer Ablauf (von Hand; der Workflow `.github/workflows/sync.yml` ist seit 10.10.2026 entfernt):
 ```powershell
 .\0-import-roster.ps1
 .\2-fetch-gear.ps1
@@ -263,11 +263,8 @@ python 7-stat-gewichte.py
   Waffen werden dort standardmäßig auf den Slot `Two-Hand` gemappt.
 * **CORS-Proxy im Client:** GitHub Pages liefert nur statische Dateien ohne eigenen Proxy. Der
   clientseitige Live-Sync im Browser läuft deshalb über `corsproxy.io` zur Classic-Armory-API.
-* **Trigger-Button (Supabase Edge Function):** Der lila Blitz-Knopf auf der Seite ruft
-  `supabase/functions/trigger-sync` auf. Die Function prüft die Admin-Authentifizierung und stößt über
-  ein im Supabase Vault hinterlegtes `GITHUB_TOKEN` den GitHub-Actions-Workflow an — das Token verlässt
-  nie den Client. **Netlify wurde dafür vollständig abgelöst**, die zugehörigen Dateien
-  (`netlify.toml`, `netlify/functions/trigger-sync.js`) sind entfernt.
+* **Trigger-Button:** Der lila Blitz-Knopf samt Edge Function `trigger-sync` und Workflow ist seit
+  10.10.2026 entfernt (Sync nicht mehr benötigt).
 * **Multi-Select-Spieler-Filter:** Auswahl über ein Dropdown mit Suchfeld und
   Mehrfachauswahl-Checkboxes für direkte Vergleiche (2–4 Spieler) im Loot-Rat.
 * **Seitensprung bei Dynamic Heights:** Schrumpft die Tabelle durch Filter, erzwingt der Browser sonst

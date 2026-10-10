@@ -17,9 +17,8 @@ Repo: `github.com/Kaos-WoW/loot-prio` · Ausgabe: `ausgabe/loot-prio-p3.html` bz
 
 ## Für Menschen, die nur die Seite lesen wollen
 
-Nichts zu tun. Die Seite aktualisiert sich nachts automatisch (siehe „Automatisierung“ unten) und zeigt
-den Stand nach dem letzten Raid. Ein lila Blitz-Knopf auf der Seite startet das Update vollautomatisch im
-Hintergrund, indem er eine Supabase Edge Function aufruft, die den GitHub-Actions-Workflow triggert.
+Nichts zu tun. Die Seite zeigt den Stand des letzten von Hand angestoßenen Durchlaufs (siehe
+„Automatisierung“ unten).
 
 ## Für alle, die am Code weiterarbeiten
 
@@ -51,9 +50,8 @@ die Datei von Hand über `python daten/scrape-bis-wowhead.py` (alle 17 Specs, al
 (warcrafttavern.com) und `scrape_wowhead_final.py` (nur Phase 3) sind entfallen, ebenso die von ihnen
 erzeugte `bis-listen.json`.
 
-**Normaler Durchlauf nach einem Raid** (das macht die Automatisierung nachts von selbst — siehe
-`.github/workflows/sync.yml` für die verbindliche Reihenfolge inklusive eines Sicherheits-Checks, der
-abbricht, falls der Gear-Abruf verdächtig wenige Spieler liefert):
+**Normaler Durchlauf nach einem Raid** (von Hand; vor dem Bauen prüfen, ob `daten/players.json`
+plausibel viele Spieler enthält — der frühere Workflow brach unter 5 Einträgen ab):
 
 ```powershell
 .\0-import-roster.ps1; .\2-fetch-gear.ps1; python 7-stat-gewichte.py; .\3-compute.ps1; .\4-bis-check.ps1; .\5-build-payload.ps1
@@ -78,19 +76,10 @@ Beschaffungsskripte in `daten/`: `scrape-bis-wowhead.py` (BiS-Listen) und `scrap
 
 ## Automatisierung
 
-**GitHub Actions** (`.github/workflows/sync.yml`) läuft nicht mehr automatisch (Nachtlauf seit 10.10.2026 aus) und lässt sich nur noch
-manuell über das GitHub-Interface oder über den lila Blitz-Knopf auf der Seite auslösen (der ruft eine
-Supabase Edge Function auf, die per API den Workflow anstößt — das GitHub-Token liegt dafür nur im
-Supabase Vault, nie im Client-Code).
-
-Der Workflow importiert das Roster, holt das Gear, bricht ab, wenn dabei verdächtig wenige Spieler
-zurückkommen (Schutz gegen einen kaputten Abruf), simuliert die individuellen Stat-Gewichte **aller**
-DPS-Spieler, rechnet neu und **committet und pusht das Ergebnis automatisch** (`roster.json`,
-`daten/players.json`, `daten/cache-tooltips.json`, `daten/payload.json`, `index.html`,
-`ausgabe/loot-prio-p3.html`, `daten/bis-listen-phasen.json`, `daten/bis-check.json`, `daten/sim-weights.json`,
-`daten/trinket-werte.json`, `daten/upgrades-p4.json`, `daten/upgrades-p5.json`). Das ist ein bewusst eingerichteter,
-system-eigener Push und keine Ausnahme von der Regel, dass ein Assistent nicht ungefragt pusht — die
-Automatisierung wurde als solche eingerichtet und genehmigt.
+**Abgeschaltet (10.10.2026).** Der GitHub-Actions-Workflow „Sync Roster and Gear“, der Roster und Gear
+nachts importierte, neu rechnete und das Ergebnis selbst pushte, scheiterte zuletzt ständig und wird nicht
+mehr benötigt. Workflow-Datei, lila Blitz-Knopf und die Edge Function `trigger-sync` sind entfernt; den
+Durchlauf startet man bei Bedarf lokal (siehe oben).
 
 **GitHub Pages** hostet die Seite direkt aus dem Hauptverzeichnis (`index.html`) des `main`-Branches.
 Clientseitige Abfragen der WoW-Armory laufen über den Proxy `corsproxy.io` auf die API von
@@ -105,7 +94,7 @@ ist vollständig durch GitHub Pages + Supabase abgelöst, die zugehörigen Datei
 
 `0-import-roster.ps1` liest den Kader aus einem öffentlichen Google Sheet (Tabellenblatt „Übersicht“)
 und schreibt `roster.json` **komplett neu**. Wer Spieler oder Specs ändern will, trägt das im Sheet ein,
-nicht mehr in der Datei — ein manueller Edit an `roster.json` wird beim nächsten automatischen Lauf
+nicht mehr in der Datei — ein manueller Edit an `roster.json` wird beim nächsten Lauf von `0-import-roster.ps1`
 überschrieben (punktuelle Handkorrekturen zwischen zwei Läufen kommen vor, siehe Commit-Historie, sind
 aber nicht der vorgesehene Weg).
 
@@ -423,8 +412,6 @@ vergleichbar.
 | `bin/` | heruntergeladene WoWSims-CLI plus deren Ein-/Ausgabedateien |
 | `ausgabe/`, `index.html` | die fertige Seite (zweimal, s. „Automatisierung“) |
 | `quellen/` | Rechercheunterlagen aus dem Erstaufbau: Item-Pool, Statgewichte, Alternativen, Gear-Stand |
-| `supabase/functions/trigger-sync/` | Edge Function für den Blitz-Knopf |
-| `.github/workflows/sync.yml` | die Automatisierung |
 
 ---
 
