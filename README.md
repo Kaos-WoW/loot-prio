@@ -78,7 +78,7 @@ Beschaffungsskripte in `daten/`: `scrape-bis-wowhead.py` (BiS-Listen) und `scrap
 
 ## Automatisierung
 
-**GitHub Actions** (`.github/workflows/sync.yml`) läuft täglich um 03:00 UTC und lässt sich zusätzlich
+**GitHub Actions** (`.github/workflows/sync.yml`) läuft nicht mehr automatisch (Nachtlauf seit 10.10.2026 aus) und lässt sich nur noch
 manuell über das GitHub-Interface oder über den lila Blitz-Knopf auf der Seite auslösen (der ruft eine
 Supabase Edge Function auf, die per API den Workflow anstößt — das GitHub-Token liegt dafür nur im
 Supabase Vault, nie im Client-Code).

@@ -2,8 +2,7 @@ name: Sync Roster and Gear
 
 on:
   workflow_dispatch: # Ermöglicht manuelles Starten per Mausklick auf GitHub
-  schedule:
-    - cron: '0 3 * * *' # Läuft automatisch jeden Tag um 03:00 Uhr nachts UTC
+  # Nächtlicher Lauf (03:00 UTC) am 10.10.2026 abgeschaltet: wird nicht mehr benötigt.
 
 permissions:
   contents: write # Ermöglicht der Action, Änderungen zurück ins Repo zu pushen
